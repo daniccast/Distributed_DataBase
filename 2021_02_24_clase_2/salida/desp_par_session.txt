@@ -1,0 +1,79 @@
+SQL> CLEAR SCREEN
+
+SQL> SET PAGESIZE 99;
+SQL> SET LINESIZE 150;
+SQL> SET COLSEP '|=|';
+SQL> SET UNDERLINE =
+SQL> COL PARAMETER FORMAT A29;
+SQL> COL VALUE	   FORMAT A29;
+SQL> SELECT PARAMETER, VALUE FROM NLS_SESSION_PARAMETERS
+  2  	  ORDER BY 1;
+
+PARAMETER                    |=|VALUE                                                                                                                 
+=============================|=|=============================                                                                                         
+NLS_CALENDAR                 |=|GREGORIAN                                                                                                             
+NLS_COMP                     |=|BINARY                                                                                                                
+NLS_CURRENCY                 |=|$                                                                                                                     
+NLS_DATE_FORMAT              |=|DD-MON-RR                                                                                                             
+NLS_DATE_LANGUAGE            |=|ENGLISH                                                                                                               
+NLS_DUAL_CURRENCY            |=|$                                                                                                                     
+NLS_ISO_CURRENCY             |=|MEXICO                                                                                                                
+NLS_LANGUAGE                 |=|MEXICAN SPANISH                                                                                                       
+NLS_LENGTH_SEMANTICS         |=|BYTE                                                                                                                  
+NLS_NCHAR_CONV_EXCP          |=|FALSE                                                                                                                 
+NLS_NUMERIC_CHARACTERS       |=|.,                                                                                                                    
+NLS_SORT                     |=|WEST_EUROPEAN                                                                                                         
+NLS_TERRITORY                |=|MEXICO                                                                                                                
+NLS_TIME_FORMAT              |=|HH24:MI:SSXFF                                                                                                         
+NLS_TIMESTAMP_FORMAT         |=|DD/MM/RR HH24:MI:SSXFF                                                                                                
+NLS_TIMESTAMP_TZ_FORMAT      |=|DD/MM/RR HH24:MI:SSXFF TZR                                                                                            
+NLS_TIME_TZ_FORMAT           |=|HH24:MI:SSXFF TZR                                                                                                     
+
+17 rows selected.
+
+SQL> 
+SQL> REM CAMBIA EL IDIOMA DE LA FECHA
+SQL> alter session set nls_date_language = 'ENGLISH';
+
+Session altered.
+
+SQL> 
+SQL> REM Despliega nuevamente los parametros de la session
+SQL> clear screen
+
+SQL> SELECT PARAMETER, VALUE FROM NLS_SESSION_PARAMETERS
+  2  ORDER BY 1;
+
+PARAMETER                    |=|VALUE                                                                                                                 
+=============================|=|=============================                                                                                         
+NLS_CALENDAR                 |=|GREGORIAN                                                                                                             
+NLS_COMP                     |=|BINARY                                                                                                                
+NLS_CURRENCY                 |=|$                                                                                                                     
+NLS_DATE_FORMAT              |=|DD-MON-RR                                                                                                             
+NLS_DATE_LANGUAGE            |=|ENGLISH                                                                                                               
+NLS_DUAL_CURRENCY            |=|$                                                                                                                     
+NLS_ISO_CURRENCY             |=|MEXICO                                                                                                                
+NLS_LANGUAGE                 |=|MEXICAN SPANISH                                                                                                       
+NLS_LENGTH_SEMANTICS         |=|BYTE                                                                                                                  
+NLS_NCHAR_CONV_EXCP          |=|FALSE                                                                                                                 
+NLS_NUMERIC_CHARACTERS       |=|.,                                                                                                                    
+NLS_SORT                     |=|WEST_EUROPEAN                                                                                                         
+NLS_TERRITORY                |=|MEXICO                                                                                                                
+NLS_TIME_FORMAT              |=|HH24:MI:SSXFF                                                                                                         
+NLS_TIMESTAMP_FORMAT         |=|DD/MM/RR HH24:MI:SSXFF                                                                                                
+NLS_TIMESTAMP_TZ_FORMAT      |=|DD/MM/RR HH24:MI:SSXFF TZR                                                                                            
+NLS_TIME_TZ_FORMAT           |=|HH24:MI:SSXFF TZR                                                                                                     
+
+17 rows selected.
+
+SQL> 
+SQL> rem despliega solamente el parametro  nls_date_language
+SQL> select parameter, value from nls_session_parameters
+  2    where parameter = 'NLS_DATE_LANGUAGE' ;
+
+PARAMETER                    |=|VALUE                                                                                                                 
+=============================|=|=============================                                                                                         
+NLS_DATE_LANGUAGE            |=|ENGLISH                                                                                                               
+
+SQL> 
+SQL> spool off
