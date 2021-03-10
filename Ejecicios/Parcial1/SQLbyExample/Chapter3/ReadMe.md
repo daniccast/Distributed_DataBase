@@ -2,15 +2,15 @@ Resumen cápitulo tres.
 Información recuperada de ROSENZWEIG,B &  RAKHIMOV,E (2009).Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson. 
 
 
-#Funciones
+# Funciones
 
 1. LOWER 
 Nos permite transformar los datos a minúsculas.
-->	LOWER(cadena)
+	LOWER(cadena)
 
 1. UPPER
 Nos permite transformar los datos a mayúsculas.
-->	UPPER(cadena)
+	UPPER(cadena)
 
 1. INITCAP
 Nos permite transformar la primera letra mayúscula.(Capitalize)
@@ -19,12 +19,12 @@ Nos permite transformar la primera letra mayúscula.(Capitalize)
 1. LPAD, left pad
 Agrega caracterres a la izquierda
 	LPAD(char1, n [, char2])
-cadena1,n tamaño total, cadena a agregar opcional
+	cadena1,n tamaño total, cadena a agregar opcional
 
 1. RPAD. rigth pad
 Agrega caracterres a la derecha
 	RPAD(char1, n [, char2])
-cadena1,n tamaño total, cadena a agregar opcional
+	cadena1,n tamaño total, cadena a agregar opcional
 
 
 1. DUAL TABLE
@@ -33,7 +33,7 @@ Tabla especial de Oracle, no contiene nada importante, pero es usada junto con o
 1. LTRIM
 Elimina carácteres a a izquierda.
 	LTRIM(char1 [, char2])
-cadena, caracteres a eliminar (si no pones ninguno quita espacios)
+	cadena, caracteres a eliminar (si no pones ninguno quita espacios)
 
 1. RTRIM
 Elimina carácteres a a derecha.
@@ -41,8 +41,8 @@ Elimina carácteres a a derecha.
 
 1. TRIM
 	TRIM([LEADING|TRAILING| BOTH ] char1 FROM char2)
-SI quieremos que funcione como LTRIM ponemos LEADING, como RTRIM TRAILING y ambos BOTH (o no especificas). 
-Char1 es lo que vamos a quitar y char2 de donde lo vamos a quitar.
+	Si quieremos que funcione como LTRIM ponemos LEADING, como RTRIM TRAILING y ambos BOTH (o no especificas). 
+	Char1 es lo que vamos a quitar y char2 de donde lo vamos a quitar.
 
 1. SUBSTR
 	SUBSTR(char1, starting_position [, substring_length])
@@ -59,36 +59,33 @@ Devuelve longitud de una cadena.
 	LENGTH(cadena)
 
 
-TODAS LAS FUNCIONES SE PUEDEN USAR TAMBIEN DENTRO DEL WHERE Y EL ORDER BY. Ejemplos: -- Página 172
+*TODAS LAS FUNCIONES SE PUEDEN USAR TAMBIEN DENTRO DEL WHERE Y EL ORDER BY. Ejemplos: -- Página 172 *
 
-SELECT first_name, last_name
-FROM student
-WHERE SUBSTR(last_name, 1, 2) = 'Mo'
+	SELECT first_name, last_name
+	FROM student
+	WHERE SUBSTR(last_name, 1, 2) = 'Mo'
 
-SELECT first_name, last_name
-FROM student
-WHERE INSTR(first_name, '.') > 0
-ORDER BY LENGTH(last_name)
+	SELECT first_name, last_name
+	FROM student
+	WHERE INSTR(first_name, '.') > 0
+	ORDER BY LENGTH(last_name)
 
-También se pueden hacer funciones dentro de funciones.
+*También se pueden hacer funciones dentro de funciones.*
 Ejemplo: --Página 173
 
-SELECT RPAD(UPPER(city), 20,'.')
-FROM zipcode
-WHERE state = 'CT'
+	SELECT RPAD(UPPER(city), 20,'.')
+	FROM zipcode
+	WHERE state = 'CT'
 
 
 1. Concatenación
-
 Podemos usar la función
+	CONCAT(char1, char2) o el operador ||
 
-	CONCAT(char1, char2)
-o el operador ||
-
-14. REPLACE
+1. REPLACE
 Remplazar una cadena con ora
-REPLACE(char, if, then)
-if lo que buscamos, then lo que reemplazamos
+	REPLACE(char, if, then)
+	if lo que buscamos, then lo que reemplazamos
 
 1. TRANSLATE
 ONE FOR ONE sustitución de carácteres.
@@ -98,17 +95,17 @@ ONE FOR ONE sustitución de carácteres.
 Comparar palabras que suenan igual, pero se escriben diferente.
 	SOUNDEX(Cadena)
 Ejemplo --Página 176
-SELECT student_id, last_name
-FROM student
-WHERE SOUNDEX(last_name) = SOUNDEX('MARTIN')
+	SELECT student_id, last_name
+	FROM student
+	WHERE SOUNDEX(last_name) = SOUNDEX('MARTIN')
+
 STUDENT_ID LAST_NAME
 ---------- ---------
 110 Martin
 324 Marten
 393 Martin
 
-
-		..:: Number Functions ::..
+## Number Functions
 
 1. ABS
 Devuelve el valor absoluto de un número
@@ -121,8 +118,7 @@ Devuelve 1 si es positivo, -1 si es negativo
 1. ROUND
 Redondea un valor.
 	ROUND(value [, precision])
-
-Numero de lugares 
+	Numero de lugares 
 1. TRUNC	
 Trunca (o corta) un valor.
 	TRUNC(value [, precision])
@@ -142,7 +138,9 @@ Módulo de un numro
 Residuo de numero
 	REMAINDER(value, divisor)
 	
-Se pueden usar operadores aritméticos.
+*Se pueden usar operadores aritméticos.*
+
+## Más funciones
 
 1. NVL
 Reemplaza null por algun valor
@@ -162,26 +160,26 @@ Sustituye un valor si el dato es NaN.
 Susttución basada en lógica IF -> THEN
 
 	DECODE (if_expr, equals_search,
-then_result [,else_default])
+	then_result [,else_default])
 
 Ejemplo -- Página 205
 
-DECODE(state, 'NY',
-'NJ',
-DECODE(state, 'NY',
-'NJ',
-'New York',
-'New Jersey') no_default,
-'New York',
-'New Jersey',
-'OTHER') with_default
+	DECODE(state, 'NY',
+	'NJ',
+	DECODE(state, 'NY',
+	'NJ',
+	'New York',
+	'New Jersey') no_default,
+	'New York',
+	'New Jersey',
+	'OTHER') with_default
 
 1. CASE
 
 	CASE {WHEN condition THEN return_expr
-[WHEN condition THEN return_expr]... }
-[ELSE else_expr]
-END
+	[WHEN condition THEN return_expr]... }
+	[ELSE else_expr]
+	END
 
 
 
