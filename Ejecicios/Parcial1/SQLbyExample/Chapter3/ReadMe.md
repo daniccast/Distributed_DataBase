@@ -17,37 +17,35 @@ Nos permite transformar la primera letra mayúscula.(Capitalize)
 	```INITCAP(cadena)```
 
 * LPAD, left pad
-Agrega carácteres a la izquierda
-	``` LPAD(char1, n [, char2])
-	    cadena1,n tamaño total, cadena a agregar opcional
-	```
+Agrega carácteres a la izquierda. 
+	```LPAD(char1, n [, char2])```
+cadena1,n tamaño total, cadena a agregar opcional
+	
 
 * RPAD. rigth pad
 Agrega carácteres a la derecha
-	``` RPAD(char1, n [, char2])
-	   cadena1,n tamaño total, cadena a agregar opcional
-	 ```
+	```RPAD(char1, n [, char2])```
+cadena1,n tamaño total, cadena a agregar opcional
+	 
 
 * *DUAL TABLE*
 Tabla especial de Oracle, no contiene nada importante, pero es usada junto con otras funciones para ver valores que NO existen en la tabla.
 
 * LTRIM
 Elimina carácteres a a izquierda.
-	``` LTRIM(char1 [, char2])
-	cadena, carácteres a eliminar (si no pones ninguno quita espacios) 
-	```
+	```LTRIM(char1 [, char2])```
+cadena, carácteres a eliminar (si no pones ninguno quita espacios) 
+	
 
 * RTRIM
 Elimina carácteres a a derecha.
 	``` RTRIM(char1 [, char2]) ```
 
 * TRIM
-	``` TRIM([LEADING|TRAILING| BOTH ] char1 FROM char2)
-	```
+	```TRIM([LEADING|TRAILING| BOTH ] char1 FROM char2)```
 Si quieremos que funcione como LTRIM ponemos LEADING, como RTRIM TRAILING y ambos BOTH (o no especificar). 
 Char1 es lo que vamos a quitar y char2 de donde lo vamos a quitar. 
 	
-
 * SUBSTR
 	```SUBSTR(char1, starting_position [, substring_length])```
 Devuelve subcadenas, con la posicion inicial de donde queremos que inicie la subcadena (dividir), y el tercer parametro de la longitud de la subcadena, si no se pone toma lo restante.
@@ -63,7 +61,7 @@ Devuelve longitud de una cadena.
 	```LENGTH(cadena)```
 
 
-*TODAS LAS FUNCIONES SE PUEDEN USAR TAMBIEN DENTRO DEL WHERE Y EL ORDER BY. Ejemplos: -- Página 172*
+**TODAS LAS FUNCIONES SE PUEDEN USAR TAMBIEN DENTRO DEL WHERE Y EL ORDER BY. Ejemplos: -- Página 172**
 
 	SELECT first_name, last_name
 	FROM student
@@ -74,7 +72,7 @@ Devuelve longitud de una cadena.
 	WHERE INSTR(first_name, '.') > 0
 	ORDER BY LENGTH(last_name)
 
-*También se pueden hacer funciones dentro de funciones.*
+**También se pueden hacer funciones dentro de funciones.**
 Ejemplo: --Página 173
 
 	SELECT RPAD(UPPER(city), 20,'.')
@@ -88,8 +86,8 @@ Podemos usar la función
 
 * REPLACE
 Remplazar una cadena con otra
-	```REPLACE(char, if, then)
-	if lo que buscamos, then lo que reemplazamos```
+	```REPLACE(char, if, then)```
+if lo que buscamos, then lo que reemplazamos
 
 * TRANSLATE
 ONE FOR ONE sustitución de carácteres.
@@ -142,7 +140,7 @@ Módulo de un numro
 Residuo de numero
 	```REMAINDER(value, divisor)```
 	
-*Se pueden usar operadores aritméticos.*
+**Se pueden usar operadores aritméticos.**
 
 ## Más funciones
 
@@ -163,8 +161,7 @@ Sustituye un valor si el dato es NaN.
 * DECODE
 Susttución basada en lógica IF -> THEN
 
-	```DECODE (if_expr, equals_search,
-	then_result [,else_default])```
+	```DECODE (if_expr, equals_search,then_result [,else_default])```
 
 Ejemplo -- Página 205
 
