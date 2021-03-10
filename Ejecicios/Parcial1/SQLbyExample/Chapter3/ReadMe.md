@@ -18,30 +18,35 @@ Nos permite transformar la primera letra mayúscula.(Capitalize)
 
 * LPAD, left pad
 Agrega carácteres a la izquierda
-	```LPAD(char1, n [, char2])
-	   cadena1,n tamaño total, cadena a agregar opcional```
+	``` LPAD(char1, n [, char2])
+	    cadena1,n tamaño total, cadena a agregar opcional
+	```
 
 * RPAD. rigth pad
 Agrega carácteres a la derecha
-	```RPAD(char1, n [, char2])
-	   cadena1,n tamaño total, cadena a agregar opcional```
+	``` RPAD(char1, n [, char2])
+	   cadena1,n tamaño total, cadena a agregar opcional
+	 ```
 
 * *DUAL TABLE*
 Tabla especial de Oracle, no contiene nada importante, pero es usada junto con otras funciones para ver valores que NO existen en la tabla.
 
 * LTRIM
 Elimina carácteres a a izquierda.
-	```LTRIM(char1 [, char2])
-	cadena, carácteres a eliminar (si no pones ninguno quita espacios) ```
+	``` LTRIM(char1 [, char2])
+	cadena, carácteres a eliminar (si no pones ninguno quita espacios) 
+	```
 
 * RTRIM
 Elimina carácteres a a derecha.
-	RTRIM(char1 [, char2])
+	``` RTRIM(char1 [, char2]) ```
 
 * TRIM
-	```TRIM([LEADING|TRAILING| BOTH ] char1 FROM char2)
-	Si quieremos que funcione como LTRIM ponemos LEADING, como RTRIM TRAILING y ambos BOTH (o no especificar). 
-	Char1 es lo que vamos a quitar y char2 de donde lo vamos a quitar. ```
+	``` TRIM([LEADING|TRAILING| BOTH ] char1 FROM char2)
+	```
+Si quieremos que funcione como LTRIM ponemos LEADING, como RTRIM TRAILING y ambos BOTH (o no especificar). 
+Char1 es lo que vamos a quitar y char2 de donde lo vamos a quitar. 
+	
 
 * SUBSTR
 	```SUBSTR(char1, starting_position [, substring_length])```
