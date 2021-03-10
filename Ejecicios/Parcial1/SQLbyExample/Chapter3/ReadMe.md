@@ -4,57 +4,56 @@ Información recuperada de ROSENZWEIG,B &  RAKHIMOV,E (2009).Oracle® PL/SQL™b
 
 # Funciones
 
-1. LOWER 
+* LOWER 
 Nos permite transformar los datos a minúsculas.
-	LOWER(cadena)
+	```LOWER(cadena)```
 
-1. UPPER
+* UPPER
 Nos permite transformar los datos a mayúsculas.
-	UPPER(cadena)
+	```UPPER(cadena)```
 
-1. INITCAP
+* INITCAP
 Nos permite transformar la primera letra mayúscula.(Capitalize)
-	INITCAP(cadena)
+	```INITCAP(cadena)```
 
-1. LPAD, left pad
+*. LPAD, left pad
 Agrega caracterres a la izquierda
-	LPAD(char1, n [, char2])
-	cadena1,n tamaño total, cadena a agregar opcional
+	```LPAD(char1, n [, char2])
+	cadena1,n tamaño total, cadena a agregar opcional```
 
-1. RPAD. rigth pad
+* RPAD. rigth pad
 Agrega caracterres a la derecha
-	RPAD(char1, n [, char2])
-	cadena1,n tamaño total, cadena a agregar opcional
+	```RPAD(char1, n [, char2])
+	cadena1,n tamaño total, cadena a agregar opcional```
 
-
-1. DUAL TABLE
+* DUAL TABLE
 Tabla especial de Oracle, no contiene nada importante, pero es usada junto con otras funciones para ver valores que NO existen en la tabla.
 
-1. LTRIM
+* LTRIM
 Elimina carácteres a a izquierda.
 	LTRIM(char1 [, char2])
 	cadena, caracteres a eliminar (si no pones ninguno quita espacios)
 
-1. RTRIM
+* RTRIM
 Elimina carácteres a a derecha.
 	RTRIM(char1 [, char2])
 
-1. TRIM
+* TRIM
 	TRIM([LEADING|TRAILING| BOTH ] char1 FROM char2)
 	Si quieremos que funcione como LTRIM ponemos LEADING, como RTRIM TRAILING y ambos BOTH (o no especificas). 
 	Char1 es lo que vamos a quitar y char2 de donde lo vamos a quitar.
 
-1. SUBSTR
+* SUBSTR
 	SUBSTR(char1, starting_position [, substring_length])
 Devuelve subcadenas, con la posicion inicial de donde queremos que onicie la subcadena (dividir), y el tercer parametro de la longitud de la subcadena, si no se pone toma lo restante.
 
-1. INSTR
+* INSTR
 Busca la ocurrencia de una cadena Char2 en otra Char1, devuelve la posicion inicial de esa cadena buscada.
 
 	INSTR(char1, char2 [,start_position [, occurrence]])
 Puede tomar la pocision inicial de la búsqueda y cual ocurrencia de la cadena búscamos.
 
-1. LENGTH
+* LENGTH
 Devuelve longitud de una cadena.
 	LENGTH(cadena)
 
@@ -78,20 +77,20 @@ Ejemplo: --Página 173
 	WHERE state = 'CT'
 
 
-1. Concatenación
+* Concatenación
 Podemos usar la función
 	CONCAT(char1, char2) o el operador ||
 
-1. REPLACE
+* REPLACE
 Remplazar una cadena con ora
 	REPLACE(char, if, then)
 	if lo que buscamos, then lo que reemplazamos
 
-1. TRANSLATE
+* TRANSLATE
 ONE FOR ONE sustitución de carácteres.
 	TRANSLATE(char, if, then)
 
-1. SOUNDEX
+* SOUNDEX
 Comparar palabras que suenan igual, pero se escriben diferente.
 	SOUNDEX(Cadena)
 Ejemplo --Página 176
@@ -99,42 +98,42 @@ Ejemplo --Página 176
 	FROM student
 	WHERE SOUNDEX(last_name) = SOUNDEX('MARTIN')
 
-STUDENT_ID LAST_NAME
----------- ---------
-110 Martin
-324 Marten
-393 Martin
+STUDENT_ID| LAST_NAME
+----------| ---------
+110| Martin
+324| Marten
+393| Martin
 
 ## Number Functions
 
-1. ABS
+* ABS
 Devuelve el valor absoluto de un número
 	ABS(N)
 	
-1. SIGN
+* SIGN
 Devuelve 1 si es positivo, -1 si es negativo
 	SIGN(N)
 	
-1. ROUND
+* ROUND
 Redondea un valor.
 	ROUND(value [, precision])
 	Numero de lugares 
-1. TRUNC	
+* TRUNC	
 Trunca (o corta) un valor.
 	TRUNC(value [, precision])
 
-1. FLOOR
+* FLOOR
 Devuelve el entero cercano menor o igual al numero.
 	FLOOR(N)
-1. CEIL
+* CEIL
 Devuelve el entero mas pequeño mayor o igual al numero
 	CEIL(N)
 
-1. MOD
+* MOD
 Módulo de un numro
 	MOD(value, divisor)
 
-1. REMAINDER
+* REMAINDER
 Residuo de numero
 	REMAINDER(value, divisor)
 	
@@ -142,21 +141,21 @@ Residuo de numero
 
 ## Más funciones
 
-1. NVL
+* NVL
 Reemplaza null por algun valor
 	NVL(input_expression, substitution_expression)
-1. NULLIF
+* NULLIF
 The function compares two
 expressions; if the values are equal, the function returns a null; otherwise, the function returns the
 first expression.
 
 	NULLIF(expression1, equal_expression2)
 
-1. NANVL
+* NANVL
 Sustituye un valor si el dato es NaN.
 	NANVL(input_value, substitution_value)
 	
-1. DECODE
+* DECODE
 Susttución basada en lógica IF -> THEN
 
 	DECODE (if_expr, equals_search,
@@ -174,7 +173,7 @@ Ejemplo -- Página 205
 	'New Jersey',
 	'OTHER') with_default
 
-1. CASE
+* CASE
 
 	CASE {WHEN condition THEN return_expr
 	[WHEN condition THEN return_expr]... }
