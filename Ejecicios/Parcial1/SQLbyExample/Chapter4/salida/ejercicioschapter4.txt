@@ -1,0 +1,57 @@
+
+NOMBRE                       |=|FECHA                                                                                                                 
+-----------------------------|=|-----------------------------                                                                                         
+Fred Crocitto                |=|22-JAN-2003                                                                                                           
+J. Landry                    |=|22-JAN-2003                                                                                                           
+Laetia Enison                |=|22-JAN-2003                                                                                                           
+Angel Moskowitz              |=|22-JAN-2003                                                                                                           
+Judith Olvsade               |=|22-JAN-2003                                                                                                           
+Catherine Mierzwa            |=|22-JAN-2003                                                                                                           
+Judy Sethi                   |=|22-JAN-2003                                                                                                           
+Larry Walter                 |=|22-JAN-2003                                                                                                           
+
+8 filas seleccionadas.
+
+
+NOMBRE                       |=|FECHA                                                                                                                 
+-----------------------------|=|-----------------------------                                                                                         
+Fred Crocitto                |=|22-JAN-2003                                                                                                           
+J. Landry                    |=|22-JAN-2003                                                                                                           
+Laetia Enison                |=|22-JAN-2003                                                                                                           
+Angel Moskowitz              |=|22-JAN-2003                                                                                                           
+Judith Olvsade               |=|22-JAN-2003                                                                                                           
+Catherine Mierzwa            |=|22-JAN-2003                                                                                                           
+Judy Sethi                   |=|22-JAN-2003                                                                                                           
+Larry Walter                 |=|22-JAN-2003                                                                                                           
+
+8 filas seleccionadas.
+
+
+NOMBRE                       |=|Fecha modificación  |=|Fecha creacion      |=|(MODIFIED_DATE-CREATED_DATE)                                            
+-----------------------------|=|--------------------|=|--------------------|=|----------------------------                                            
+Fred Crocitto                |=|22-JAN-2003         |=|19-JAN-2003         |=|                           3                                            
+J. Landry                    |=|22-JAN-2003         |=|19-JAN-2003         |=|                           3                                            
+Laetia Enison                |=|22-JAN-2003         |=|19-JAN-2003         |=|                           3                                            
+Angel Moskowitz              |=|22-JAN-2003         |=|19-JAN-2003         |=|                           3                                            
+Judith Olvsade               |=|22-JAN-2003         |=|19-JAN-2003         |=|                           3                                            
+Catherine Mierzwa            |=|22-JAN-2003         |=|19-JAN-2003         |=|                           3                                            
+Judy Sethi                   |=|22-JAN-2003         |=|19-JAN-2003         |=|                           3                                            
+Larry Walter                 |=|22-JAN-2003         |=|19-JAN-2003         |=|                           3                                            
+
+8 filas seleccionadas.
+
+
+     MESES                                                                                                                                            
+----------                                                                                                                                            
+-46.612903                                                                                                                                            
+
+
+     MESES                                                                                                                                            
+----------                                                                                                                                            
+46.6129032                                                                                                                                            
+
+
+     MESES                                                                                                                                            
+----------                                                                                                                                            
+49.6129032                                                                                                                                            
+
