@@ -121,7 +121,7 @@ ORDER BY start_date_time
 
 
 Function |Purpose |Return Datatype
----------|--------|------------------
+---------|-------------|-----
 ADD_MONTHS(date, integer) |Adds or subtracts number of months from a certaindate. |DATE
 MONTHS_BETWEEN (date2, date1) |Determines the number of months between two dates. |NUMBER
 LAST_DAY(date) |Returns the last date of the month. |DATE
@@ -130,6 +130,67 @@ TRUNC(date)| Ignores the hours, minutes, and seconds on DATE datatype. |DATE
 ROUND(date [,format_mask])| Rounds to various DATE components depending on the optional supplied format mask.| DATE
 NEW_TIME(date,current_time_zone,new_time_zone)| Returns the date and time in another time zone; for example, EST (Eastern Standard Time), PST (Pacific Standard Time), PDT (Pacific Daylight Time). |DATE
 
+# Lab 4.3 Understanding TIMESTAMP and TIME, ZONE DATATYPES
+	
+## The TIMESTAMP Datatype
+	
+Permite almacenar fracciones de segundo con una precisión de 9, la default es 6. Ejemplo: '14-MAR-02 08.29.01.000123 AM'. FORMATO **'DD-MON-RRHH.MI.SS.FFN AM'** donde N es la precisión.
+
+## The TIMESTAMP WITH TIME ZONE Datatype
+Toma en cuenta la zona del sistema donde estas. UTC -> según el meridiano.  Formato: *DD-MON-RR HH.MI.SS.FF AM TZH:TZM'* 
+```
+SELECT DBTIMEZONE
+FROM dual
+```
+## The TIMESTAMP WITH LOCAL TIME ZONE Datatype
+Almacena la fecha y hora de la base de datos de la zona local.
 
 	
+## Session and Server Datetime Functions
+(Rischert, p. 255)	
+	
+Function |Purpose |Return Datatype
+---------|--------|---------------
+CURRENT_DATE |Returns the date and time of the local session time zone in DATE datatype. (The local session time can be different than the server's date and time, if the client session is in a different time zone.) |DATE
+CURRENT_TIMESTAMP[(optional_precision)]| Returns the individual's session date and time in the datatype TIMESTAMP WITH TIME ZONE value.| TIMESTAMP WITH TIME ZONE
+DBTIMEZONE |Returns the time zone offset value of the database server time zone or time zone region name, depending on the setup of the database. | VARCHAR2 
+LOCALTIMESTAMP[(optional_precision)] | Returns in the TIMESTAMP format the current date and time in the local session time.| TIMESTAMP
+SESSIONTIMEZONE| Returns the time zone offset value of the session time zone or the time zone region name, depending on the setup of the database.	|VARCHAR2
+SYSDATE | Returns the database server operating system current date and time. | DATE
+SYSTIMESTAMP |Returns date, time, and six-digit fractional seconds and time zone of the server . This is similar to the SYSDATE function, but includes the fractional seconds and time zone.| TIMESTAMP	
+	
+## Changing The Local Time Zone
+
+Se puede cambiar la Time Zone de la sesion con:
+```
+ALTER SESSION SET TIME_ZONE = 'America/New_York'
+ALTER SESSION SET TIME_ZONE = dbtimezone
+ALTER SESSION SET TIME_ZONE = local
+```
+## Extract Functions
+(Rischert, p. 259)	
+
+Function | Purpose | Return Datatype
+---------|---------|----------------------
+
+EXTRACT(YEAR FROM date) |Extracts year from a DATE datatype.Valid keyword choices are YEAR,MONTH, and DAY to extract the year,month, and day, respectively.| NUMBER
+EXTRACT(YEAR FROM timestamp)| Extracts year from a TIMESTAMP datatype. Valid keyword choices are YEAR, MONTH, DAY, HOUR, MINUTE, SECOND to extract the year, month, day, hour, minute, and seconds including fractional seconds, respectively.| NUMBER
+EXTRACT(YEAR FROM timestamp_with_time_zone)|Valid keywords are YEAR, MONTH, DAY, HOUR, MINUTE, SECOND, TIMEZONE_HOUR, TIMEZONE_MINUTE, TIMEZONE_REGION, TIMEZONE_ABBR. The values are returned in UTC.| NUMBER for TIME-ZONE_REGION (If TIMEZONE_ABBR is passed, the EXTRACT function returns VARCHAR2)
+SYS_EXTRACT_UTC(timestamp_with_time zone) | Returns the date and time in UTC. | TIMESTAMP WITH TIME ZONE 
+TZ_OFFSET(time_zone) | Returns the time difference between UTC and passed time zone value. | VARCHAR2	
+
+
+## Conversiones
+(Rischert, p. 262)
+
+```
+TO_TIMESTAMP(char[,format_mask])
+TO_TIMESTAMP_TZ(char[,format_mask])
+TO_DATE(char[,format_mask])
+TO_CHAR(date[,format_mask])
+FROM_TZ(timestamp,hour_min_offset)
+```
+# Lab 4.4 Performing Calculations With The Interval Datatypes
+
+
 
