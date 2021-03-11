@@ -9,7 +9,8 @@ Información recuperada de Rischert,A (2004)."Chapter 3. Character, Number,and M
 Formato default para imprimir fechas: **DD-MON-YY**
 Para cambiarlo usamos ```TO_CHAR``` junto con el formato.
 Ejemplo (Rischert, p. 224):
-```SELECT last_name, registration_date,
+``` 
+SELECT last_name, registration_date,
 TO_CHAR(registration_date, 'MM/DD/YYYY'),
 TO_CHAR(registration_date, 'Dy') AS "1.Day",
 TO_CHAR(registration_date, 'Month DD, YYYY')
@@ -19,15 +20,16 @@ WHERE student_id IN (123, 161, 190);
 ```
 De igual manera, si queremos pasar fecha a char, usamos ```TO_DATE```
 (Rischert, p. 228)
-```SELECT last_name, registration_date
+```
+SELECT last_name, registration_date
 FROM student
 WHERE registration_date = TO_DATE('22-JAN-2003', 'DD-MON-YYYY')
 ```
-**Oracle a veces hace la convercion automática**
-
-\n
-	TO_CHAR(date[,format_mask])\n
-	TO_DATE(char[,format_mask])
+**Oracle a veces hace la conversion automática**
+```
+TO_CHAR(date[,format_mask])\n
+TO_DATE(char[,format_mask])
+```
 	
 ### Tabla de datos comunes de fecha
 (Rischert, p. 225)
@@ -38,8 +40,7 @@ YEAR |Year spelled out.
 MM |Two-digit month.
 MON |Three-letter abbreviation of the month in capital letters.
 MONTH| Month spelled out in capital letters and padded with blanks.
-Month |Month spelled with first letter in caps and padded with blanks to a length of nine
-characters.
+Month |Month spelled with first letter in caps and padded with blanks to a length of nine characters.
 DD| Numeric day (1–31).
 DAY |Day of the week in capital letters and padded with blanks to a length of nine characters.
 DY |Three-letter abbreviation of the day of the week in caps.
@@ -65,13 +66,14 @@ Q |Quarter of the year.
 
 Si el formato en el query es DD-MON-RR (century), los números del 50 al 99 se toma del siglo pasado y del 0 al 49 de este.\n
 Ejemplo (Rischert, p. 230)
-```SELECT TO_CHAR(TO_DATE('17-OCT-67','DD-MON-RR'),'YYYY') "1900",
+```
+SELECT TO_CHAR(TO_DATE('17-OCT-67','DD-MON-RR'),'YYYY') "1900",
 TO_CHAR(TO_DATE('17-OCT-17','DD-MON-RR'),'YYYY') "2000"
 FROM dual;
 ```
-\n
+
 **Cuando no se ingresan horas, Oracle asume que son las 00:00**
-\n
+
 La funcion *TRUNC* sirve también con fechas, y eso hace que no importe la hora se redondea al día. 
 
 
@@ -84,4 +86,50 @@ AND enroll_date < TIMESTAMP '2003-02-08 00:00:00'
 Date, solo para fecha, y timestamp para la hora también. 
 
 
+# Lab 4.2 Performing Date And Time Math
+
+## SYSDATE
+La función **SYSDATE**devuelve la fecha y hora del sistema operativo actual. Ejemplo.  (Rischert, p. 243)
+```
+SELECT SYSDATE, TO_CHAR(SYSDATE, 'DD-MON-YYYY HH24:MI')
+FROM dual;
+```
+
+Para hacer operaciones con fechas se tiene que convertir todo a formato DATE 'DD-MON-YYYY'. Ejemplo  (Rischert, p. 243)
+```
+SELECT TO_DATE('01-JAN-2005','DD-MON-YYYY')-TRUNC(SYSDATE) int,
+TO_DATE('01-JAN-2005','DD-MON-YYYY')-SYSDATE dec,
+TO_CHAR(SYSDATE+3/24, 'MM/DD HH24:MI:SS') AS now_plus_3hrs,
+FROM dual
+```
+
+## EXTRACT Function
+Extraes ÚNICAMENTE día, mes o año de una fecha.
+Ejemplo. (Rischert, p. 245)
+```
+SELECT TO_CHAR(start_date_time, 'DD-MON-YYYY') "Start Date",
+EXTRACT(MONTH FROM start_date_time) "Month",
+EXTRACT(YEAR FROM start_date_time) "Year",
+EXTRACT(DAY FROM start_date_time) "Day"
+FROM section
+WHERE EXTRACT(MONTH FROM start_date_time) = 4
+ORDER BY start_date_time
+```
+
+## Commonly Used Oracle Datetime-Related Calculation Functions
+(Rischert, p. 246)
+
+
+Function |Purpose |Return Datatype
+---------|--------|------------------
+ADD_MONTHS(date, integer) |Adds or subtracts number of months from a certaindate. |DATE
+MONTHS_BETWEEN (date2, date1) |Determines the number of months between two dates. |NUMBER
+LAST_DAY(date) |Returns the last date of the month. |DATE
+NEXT_DAY(date,day_of_the_week)| Returns the first day of the week that is later than the date parameter passed.| DATE
+TRUNC(date)| Ignores the hours, minutes, and seconds on DATE datatype. |DATE
+ROUND(date [,format_mask])| Rounds to various DATE components depending on the optional supplied format mask.| DATE
+NEW_TIME(date,current_time_zone,new_time_zone)| Returns the date and time in another time zone; for example, EST (Eastern Standard Time), PST (Pacific Standard Time), PDT (Pacific Daylight Time). |DATE
+
+
+	
 
