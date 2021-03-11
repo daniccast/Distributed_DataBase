@@ -172,10 +172,9 @@ ALTER SESSION SET TIME_ZONE = local
 
 Function | Purpose | Return Datatype
 ---------|---------|----------------------
-
 EXTRACT(YEAR FROM date) |Extracts year from a DATE datatype.Valid keyword choices are YEAR,MONTH, and DAY to extract the year,month, and day, respectively.| NUMBER
 EXTRACT(YEAR FROM timestamp)| Extracts year from a TIMESTAMP datatype. Valid keyword choices are YEAR, MONTH, DAY, HOUR, MINUTE, SECOND to extract the year, month, day, hour, minute, and seconds including fractional seconds, respectively.| NUMBER
-EXTRACT(YEAR FROM timestamp_with_time_zone)|Valid keywords are YEAR, MONTH, DAY, HOUR, MINUTE, SECOND, TIMEZONE_HOUR, TIMEZONE_MINUTE, TIMEZONE_REGION, TIMEZONE_ABBR. The values are returned in UTC.| NUMBER for TIME-ZONE_REGION (If TIMEZONE_ABBR is passed, the EXTRACT function returns VARCHAR2)
+EXTRACT(YEAR FROM timestamp\_with\_time\_zone)|Valid keywords are YEAR, MONTH, DAY, HOUR, MINUTE, SECOND, TIMEZONE\_HOUR, TIMEZONE\_MINUTE, TIMEZONE\_REGION, TIMEZONE\_ABBR. The values are returned in UTC.| NUMBER for TIME-ZONE\_REGION (If TIMEZONE\_ABBR is passed, the EXTRACT function returns VARCHAR2)
 SYS_EXTRACT_UTC(timestamp_with_time zone) | Returns the date and time in UTC. | TIMESTAMP WITH TIME ZONE 
 TZ_OFFSET(time_zone) | Returns the time difference between UTC and passed time zone value. | VARCHAR2	
 
