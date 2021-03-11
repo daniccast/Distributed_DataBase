@@ -4,11 +4,11 @@ rem *****************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2         * 
 rem * Elaborado por:                                    *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar Oscar  *
-rem * Ejercicios lab 3.1 y test your thiingk            *
+rem * Ejercicios lab 3.1 y test your thiking            *
 rem * Página 178 y           220                        *
 rem * Realizado el 7 de Marzo de 2021                   *
-rem * rem ROSENZWEIG,B &  RAKHIMOV,E (2009).            *
-rem * Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson. *
+rem * rem Rischert,A (2004).            		  *
+rem * Oracle® SQL™by Example,Nueva Jersey,USA:Perarson.*
 rem *****************************************************
 
 rem Establecer formato para las tablas
@@ -20,7 +20,7 @@ SET LINESIZE 150
 
 
 rem ----------------------------- EJERCICIO C. LAB 3.1 --------------------------------------------------------------------------------
-rem Describe the result of the following SQL statement. Pay particular attention to thenegative number parameter. 
+rem Describe the result of the following SQL statement. Pay particular attention to thenegative number parameter. (Rischert, p. 178).
 
 SELECT SUBSTR('12345', 3),
 SUBSTR('12345', 3, 2),
@@ -42,7 +42,7 @@ rem Aquí no selecciona nada, por lo tanto solo selecciona los caracteres que sí 
 rem -------------------------------EJERCICIO G. LAB 3.1-------------------------------------------------------------------------------
 
 
-rem Write the SQL statement to retrieve those students that have a last name with thelowercase letter 'o' occurring three or more times. 
+rem Write the SQL statement to retrieve those students that have a last name with thelowercase letter 'o' occurring three or more times. (Rischert, p. 178).
 COL ID FORMAT 9999;
 COL last_name FORMAT A29;
 
@@ -51,14 +51,14 @@ where  INSTR(last_name,'o',1,3) > 1;
 
 rem -------------------------------EJERCICIO 2. TEST YPUR THINKING---------------------------------------------------------------------
 
-rem Rewrite the following query to replace all occurrences of the string 'Unix' with 'Linux'.
+rem Rewrite the following query to replace all occurrences of the string 'Unix' with 'Linux'. (Rischert, p. 220).
 SELECT REPLACE('I develop software on the Unix platform','Unix','Linux') as Reemplazo
 FROM dual;
 
 
 rem -------------------------------EJERCICIO 3. TEST YPUR THINKING---------------------------------------------------------------------
 
-rem Determine which student does not have the first letter of her or his last name capitalized. Show the STUDENT_ID and last_name
+rem Determine which student does not have the first letter of her or his last name capitalized. Show the STUDENT_ID and last_name  (Rischert, p. 220).
 select STUDENT_ID as ID, last_name  from STUDENT 
 where last_name!=INITCAP(last_name);
 

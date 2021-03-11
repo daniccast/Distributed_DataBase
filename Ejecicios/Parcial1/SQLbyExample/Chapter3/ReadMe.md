@@ -1,6 +1,5 @@
 Resumen cápitulo tres.
-Información recuperada de ROSENZWEIG,B &  RAKHIMOV,E (2009).Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson. 
-
+Información recuperada de Rischert,A (2004)."Chapter 3. Character, Number,and Miscellaneous Functions". Ramagnano,L, Oracle® SQLby Example(164-221). Pearson. 
 
 # Funciones
 
