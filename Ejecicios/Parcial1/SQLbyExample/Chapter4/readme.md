@@ -2,26 +2,27 @@ Resumen cápitulo tres.
 Información recuperada de Rischert,A (2004)."Chapter 3. Character, Number,and Miscellaneous Functions". Ramagnano,L, Oracle® SQLby Example(164-221). Pearson. 
 
 
-# Lab 4.1 APpling Oracle's DATE Format Models
+# Lab 4.1 Appling Oracle's DATE Format Models
 
 ## Changing The DATE Display Format
 
 Formato default para imprimir fechas: **DD-MON-YY**
 Para cambiarlo usamos ```TO_CHAR``` junto con el formato.
 Ejemplo (Rischert, p. 224):
-	SELECT last_name, registration_date,
-	TO_CHAR(registration_date, 'MM/DD/YYYY'),
-	TO_CHAR(registration_date, 'Dy') AS "1.Day",
-	TO_CHAR(registration_date, 'Month DD, YYYY')
-	
-	AS "Formatted"
-	FROM student
-	WHERE student_id IN (123, 161, 190);
+```SELECT last_name, registration_date,
+TO_CHAR(registration_date, 'MM/DD/YYYY'),
+TO_CHAR(registration_date, 'Dy') AS "1.Day",
+TO_CHAR(registration_date, 'Month DD, YYYY')
+AS "Formatted"
+FROM student
+WHERE student_id IN (123, 161, 190);
+```
 De igual manera, si queremos pasar fecha a char, usamos ```TO_DATE```
 (Rischert, p. 228)
-	SELECT last_name, registration_date
-	FROM student
-	WHERE registration_date = TO_DATE('22-JAN-2003', 'DD-MON-YYYY')
+```SELECT last_name, registration_date
+FROM student
+WHERE registration_date = TO_DATE('22-JAN-2003', 'DD-MON-YYYY')
+```
 **Oracle a veces hace la convercion automática**
 
 \n
@@ -31,7 +32,7 @@ De igual manera, si queremos pasar fecha a char, usamos ```TO_DATE```
 ### Tabla de datos comunes de fecha
 (Rischert, p. 225)
 Format | Description
-------------------------
+-------|--------------------
 YYYY |	Four-digit year.
 YEAR |Year spelled out.
 MM |Two-digit month.
@@ -62,21 +63,25 @@ Q |Quarter of the year.
 **Para cambiar el formato de la sesión tenemos que cambiar el atributo NLS_DATE_FORMAT**
 
 
-Si el formato en el query es DD-MON-RR (century), los números del 50 al 99 se toma del siglo pasado y del 0 al 49 de este.
+Si el formato en el query es DD-MON-RR (century), los números del 50 al 99 se toma del siglo pasado y del 0 al 49 de este.\n
 Ejemplo (Rischert, p. 230)
-	SELECT TO_CHAR(TO_DATE('17-OCT-67','DD-MON-RR'),'YYYY') "1900",
-	TO_CHAR(TO_DATE('17-OCT-17','DD-MON-RR'),'YYYY') "2000"
-	FROM dual;
-
+```SELECT TO_CHAR(TO_DATE('17-OCT-67','DD-MON-RR'),'YYYY') "1900",
+TO_CHAR(TO_DATE('17-OCT-17','DD-MON-RR'),'YYYY') "2000"
+FROM dual;
+```
+\n
 **Cuando no se ingresan horas, Oracle asume que son las 00:00**
-
+\n
 La funcion *TRUNC* sirve también con fechas, y eso hace que no importe la hora se redondea al día. 
 
 
-
-
-
-
+## The ANSI DATE and ANSI TIMESTAMP, Formats
+Se puede especificar la fecha en el formato ANSI: Ejemplo:
+```
+WHERE enroll_date >= DATE '2003-02-07'
+AND enroll_date < TIMESTAMP '2003-02-08 00:00:00'
+```
+Date, solo para fecha, y timestamp para la hora también. 
 
 
 
