@@ -119,8 +119,8 @@ Devuelve 1 si es positivo, -1 si es negativo
 	
 * ROUND
 Redondea un valor.
-	```ROUND(value [, precision])
-	Número de lugares``` 
+	```ROUND(value [, precision])``` 
+Número de lugares
 * TRUNC	
 Trunca (o corta) un valor.
 	```TRUNC(value [, precision])```
