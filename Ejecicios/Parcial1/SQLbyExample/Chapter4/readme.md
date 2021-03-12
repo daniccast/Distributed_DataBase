@@ -1,4 +1,4 @@
-Resumen cápitulo tres.
+Resumen cápitulo cuatro.
 Información recuperada de Rischert,A (2004)."Chapter 4. Date and Conversion Functions". Ramagnano,L, Oracle® SQLby Example(164-221). Pearson. 
 
 

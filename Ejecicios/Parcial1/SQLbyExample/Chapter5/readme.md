@@ -1,5 +1,5 @@
-Resumen cápitulo tres.
-Información recuperada de Rischert,A (2004)."Chapter 4. Aggregate Functions,GROUP BY, and HAVING". Ramagnano,L, Oracle® SQLby Example(301-326). Pearson. 
+Resumen cápitulo cinco.
+Información recuperada de Rischert,A (2004)."Chapter 5. Aggregate Functions,GROUP BY, and HAVING". Ramagnano,L, Oracle® SQLby Example(301-326). Pearson. 
 
 # Chapter 5. Aggregate Functions,GROUP BY, and HAVING
 
