@@ -1,5 +1,5 @@
 Resumen cápitulo tres.
-Información recuperada de Rischert,A (2004)."Chapter 3. Character, Number,and Miscellaneous Functions". Ramagnano,L, Oracle® SQLby Example(164-221). Pearson. 
+Información recuperada de Rischert,A (2004)."Chapter 4. Date and Conversion Functions". Ramagnano,L, Oracle® SQLby Example(164-221). Pearson. 
 
 
 # Lab 4.1 Appling Oracle's DATE Format Models
