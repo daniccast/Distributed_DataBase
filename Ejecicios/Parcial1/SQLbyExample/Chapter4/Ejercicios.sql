@@ -7,8 +7,8 @@ rem * Cortés Castilllo Daniela y Mendoza Cuellar Oscar  *
 rem * Ejercicios lab 3.1 y test your thiking            *
 rem * Página 178 y           220                        *
 rem * Realizado el 7 de Marzo de 2021                   *
-rem * rem Rischert,A (2004).            		  *
-rem * Oracle® SQL™by Example,Nueva Jersey,USA:Perarson.*
+rem * rem Rischert,A (2004).            		*
+rem * Oracle® SQL™by Example,Nueva Jersey,USA:Perarson. *
 rem *****************************************************
 
 rem Establecer formato para las tablas
@@ -18,8 +18,10 @@ set describe linenum on
 SET PAGESIZE 99;
 SET LINESIZE 150
 
-rem alter session set NLS_DATE_FORMAT = 'DD-MON-YYYY';
-rem para estos ejercicios necesitamos este tipo de formato
+alter session set NLS_DATE_FORMAT   = 'DD-MON-YYYY';
+alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
+ 
+rem para estos ejercicios necesitamos este tipo de formato e idioma
 
 
 rem ----------------------------- EJERCICIO B. LAB 4.1.1 --------------------------------------------------------------------------------
@@ -40,7 +42,7 @@ where MODIFIED_DATE<= TO_DATE('22-JAN-2003');
 
 rem Ahora mostraremos lo anterior más los diás de diferencia entre la fecha modificada y la de creación.
 
-select first_name ||' '|| last_name as Nombre, TO_CHAR(modified_date,'DD-MON-YYYY') as "Fecha modificación", TO_CHAR(created_date,'DD-MON-YYYY') as "Fecha creacion", (modified_date - created_Date) from STUDENT
+select first_name ||' '|| last_name as Nombre, TO_CHAR(modified_date,'DD-MON-YYYY') as "Fecha modificación", TO_CHAR(created_date,'DD-MON-YYYY') as "Fecha creacion", (modified_date - created_Date) as Diferencia from STUDENT
 where MODIFIED_DATE<= TO_DATE('22-JAN-2003'); 
 
 
@@ -66,28 +68,34 @@ rem -------------------------------EJERCICIO B. LAB 4.5.2-----------------------
 rem ist the COURSE_NO and COST columns for courses that cost more than 1500. In a third, fourth, and fifth column show the cost increased by 15%. Show the increased cost columns, one with a leading dollar sign and separate the thousands, and in another column show the same formatting but rounded to the nearest dollar. The result should look similar to the following output (Rischert, p. 292).
 
 
-select course_no as "Curso", cost as "OldCost", (cost*1.15) as "NewCost", TO_CHAR(cost*1.15,"$999,999.99") as "Formatted", TO_CHAR(ROUND(cost*1.15),"$999,999.99") 
+select course_no as "Curso", cost as "OldCost", (cost*1.15) as "NewCost", TO_CHAR(cost*1.15,'$999,999.99') as "Formatted", TO_CHAR(ROUND(cost*1.15),'$999,999.99') 
+from COURSE
 where course_no = 80;
 
+rem Importante!!! Usar comillas simples. 
+re Podemos mostrar la información de una manera más simple, por ejemplo:
+
+select 'El curso '||course_no || ' un costo de' || TO_CHAR(ROUND(cost*1.15),'$999,999.99') as Informacion
+from COURSE
+where course_no = 80;
+
+rem Podemos hacer uso de otro formato, ya que no necesitamos ver los numeros después del punt
+
+select 'El curso '||course_no ||' un costo de ' || TO_CHAR(ROUND(cost*1.15),'$999,999') as Informacion
+from COURSE
+where course_no = 80;
 
 
 
 rem ---------------------------- INTERVALS ------------------------
 
-rem ejemplo 276
+
+rem ejemplo 276, Suma un intervalo de un año con seis meses  a la fecha.
 SELECT student_id, registration_date,
 registration_date+TO_YMINTERVAL('01-06') "Grad. Date"
 FROM student
 WHERE student_id = 123;
 
-SELECT meeting_id,
-TO_CHAR(meeting_start, 'DD-MON-YYYY HH:MI PM') "Start",
-TO_CHAR(meeting_end, 'DD-MON-YYYY HH:MI PM') "End"
-FROM meeting
-WHERE (meeting_start, meeting_end)
-OVERLAPS
-(TO_DATE('01-JUL-2002 3:30PM', 'DD-MON-YYYY HH:MI PM'),
-INTERVAL '2' HOUR)
 
 SELECT section_id "ID",
 TO_CHAR(created_date, 'MM/DD/YY HH24:MI')
@@ -98,7 +106,7 @@ NUMTODSINTERVAL(start_date_time-created_date, 'DAY')
 "Interval"
 FROM section
 WHERE NUMTODSINTERVAL(start_date_time-created_date, 'DAY')
-BETWEEN INTERVAL '100' DAY(3) AND INTERVAL '120' DAY(3)
+BETWEEN INTERVAL '100' DAY(4) AND INTERVAL '120' DAY(3)
 ORDER BY 3;
 
 
