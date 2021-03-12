@@ -192,4 +192,77 @@ FROM_TZ(timestamp,hour_min_offset)
 # Lab 4.4 Performing Calculations With The Interval Datatypes
 
 
+## Tabla de intervalos
+(Rischert, p. 275)
+Datatype | Purpose and Example Literals
+---------|---------------------------------------
+INTERVAL YEAR [(year_precision)] TO MONTH | Values are expressed in years and months. The default year precision is 2. Literal examples: INTERVAL '3-2' YEAR TO MONTH (3 years and 2 months) INTERVAL '2' YEAR (2 years) INTERVAL '4' MONTH (4 months) INTERVAL '36' MONTH (36 months or 3 years)
+INTERVAL DAY [(day_precision)] TO SECOND [(fractional_seconds_precision)] | Values are expressed in days, hours, minutes, and seconds. The default value for the day precision is 2, the fractional seconds precision has a six-digit default value. Literal examples: INTERVAL '30' DAY (30 days)INTERVAL '200' DAY (3) (300 days. Because the literal exceeds the default DAY precision of 2 you need to explicitly specify the precision.) INTERVAL '12:51' HOUR TO MINUTE (12 hours and 51 minutes) INTERVAL '15' MINUTE (15 minutes) INTERVAL '3 5:10:15.10' DAY TO SECONDS (3 days, 5 hours, 10 minutes, 15 seconds, and 10 fractional seconds) Note the components must be contiguous; for example, you cannot skip the MINUTE component between the HOUR and SECOND component.
+
+#Tabla de funciones de intervalos.
+(Rischert, p. 275)
+Function |Purpose |Return Datatype
+---------|--------|-----------------------
+TO_YMINTERVAL(char) | Convert a text literal to an INTERVAL YEAR TOMONTH datatype | INTERVAL YEAR TO MONTH
+TO_DSINTERVAL(char) | Convert a text literal to an INTERVAL DAY TO SECOND datatype|  INTERVAL DAY TO SECOND
+NUMTOYMINTERVAL(number, 'YEAR') \\ NUMTOYMINTERVAL(number, 'MONTH') | Convert a number to an INTERVAL YEAR TO MONTH literal. | INTERVAL YEAR TO MONTH
+NUMTODSINTERVAL(number, 'DAY')| Convert a number to an INTERVAL DAY TO SECOND literal. Instead of the DAY parameter you can pass the HOUR, MINUTE, or SECOND instead. | INTERVAL DAY TO SECOND
+EXTRACT(MINUTE FROM interval_datatype) | Extract specific components (i.e., YEAR, MONTH, DAY, HOUR, MINUTE, SECOND). | NUMBER
+
+# Determining OVERLAPS
+Se implementa para ver si dos periodos/fechas se traslapan.
+Ejemplo
+```
+SELECT meeting_id,
+TO_CHAR(meeting_start, 'DD-MON-YYYY HH:MI PM') "Start",
+TO_CHAR(meeting_end, 'DD-MON-YYYY HH:MI PM') "End"
+FROM meeting
+WHERE (meeting_start, meeting_end)
+OVERLAPS
+(TO_DATE('01-JUL-2002 3:30PM', 'DD-MON-YYYY HH:MI PM'),
+INTERVAL '2' HOUR);
+```
+Sintaxis:
+```
+event OVERLAPS event, event es:
+(start_event_date_time, end_event_start_time)
+Or:
+(start_event_date_time, interval_duration)
+```
+# Lab 4.5 Converting From One Datatype To Another
+
+Aunque Oracle muchas veces hace conversiones ímplicitas, debemos dejarlo claro en el código, para evitar errores.
+
+## CAST FUNCTION
+Pasar de un tipo de dato a otro.
+
+```
+CAST(expression AS datatype)
+```
+_Para convertir a varchar2 o char hay que especificar la longitud._
+Ejemplo  (Rischert, p. 287)
+```
+SELECT *
+FROM conversion_example
+WHERE course_no = CAST(123 AS VARCHAR2(3))
+
+SELECT CAST('29-Mar-02' AS DATE),
+CAST('29-MAR-02' AS TIMESTAMP WITH LOCAL TIME ZONE)
+FROM dual
+```
+
+## Formatting Data
+Podemos usar TO_CHAR para dar formato a los datos.
+Ejemplo  (Rischert, p. 289)
+
+```
+COL "SQL*PLUS" FORMAT 999,999
+SELECT course_no, cost "SQL*PLUS",
+TO_CHAR(cost, '999,999') "CHAR"
+FROM course
+WHERE course_no < 25;
+```
+
+
+
 

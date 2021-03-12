@@ -60,5 +60,47 @@ rem Ahora podríamos realizar otra comparación entre la primera fecha más 3 meses
 select MONTHS_BETWEEN(ADD_MONTHS(TO_DATE('17-AUG-2003','DD-MON-YYYY'),3),TO_DATE('29-SEP-1999','DD-MON-YYYY')) as Meses from dual;
 
 
+rem -------------------------------EJERCICIO B. LAB 4.5.2-------------------------------------------------------------------------------
+
+
+rem ist the COURSE_NO and COST columns for courses that cost more than 1500. In a third, fourth, and fifth column show the cost increased by 15%. Show the increased cost columns, one with a leading dollar sign and separate the thousands, and in another column show the same formatting but rounded to the nearest dollar. The result should look similar to the following output (Rischert, p. 292).
+
+
+select course_no as "Curso", cost as "OldCost", (cost*1.15) as "NewCost", TO_CHAR(cost*1.15,"$999,999.99") as "Formatted", TO_CHAR(ROUND(cost*1.15),"$999,999.99") 
+where course_no = 80;
+
+
+
+
+rem ---------------------------- INTERVALS ------------------------
+
+rem ejemplo 276
+SELECT student_id, registration_date,
+registration_date+TO_YMINTERVAL('01-06') "Grad. Date"
+FROM student
+WHERE student_id = 123;
+
+SELECT meeting_id,
+TO_CHAR(meeting_start, 'DD-MON-YYYY HH:MI PM') "Start",
+TO_CHAR(meeting_end, 'DD-MON-YYYY HH:MI PM') "End"
+FROM meeting
+WHERE (meeting_start, meeting_end)
+OVERLAPS
+(TO_DATE('01-JUL-2002 3:30PM', 'DD-MON-YYYY HH:MI PM'),
+INTERVAL '2' HOUR)
+
+SELECT section_id "ID",
+TO_CHAR(created_date, 'MM/DD/YY HH24:MI')
+"CREATED_DATE",
+TO_CHAR(start_date_time, 'MM/DD/YY HH24:MI')
+"START_DATE_TIME",
+NUMTODSINTERVAL(start_date_time-created_date, 'DAY')
+"Interval"
+FROM section
+WHERE NUMTODSINTERVAL(start_date_time-created_date, 'DAY')
+BETWEEN INTERVAL '100' DAY(3) AND INTERVAL '120' DAY(3)
+ORDER BY 3;
+
+
 
 spool OFF;
