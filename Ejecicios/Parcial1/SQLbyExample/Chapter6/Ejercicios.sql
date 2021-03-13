@@ -40,11 +40,22 @@ rem Produce the mailing addresses for instructors who taught sections starting i
 select i.INSTRUCTOR_ID, i.STREET_ADDRESS, z.CITY,s.START_DATE_TIME
 from INSTRUCTOR i, ZIPCODE z, SECTION s
 ON (z.ZIP=i.ZIP AND i.INSTRUCTOR_ID=s.INSTRUCTOR_ID)
-where s.START_DATE_TIME >= TO_DATE('1-JUN-2003') AND
-      s.START_DATE_TIME < TO_DATE('1-JUL-2003') ;
+where s.START_DATE_TIME >= TO_DATE('1-JUN-2003','DD-MON-YYYY') AND
+      s.START_DATE_TIME < TO_DATE('1-JUL-2003','DD-MON-YYYY') ;
 
 rem ----------------------------- EJERCICIO B. LAB 6.2.2--------------------------------------------------------------------------------
 rem List the final examination grades for all enrolled Connecticut students of course number 420. Note final examination does not mean final grade.
+
+select s.STUDENT_ID as Estudiante, sec.COURSE_NO, g.NUMERIC_GRADE 
+from ZIPCODE z, STUDENT s, ENROLLMENT e, GRADE g, SECTION sec
+where z.ZIP=s.ZIP and s.STUDENT_ID=e.STUDENT_ID and e.STUDENT_ID= g.STUDENT_ID and e.SECTION_ID= sec.SECTION_ID and e.SECTION_ID=g.SECTION_ID AND
+z.STATE= "CT" AND
+sec.COURSE_NO=420 AND
+g.GRADE_TYPE_CODE='FI';
+
+
+
+ 
 
 
 
