@@ -1,0 +1,24 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+born on                                                                                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+
+Daniela born on 22-SEP-1999                                                                                                                           
+
+Procedimiento PL/SQL terminado correctamente.
+
+Introduzca un valor para nombre: mari
+antiguo   2: v_name 	VARCHAR2(30):= '&nombre';
+nuevo   2: v_name 	VARCHAR2(30):= 'mari';
+Introduzca un valor para fecha_ddmonyyyy: 26-OCT-2006
+antiguo   3: v_dob  	DATE:=TO_DATE('&fecha_ddmonyyyy','DD-MON-YYYY');
+nuevo   3: v_dob  	DATE:=TO_DATE('26-OCT-2006','DD-MON-YYYY');
+mari born on 26-OCT-2006                                                                                                                              
+
+Procedimiento PL/SQL terminado correctamente.
+

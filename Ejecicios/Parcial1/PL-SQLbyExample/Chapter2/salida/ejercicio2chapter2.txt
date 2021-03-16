@@ -1,0 +1,19 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+DECLARE
+*
+ERROR en línea 1:
+ORA-06502: PL/SQL: error : precisión de número demasiado grande numérico o de valor 
+ORA-06512: en línea 2 
+
+
+v_var1: 123                                                                                                                                           
+v_var2: 1234                                                                                                                                          
+v_var3: 1234.12                                                                                                                                       
+
+Procedimiento PL/SQL terminado correctamente.
+
