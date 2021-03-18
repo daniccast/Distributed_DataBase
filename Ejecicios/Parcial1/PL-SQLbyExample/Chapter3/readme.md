@@ -32,7 +32,7 @@ Podemos insertar datos de esta manera.
 ### Using an Oracle sequence
 Una secuencia de Oracle es un objeto que puede ser usado para generar números únicos. 
 
-###Accesing and incrementing sqequence values
+### Accesing and incrementing sqequence values
 Despues de crear una secuencia, podemos acceder a ella con:
 
 * **CURRVAL** returns the current value of the sequence.
