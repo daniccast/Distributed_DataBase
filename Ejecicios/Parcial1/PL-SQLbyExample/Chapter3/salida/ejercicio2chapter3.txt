@@ -1,0 +1,18 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+
+   CURRVAL                                                                                                                                            
+----------                                                                                                                                            
+       432                                                                                                                                            
+
+
+Procedimiento PL/SQL terminado correctamente.
+
+433 Smith 11238                                                                                                                                       
+
+Procedimiento PL/SQL terminado correctamente.
+

@@ -1,0 +1,33 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+
+Punto de grabación creado.
+
+
+Procedimiento PL/SQL terminado correctamente.
+
+
+ninguna fila seleccionada
+
+
+Rollback terminado.
+
+
+Procedimiento PL/SQL terminado correctamente.
+
+
+LAST_NAME                                                                                                                                             
+-------------------------                                                                                                                             
+Tashi                                                                                                                                                 
+Tashi                                                                                                                                                 
+
+
+Rollback terminado.
+
+
+Confirmación terminada.
+
