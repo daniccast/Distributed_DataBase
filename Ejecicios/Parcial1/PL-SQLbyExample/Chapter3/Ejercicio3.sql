@@ -1,21 +1,23 @@
-ï»¿spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial1\PL-SQLbyExample\Chapter3\salida\ejercicio3chapter3.txt
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial1\PL-SQLbyExample\Chapter3\salida\ejercicio3chapter3.txt
 /*
 rem *****************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2         * 
 rem * Elaborado por:                                    *
-rem * CortÃ©s Castilllo Daniela y Mendoza Cuellar Oscar  *                 
+rem * Cortés Castilllo Daniela y Mendoza Cuellar Oscar  *                 
 rem * Realizado el 13 de Marzo de 2021                  *
 rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).                *
-rem *OracleÂ® PL/SQLÂ™by Example,Boston,MA,USA:Perarson. *
+rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson. *
 rem *****************************************************
 */
 
-set colsep '|='
+set colsep '|=|'
 set describe linenum on
 SET PAGESIZE 99;
 SET LINESIZE 150
 alter session set NLS_DATE_FORMAT = 'DD-MON-YYYY';
 alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
+
+SET SERVEROUTPUT ON
 
 /*
 log into the STUDENT schema and enter the following text exactly as it appears here. (Optionally, you
@@ -96,10 +98,10 @@ SELECT last_name
 FROM student
 WHERE last_name = 'Tashi';
 
---La salida es exactamente los datos de Tashi, puesto que el rollback estÃ¡ despuÃ©s de la ceracion del usuario.
+--La salida es exactamente los datos de Tashi, puesto que el rollback está después de la ceracion del usuario.
 
 --regresamos y hacemos commit para que no quede el savepoint volando
 rollback to ejercicioA;
 commit;
 
-spool off;
+spool OFF;
