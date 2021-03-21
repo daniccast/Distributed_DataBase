@@ -1,12 +1,12 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial1\PL-SQLbyExample\Chapter3\salida\ejercicio3chapter5.txt
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial1\PL-SQLbyExample\Chapter5\salida\ejercicio3chapter5.txt
 /*
 rem *****************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2         * 
 rem * Elaborado por:                                    *
-rem * Cort√©s Castilllo Daniela y Mendoza Cuellar Oscar  *                 
+rem * CortÈs Castilllo Daniela y Mendoza Cuellar Oscar  *                 
 rem * Realizado el 13 de Marzo de 2021                  *
 rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).                *
-rem *Oracle¬Æ PL/SQL¬ôby Example,Boston,MA,USA:Perarson. *
+rem *OracleÆ PL/SQL?by Example,Boston,MA,USA:Perarson. *
 rem *****************************************************
 */
 
@@ -20,8 +20,8 @@ alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
 SET SERVEROUTPUT ON
 
 /*
-Create the following script. Modify the script you created in Chapter 4, project 1 of the ‚ÄúTry It
-Yourself‚Äù section. You can use either the CASE statement or the searched CASE statement. The
+Create the following script. Modify the script you created in Chapter 4, project 1 of the ìTry It
+Yourselfî section. You can use either the CASE statement or the searched CASE statement. The
 output should look similar to the output produced by the example you created in Chapter 4.
  (ROSENZWEIG,B &  RAKHIMOV,E, p. 78)
 */
@@ -54,13 +54,13 @@ v_day := RTRIM(TO_CHAR(v_date, 'DAY'));
 
 CASE v_day
 	when 'SATURDAY' then 
-		DBMS_OUTPUT.PUT_LINE ('Falls on weekend, it\'s SATURDAY');
+		DBMS_OUTPUT.PUT_LINE ('Falls on weekend, it is SATURDAY');
 	when 'SUNDAY' then 
-		DBMS_OUTPUT.PUT_LINE ('Falls on weekend, it\'s SUNDAY');
+		DBMS_OUTPUT.PUT_LINE ('Falls on weekend, it is SUNDAY');
 	else 
-		DBMS_OUTPUT.PUT_LINE ('Doesn\'t fall on weekend');
+		DBMS_OUTPUT.PUT_LINE ('Does not fall on weekend');
 END CASE;
-
+END;
 .
 /
 

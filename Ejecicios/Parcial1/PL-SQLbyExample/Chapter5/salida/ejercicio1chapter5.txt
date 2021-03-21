@@ -1,0 +1,27 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+Introduzca un valor para sv_user_date: 20-mar-2021
+antiguo   2: v_date DATE := TO_DATE('&sv_user_date', 'DD-MON-YYYY');
+nuevo   2: v_date DATE := TO_DATE('20-mar-2021', 'DD-MON-YYYY');
+Today is Saturday                                                                                                                                     
+
+Procedimiento PL/SQL terminado correctamente.
+
+Introduzca un valor para sv_user_date: 21-mar-2021
+antiguo   2: v_date DATE := TO_DATE('&sv_user_date', 'DD-MON-YYYY');
+nuevo   2: v_date DATE := TO_DATE('21-mar-2021', 'DD-MON-YYYY');
+Today is Sunday                                                                                                                                       
+
+Procedimiento PL/SQL terminado correctamente.
+
+Introduzca un valor para sv_user_date: 22-mar-2021
+antiguo   2: v_date DATE := TO_DATE('&sv_user_date', 'DD-MON-YYYY');
+nuevo   2: v_date DATE := TO_DATE('22-mar-2021', 'DD-MON-YYYY');
+Today is Monday                                                                                                                                       
+
+Procedimiento PL/SQL terminado correctamente.
+

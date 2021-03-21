@@ -30,23 +30,22 @@ BEGIN
 v_day := TO_CHAR(v_date, 'D');
 CASE v_day
 WHEN '1' THEN
-DBMS_OUTPUT.PUT_LINE ('Today is Sunday');
-WHEN '2' THEN
 DBMS_OUTPUT.PUT_LINE ('Today is Monday');
-WHEN '3' THEN
+WHEN '2' THEN
 DBMS_OUTPUT.PUT_LINE ('Today is Tuesday');
-WHEN '4' THEN
+WHEN '3' THEN
 DBMS_OUTPUT.PUT_LINE ('Today is Wednesday');
-WHEN '5' THEN
+WHEN '4' THEN
 DBMS_OUTPUT.PUT_LINE ('Today is Thursday');
-WHEN '6' THEN
+WHEN '5' THEN
 DBMS_OUTPUT.PUT_LINE ('Today is Friday');
-WHEN '7' THEN
+WHEN '6' THEN
 DBMS_OUTPUT.PUT_LINE ('Today is Saturday');
+WHEN '7' THEN
+DBMS_OUTPUT.PUT_LINE ('Today is Sunday ');
 END CASE;
 
 END;
-
 .
 /
 
@@ -60,23 +59,22 @@ v_date DATE := TO_DATE('&sv_user_date', 'DD-MON-YYYY');
 BEGIN
 CASE 
 	WHEN TO_CHAR(v_date, 'D')='1' THEN
-		DBMS_OUTPUT.PUT_LINE ('Today is Sunday');
-	WHEN TO_CHAR(v_date, 'D')='2' THEN
 		DBMS_OUTPUT.PUT_LINE ('Today is Monday');
-	WHEN TO_CHAR(v_date, 'D')='3' THEN
+	WHEN TO_CHAR(v_date, 'D')='2' THEN
 		DBMS_OUTPUT.PUT_LINE ('Today is Tuesday');
-	WHEN TO_CHAR(v_date, 'D')='4' THEN
+	WHEN TO_CHAR(v_date, 'D')='3' THEN
 		DBMS_OUTPUT.PUT_LINE ('Today is Wednesday');
-	WHEN TO_CHAR(v_date, 'D')='5' THEN
+	WHEN TO_CHAR(v_date, 'D')='4' THEN
 		DBMS_OUTPUT.PUT_LINE ('Today is Thursday');
-	WHEN TO_CHAR(v_date, 'D')='6' THEN
+	WHEN TO_CHAR(v_date, 'D')='5' THEN
 		DBMS_OUTPUT.PUT_LINE ('Today is Friday');
-	ELSE
+	WHEN TO_CHAR(v_date, 'D')='6' THEN
 		DBMS_OUTPUT.PUT_LINE ('Today is Saturday');
+	ELSE
+		DBMS_OUTPUT.PUT_LINE ('Today is Sunday ');
 END CASE;
 
 END;
-
 .
 /
 
@@ -88,22 +86,22 @@ v_day varchar(20);
 BEGIN
 v_day:= CASE 
 	WHEN TO_CHAR(v_date, 'D')='1' THEN
-		'Today is Sunday'
+		'Today is Monday '
 	WHEN TO_CHAR(v_date, 'D')='2' THEN
-		('Today is Monday')
+		('Today is Tuesday ')
 	WHEN TO_CHAR(v_date, 'D')='3' THEN
-		'Today is Tuesday'
+		'Today is Wednesday '
 	WHEN TO_CHAR(v_date, 'D')='4' THEN
-		'Today is Wednesday'
+		'Today is Thursday '
 	WHEN TO_CHAR(v_date, 'D')='5' THEN
-		'Today is Thursday'
+		'Today is Friday '
 	WHEN TO_CHAR(v_date, 'D')='6' THEN
-		'Today is Friday'
-	ELSE
 		'Today is Saturday'
-	END CASE;
+	ELSE
+		'Today is Sunday '
+	END;
 
-DBMS_OUTPUT.PUT_LINE ('Today is '|| v_day);
+DBMS_OUTPUT.PUT_LINE (v_day);
 END;
 .
 /

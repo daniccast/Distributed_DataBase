@@ -54,21 +54,18 @@ END;
 
 
 --CAMBIO para ahorrar código
-
 SELECT final_grade, CASE 
-	WHEN v_final_grade >= 90 THEN 'A'
-	WHEN v_final_grade >= 80 THEN 'B'
-	WHEN v_final_grade >= 70 THEN 'C'
-	WHEN v_final_grade >= 60 THEN 'D'
+	WHEN final_grade >= 90 THEN 'A'
+	WHEN final_grade >= 80 THEN 'B'
+	WHEN final_grade >= 70 THEN 'C'
+	WHEN final_grade >= 60 THEN 'D'
 	ELSE 'F'
 	END as "letter grade"
-END
 FROM enrollment
 WHERE student_id = 102
 AND section_id = 89;
 .
 /
-
 
 
 spool OFF;
