@@ -1,0 +1,19 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+Introduzca un valor para sv_user_date: 20-MAR-2021
+antiguo   2: v_date DATE := TO_DATE('&sv_user_date', 'DD-MON-YYYY');
+nuevo   2: v_date DATE := TO_DATE('20-MAR-2021', 'DD-MON-YYYY');
+20-MAR-2021 falls on weekend                                                                                                                          
+Done...                                                                                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+
+20-MAR-2021 falls on weekend                                                                                                                          
+After noon                                                                                                                                            
+
+Procedimiento PL/SQL terminado correctamente.
+

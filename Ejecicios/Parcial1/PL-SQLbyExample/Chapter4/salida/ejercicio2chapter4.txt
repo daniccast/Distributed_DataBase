@@ -1,0 +1,17 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+v_num is not greater than 0                                                                                                                           
+
+Procedimiento PL/SQL terminado correctamente.
+
+
+Procedimiento PL/SQL terminado correctamente.
+
+v_num is equal than 0                                                                                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+

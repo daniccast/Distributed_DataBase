@@ -19,39 +19,11 @@ alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
 
 SET SERVEROUTPUT ON
 
--- EJEMPLO NESTED IF (ROSENZWEIG,B &  RAKHIMOV,E, 2009, p.105) 
-
--- ch04_4a.sql, version 1.0
-SET SERVEROUTPUT ON
-DECLARE
-v_temp_in NUMBER := &sv_temp_in;
-v_scale_in CHAR := '&sv_scale_in';
-v_temp_out NUMBER;
-v_scale_out CHAR;
-BEGIN
-IF v_scale_in != 'C' AND v_scale_in != 'F' THEN
-DBMS_OUTPUT.PUT_LINE ('This is not a valid scale');
-ELSE
-IF v_scale_in = 'C' THEN
-v_temp_out := ( (9 * v_temp_in) / 5 ) + 32;
-v_scale_out := 'F';
-ELSE
-v_temp_out := ( (v_temp_in - 32) * 5 ) / 9;
-v_scale_out := 'C';
-END IF;
-DBMS_OUTPUT.PUT_LINE ('New scale is: '||v_scale_out);
-DBMS_OUTPUT.PUT_LINE ('New temperature is: '||v_temp_out);
-END IF;
-END;
-
-
-
 
 /*Execute the following two PL/SQL blocks, and explain why they produce different output for the
 same value of the variable v_num . Remember to issue the SET SERVEROUTPUT ON command
 before running this script.
 (ROSENZWEIG,B &  RAKHIMOV,E, 2009, p.109) 
-
 */
 -- Block 1
 DECLARE
@@ -63,6 +35,8 @@ ELSE
 DBMS_OUTPUT.PUT_LINE ('v_num is not greater than 0');
 END IF;
 END;
+.
+/
 -- Block 2
 DECLARE
 v_num NUMBER := NULL;
@@ -74,6 +48,32 @@ IF NOT (v_num > 0) THEN
 DBMS_OUTPUT.PUT_LINE ('v_num is not greater than 0');
 END IF;
 END;
+.
+/
+
+/*
+En el primer bloque primero se compara si el número es mayor que 0, como no lo es automaticamente
+realiza lo que está en el bloque del ELSE.
+En el segundo bloque hay dos condiciones que el número sea mayor que 0, que no se cumple, y 
+que el número no se mayor a cero, ya que NULL no es ni mayor ni menor que cero, porque no reprsenta nada, tampoco 
+cumple la condición y sale del if. 
+*/
+
+-- Para evitar los NULL podemos usar NVL.
+
+DECLARE
+v_num NUMBER := NULL;
+BEGIN
+IF nvl(v_num,0) > 0 THEN
+DBMS_OUTPUT.PUT_LINE ('v_num is greater than 0');
+ELSIF  nvl(v_num,0) = 0 THEN
+DBMS_OUTPUT.PUT_LINE ('v_num is equal than 0');
+ELSE
+DBMS_OUTPUT.PUT_LINE ('v_num is not grater than 0');
+END IF;
+END;
+.
+/
 
 spool OFF;
 
