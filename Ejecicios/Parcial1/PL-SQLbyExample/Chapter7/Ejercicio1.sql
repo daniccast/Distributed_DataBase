@@ -36,7 +36,7 @@ BEGIN
 			CONTINUE;
 		END IF;
 		
-		DBMS_OUTPUT.PUT_LINE('after continue condition, v_counter = '|| v_counter);
+		DBMS_OUTPUT.PUT_LINE(' after continue condition, v_counter = '|| v_counter);
 		
 		-- if EXIT condition yields TRUE exit the loop
 		IF v_counter = 5 THEN
@@ -46,5 +46,7 @@ BEGIN
 	-- control resumes here
 	DBMS_OUTPUT.PUT_LINE ('Done...');
 END;
+.
+/
 
 spool OFF;

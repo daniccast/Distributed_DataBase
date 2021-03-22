@@ -1,2 +1,90 @@
 
+Sesión modificada.
+
+
+Sesión modificada.
+
+Outer Loop                                                                                                                                            
+i = 1                                                                                                                                                 
+v_test = 0                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 1                                                                                                                                                 
+i = 1                                                                                                                                                 
+v_test = 1                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 2                                                                                                                                                 
+i = 1                                                                                                                                                 
+v_test = 1                                                                                                                                            
+Outer Loop                                                                                                                                            
+i = 2                                                                                                                                                 
+v_test = 1                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 1                                                                                                                                                 
+i = 2                                                                                                                                                 
+v_test = 2                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 2                                                                                                                                                 
+i = 2                                                                                                                                                 
+v_test = 2                                                                                                                                            
+Outer Loop                                                                                                                                            
+i = 3                                                                                                                                                 
+v_test = 2                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 1                                                                                                                                                 
+i = 3                                                                                                                                                 
+v_test = 3                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 2                                                                                                                                                 
+i = 3                                                                                                                                                 
+v_test = 3                                                                                                                                            
+
+Procedimiento PL/SQL terminado correctamente.
+
+Outer Loop                                                                                                                                            
+i = 1                                                                                                                                                 
+v_test = 0                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 0                                                                                                                                                 
+i = 1                                                                                                                                                 
+v_test = 1                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 1                                                                                                                                                 
+i = 1                                                                                                                                                 
+v_test = 1                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 2                                                                                                                                                 
+i = 1                                                                                                                                                 
+v_test = 1                                                                                                                                            
+Outer Loop                                                                                                                                            
+i = 2                                                                                                                                                 
+v_test = 1                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 0                                                                                                                                                 
+i = 2                                                                                                                                                 
+v_test = 2                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 1                                                                                                                                                 
+i = 2                                                                                                                                                 
+v_test = 2                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 2                                                                                                                                                 
+i = 2                                                                                                                                                 
+v_test = 2                                                                                                                                            
+Outer Loop                                                                                                                                            
+i = 3                                                                                                                                                 
+v_test = 2                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 0                                                                                                                                                 
+i = 3                                                                                                                                                 
+v_test = 3                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 1                                                                                                                                                 
+i = 3                                                                                                                                                 
+v_test = 3                                                                                                                                            
+Inner Loop                                                                                                                                            
+j = 2                                                                                                                                                 
+i = 3                                                                                                                                                 
+v_test = 3                                                                                                                                            
+
+Procedimiento PL/SQL terminado correctamente.
 

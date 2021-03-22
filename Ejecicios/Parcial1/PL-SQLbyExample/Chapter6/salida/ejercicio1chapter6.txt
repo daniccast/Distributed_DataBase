@@ -1,0 +1,24 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+v_counter = 1                                                                                                                                         
+v_counter = 2                                                                                                                                         
+v_counter = 3                                                                                                                                         
+v_counter = 4                                                                                                                                         
+v_counter = 5                                                                                                                                         
+Done...                                                                                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+
+v_counter = 1                                                                                                                                         
+v_counter = 2                                                                                                                                         
+v_counter = 3                                                                                                                                         
+v_counter = 4                                                                                                                                         
+v_counter = 5                                                                                                                                         
+Done...                                                                                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+

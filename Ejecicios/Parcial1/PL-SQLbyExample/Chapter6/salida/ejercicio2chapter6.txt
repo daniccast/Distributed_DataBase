@@ -1,2 +1,14 @@
 
+Sesión modificada.
+
+
+Sesión modificada.
+
+Factorial of ten is: 3628800                                                                                                                          
+
+Procedimiento PL/SQL terminado correctamente.
+
+Factorial of ten is: 3628800                                                                                                                          
+
+Procedimiento PL/SQL terminado correctamente.
 
