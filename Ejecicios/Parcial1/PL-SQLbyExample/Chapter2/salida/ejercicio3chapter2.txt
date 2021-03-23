@@ -1,0 +1,17 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+0                                                                                                                                                     
+
+Procedimiento PL/SQL terminado correctamente.
+
+1                                                                                                                                                     
+1200                                                                                                                                                  
+6                                                                                                                                                     
+1800                                                                                                                                                  
+
+Procedimiento PL/SQL terminado correctamente.
+
