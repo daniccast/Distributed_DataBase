@@ -1,0 +1,74 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+Current sum is: 1                                                                                                                                     
+Current sum is: 3                                                                                                                                     
+Current sum is: 6                                                                                                                                     
+Current sum is: 10                                                                                                                                    
+Current sum is: 15                                                                                                                                    
+Current sum is: 21                                                                                                                                    
+Current sum is: 28                                                                                                                                    
+Current sum is: 36                                                                                                                                    
+Current sum is: 45                                                                                                                                    
+Current sum is: 55                                                                                                                                    
+The sum of integers between 1 and 10 is: 55                                                                                                           
+
+Procedimiento PL/SQL terminado correctamente.
+
+Current sum is: 2                                                                                                                                     
+Current sum is: 6                                                                                                                                     
+Current sum is: 12                                                                                                                                    
+Current sum is: 20                                                                                                                                    
+Current sum is: 30                                                                                                                                    
+Current sum is: 42                                                                                                                                    
+Current sum is: 56                                                                                                                                    
+Current sum is: 72                                                                                                                                    
+Current sum is: 90                                                                                                                                    
+Current sum is: 110                                                                                                                                   
+Current sum is: 132                                                                                                                                   
+Current sum is: 156                                                                                                                                   
+Current sum is: 182                                                                                                                                   
+Current sum is: 210                                                                                                                                   
+Current sum is: 240                                                                                                                                   
+Current sum is: 272                                                                                                                                   
+Current sum is: 306                                                                                                                                   
+Current sum is: 342                                                                                                                                   
+Current sum is: 380                                                                                                                                   
+Current sum is: 420                                                                                                                                   
+Current sum is: 462                                                                                                                                   
+Current sum is: 506                                                                                                                                   
+Current sum is: 552                                                                                                                                   
+Current sum is: 600                                                                                                                                   
+Current sum is: 650                                                                                                                                   
+Current sum is: 702                                                                                                                                   
+Current sum is: 756                                                                                                                                   
+Current sum is: 812                                                                                                                                   
+Current sum is: 870                                                                                                                                   
+Current sum is: 930                                                                                                                                   
+Current sum is: 992                                                                                                                                   
+Current sum is: 1056                                                                                                                                  
+Current sum is: 1122                                                                                                                                  
+Current sum is: 1190                                                                                                                                  
+Current sum is: 1260                                                                                                                                  
+Current sum is: 1332                                                                                                                                  
+Current sum is: 1406                                                                                                                                  
+Current sum is: 1482                                                                                                                                  
+Current sum is: 1560                                                                                                                                  
+Current sum is: 1640                                                                                                                                  
+Current sum is: 1722                                                                                                                                  
+Current sum is: 1806                                                                                                                                  
+Current sum is: 1892                                                                                                                                  
+Current sum is: 1980                                                                                                                                  
+Current sum is: 2070                                                                                                                                  
+Current sum is: 2162                                                                                                                                  
+Current sum is: 2256                                                                                                                                  
+Current sum is: 2352                                                                                                                                  
+Current sum is: 2450                                                                                                                                  
+Current sum is: 2550                                                                                                                                  
+The sum of even integers between 1 and 100 is: 2550                                                                                                   
+
+Procedimiento PL/SQL terminado correctamente.
+

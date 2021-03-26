@@ -1,0 +1,25 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+v_counter = 10                                                                                                                                        
+v_counter = 8                                                                                                                                         
+v_counter = 6                                                                                                                                         
+v_counter = 4                                                                                                                                         
+v_counter = 2                                                                                                                                         
+v_counter = 0                                                                                                                                         
+Done...                                                                                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+
+v_counter = 9                                                                                                                                         
+v_counter = 7                                                                                                                                         
+v_counter = 5                                                                                                                                         
+v_counter = 3                                                                                                                                         
+v_counter = 1                                                                                                                                         
+Done...                                                                                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+
