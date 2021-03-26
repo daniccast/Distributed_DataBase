@@ -1,0 +1,109 @@
+SQL> /*
+SQL> rem **********************************************************
+SQL> rem * Distributed DataBase, ESCOM. Ciclo 2021-2		  *
+SQL> rem * Elaborado por:					  *
+SQL> rem * Cortés Castilllo Daniela y Mendoza Cuellar José Oscar  *
+SQL> rem * Realizado el 13 de Marzo de 2021			  *
+SQL> rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).			  *
+SQL> rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.	     *
+SQL> rem **********************************************************
+SQL> */
+SQL> 
+SQL> set colsep '|='
+SQL> set describe linenum on
+SQL> SET PAGESIZE 99;
+SQL> SET LINESIZE 150
+SQL> alter session set NLS_DATE_FORMAT = 'DD-MON-YYYY';
+
+Sesi�n modificada.
+
+SQL> alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
+
+Sesi�n modificada.
+
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> --How would you change this script? (ROSENZWEIG,B &  RAKHIMOV,E, p. 70).
+SQL> 
+SQL> 
+SQL> DECLARE
+  2  	 v_student_id NUMBER := 102;
+  3  	 v_section_id NUMBER := 89;
+  4  	 v_final_grade NUMBER;
+  5  	 v_letter_grade CHAR(1);
+  6  BEGIN
+  7  	 SELECT final_grade
+  8  	     INTO v_final_grade
+  9  	     FROM enrollment
+ 10  	 WHERE student_id = v_student_id
+ 11  	     AND section_id = v_section_id;
+ 12  	 IF v_final_grade BETWEEN 90 AND 100 THEN
+ 13  	     v_letter_grade := 'A';
+ 14  	 ELSIF v_final_grade BETWEEN 80 AND 89 THEN
+ 15  	     v_letter_grade := 'B';
+ 16  	 ELSIF v_final_grade BETWEEN 70 AND 79 THEN
+ 17  	     v_letter_grade := 'C';
+ 18  	 ELSIF v_final_grade BETWEEN 60 AND 69 THEN
+ 19  	     v_letter_grade := 'D';
+ 20  	 ELSE
+ 21  	     v_letter_grade := 'F';
+ 22  	 END IF;
+ 23  	 -- control resumes here
+ 24  	 DBMS_OUTPUT.PUT_LINE ('Letter grade is: '||
+ 25  	     v_letter_grade);
+ 26  	 EXCEPTION
+ 27  	 WHEN NO_DATA_FOUND THEN
+ 28  	 DBMS_OUTPUT.PUT_LINE ('There is no such student or section');
+ 29  END;
+ 30  .
+SQL> /
+Letter grade is: A                                                                                                                                    
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> /*
+SQL> Este script nos muestra la calificacion final en forma de letra de un estudiante, poniendo intervalos para las calificaciones. Pero que pasa cuendo la calificacion es un NULL?,
+SQL> en el bloque anterios cualquier caso que entre en los intervalos es una F, pero si queremos que nos inque que es valor es nulo, debemos poner otra condicional y cambiar el alumno
+SQL> seleccionado para comprobar que funcione por ejemplo el estudiante con studen_id=203 y section_id=132
+SQL> */
+SQL> 
+SQL> DECLARE
+  2  	 v_student_id NUMBER := 203;
+  3  	 v_section_id NUMBER := 132;
+  4  	 v_final_grade NUMBER;
+  5  	 v_letter_grade CHAR(1);
+  6  BEGIN
+  7  	 SELECT final_grade
+  8  	 INTO v_final_grade
+  9  	 FROM enrollment
+ 10  	 WHERE student_id = v_student_id
+ 11  	 AND section_id = v_section_id;
+ 12  	 IF v_final_grade IS NULL THEN
+ 13  	     DBMS_OUTPUT.PUT_LINE('v_final_grade is null');
+ 14  	 ELSIF v_final_grade BETWEEN 90 AND 100 THEN
+ 15  	     v_letter_grade := 'A';
+ 16  	 ELSIF v_final_grade BETWEEN 80 AND 89 THEN
+ 17  	     v_letter_grade := 'B';
+ 18  	 ELSIF v_final_grade BETWEEN 70 AND 79 THEN
+ 19  	     v_letter_grade := 'C';
+ 20  	 ELSIF v_final_grade BETWEEN 60 AND 69 THEN
+ 21  	     v_letter_grade := 'D';
+ 22  	 ELSE
+ 23  	     v_letter_grade := 'F';
+ 24  	 END IF;
+ 25  	 -- control resumes here
+ 26  	 DBMS_OUTPUT.PUT_LINE ('Letter grade is: '||
+ 27  	 v_letter_grade);
+ 28  	 EXCEPTION
+ 29  	     WHEN NO_DATA_FOUND THEN
+ 30  	     DBMS_OUTPUT.PUT_LINE ('There is no such student or section');
+ 31  	 END;
+ 32  .
+SQL> /
+v_final_grade is null                                                                                                                                 
+Letter grade is:                                                                                                                                      
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> 
+SQL> spool OFF;
