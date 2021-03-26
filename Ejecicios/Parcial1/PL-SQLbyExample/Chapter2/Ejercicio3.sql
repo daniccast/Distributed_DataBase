@@ -1,4 +1,4 @@
-spool C:\Users\ozkr_\OneDrive\Documentos\DDB\PrimerParcial\chapter2\salida\ejercicio3chapter2.txt
+spool C:\Users\ozkr_\OneDrive\Documentos\DDB\PrimerParcial\PL-SQLbyExample\chapter2\salida\ejercicio3chapter2.txt
 /*
 rem **********************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
