@@ -1,0 +1,19 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+Outer Block, v_test: 123                                                                                                                              
+Inner Block, v_test: 456                                                                                                                              
+Inner Block, outer_block.v_test: 123                                                                                                                  
+
+Procedimiento PL/SQL terminado correctamente.
+
+outer student id is 123                                                                                                                               
+inner student id is 125                                                                                                                               
+When am I displayed?                                                                                                                                  
+outer student id is 123                                                                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+

@@ -28,7 +28,7 @@ output produced by the original script.
 (ROSENZWEIG,B &  RAKHIMOV,E, p. 190).
 */
 -- ch07_3a.sql, version 1.0
-SET SERVEROUTPUT ON
+
 DECLARE
 v_test NUMBER := 0;
 BEGIN
@@ -59,18 +59,20 @@ j NUMBER:= 0;
 BEGIN
 	<<outer_loop>>
 	LOOP
-	i= i+1;
+	i:= i+1;
 		DBMS_OUTPUT.PUT_LINE('Outer Loop');
 		DBMS_OUTPUT.PUT_LINE('i = '||i);
 		DBMS_OUTPUT.PUT_LINE('v_test = '||v_test);
 		v_test := v_test + 1;
+		j:=0;
 		<<inner_loop>>
 		WHILE j<3 LOOP
-			j= j+1;
+			
 			DBMS_OUTPUT.PUT_LINE('Inner Loop');
 			DBMS_OUTPUT.PUT_LINE('j = '||j);
 			DBMS_OUTPUT.PUT_LINE('i = '||i);
 			DBMS_OUTPUT.PUT_LINE('v_test = '||v_test);
+			j:= j+1;
 		END LOOP inner_loop;
 	
 	

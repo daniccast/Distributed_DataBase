@@ -1,0 +1,85 @@
+SQL> /*
+SQL> rem **********************************************************
+SQL> rem * Distributed DataBase, ESCOM. Ciclo 2021-2		  *
+SQL> rem * Elaborado por:					  *
+SQL> rem * Cortés Castilllo Daniela y Mendoza Cuellar José Oscar  *
+SQL> rem * Realizado el 13 de Marzo de 2021			  *
+SQL> rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).			  *
+SQL> rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.	     *
+SQL> rem **********************************************************
+SQL> */
+SQL> 
+SQL> set colsep '|='
+SQL> set describe linenum on
+SQL> SET PAGESIZE 99;
+SQL> SET LINESIZE 150
+SQL> alter session set NLS_DATE_FORMAT = 'DD-MON-YYYY';
+
+Sesi�n modificada.
+
+SQL> alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
+
+Sesi�n modificada.
+
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> -- IF THEN EJEMPLO. (ROSENZWEIG,B &  RAKHIMOV,E, p. 62).
+SQL> 
+SQL> DECLARE
+  2  	 v_total NUMBER;
+  3  BEGIN
+  4  SELECT COUNT(*)
+  5  INTO v_total
+  6  FROM enrollment e
+  7  JOIN section s USING (section_id)
+  8  WHERE s.course_no = 25
+  9  AND s.section_no = 1;
+ 10  -- check if section 1 of course 25 is full
+ 11  IF v_total >= 15 THEN
+ 12  	 DBMS_OUTPUT.PUT_LINE
+ 13  	 ('Section 1 of course 25 is full');
+ 14  ELSE
+ 15  	 DBMS_OUTPUT.PUT_LINE
+ 16  	 ('Section 1 of course 25 is not full');
+ 17  END IF;
+ 18  -- control resumes here
+ 19  END;
+ 20  .
+SQL> /
+Section 1 of course 25 is not full                                                                                                                    
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> 
+SQL> /*El bloque anterior nos muestra si la secccion esta llena o no, pero en el siguente bloque podemos hacer que nos indique lo mismo pero si no esta llena
+SQL> que no diga cuantos alumnos mas se pueden inscribir*/
+SQL> 
+SQL> DECLARE
+  2  	 v_total NUMBER;
+  3  	 v_students NUMBER;
+  4  BEGIN
+  5  	 SELECT COUNT(*)
+  6  	 INTO v_total
+  7  	 FROM enrollment e
+  8  	 JOIN section s USING (section_id)
+  9  	 WHERE s.course_no = 25
+ 10  	 AND s.section_no = 1;
+ 11  -- check if section 1 of course 25 is full
+ 12  IF v_total >= 15 THEN
+ 13  	 DBMS_OUTPUT.PUT_LINE
+ 14  	 ('Section 1 of course 25 is full');
+ 15  ELSE
+ 16  v_students := 15 - v_total;
+ 17  	 DBMS_OUTPUT.PUT_LINE (v_students||
+ 18  	 ' students can still enroll into section 1'||
+ 19  	 ' of course 25');
+ 20  END IF;
+ 21  -- control resumes here
+ 22  END;
+ 23  .
+SQL> /
+10 students can still enroll into section 1 of course 25                                                                                              
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> spool OFF;

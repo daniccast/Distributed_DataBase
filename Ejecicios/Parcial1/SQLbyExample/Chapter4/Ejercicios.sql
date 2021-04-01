@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial1\SQLbyExample\Chapter4\salida\ejercicioschapter4.txt
 
 rem *****************************************************
@@ -10,6 +11,20 @@ rem * Functions".	  				  *
 rem * Ramagnano,L, Oracle® SQL™by Example(164-221). 	  *
 rem * Pearson.  					  *
 rem *****************************************************
+=======
+spool C:\Users\ozkr_\OneDrive\Documentos\DDB\PrimerParcial\SQLbyExample\Chapter4\salida\ejercicioschapter4.txt
+
+rem **********************************************************
+rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
+rem * Elaborado por:                                         *
+rem * CortÃ©s Castilllo Daniela y Mendoza Cuellar JosÃ© Oscar  *
+rem * Ejercicios lab 3.1 y test your thiking                 *
+rem * PÃ¡gina 178 y           220                             *
+rem * Realizado el 7 de Marzo de 2021                        *
+rem * rem Rischert,A (2004).            		             *      
+rem * OracleÂ® SQLâ„¢by Example,Nueva Jersey,USA:Perarson.      *
+rem **********************************************************
+>>>>>>> refs/remotes/origin/main
 
 rem Establecer formato para las tablas
 
@@ -40,10 +55,22 @@ rem Podemos realizar el mismo ejercicio sin usar el formato ANSI
 select first_name ||' '|| last_name as Nombre, TO_CHAR(modified_date,'DD-MON-YYYY') as Fecha from STUDENT
 where MODIFIED_DATE<= TO_DATE('22-JAN-2003'); 
 
-rem Ahora mostraremos lo anterior más los diás de diferencia entre la fecha modificada y la de creación.
+rem Ahora mostraremos lo anterior mï¿½s los diï¿½s de diferencia entre la fecha modificada y la de creaciï¿½n.
 
-select first_name ||' '|| last_name as Nombre, TO_CHAR(modified_date,'DD-MON-YYYY') as "Fecha modificación", TO_CHAR(created_date,'DD-MON-YYYY') as "Fecha creacion", (modified_date - created_Date) as Diferencia from STUDENT
+select first_name ||' '|| last_name as Nombre, TO_CHAR(modified_date,'DD-MON-YYYY') as "Fecha modificaciï¿½n", TO_CHAR(created_date,'DD-MON-YYYY') as "Fecha creacion", (modified_date - created_Date) as Diferencia from STUDENT
 where MODIFIED_DATE<= TO_DATE('22-JAN-2003'); 
+
+
+rem ----------------------------- EJERCICIO B. LAB 4.1.2 --------------------------------------------------------------------------------
+
+rem List the section ID and starting date and time for all sections that begin and end in July 2003.(Rischert, p. 232).
+
+SELECT section_id,
+    TO_CHAR(start_date_time, 'DD-MON-YYYY HH24:MI:SS')
+FROM section
+WHERE start_date_time BETWEEN
+    TO_DATE('07/01/2003', 'MM/DD/YYYY')
+    AND TO_DATE('07/31/2003 23:59:59', 'MM/DD/YYYY HH24:MI:SS');
 
 
 rem -------------------------------EJERCICIO B. LAB 4.2-------------------------------------------------------------------------------
@@ -53,12 +80,12 @@ rem Compute the number of months between September 29, 1999 and August 17, 2003.
 
 
 select MONTHS_BETWEEN(TO_DATE('29-SEP-1999','DD-MON-YYYY'),TO_DATE('17-AUG-2003','DD-MON-YYYY')) as Meses from dual;
-rem Aquí puse la comparación al revés y por eso vemos números negativos. 
+rem Aquï¿½ puse la comparaciï¿½n al revï¿½s y por eso vemos nï¿½meros negativos. 
 
 select MONTHS_BETWEEN(TO_DATE('17-AUG-2003','DD-MON-YYYY'),TO_DATE('29-SEP-1999','DD-MON-YYYY')) as Meses from dual;
-rem Esta es la operación correcta.
+rem Esta es la operaciï¿½n correcta.
 
-rem Ahora podríamos realizar otra comparación entre la primera fecha más 3 meses y la sgunda fecha.
+rem Ahora podrï¿½amos realizar otra comparaciï¿½n entre la primera fecha mï¿½s 3 meses y la sgunda fecha.
 select MONTHS_BETWEEN(ADD_MONTHS(TO_DATE('17-AUG-2003','DD-MON-YYYY'),3),TO_DATE('29-SEP-1999','DD-MON-YYYY')) as Meses from dual;
 
 
@@ -73,13 +100,13 @@ from COURSE
 where course_no = 80;
 
 rem Importante!!! Usar comillas simples. 
-re Podemos mostrar la información de una manera más simple, por ejemplo:
+re Podemos mostrar la informaciï¿½n de una manera mï¿½s simple, por ejemplo:
 
 select 'El curso '||course_no || ' un costo de' || TO_CHAR(ROUND(cost*1.15),'$999,999.99') as Informacion
 from COURSE
 where course_no = 80;
 
-rem Podemos hacer uso de otro formato, ya que no necesitamos ver los numeros después del punt
+rem Podemos hacer uso de otro formato, ya que no necesitamos ver los numeros despuï¿½s del punt
 
 select 'El curso '||course_no ||' un costo de ' || TO_CHAR(ROUND(cost*1.15),'$999,999') as Informacion
 from COURSE
@@ -90,7 +117,7 @@ where course_no = 80;
 rem ---------------------------- INTERVALS ------------------------
 
 
-rem ejemplo 276, Suma un intervalo de un año con seis meses  a la fecha.
+rem ejemplo 276, Suma un intervalo de un aï¿½o con seis meses  a la fecha.
 SELECT student_id, registration_date,
 registration_date+TO_YMINTERVAL('01-06') "Grad. Date"
 FROM student
@@ -110,5 +137,6 @@ BETWEEN INTERVAL '100' DAY(4) AND INTERVAL '120' DAY(3)
 ORDER BY 3;
 
 
-
 spool OFF;
+
+

@@ -1,0 +1,14 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+Factorial numeros pares del 1 al 10: 3840                                                                                                             
+
+Procedimiento PL/SQL terminado correctamente.
+
+Factorial numeros impares del 1 al 10: 945                                                                                                            
+
+Procedimiento PL/SQL terminado correctamente.
+

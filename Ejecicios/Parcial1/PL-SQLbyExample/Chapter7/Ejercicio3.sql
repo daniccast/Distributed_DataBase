@@ -25,18 +25,34 @@ script should use a CONTINUE or CONTINUE WHEN statement..
  (ROSENZWEIG,B &  RAKHIMOV,E, p. 190)
 */
 
--- ch06_4a.sql, version 1.0
+-- ch06_4a.sql, modificado
 
 DECLARE
 	v_factorial NUMBER := 1;
 BEGIN
 	FOR v_counter IN 1..10 LOOP
-	CONTINUE WHEN MOD(v_counter)!=0;
+	CONTINUE WHEN MOD(v_counter,2)!=0;
 	v_factorial := v_factorial * v_counter;
 	END LOOP;
 	
 	-- control resumes here
-	DBMS_OUTPUT.PUT_LINE('Factorial of ten is: '||v_factorial);
+	DBMS_OUTPUT.PUT_LINE('Factorial numeros pares del 1 al 10: '||v_factorial);
+END;
+.
+/
+
+
+--Ahora de los números impares.
+DECLARE
+	v_factorial NUMBER := 1;
+BEGIN
+	FOR v_counter IN 1..10 LOOP
+	CONTINUE WHEN MOD(v_counter,2)=0;
+	v_factorial := v_factorial * v_counter;
+	END LOOP;
+	
+	-- control resumes here
+	DBMS_OUTPUT.PUT_LINE('Factorial numeros impares del 1 al 10: '||v_factorial);
 END;
 .
 /

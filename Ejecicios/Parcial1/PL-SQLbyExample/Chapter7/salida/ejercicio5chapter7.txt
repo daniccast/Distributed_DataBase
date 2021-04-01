@@ -1,0 +1,31 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+before continue condition, v_counter = 1                                                                                                              
+before continue condition, v_counter = 2                                                                                                              
+before continue condition, v_counter = 3                                                                                                              
+after continue condition, v_counter = 3                                                                                                               
+before continue condition, v_counter = 4                                                                                                              
+after continue condition, v_counter = 4                                                                                                               
+before continue condition, v_counter = 5                                                                                                              
+after continue condition, v_counter = 5                                                                                                               
+Done...                                                                                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+
+before continue condition, v_counter = 1                                                                                                              
+after continue condition, v_counter = 1                                                                                                               
+before continue condition, v_counter = 2                                                                                                              
+after continue condition, v_counter = 2                                                                                                               
+before continue condition, v_counter = 3                                                                                                              
+before continue condition, v_counter = 4                                                                                                              
+after continue condition, v_counter = 4                                                                                                               
+before continue condition, v_counter = 5                                                                                                              
+after continue condition, v_counter = 5                                                                                                               
+Done...                                                                                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+

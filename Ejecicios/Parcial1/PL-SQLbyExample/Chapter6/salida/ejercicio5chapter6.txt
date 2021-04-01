@@ -1,0 +1,26 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+v_counter = 1                                                                                                                                         
+v_counter = 2                                                                                                                                         
+v_counter = 3                                                                                                                                         
+v_counter = 4                                                                                                                                         
+v_counter = 5                                                                                                                                         
+
+Procedimiento PL/SQL terminado correctamente.
+
+    v_counter := v_counter + 1;
+              *
+ERROR en línea 2:
+ORA-06550: línea 2, columna 15: 
+PLS-00103: Se ha encontrado el símbolo "=" cuando se esperaba uno de los siguientes: 
+constant exception <an identifier> 
+<a double-quoted delimited-identifier> table columns long 
+double ref char time timestamp interval date binary national 
+character nchar 
+El símbolo "<an identifier>" ha sido sustituido por "=" para continuar. 
+
+

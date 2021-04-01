@@ -19,7 +19,6 @@ alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
 
 SET SERVEROUTPUT ON
 
-
 /*
 Factorial
 (ROSENZWEIG,B &  RAKHIMOV,E, p. 166).
@@ -38,6 +37,7 @@ DBMS_OUTPUT.PUT_LINE
 END;
 .
 /
+
 /*
 Rewrite script ch06_4a.sql using a simple loop instead of a numeric FOR loop. Make sure that the
 output produced by this script does not differ from the output produced by the script
@@ -51,19 +51,16 @@ v_counter NUMBER := 1;
 BEGIN
 
 LOOP
-EXIT v_factorial=10;
 
 v_factorial := v_factorial * v_counter;
+EXIT WHEN v_counter=10;
 v_counter:= v_counter + 1;
-
 END LOOP;
 
 -- control resumes here
-DBMS_OUTPUT.PUT_LINE
-('Factorial of ten is: '||v_factorial);
+DBMS_OUTPUT.PUT_LINE ('Factorial of ten is: '||v_factorial);
 END;
 .
 /
-
 
 spool OFF;
