@@ -1,5 +1,5 @@
-#Ejercicios parcial dos
-##SQL by Example
+# Ejercicios parcial dos
+## SQL by Example
 
 - [x] Capítulo 7
 - [ ] Capítulo 8
@@ -7,7 +7,7 @@
 - [ ] Capítulo 15
 
 
-##PL/SQL by example
+## PL/SQL by example
 
 - [ ] Capítulo 8
 - [ ] Capítulo 9
@@ -16,6 +16,6 @@
 - [ ] Capítulo 13
 - [ ] Capítulo 14
 
-###Requísitos.
+### Requísitos.
 Comentados, referenciados, cinco ejercicios por capítulo.
 Generar spool. 
