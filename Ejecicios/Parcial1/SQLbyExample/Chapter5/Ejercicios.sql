@@ -4,11 +4,11 @@ rem *****************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2         * 
 rem * Elaborado por:                                    *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar Oscar  *
-rem * Ejercicios lab 3.1 y test your thiking            *
-rem * Página 178 y           220                        *
 rem * Realizado el 11 de Marzo de 2021                  *
-rem * rem Rischert,A (2004).            		*
-rem * Oracle® SQL™by Example,Nueva Jersey,USA:Perarson. *
+rem * Rischert,A (2004)."Chapter 5. Aggregate Functions,*
+rem * GROUP BY, and HAVING". 	 			  *
+rem * Ramagnano,L, Oracle® SQL™by Example(301-326). 	  *
+rem * Pearson.  					  *
 rem *****************************************************
 
 rem Establecer formato para las tablas
