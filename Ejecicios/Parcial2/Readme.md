@@ -2,8 +2,8 @@
 ## SQL by Example
 
 - [x] Capítulo 7 - Subqueries
-- [ ] Capítulo 8 - Set Operators
-- [ ] Capítulo 9 - Complex Joins
+- [x] Capítulo 8 - Set Operators
+- [x] Capítulo 9 - Complex Joins
 - [ ] Capítulo 15- Regular Expressions and Hierarchical Queries
 
 
