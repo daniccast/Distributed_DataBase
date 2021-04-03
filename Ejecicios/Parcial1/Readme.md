@@ -1,4 +1,4 @@
-# Ejercicios parcial dos
+# Ejercicios parcial uno
 ## SQL by Example
 
 - [x] Capítulo 3- Character, Number, and Miscellaneous Functions
