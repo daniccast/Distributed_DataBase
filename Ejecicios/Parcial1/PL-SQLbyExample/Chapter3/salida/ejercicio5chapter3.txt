@@ -1,0 +1,186 @@
+SQL> /*
+SQL> rem **********************************************************
+SQL> rem * Distributed DataBase, ESCOM. Ciclo 2021-2		  *
+SQL> rem * Elaborado por:					  *
+SQL> rem * CortÃ©s Castilllo Daniela y Mendoza Cuellar JosÃ© Oscar  *
+SQL> rem * Realizado el 13 de Marzo de 2021			  *
+SQL> rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).			  *
+SQL> rem *OracleÂ® PL/SQLâ„¢by Example,Boston,MA,USA:Perarson.	     *
+SQL> rem **********************************************************
+SQL> */
+SQL> 
+SQL> set colsep '|='
+SQL> set describe linenum on
+SQL> SET PAGESIZE 99;
+SQL> SET LINESIZE 150
+SQL> alter session set NLS_DATE_FORMAT = 'DD-MON-YYYY';
+
+Sesión modificada.
+
+SQL> alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
+
+Sesión modificada.
+
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> -- Ejemplo (ROSENZWEIG,B &  RAKHIMOV,E, p. 46).
+SQL> 
+SQL> 
+SQL> /*En este ejemplo nos nuestra la actualizacion permanente de la columna cost de la tabla, pero nosotros podemos regredar esta tabla asu valor original con ayuda de
+SQL> los savepoint y el comando rollback*/
+SQL> 
+SQL> 
+SQL> /*mostramos los valores originales*/
+SQL> SELECT cost from course;
+
+      COST                                                                                                                                            
+----------                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1595                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1095                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1095                                                                                                                                            
+      1095                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+                                                                                                                                                      
+
+30 filas seleccionadas.
+
+SQL> /*hacemos un punto de guardado des estos valores*/
+SQL> SAVEPOINT A;
+
+Punto de grabación creado.
+
+SQL> /
+
+Punto de grabación creado.
+
+SQL> -- STEP 1
+SQL> UPDATE course
+  2  SET cost = cost - (cost * 0.10)
+  3  WHERE prerequisite IS NULL;
+
+4 filas actualizadas.
+
+SQL> -- STEP 2
+SQL> UPDATE course
+  2  SET cost = cost + (cost * 0.10)
+  3  WHERE prerequisite IS NOT NULL;
+
+26 filas actualizadas.
+
+SQL> END;
+SP2-0042: comando desconocido "END" - resto de la línea ignorado.
+SQL> .
+SQL> /
+
+26 filas actualizadas.
+
+SQL> 
+SQL> /*mostramos los valores originales*/
+SQL> SELECT cost from course;
+
+      COST                                                                                                                                            
+----------                                                                                                                                            
+    1075.5                                                                                                                                            
+    1075.5                                                                                                                                            
+   1445.95                                                                                                                                            
+   1929.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1324.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+    1075.5                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1324.95                                                                                                                                            
+   1324.95                                                                                                                                            
+    1075.5                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+   1445.95                                                                                                                                            
+                                                                                                                                                      
+
+30 filas seleccionadas.
+
+SQL> 
+SQL>  /*regresamos los valores a su valor original*/
+SQL> ROLLBACK TO A;
+
+Rollback terminado.
+
+SQL> 
+SQL> /*mostamos que en efecto son los originales*/
+SQL> SELECT cost from course;
+
+      COST                                                                                                                                            
+----------                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1595                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1095                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1095                                                                                                                                            
+      1095                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+      1195                                                                                                                                            
+                                                                                                                                                      
+
+30 filas seleccionadas.
+
+SQL> 
+SQL> spool OFF;

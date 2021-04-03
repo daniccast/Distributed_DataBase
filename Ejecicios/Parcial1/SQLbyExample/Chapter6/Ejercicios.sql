@@ -1,15 +1,15 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial1\SQLbyExample\Chapter6\salida\ejercicioschapter6.txt
+spool C:\Users\ozkr_\OneDrive\Documentos\DDB\PrimerParcial\SQLbyExample\Chapter6\salida\ejercicioschapter7.txt
 
-rem *****************************************************
-rem * Distributed DataBase, ESCOM. Ciclo 2021-2         * 
-rem * Elaborado por:                                    *
-rem * Cortés Castilllo Daniela y Mendoza Cuellar Oscar  *
-rem * Realizado el 11 de Marzo de 2021                  *
-rem * Rischert,A (2004)."Chapter 6. Equijoins". 	*
-rem *Ramagnano,L, Oracle® SQL™by Example(326-366). 	*
-rem *Pearson.  					        *
-rem *****************************************************
-
+rem **********************************************************
+rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
+rem * Elaborado por:                                         *
+rem * CortÃ©s Castilllo Daniela y Mendoza Cuellar JosÃ© Oscar  *
+rem * Ejercicios lab 3.1 y test your thiking                 *
+rem * PÃ¡gina 178 y           220                             *
+rem * Realizado el 11 de Marzo de 2021                        *
+rem * rem Rischert,A (2004).            		             *      
+rem * OracleÂ® SQLâ„¢by Example,Nueva Jersey,USA:Perarson.      *
+rem **********************************************************
 rem Establecer formato para las tablas
 
 set colsep '|=|'
@@ -21,6 +21,21 @@ alter session set NLS_DATE_FORMAT = 'DD-MON-YYYY';
 alter session set NLS_DATE_LANGUAGE= 'ENGLISH';
 rem para estos ejercicios necesitamos este tipo de formato
 
+
+rem ----------------------------- EJERCICIO B. LAB 6.1.2--------------------------------------------------------------------------------
+rem For all students, display last name, city, state, and zip code. Show the result ordered by zip code.(Rischert, p. 336). 
+
+SELECT s.last_name, s.zip, z.state, z.city
+FROM student s, zipcode z
+WHERE s.zip = z.zip 
+ORDER BY s.zip;
+
+rem Si solo queremos los saber los que son de Brooklyn
+
+SELECT s.last_name, s.zip, z.state, z.city
+FROM student s, zipcode z
+WHERE s.zip = z.zip AND city = 'Brooklyn'
+ORDER BY s.zip;
 
 rem ----------------------------- EJERCICIO B. LAB 6.1.2--------------------------------------------------------------------------------
 rem Select the student ID, course number, enrollment date, and section ID for students who enrolled in course number 20 on January 30, 2003.(Rischert, p. 336). 
@@ -78,10 +93,41 @@ where
 order by s.START_DATE_TIME;
 
 
+rem ----------------------------- EJERCICIO B. LAB 6.2.2--------------------------------------------------------------------------------
+
+rem Show all the grades student Fred Crocitto received for SECTION_ID 86 (Rischert, p. 353). 
+
+SELECT s.first_name|| ' '|| s.last_name name,
+e.section_id, g.grade_type_code,
+g.numeric_grade grade
+FROM student s JOIN enrollment e
+ON (s.student_id = e.student_id)
+JOIN grade g
+ON (e.student_id = g.student_id
+AND e.section_id = g.section_id)
+WHERE s.last_name = 'Crocitto'
+AND s.first_name ='Fred'
+AND e.section_id = 86;
+
+rem Si solo quremos ver sus calificaciones de HM
+
+SELECT s.first_name|| ' '|| s.last_name name,
+e.section_id, g.grade_type_code,
+g.numeric_grade grade
+FROM student s JOIN enrollment e
+ON (s.student_id = e.student_id)
+JOIN grade g
+ON (e.student_id = g.student_id
+AND e.section_id = g.section_id)
+WHERE s.last_name = 'Crocitto'
+AND s.first_name ='Fred'
+AND e.section_id = 86
+AND g.grade_type_code ='HM';
+
 
 
 rem ----------------------------- EJERCICIO B. LAB 6.2.2--------------------------------------------------------------------------------
-rem List the final examination grades for all enrolled Connecticut students of course number 420. Note final examination does not mean final grade.
+rem List the final examination grades for all enrolled Connecticut students of course number 420. Note final examination does not mean final grade.(Rischert, p. 353)
 
 select s.STUDENT_ID as Estudiante, sec.COURSE_NO, g.NUMERIC_GRADE 
 from ZIPCODE z, STUDENT s, ENROLLMENT e, GRADE g, SECTION sec
@@ -103,6 +149,8 @@ USING(STUDENT_ID, SECTION_ID)
 where z.STATE= 'CT' AND
 sec.COURSE_NO=420 AND
 g.GRADE_TYPE_CODE='FI';
+
+
 
 
 spool OFF;

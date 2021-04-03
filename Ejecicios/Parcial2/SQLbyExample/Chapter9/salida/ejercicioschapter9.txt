@@ -1,0 +1,155 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+
+ COURSE_NO|=|DESCRIPTION                                                                                                                              
+----------|=|----------------------------------------                                                                                                 
+       430|=|JDeveloper Techniques                                                                                                                    
+       450|=|DB Programming in Java                                                                                                                   
+
+
+SECTION_ID|=| COURSE_NO                                                                                                                               
+----------|=|----------                                                                                                                               
+       109|=|       450                                                                                                                               
+
+
+ CNO|=| SNO|=|DESCRIPTION                             |=|PREREQ|=|LOC                                               |=|SECTION_ID                     
+----|=|----|=|----------------------------------------|=|------|=|--------------------------------------------------|=|----------                     
+ 430|=|    |=|JDeveloper Techniques                   |=|   350|=|                                                  |=|                               
+ 450|=| 450|=|DB Programming in Java                  |=|   350|=|L507                                              |=|       109                     
+
+
+ CNO|=|DESCRIPTIO|=|PREREQ|=|LOC                                               |=|SECTION_ID                                                          
+----|=|----------|=|------|=|--------------------------------------------------|=|----------                                                          
+ 430|=|JDeveloper|=|   350|=|                                                  |=|                                                                    
+    |=| Technique|=|      |=|                                                  |=|                                                                    
+    |=|s         |=|      |=|                                                  |=|                                                                    
+                                                                                                                                                      
+ 450|=|DB Program|=|   350|=|L507                                              |=|       109                                                          
+    |=|ming in Ja|=|      |=|                                                  |=|                                                                    
+    |=|va        |=|      |=|                                                  |=|                                                                    
+                                                                                                                                                      
+
+
+ CNO|=| SNO|=|DESCRIPTIO|=|PREREQ|=|LOC                                               |=|SECTION_ID                                                   
+----|=|----|=|----------|=|------|=|--------------------------------------------------|=|----------                                                   
+ 430|=|    |=|JDeveloper|=|   350|=|                                                  |=|                                                             
+    |=|    |=| Technique|=|      |=|                                                  |=|                                                             
+    |=|    |=|s         |=|      |=|                                                  |=|                                                             
+                                                                                                                                                      
+ 450|=| 450|=|DB Program|=|   350|=|L507                                              |=|       109                                                   
+    |=|    |=|ming in Ja|=|      |=|                                                  |=|                                                             
+    |=|    |=|va        |=|      |=|                                                  |=|                                                             
+                                                                                                                                                      
+
+
+ CNO|=| SNO|=|DESCRIPTIO|=|PREREQ|=|LOC                                               |=|SECTION_ID                                                   
+----|=|----|=|----------|=|------|=|--------------------------------------------------|=|----------                                                   
+ 450|=| 450|=|DB Program|=|   350|=|L507                                              |=|       109                                                   
+    |=|    |=|ming in Ja|=|      |=|                                                  |=|                                                             
+    |=|    |=|va        |=|      |=|                                                  |=|                                                             
+                                                                                                                                                      
+
+
+ CNO|=| SNO|=|DESCRIPTIO|=|PREREQ|=|LOC                                               |=|SECTION_ID                                                   
+----|=|----|=|----------|=|------|=|--------------------------------------------------|=|----------                                                   
+ 430|=|    |=|JDeveloper|=|   350|=|                                                  |=|                                                             
+    |=|    |=| Technique|=|      |=|                                                  |=|                                                             
+    |=|    |=|s         |=|      |=|                                                  |=|                                                             
+                                                                                                                                                      
+ 450|=| 450|=|DB Program|=|   350|=|L507                                              |=|       109                                                   
+    |=|    |=|ming in Ja|=|      |=|                                                  |=|                                                             
+    |=|    |=|va        |=|      |=|                                                  |=|                                                             
+                                                                                                                                                      
+
+
+ CNO|=| SNO|=|DESCRIPTIO|=|PREREQ|=|LOC                                               |=|SECTION_ID                                                   
+----|=|----|=|----------|=|------|=|--------------------------------------------------|=|----------                                                   
+ 430|=|    |=|JDeveloper|=|   350|=|                                                  |=|                                                             
+    |=|    |=| Technique|=|      |=|                                                  |=|                                                             
+    |=|    |=|s         |=|      |=|                                                  |=|                                                             
+                                                                                                                                                      
+ 450|=| 450|=|DB Program|=|   350|=|L507                                              |=|       109                                                   
+    |=|    |=|ming in Ja|=|      |=|                                                  |=|                                                             
+    |=|    |=|va        |=|      |=|                                                  |=|                                                             
+                                                                                                                                                      
+
+
+STUDENT_ID|=|SECTION_ID|=|GR|=|NUMERIC_GRADE                                                                                                          
+----------|=|----------|=|--|=|-------------                                                                                                          
+       102|=|        86|=|FI|=|           85                                                                                                          
+       102|=|        86|=|HM|=|           90                                                                                                          
+       102|=|        86|=|HM|=|           99                                                                                                          
+       102|=|        86|=|HM|=|           82                                                                                                          
+       102|=|        86|=|HM|=|           82                                                                                                          
+       102|=|        86|=|MT|=|           90                                                                                                          
+       102|=|        86|=|PA|=|           85                                                                                                          
+       102|=|        86|=|QZ|=|           90                                                                                                          
+       102|=|        86|=|QZ|=|           84                                                                                                          
+       102|=|        86|=|QZ|=|           97                                                                                                          
+       102|=|        86|=|QZ|=|           97                                                                                                          
+       102|=|        89|=|FI|=|           92                                                                                                          
+       102|=|        89|=|MT|=|           91                                                                                                          
+       301|=|          |=|  |=|                                                                                                                       
+
+14 filas seleccionadas.
+
+
+STUDENT_ID|=|SECTION_ID|=|GR|=|NUMERIC_GRADE                                                                                                          
+----------|=|----------|=|--|=|-------------                                                                                                          
+       102|=|        86|=|FI|=|           85                                                                                                          
+       102|=|        86|=|HM|=|           90                                                                                                          
+       102|=|        86|=|HM|=|           99                                                                                                          
+       102|=|        86|=|HM|=|           82                                                                                                          
+       102|=|        86|=|HM|=|           82                                                                                                          
+       102|=|        86|=|MT|=|           90                                                                                                          
+       102|=|        86|=|PA|=|           85                                                                                                          
+       102|=|        86|=|QZ|=|           90                                                                                                          
+       102|=|        86|=|QZ|=|           84                                                                                                          
+       102|=|        86|=|QZ|=|           97                                                                                                          
+       102|=|        86|=|QZ|=|           97                                                                                                          
+       102|=|        89|=|FI|=|           92                                                                                                          
+       102|=|        89|=|MT|=|           91                                                                                                          
+       301|=|          |=|  |=|                                                                                                                       
+
+14 filas seleccionadas.
+
+
+ COURSE_NO|=|COURSE_DESCR    |=|PREREQUISITE|=|PRE_REQ_DESCR                                                                                          
+----------|=|----------------|=|------------|=|----------------                                                                                       
+        10|=|DP Overview     |=|            |=|                                                                                                       
+        20|=|Intro to Comput |=|            |=|                                                                                                       
+        25|=|Intro to Progra |=|         140|=|Structured Anal                                                                                        
+        80|=|Structured Prog |=|         204|=|Intro to SQL                                                                                           
+       100|=|Hands-On Window |=|          20|=|Intro to Comput                                                                                        
+       120|=|Intro to Java P |=|          80|=|Structured Prog                                                                                        
+       122|=|Intermediate Ja |=|         120|=|Intro to Java P                                                                                        
+       124|=|Advanced Java P |=|         122|=|Intermediate Ja                                                                                        
+       125|=|JDeveloper      |=|         122|=|Intermediate Ja                                                                                        
+       130|=|Intro to Unix   |=|         310|=|Operating Syste                                                                                        
+       132|=|Basics of Unix  |=|         130|=|Intro to Unix                                                                                          
+       134|=|Advanced Unix A |=|         132|=|Basics of Unix                                                                                         
+       135|=|Unix Tips and T |=|         134|=|Advanced Unix A                                                                                        
+       140|=|Structured Anal |=|          20|=|Intro to Comput                                                                                        
+       142|=|Project Managem |=|          20|=|Intro to Comput                                                                                        
+       144|=|Database Design |=|         420|=|Database System                                                                                        
+       145|=|Internet Protoc |=|         310|=|Operating Syste                                                                                        
+       146|=|Java for C/C++  |=|            |=|                                                                                                       
+       147|=|GUI Programming |=|          20|=|Intro to Comput                                                                                        
+       204|=|Intro to SQL    |=|          20|=|Intro to Comput                                                                                        
+       210|=|Oracle Tools    |=|         220|=|PL/SQL Programm                                                                                        
+       220|=|PL/SQL Programm |=|          80|=|Structured Prog                                                                                        
+       230|=|Intro to Intern |=|          10|=|DP Overview                                                                                            
+       240|=|Intro to the Ba |=|          25|=|Intro to Progra                                                                                        
+       310|=|Operating Syste |=|            |=|                                                                                                       
+       330|=|Network Adminis |=|         130|=|Intro to Unix                                                                                          
+       350|=|JDeveloper Lab  |=|         125|=|JDeveloper                                                                                             
+       420|=|Database System |=|          25|=|Intro to Progra                                                                                        
+       430|=|JDeveloper Tech |=|         350|=|JDeveloper Lab                                                                                         
+       450|=|DB Programming  |=|         350|=|JDeveloper Lab                                                                                         
+
+30 filas seleccionadas.
+

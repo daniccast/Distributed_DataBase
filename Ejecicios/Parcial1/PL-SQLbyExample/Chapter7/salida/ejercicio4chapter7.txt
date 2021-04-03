@@ -1,0 +1,24 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+Current sum is: 2                                                                                                                                     
+Current sum is: 6                                                                                                                                     
+Current sum is: 12                                                                                                                                    
+Current sum is: 20                                                                                                                                    
+Current sum is: 30                                                                                                                                    
+Final sum is: 30                                                                                                                                      
+
+Procedimiento PL/SQL terminado correctamente.
+
+Current sum is: 1                                                                                                                                     
+Current sum is: 4                                                                                                                                     
+Current sum is: 9                                                                                                                                     
+Current sum is: 16                                                                                                                                    
+Current sum is: 25                                                                                                                                    
+Final sum is: 25                                                                                                                                      
+
+Procedimiento PL/SQL terminado correctamente.
+

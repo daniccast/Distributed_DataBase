@@ -1,0 +1,86 @@
+SQL> /*
+SQL> rem **********************************************************
+SQL> rem * Distributed DataBase, ESCOM. Ciclo 2021-2		  *
+SQL> rem * Elaborado por:					  *
+SQL> rem * Cortés Castilllo Daniela y Mendoza Cuellar José Oscar  *
+SQL> rem * Realizado el 13 de Marzo de 2021			  *
+SQL> rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).			  *
+SQL> rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.	     *
+SQL> rem **********************************************************
+SQL> */
+SQL> 
+SQL> set colsep '|='
+SQL> set describe linenum on
+SQL> SET PAGESIZE 99;
+SQL> SET LINESIZE 150
+SQL> alter session set NLS_DATE_FORMAT = 'DD-MON-YYYY';
+
+Sesi�n modificada.
+
+SQL> alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
+
+Sesi�n modificada.
+
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> -- Ejemplo ¿Qué suscede? ¿Cómo arreglarlo? (ROSENZWEIG,B &  RAKHIMOV,E, p. 78).
+SQL> 
+SQL> DECLARE
+  2  	 v_temp_in NUMBER := 100;
+  3  	 v_scale_in CHAR := 'F';
+  4  	 v_temp_out NUMBER;
+  5  	 v_scale_out CHAR;
+  6  BEGIN
+  7  	 IF v_scale_in != 'C' AND v_scale_in != 'F' THEN
+  8  	     DBMS_OUTPUT.PUT_LINE ('This is not a valid scale');
+  9  	 ELSE
+ 10  	 IF v_scale_in = 'C' THEN
+ 11  	     v_temp_out := ( (9 * v_temp_in) / 5 ) + 32;
+ 12  	     v_scale_out := 'F';
+ 13  	 ELSE
+ 14  	     v_temp_out := ( (v_temp_in - 32) * 5 ) / 9;
+ 15  	     v_scale_out := 'C';
+ 16  	 END IF;
+ 17  	     DBMS_OUTPUT.PUT_LINE ('New scale is: '||v_scale_out);
+ 18  	     DBMS_OUTPUT.PUT_LINE ('New temperature is: '||v_temp_out);
+ 19  	 END IF;
+ 20  END;
+ 21  .
+SQL> /
+New scale is: C                                                                                                                                       
+New temperature is: 37.77777777777777777777777777777777777778                                                                                         
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> /*
+SQL> Este script convierte la temperatura de una escala a otra, pidiendo el valord e la temperatura y la escala en la que esta, aceptando solo
+SQL> dos escalas C y F si no es ninguna de las dos mostrara un mensaje de error, si ingresamos una leta diferente de C o F no mostrar el sig mensaje
+SQL> */
+SQL> 
+SQL> DECLARE
+  2  	 v_temp_in NUMBER := 100;
+  3  	 v_scale_in CHAR := 'A';
+  4  	 v_temp_out NUMBER;
+  5  	 v_scale_out CHAR;
+  6  BEGIN
+  7  	 IF v_scale_in != 'C' AND v_scale_in != 'F' THEN
+  8  	     DBMS_OUTPUT.PUT_LINE ('This is not a valid scale');
+  9  	 ELSE
+ 10  	 IF v_scale_in = 'C' THEN
+ 11  	     v_temp_out := ( (9 * v_temp_in) / 5 ) + 32;
+ 12  	     v_scale_out := 'F';
+ 13  	 ELSE
+ 14  	     v_temp_out := ( (v_temp_in - 32) * 5 ) / 9;
+ 15  	     v_scale_out := 'C';
+ 16  	 END IF;
+ 17  	     DBMS_OUTPUT.PUT_LINE ('New scale is: '||v_scale_out);
+ 18  	     DBMS_OUTPUT.PUT_LINE ('New temperature is: '||v_temp_out);
+ 19  	 END IF;
+ 20  END;
+ 21  .
+SQL> /
+This is not a valid scale                                                                                                                             
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> spool OFF;

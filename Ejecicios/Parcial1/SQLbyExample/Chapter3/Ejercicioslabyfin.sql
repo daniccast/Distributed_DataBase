@@ -1,15 +1,16 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial1\SQLbyExample\Chapter3\salida\ejercicioschapter3.txt
+spool C:\Users\ozkr_\OneDrive\Documentos\DDB\PrimerParcial\SQLbyExample\Chapter3\salida\ejercicioschapter3.txt
 
-rem *****************************************************
-rem * Distributed DataBase, ESCOM. Ciclo 2021-2         * 
-rem * Elaborado por:                                    *
-rem * Cortés Castilllo Daniela y Mendoza Cuellar Oscar  *
-rem * Ejercicios lab 3.1 y test your thiking            *
-rem * Página 178 y           220                        *
-rem * Realizado el 7 de Marzo de 2021                   *
-rem * rem Rischert,A (2004).            		  *
-rem * Oracle® SQL™by Example,Nueva Jersey,USA:Perarson.*
-rem *****************************************************
+rem **********************************************************
+rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
+rem * Elaborado por:                                         *
+rem * CortÃ©s Castilllo Daniela y Mendoza Cuellar JosÃ© Oscar  *
+rem * Ejercicios lab 3.1 y test your thiking                 *
+rem * PÃ¡gina 178 y           220                             *
+rem * Realizado el 7 de Marzo de 2021                        *
+rem * rem Rischert,A (2004).            		             *      
+rem * OracleÂ® SQLâ„¢by Example,Nueva Jersey,USA:Perarson.      *
+rem **********************************************************
+
 
 rem Establecer formato para las tablas
 
@@ -27,17 +28,17 @@ SUBSTR('12345', 3, 2),
 SUBSTR('12345', -4, 3)
 FROM dual;
 
-rem En el caso de los negativos, podemos decir que toma la última posición y de ahí comienza a contar hacia atrás 4 pocisiones, ahí es el inicio de la cadena.
+rem En el caso de los negativos, podemos decir que toma la ï¿½ltima posiciï¿½n y de ahï¿½ comienza a contar hacia atrï¿½s 4 pocisiones, ahï¿½ es el inicio de la cadena.
 
-rem Prueba con número negativo más grande
+rem Prueba con numero negativo mas grande
 SELECT SUBSTR('12345', -6, 3)
 FROM dual;
-rem Aquí no selecciona nada
+rem Aqui no selecciona nada
 
-rem Prueba con número más grande
+rem Prueba con numero mas grande
 SELECT SUBSTR('12345', 12, 3)
 FROM dual;
-rem Aquí no selecciona nada, por lo tanto solo selecciona los caracteres que sí existen.
+rem Aqui no selecciona nada, por lo tanto solo selecciona los caracteres que sï¿½ existen.
 
 rem -------------------------------EJERCICIO G. LAB 3.1-------------------------------------------------------------------------------
 
@@ -61,5 +62,17 @@ rem -------------------------------EJERCICIO 3. TEST YPUR THINKING--------------
 rem Determine which student does not have the first letter of her or his last name capitalized. Show the STUDENT_ID and last_name  (Rischert, p. 220).
 select STUDENT_ID as ID, last_name  from STUDENT 
 where last_name!=INITCAP(last_name);
+
+
+
+rem ------------------------------Lab Exercises 3.3.1 a)---------------------------------------------------------------------------------
+
+rem List the last name, first name, and phone number of students who do not have a phone number. Display '212-555-1212' for the phone number. (Rischert, p. 211).
+
+SELECT first_name||' '|| last_name name,
+phone oldphone,
+NVL(phone, '212-555-1212') newphone
+FROM student
+WHERE phone IS NULL;
 
 spool OFF;
