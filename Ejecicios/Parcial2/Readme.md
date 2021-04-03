@@ -1,5 +1,5 @@
-#Ejercicios parcial dos
-##SQL by Example
+# Ejercicios parcial dos
+## SQL by Example
 
 - [x] Capítulo 7 - Subqueries
 - [ ] Capítulo 8 - Set Operators
@@ -7,7 +7,7 @@
 - [ ] Capítulo 15- Regular Expressions and Hierarchical Queries
 
 
-##PL/SQL by example
+## PL/SQL by example
 
 - [ ] Capítulo 8 - Error Handling and Built-in Exceptions
 - [ ] Capítulo 9 - Exceptions
@@ -16,6 +16,6 @@
 - [ ] Capítulo 13- Triggers
 - [ ] Capítulo 14- Compound Triggers
 
-###Requísitos.
+### Requísitos.
 Comentados, referenciados, cinco ejercicios por capítulo.
 Generar spool. 
