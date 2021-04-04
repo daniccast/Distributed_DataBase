@@ -1,4 +1,4 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial2\SQLbyExample\Chapter15\salida\ejercicioschapter15.txt
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial2\SQLbyExample\Chapter15\salida\ejercicioschapter15.txt
 
 rem *****************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2         * 
