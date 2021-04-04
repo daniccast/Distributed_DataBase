@@ -6,9 +6,9 @@ rem * Elaborado por:                                    *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar Oscar  *
 rem * Realizado el 1 de Abril de 2021                   *
 rem * Rischert,A (2004)."Chapter 15. Regular Expressions*
-rem * and Hierarchical Queries". 	  		  *
-rem *Ramagnano,L, Oracle® SQL™by Example(711-258). 	  *
-rem *Pearson.  					  *
+rem * and Hierarchical Queries". 	  		*
+rem *Ramagnano,L, Oracle® SQL™by Example(711-258). 	*
+rem *Pearson.  					        *
 rem *****************************************************
 
 rem Establecer formato para las tablas
@@ -33,14 +33,11 @@ ADD CONSTRAINT stud_first_name_ck CHECK
 
 rem no se escapa el . porque esta dentro de una lista.
 
-
-
-rem solo prueba
-SELECT REGEXP_LIKE('10025', '[[:digit:]]')
-FROM dual;
-
 rem ----------------------------- EJERCICIO A. LAB 15.2.1--------------------------------------------------------------------------------
 rem Show the course number and course description of courses with course number 310 as a prerequisite. Make these records the root of your hierarchical query. Display all the courses that can be taken after these root courses have been completed as childrecords. Include the LEVEL pseudocolumn as an additional column (Rischert, 2004, 748). 
+
+COL LEVEL format 999;
+COL hierarchy FORMAT A50;
 
 SELECT LEVEL, LPAD(' ', 6*(LEVEL-1)) ||course_no
 || ' ' ||description hierarchy
@@ -49,10 +46,28 @@ START WITH prerequisite = 310
 CONNECT BY PRIOR course_no = prerequisite;
 
 
-rem cambiar prior
+rem ¿Qué pasa si ponemos el PRIOR en prerequisite?
+
+
+SELECT LEVEL, LPAD(' ', 6*(LEVEL-1)) ||course_no
+|| ' ' ||description hierarchy
+FROM course
+START WITH prerequisite = 310
+CONNECT BY course_no = PRIOR prerequisite;
+
+rem se cambia el orden del árbol así que solo muestra poca info.
+
 
 rem and level<=3;
 
 
+SELECT LEVEL, LPAD(' ', 6*(LEVEL-1)) ||course_no
+|| ' ' ||description hierarchy
+FROM course
+START WITH prerequisite = 310
+CONNECT BY PRIOR course_no = prerequisite
+	and LEVEL<=2;
+
+rem Solo se muestran los dos primeros niveles.
 
 spool OFF;

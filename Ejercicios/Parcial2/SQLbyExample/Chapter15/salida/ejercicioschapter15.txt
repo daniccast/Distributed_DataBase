@@ -1,0 +1,40 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+ADD CONSTRAINT stud_first_name_ck CHECK
+               *
+ERROR en línea 2:
+ORA-02264: nombre ya utilizado por una restricción existente 
+
+
+
+LEVEL|=|HIERARCHY                                                                                                                                     
+-----|=|--------------------------------------------------                                                                                            
+    1|=|130 Intro to Unix                                                                                                                             
+    2|=|      132 Basics of Unix Admin                                                                                                                
+    3|=|            134 Advanced Unix Admin                                                                                                           
+    4|=|                  135 Unix Tips and Techniques                                                                                                
+    2|=|      330 Network Administration                                                                                                              
+    1|=|145 Internet Protocols                                                                                                                        
+
+6 filas seleccionadas.
+
+
+LEVEL|=|HIERARCHY                                                                                                                                     
+-----|=|--------------------------------------------------                                                                                            
+    1|=|130 Intro to Unix                                                                                                                             
+    2|=|      310 Operating Systems                                                                                                                   
+    1|=|145 Internet Protocols                                                                                                                        
+    2|=|      310 Operating Systems                                                                                                                   
+
+
+LEVEL|=|HIERARCHY                                                                                                                                     
+-----|=|--------------------------------------------------                                                                                            
+    1|=|130 Intro to Unix                                                                                                                             
+    2|=|      132 Basics of Unix Admin                                                                                                                
+    2|=|      330 Network Administration                                                                                                              
+    1|=|145 Internet Protocols                                                                                                                        
+
