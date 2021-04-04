@@ -23,11 +23,35 @@ alter session set NLS_DATE_LANGUAGE= 'ENGLISH';
 rem para estos ejercicios necesitamos este tipo de formato
 
 
-rem ----------------------------- EJERCICIO B. LAB 9.1.1--------------------------------------------------------------------------------
-rem (Rischert, 2004, ). 
+rem ----------------------------- EJERCICIO A. LAB 15.1--------------------------------------------------------------------------------
+rem Write a regular expression column constraint against the FIRST_NAME column of the STUDENT table that ensures that the first name starts with an uppercase character. The subsequent characters allowed are alphabetical letters, spaces, hyphens, quotes, and periods (Rischert, 2004, 728). 
+
+
+ALTER TABLE student
+ADD CONSTRAINT stud_first_name_ck CHECK
+(REGEXP_LIKE(first_name, '^[[:upper:]]{1}[-[:alpha:] .'']*$'));
+
+rem no se escapa el . porque esta dentro de una lista.
 
 
 
+rem solo prueba
+SELECT REGEXP_LIKE('10025', '[[:digit:]]')
+FROM dual;
+
+rem ----------------------------- EJERCICIO A. LAB 15.2.1--------------------------------------------------------------------------------
+rem Show the course number and course description of courses with course number 310 as a prerequisite. Make these records the root of your hierarchical query. Display all the courses that can be taken after these root courses have been completed as childrecords. Include the LEVEL pseudocolumn as an additional column (Rischert, 2004, 748). 
+
+SELECT LEVEL, LPAD(' ', 6*(LEVEL-1)) ||course_no
+|| ' ' ||description hierarchy
+FROM course
+START WITH prerequisite = 310
+CONNECT BY PRIOR course_no = prerequisite;
+
+
+rem cambiar prior
+
+rem and level<=3;
 
 
 
