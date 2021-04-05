@@ -3,10 +3,10 @@ spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial2\PL-S
 rem **********************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
 rem * Elaborado por:                                         *
-rem * CortÃ©s Castilllo Daniela y Mendoza Cuellar JosÃ© Oscar  *                 
+rem * Cortés Castilllo Daniela y Mendoza Cuellar José Oscar  *                 
 rem * Realizado el 4 de Abril  de 2021                       *
 rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).                     *
-rem *OracleÂ® PL/SQLâ„¢by Example,Boston,MA,USA:Perarson.       *
+rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.       *
 rem **********************************************************
 */
 
@@ -33,8 +33,10 @@ EXCEPTION
 END;
 .
 /
+/
 
--- ch08_1b.sql, version 2.0
+--Esta excepción se puede manejar inclusive sin el bloque manejador. 
+
 
 DECLARE
 	v_num NUMBER := &sv_num;
@@ -45,9 +47,7 @@ BEGIN
 		DBMS_OUTPUT.PUT_LINE ('A number cannot be negative');
 	END IF;
 END;
-
 .
 /
-
-
+/
 spool OFF;
