@@ -4,7 +4,7 @@
 - [x] Capítulo 7 - Subqueries
 - [x] Capítulo 8 - Set Operators
 - [x] Capítulo 9 - Complex Joins
-- [ ] Capítulo 15- Regular Expressions and Hierarchical Queries
+- [x] Capítulo 15- Regular Expressions and Hierarchical Queries
 
 
 ## PL/SQL by example
