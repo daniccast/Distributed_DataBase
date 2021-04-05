@@ -9,7 +9,7 @@
 
 ## PL/SQL by example
 
-- [ ] Capítulo 8 - Error Handling and Built-in Exceptions
+- [x] Capítulo 8 - Error Handling and Built-in Exceptions
 - [ ] Capítulo 9 - Exceptions
 - [ ] Capítulo 11- Introduction to Cursors
 - [ ] Capítulo 12- Advanced Cursors
