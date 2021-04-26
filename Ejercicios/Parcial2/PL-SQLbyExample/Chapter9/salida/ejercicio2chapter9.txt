@@ -1,0 +1,42 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+
+COUNT(STUDENT_ID)|=SECTION_ID                                                                                                                         
+-----------------|=----------                                                                                                                         
+               12|=        89                                                                                                                         
+
+
+COUNT(STUDENT_ID)|=SECTION_ID                                                                                                                         
+-----------------|=----------                                                                                                                         
+               12|=        99                                                                                                                         
+
+
+COUNT(STUDENT_ID)|=SECTION_ID                                                                                                                         
+-----------------|=----------                                                                                                                         
+                2|=       100                                                                                                                         
+
+Introduzca un valor para sv_section: 89
+antiguo   2: 	v_section NUMBER := '&sv_section';
+nuevo   2: 	v_section NUMBER := '89';
+Más de diez...                                                                                                                                        
+
+Procedimiento PL/SQL terminado correctamente.
+
+Introduzca un valor para sv_section: 99
+antiguo   2: 	v_section NUMBER := '&sv_section';
+nuevo   2: 	v_section NUMBER := '99';
+Más de diez...                                                                                                                                        
+
+Procedimiento PL/SQL terminado correctamente.
+
+Introduzca un valor para sv_section: 100
+antiguo   2: 	v_section NUMBER := '&sv_section';
+nuevo   2: 	v_section NUMBER := '100';
+Done...                                                                                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+

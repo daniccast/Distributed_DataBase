@@ -24,8 +24,7 @@ In this exercise, you display the number of students for a given zip code. You u
 */
 
 
-- ch9_1a.sql, version 1.0
-
+-- ch9_1a.sql, version 1.0
 
 DECLARE
 	v_zip VARCHAR2(5) := '&sv_zip';
@@ -47,14 +46,22 @@ BEGIN
 	END;
 	DBMS_OUTPUT.PUT_LINE ('Done...');
 END;
-
 .
 /
 
 --Correr con 07024
+-- Con este valor arroja un error, que indica que el nùmero es demasiado grande.
 
+SELECT count(*)
+FROM student
+WHERE zip = 07024;
 
---¿Qué pasaría si fueran 10?
+SELECT count(*)
+FROM student
+WHERE zip = 30342;
+
+--Son 10 estudiantes, por lo tanto v_total debe ser number(2)
+
 -- Agregar exception
 
 DECLARE
@@ -111,11 +118,5 @@ END;
 .
 /
 
-
-
-
-
-
-
-
+--Esta es una excepción global
 spool OFF;

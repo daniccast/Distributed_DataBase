@@ -20,15 +20,35 @@ SET SERVEROUTPUT ON;
 
 
 /*
-Create the following script: For a course section provided at runtime, determine the number of students registered. If this number is equal to or greater than 10, raise the user-defined exception e_too_many_students and display an error message. Otherwise, display how many students are in a section.
+Create the following script: For a course section provided at runtime, 
+determine the number of students registered. 
+	->If this number is equal to or greater than 10, raise the user-defined exception 
+	e_too_many_students and display an error message. Otherwise, display how many students are in a section.
 */
 
+/*SELECT count(student_id), section_id
+FROM enrollment
+group by section_id;
+*/
 
+SELECT count(student_id), section_id
+FROM enrollment
+WHERE section_id = 89
+group by section_id;
 
+SELECT count(student_id), section_id
+FROM enrollment
+WHERE section_id = 99
+group by section_id;
+
+SELECT count(student_id), section_id
+FROM enrollment
+WHERE section_id = 100
+group by section_id;
 
 DECLARE
 	v_section NUMBER := '&sv_section';
-	v_total NUMBER(1);
+	v_total NUMBER(2);
 	e_mayor10 EXCEPTION;
 -- outer block
 BEGIN
@@ -36,7 +56,8 @@ BEGIN
 	SELECT count(student_id)
 		INTO v_total
 		FROM enrollment
-		WHERE section_id = v_section;
+		WHERE section_id = v_section
+		group by section_id;
 	
 	IF v_total>10 THEN
 		RAISE e_mayor10;
@@ -47,25 +68,8 @@ EXCEPTION
 	WHEN e_mayor10 THEN
 		DBMS_OUTPUT.PUT_LINE ('Más de diez...');
 END;
-
 .
 /
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/
+/
 spool OFF;

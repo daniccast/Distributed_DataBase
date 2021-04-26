@@ -1,0 +1,44 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+Introduzca un valor para sv_zip: 07024
+antiguo   2: 	v_zip VARCHAR2(5) := '&sv_zip';
+nuevo   2: 	v_zip VARCHAR2(5) := '07024';
+Check if provided zipcode is valid                                                                                                                    
+DECLARE
+*
+ERROR en línea 1:
+ORA-06502: PL/SQL: error : precisión de número demasiado grande numérico o de valor 
+ORA-06512: en línea 13 
+
+
+
+  COUNT(*)                                                                                                                                            
+----------                                                                                                                                            
+        10                                                                                                                                            
+
+
+  COUNT(*)                                                                                                                                            
+----------                                                                                                                                            
+         0                                                                                                                                            
+
+Introduzca un valor para sv_zip: 07024
+antiguo   2: 	v_zip VARCHAR2(5) := '&sv_zip';
+nuevo   2: 	v_zip VARCHAR2(5) := '07024';
+Check if provided zipcode is valid                                                                                                                    
+An error has occurred                                                                                                                                 
+Done...                                                                                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+
+Introduzca un valor para sv_zip: 07024
+antiguo   2: 	v_zip VARCHAR2(5) := '&sv_zip';
+nuevo   2: 	v_zip VARCHAR2(5) := '07024';
+Check if provided zipcode is valid                                                                                                                    
+An error has occurred                                                                                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+
