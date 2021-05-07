@@ -1,4 +1,4 @@
-# Ejercicios parcial dos
+﻿# Ejercicios parcial dos
 ## SQL by Example
 
 - [x] Capítulo 7 - Subqueries
@@ -10,8 +10,8 @@
 ## PL/SQL by example
 
 - [x] Capítulo 8 - Error Handling and Built-in Exceptions
-- [ ] Capítulo 9 - Exceptions
-- [ ] Capítulo 11- Introduction to Cursors
+- [x] Capítulo 9 - Exceptions
+- [x] Capítulo 11- Introduction to Cursors
 - [ ] Capítulo 12- Advanced Cursors
 - [ ] Capítulo 13- Triggers
 - [ ] Capítulo 14- Compound Triggers

@@ -48,6 +48,40 @@ EXCEPTION
 	DBMS_OUTPUT.PUT_LINE
 	('There is no such instructor');
 END;
+.
+/
 
+/*
+Define un tipo de registro que incluye los atributos firt_name, last_name y número de 
+cursos que imparte un instruvtor. 
+En el cuerpo del bloque de código, se selecciona dentro de ese registro la información
+del instructor 102. 
+Podríamos definir un registro con más atributos, por ejemplo:
+*/
 
+DECLARE
+	TYPE instructor_info IS RECORD
+		(first_name instructor.first_name%TYPE,
+		last_name instructor.last_name%TYPE,
+		sections NUMBER, phone instructor.phone%TYPE);
+	rv_instructor instructor_info;
+BEGIN
+	SELECT RTRIM(i.first_name), RTRIM(i.last_name), COUNT(*), RTRIM(i.phone) 
+		INTO rv_instructor
+		FROM instructor i, section s
+		WHERE i.instructor_id = s.instructor_id
+		AND i.instructor_id = 102
+		GROUP BY i.first_name, i.last_name, i.phone;
+	DBMS_OUTPUT.PUT_LINE('Instructor, '||
+		rv_instructor.first_name||
+		' '||rv_instructor.last_name||
+		', teaches '||rv_instructor.sections||
+		' section(s)'||', his phone number is: '||rv_instructor.phone);
+EXCEPTION
+	WHEN NO_DATA_FOUND THEN
+	DBMS_OUTPUT.PUT_LINE
+	('There is no such instructor');
+END;
+.
+/
 spool OFF;

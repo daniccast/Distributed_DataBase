@@ -19,7 +19,8 @@ alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
 SET SERVEROUTPUT ON;
 
 /*
-Write a PL/SQL block with two cursor for loops. The parent cursor will call the student_id , first_name , and last_name from the student table for students with a student_id less than 110 and output one line with this information. For each student, the child cursor will loop through all the courses that the student is enrolled in, outputting the course_no and the
+Write a PL/SQL block with two cursor for loops. The parent cursor will call the student_id , first_name , and last_name from the student table for students with a student_id less than 110 and output one line with this information.
+For each student, the child cursor will loop through all the courses that the student is enrolled in, outputting the course_no and the
 description.
 (ROSENZWEIG &  RAKHIMOV, 2009, 248)*/
 
@@ -54,6 +55,15 @@ BEGIN
 		END LOOP;
 	END LOOP;
 END;
+.
+/
+
+/*
+Claramente, usar un FOR exclusivo para los cursores es más práctico,
+ya que no hat que definir el OPEN, FETCH y CLOSE del cursor.
+Tampoco nos tenemos que preocupar por si el cursor ha sido cerrado o no.
+Sin embargo, ambas maneras son totalmente válidas.
+*/
 
 
 
