@@ -23,6 +23,17 @@ What changes to the database take place if the following example is run? Explain
 (ROSENZWEIG &  RAKHIMOV, 2009, )
 */
 
+SELECT s.student_id, z.city, s.phone
+FROM student s, zipcode z
+WHERE z.city = 'Brooklyn'
+AND s.zip = z.zip
+AND s.student_id<170
+ORDER BY s.student_id;
+		
+/*
+Como ya tienen el 718, lo cambié a 515
+*/
+
 -- ch12_4a.sql
 DECLARE
 	CURSOR c_stud_zip IS
@@ -35,11 +46,19 @@ BEGIN
 	FOR r_stud_zip IN c_stud_zip
 	LOOP
 		UPDATE student
-		SET phone = '718'||SUBSTR(phone,4)
+		SET phone = '515'||SUBSTR(phone,4)
 		WHERE student_id = r_stud_zip.student_id;
 	END LOOP;
 END;
-
+.
+/
+SELECT s.student_id, z.city, s.phone
+FROM student s, zipcode z
+WHERE z.city = 'Brooklyn'
+AND s.zip = z.zip
+AND s.student_id<170
+ORDER BY s.student_id;
+		
 
 
 -- ch12_5a.sql
@@ -53,14 +72,23 @@ DECLARE
 BEGIN
 	FOR r_stud_zip IN c_stud_zip
 	LOOP
-		DBMS_OUTPUT.PUT_LINE(r_stud_zip.student_id);
 		UPDATE student
 			SET phone = '718'||SUBSTR(phone,4)
 			WHERE CURRENT OF c_stud_zip;
 	END LOOP;
 END;
+.
+/
 
-
-
+SELECT s.student_id, z.city, s.phone
+FROM student s, zipcode z
+WHERE z.city = 'Brooklyn'
+AND s.zip = z.zip
+AND s.student_id<170
+ORDER BY s.student_id;
+		
+/*
+Funcionan exactamente igual. La diferencua es que no hay que especificar el id.
+*/
 
 spool OFF;

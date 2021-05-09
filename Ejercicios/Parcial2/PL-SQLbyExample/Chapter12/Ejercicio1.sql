@@ -29,16 +29,37 @@ DECLARE
 CURSOR c_zip (p_state IN zipcode.state%TYPE) IS
 	SELECT zip, city, state
 	FROM zipcode
-	WHERE state = p_state
+	WHERE state = p_state;
 BEGIN
 	FOR r_zip IN c_zip('NJ')
 		LOOP
-		DBMS_OUTPUT.PUT_LINE(r_zip.city||
-		' '||r_zip.zip');
+		DBMS_OUTPUT.PUT_LINE(r_zip.city||' '||r_zip.zip);
 	END LOOP;
 END;
-
 .
 /
+
+/*
+Recordar que pueden recibir más de un parámetro
+*/
+
+DECLARE
+CURSOR c_zip (p_state IN zipcode.state%TYPE, p_zip  IN zipcode.zip%TYPE) IS
+	SELECT zip, city, state
+	FROM zipcode
+	WHERE state = p_state 
+	AND zip=p_zip;
+BEGIN
+	FOR r_zip IN c_zip('NJ', '07656')
+		LOOP
+		DBMS_OUTPUT.PUT_LINE(r_zip.city||' '||r_zip.zip);
+	END LOOP;
+END;
+.
+/
+
+/*
+Aunque es un ejemplo sencillo, nos permite ver los parámetros y como se usan.
+*/
 
 spool OFF;
