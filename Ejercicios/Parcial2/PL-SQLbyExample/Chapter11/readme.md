@@ -1,5 +1,5 @@
 Resumen cápitulo once.
-Información recuperada de ROSENZWEIG,B &  RAKHIMOV,E (2009)."Chapter 9. Exceptions".Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson. 
+Información recuperada de ROSENZWEIG,B &  RAKHIMOV,E (2009)."Chapter 11. Introduction to Cursors".Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson. 
 
 ## Introduction to Cursors
 

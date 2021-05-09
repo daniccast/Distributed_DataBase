@@ -1,0 +1,63 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+
+                                                                                                                                                     
+The Student 102 Fred Crocitto                                                                                                                         
+is enrolled in the following courses:                                                                                                                 
+25
+			Intro to Programming                                                                                                                            
+25
+			Intro to Programming                                                                                                                            
+
+                                                                                                                                                     
+The Student 103 J. Landry                                                                                                                             
+is enrolled in the following courses:                                                                                                                 
+20
+			Intro to Computers                                                                                                                              
+
+                                                                                                                                                     
+The Student 104 Laetia Enison                                                                                                                         
+is enrolled in the following courses:                                                                                                                 
+20
+			Intro to Computers                                                                                                                              
+
+                                                                                                                                                     
+The Student 105 Angel Moskowitz                                                                                                                       
+is enrolled in the following courses:                                                                                                                 
+122
+			Intermediate Java Programming                                                                                                                  
+
+                                                                                                                                                     
+The Student 106 Judith Olvsade                                                                                                                        
+is enrolled in the following courses:                                                                                                                 
+230
+			Intro to Internet                                                                                                                              
+240
+			Intro to the Basic Language                                                                                                                    
+
+                                                                                                                                                     
+The Student 107 Catherine Mierzwa                                                                                                                     
+is enrolled in the following courses:                                                                                                                 
+25
+			Intro to Programming                                                                                                                            
+
+                                                                                                                                                     
+The Student 108 Judy Sethi                                                                                                                            
+is enrolled in the following courses:                                                                                                                 
+25
+			Intro to Programming                                                                                                                            
+
+                                                                                                                                                     
+The Student 109 Larry Walter                                                                                                                          
+is enrolled in the following courses:                                                                                                                 
+230
+			Intro to Internet                                                                                                                              
+240
+			Intro to the Basic Language                                                                                                                    
+
+Procedimiento PL/SQL terminado correctamente.
+

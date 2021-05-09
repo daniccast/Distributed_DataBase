@@ -1,0 +1,28 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+Student INFO: ID 109 is Larry Walter is enrolled in 2 classes.                                                                                        
+Student INFO: ID 104 is Laetia Enison is enrolled in 1 class.                                                                                         
+Student INFO: ID 107 is Catherine Mierzwa is enrolled in 1 class.                                                                                     
+Student INFO: ID 108 is Judy Sethi is enrolled in 1 class.                                                                                            
+Student INFO: ID 103 is J. Landry is enrolled in 1 class.                                                                                             
+Student INFO: ID 106 is Judith Olvsade is enrolled in 2 classes.                                                                                      
+Student INFO: ID 102 is Fred Crocitto is enrolled in 2 classes.                                                                                       
+Student INFO: ID 105 is Angel Moskowitz is enrolled in 1 class.                                                                                       
+
+Procedimiento PL/SQL terminado correctamente.
+
+Student INFO: ID 109 is Larry Walter is enrolled in 2 classes.                                                                                        
+Student INFO: ID 104 is Laetia Enison is enrolled in 1 class.                                                                                         
+Student INFO: ID 107 is Catherine Mierzwa is enrolled in 1 class.                                                                                     
+Student INFO: ID 108 is Judy Sethi is enrolled in 1 class.                                                                                            
+Student INFO: ID 103 is J. Landry is enrolled in 1 class.                                                                                             
+Student INFO: ID 106 is Judith Olvsade is enrolled in 2 classes.                                                                                      
+Student INFO: ID 102 is Fred Crocitto is enrolled in 2 classes.                                                                                       
+Student INFO: ID 105 is Angel Moskowitz is enrolled in 1 class.                                                                                       
+
+Procedimiento PL/SQL terminado correctamente.
+
