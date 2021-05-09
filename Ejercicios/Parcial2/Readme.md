@@ -12,7 +12,7 @@
 - [x] Capítulo 8 - Error Handling and Built-in Exceptions
 - [x] Capítulo 9 - Exceptions
 - [x] Capítulo 11- Introduction to Cursors
-- [ ] Capítulo 12- Advanced Cursors
+- [x] Capítulo 12- Advanced Cursors
 - [ ] Capítulo 13- Triggers
 - [ ] Capítulo 14- Compound Triggers
 
