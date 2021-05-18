@@ -13,7 +13,7 @@
 - [x] Capítulo 9 - Exceptions
 - [x] Capítulo 11- Introduction to Cursors
 - [x] Capítulo 12- Advanced Cursors
-- [ ] Capítulo 13- Triggers
+- [x] Capítulo 13- Triggers
 - [ ] Capítulo 14- Compound Triggers
 
 ### Requísitos.
