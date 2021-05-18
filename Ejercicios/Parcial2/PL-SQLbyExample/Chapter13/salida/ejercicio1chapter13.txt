@@ -1,0 +1,104 @@
+SQL> select instructor_id from instructor;
+
+INSTRUCTOR_ID                                                                                                                                         
+-------------                                                                                                                                         
+          101                                                                                                                                         
+          102                                                                                                                                         
+          103                                                                                                                                         
+          104                                                                                                                                         
+          105                                                                                                                                         
+          106                                                                                                                                         
+          107                                                                                                                                         
+          108                                                                                                                                         
+          109                                                                                                                                         
+          110                                                                                                                                         
+
+10 filas seleccionadas.
+
+SQL> insert into Instructor (instructor_id, salutation, first_name, last_name, street_address,
+  2  	zip, phone) VALUES (111,'ms', 'Daniela', 'Cortes','Mexico','10019','58284521');
+
+1 fila creada.
+
+SQL> select instructor_id from instructor;
+
+INSTRUCTOR_ID                                                                                                                                         
+-------------                                                                                                                                         
+          101                                                                                                                                         
+          102                                                                                                                                         
+          103                                                                                                                                         
+          104                                                                                                                                         
+          105                                                                                                                                         
+          106                                                                                                                                         
+          107                                                                                                                                         
+          108                                                                                                                                         
+          109                                                                                                                                         
+          110                                                                                                                                         
+          111                                                                                                                                         
+
+11 filas seleccionadas.
+
+SQL> 
+SQL> select * from instructor
+  2  	where instructor_id=112;
+
+ninguna fila seleccionada
+
+SQL> select * from instructor
+  2  	where instructor_id=111;
+
+INSTRUCTOR_ID|=SALUT|=FIRST_NAME               |=LAST_NAME                |=STREET_ADDRESS                                    |=ZIP  |=PHONE          
+-------------|=-----|=-------------------------|=-------------------------|=--------------------------------------------------|=-----|=---------------
+CREATED_BY                    |=CREATED_DAT|=MODIFIED_BY                   |=MODIFIED_DA                                                              
+------------------------------|=-----------|=------------------------------|=-----------                                                              
+          111|=ms   |=Daniela                  |=Cortes                   |=Mexico                                            |=10019|=58284521       
+STUDENT                       |=17-MAY-2021|=STUDENT                       |=17-MAY-2021                                                              
+                                                                                                                                                      
+
+SQL> insert into Instructor (instructor_id, salutation, first_name, last_name, street_address,
+  2  	zip, phone) VALUES (112,'ms', 'Daniela', 'Cortes','Mexico','25019','58284521');
+insert into Instructor (instructor_id, salutation, first_name, last_name, street_address,
+            *
+ERROR en línea 1:
+ORA-20001: Zip code is not valid! 
+ORA-06512: en "STUDENT.INSTRUCTOR_BI", línea 14 
+ORA-04088: error durante la ejecución del disparador 'STUDENT.INSTRUCTOR_BI' 
+
+
+SQL> CREATE OR REPLACE TRIGGER instructor_bi
+  2  	BEFORE INSERT ON INSTRUCTOR
+  3  	FOR EACH ROW
+  4  DECLARE
+  5  	v_work_zip CHAR(1);
+  6  BEGIN
+  7  	:NEW.CREATED_BY := USER;
+  8  	:NEW.CREATED_DATE := SYSDATE;
+  9  	:NEW.MODIFIED_BY := USER;
+ 10  	:NEW.MODIFIED_DATE := SYSDATE;
+ 11  	IF :NEW.ZIP IS NULL THEN
+ 12  		RAISE_APPLICATION_ERROR (-20002, 'Zip code is missing!');
+ 13  	ELSE
+ 14  		SELECT 'Y'
+ 15  		INTO v_work_zip
+ 16  		FROM zipcode
+ 17  		WHERE zip = :NEW.ZIP;
+ 18  	END IF;
+ 19  EXCEPTION
+ 20  	WHEN NO_DATA_FOUND THEN
+ 21  		RAISE_APPLICATION_ERROR (-20001, 'Zip code is not valid!');
+ 22  END;
+ 23  /
+
+Disparador creado.
+
+SQL> insert into Instructor (instructor_id, salutation, first_name, last_name, street_address,
+  2  	zip, phone) VALUES (112,'ms', 'Daniela', 'Cortes','Mexico','25019','58284521');
+insert into Instructor (instructor_id, salutation, first_name, last_name, street_address,
+            *
+ERROR en línea 1:
+ORA-20001: Zip code is not valid! 
+ORA-06512: en "STUDENT.INSTRUCTOR_BI", línea 18 
+ORA-04088: error durante la ejecución del disparador 'STUDENT.INSTRUCTOR_BI' 
+
+
+SQL> spool OFF;

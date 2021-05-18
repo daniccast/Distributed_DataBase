@@ -44,6 +44,18 @@ EXCEPTION
 	WHEN NO_DATA_FOUND THEN
 		RAISE_APPLICATION_ERROR (-20001, 'Zip code is not valid!');
 END;
+/
+
+select instructor_id from instructor;
+
+select * from instructor
+	where instructor_id=111;
+
+insert into Instructor (instructor_id, salutation, first_name, last_name, street_address,
+	zip, phone) VALUES (111,'ms', 'Daniela', 'Cortes','Mexico','10019','58284521');
+
+insert into Instructor (instructor_id, salutation, first_name, last_name, street_address,
+	zip, phone) VALUES (112,'ms', 'Daniela', 'Cortes','Mexico','25019','58284521');
 
 
 

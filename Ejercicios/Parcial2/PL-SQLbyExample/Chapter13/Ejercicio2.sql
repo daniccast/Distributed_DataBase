@@ -26,6 +26,11 @@ checked against the existing courses in the COURSE table.
 (ROSENZWEIG &  RAKHIMOV, 2009, 283)
 */
 
+
+INSERT INTO COURSE (description, cost, prerequisite)
+VALUES ('Test Course', 0, 999);
+
+
 CREATE OR REPLACE TRIGGER course_bi
 	BEFORE INSERT ON COURSE
 	FOR EACH ROW
@@ -36,7 +41,10 @@ BEGIN
 	:NEW.MODIFIED_BY:= USER;
 	:NEW.MODIFIED_DATE := SYSDATE;
 END;
+/
 
+INSERT INTO COURSE (description, cost, prerequisite)
+VALUES ('Test Course', 0, 999);
 -- Modificado
 
 
@@ -59,10 +67,14 @@ BEGIN
 	:NEW.MODIFIED_DATE := SYSDATE;
 EXCEPTION
 	WHEN NO_DATA_FOUND THEN
+		RAISE_APPLICATION_ERROR (-20001, 'NO PRE');
 END;
+/
+
+SELECT course_no from course;
 
 INSERT INTO COURSE (description, cost, prerequisite)
-VALUES ('Test Course', 0, 999);
+VALUES ('Test Course', 0, 450);
 
 
 spool OFF;

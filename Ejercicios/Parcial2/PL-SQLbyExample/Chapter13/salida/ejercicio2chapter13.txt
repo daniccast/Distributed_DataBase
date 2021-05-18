@@ -1,0 +1,155 @@
+SQL> INSERT INTO COURSE (description, cost, prerequisite)
+  2  VALUES ('Test Course', 0, 999);
+INSERT INTO COURSE (description, cost, prerequisite)
+*
+ERROR en línea 1:
+ORA-01400: no se puede realizar una inserción NULL en ("STUDENT"."COURSE"."COURSE_NO") 
+
+
+SQL> 
+SQL> 
+SQL> CREATE OR REPLACE TRIGGER course_bi
+  2  	BEFORE INSERT ON COURSE
+  3  	FOR EACH ROW
+  4  BEGIN
+  5  	:NEW.COURSE_NO:= COURSE_NO_SEQ.NEXTVAL;
+  6  	:NEW.CREATED_BY:= USER;
+  7  	:NEW.CREATED_DATE := SYSDATE;
+  8  	:NEW.MODIFIED_BY:= USER;
+  9  	:NEW.MODIFIED_DATE := SYSDATE;
+ 10  END;
+ 11  /
+
+Disparador creado.
+
+SQL> INSERT INTO COURSE (description, cost, prerequisite)
+  2  VALUES ('Test Course', 0, 999);
+INSERT INTO COURSE (description, cost, prerequisite)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (STUDENT.CRSE_CRSE_FK) violada - clave principal no encontrada 
+
+
+SQL> CREATE OR REPLACE TRIGGER course_bi
+  2  	BEFORE INSERT ON COURSE
+  3  	FOR EACH ROW
+  4  DECLARE
+  5  	v_prerequisite COURSE.COURSE_NO%TYPE;
+  6  BEGIN
+  7  	IF :NEW.PREREQUISITE IS NOT NULL THEN
+  8  		SELECT course_no
+  9  		INTO v_prerequisite
+ 10  		FROM course
+ 11  		WHERE course_no = :NEW.PREREQUISITE;
+ 12  	END IF;
+ 13  	:NEW.COURSE_NO:= COURSE_NO_SEQ.NEXTVAL;
+ 14  	:NEW.CREATED_BY:= USER;
+ 15  	:NEW.CREATED_DATE := SYSDATE;
+ 16  	:NEW.MODIFIED_BY:= USER;
+ 17  	:NEW.MODIFIED_DATE := SYSDATE;
+ 18  EXCEPTION
+ 19  	WHEN NO_DATA_FOUND THEN
+ 20  END;
+ 21  /
+
+Advertencia: Disparador creado con errores de compilación.
+
+SQL> 
+SQL> INSERT INTO COURSE (description, cost, prerequisite)
+  2  VALUES ('Test Course', 0, 999);
+INSERT INTO COURSE (description, cost, prerequisite)
+            *
+ERROR en línea 1:
+ORA-04098: el disparador 'STUDENT.COURSE_BI' no es válido y ha fallado al revalidar 
+
+
+SQL> CREATE OR REPLACE TRIGGER course_bi
+  2  	BEFORE INSERT ON COURSE
+  3  	FOR EACH ROW
+  4  DECLARE
+  5  	v_prerequisite COURSE.COURSE_NO%TYPE;
+  6  BEGIN
+  7  	IF :NEW.PREREQUISITE IS NOT NULL THEN
+  8  		SELECT course_no
+  9  		INTO v_prerequisite
+ 10  		FROM course
+ 11  		WHERE course_no = :NEW.PREREQUISITE;
+ 12  	END IF;
+ 13  	:NEW.COURSE_NO:= COURSE_NO_SEQ.NEXTVAL;
+ 14  	:NEW.CREATED_BY:= USER;
+ 15  	:NEW.CREATED_DATE := SYSDATE;
+ 16  	:NEW.MODIFIED_BY:= USER;
+ 17  	:NEW.MODIFIED_DATE := SYSDATE;
+ 18  EXCEPTION
+ 19  	WHEN NO_DATA_FOUND THEN
+ 20  		RAISE_APPLICATION_ERROR (-20001, 'NO PRE');
+ 21  END;
+ 22  /
+
+Disparador creado.
+
+SQL> 
+SQL> INSERT INTO COURSE (description, cost, prerequisite)
+  2  VALUES ('Test Course', 0, 999);
+INSERT INTO COURSE (description, cost, prerequisite)
+            *
+ERROR en línea 1:
+ORA-20001: NO PRE 
+ORA-06512: en "STUDENT.COURSE_BI", línea 17 
+ORA-04088: error durante la ejecución del disparador 'STUDENT.COURSE_BI' 
+
+
+SQL> INSERT INTO COURSE (description, cost, prerequisite)
+  2  VALUES ('Test Course', 0, 1);
+INSERT INTO COURSE (description, cost, prerequisite)
+            *
+ERROR en línea 1:
+ORA-20001: NO PRE 
+ORA-06512: en "STUDENT.COURSE_BI", línea 17 
+ORA-04088: error durante la ejecución del disparador 'STUDENT.COURSE_BI' 
+
+
+SQL> 
+SQL> SELECT course_no from course;
+
+ COURSE_NO                                                                                                                                            
+----------                                                                                                                                            
+        10                                                                                                                                            
+        20                                                                                                                                            
+        25                                                                                                                                            
+        80                                                                                                                                            
+       100                                                                                                                                            
+       120                                                                                                                                            
+       122                                                                                                                                            
+       124                                                                                                                                            
+       125                                                                                                                                            
+       130                                                                                                                                            
+       132                                                                                                                                            
+       134                                                                                                                                            
+       135                                                                                                                                            
+       140                                                                                                                                            
+       142                                                                                                                                            
+       144                                                                                                                                            
+       145                                                                                                                                            
+       146                                                                                                                                            
+       147                                                                                                                                            
+       204                                                                                                                                            
+       210                                                                                                                                            
+       220                                                                                                                                            
+       230                                                                                                                                            
+       240                                                                                                                                            
+       310                                                                                                                                            
+       330                                                                                                                                            
+       350                                                                                                                                            
+       420                                                                                                                                            
+       430                                                                                                                                            
+       450                                                                                                                                            
+
+30 filas seleccionadas.
+
+SQL> INSERT INTO COURSE (description, cost, prerequisite)
+  2  VALUES ('Test Course', 0, 450);
+
+1 fila creada.
+
+SQL> spool off;

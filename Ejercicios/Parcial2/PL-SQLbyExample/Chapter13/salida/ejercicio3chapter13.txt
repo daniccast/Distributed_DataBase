@@ -1,0 +1,82 @@
+SQL> CREATE VIEW student_address AS
+  2  	SELECT s.student_id, s.first_name, s.last_name,
+  3  	s.street_address, z.city, z.state, z.zip
+  4  	FROM student s
+  5  	JOIN zipcode z
+  6  	ON (s.zip = z.zip);
+
+Vista creada.
+
+SQL> CREATE OR REPLACE TRIGGER student_address_ins
+  2  	INSTEAD OF INSERT ON student_address
+  3  	FOR EACH ROW
+  4  BEGIN
+  5  	INSERT INTO STUDENT
+  6  	(student_id, first_name, last_name, street_address, zip,
+  7  	registration_date, created_by, created_date, modified_by,
+  8  	modified_date)
+  9  	VALUES
+ 10  	(:NEW.student_id, :NEW.first_name, :NEW.last_name,
+ 11  	:NEW.street_address, :NEW.zip, SYSDATE, USER, SYSDATE, USER,
+ 12  	SYSDATE);
+ 13  END;
+ 14  /
+
+Disparador creado.
+
+SQL> INSERT INTO student_address
+  2  VALUES (STUDENT_ID_SEQ.NEXTVAL, 'John', 'Smith', '123 Main Street',
+  3  'New York', 'NY', '10019');
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO student_address
+  2  VALUES (STUDENT_ID_SEQ.NEXTVAL, 'John', 'Smith', '123 Main Street',
+  3  'New York', 'NY', '12345');
+VALUES (STUDENT_ID_SEQ.NEXTVAL, 'John', 'Smith', '123 Main Street',
+        *
+ERROR en línea 2:
+ORA-02291: restricción de integridad (STUDENT.STU_ZIP_FK) violada - clave principal no encontrada 
+ORA-06512: en "STUDENT.STUDENT_ADDRESS_INS", línea 2 
+ORA-04088: error durante la ejecución del disparador 'STUDENT.STUDENT_ADDRESS_INS' 
+
+
+SQL> CREATE OR REPLACE TRIGGER student_address_ins
+  2  	INSTEAD OF INSERT ON student_address
+  3  	FOR EACH ROW
+  4  DECLARE
+  5  	v_zip VARCHAR2(5);
+  6  BEGIN
+  7  	BEGIN
+  8  		SELECT zip
+  9  			INTO v_zip
+ 10  			FROM zipcode
+ 11  			WHERE zip = :NEW.zip;
+ 12  	EXCEPTION
+ 13  		WHEN NO_DATA_FOUND THEN
+ 14  			INSERT INTO ZIPCODE
+ 15  			(zip, city, state, created_by, created_date, modified_by, modified_date)
+ 16  			VALUES
+ 17  			(:NEW.zip, :NEW.city, :NEW.state, USER, SYSDATE, USER, SYSDATE);
+ 18  	END;
+ 19  	INSERT INTO STUDENT
+ 20  	(student_id, first_name, last_name, street_address, zip,
+ 21  	registration_date, created_by, created_date, modified_by,
+ 22  	modified_date)
+ 23  	VALUES
+ 24  	(:NEW.student_id, :NEW.first_name, :NEW.last_name,
+ 25  	:NEW.street_address, :NEW.zip, SYSDATE, USER, SYSDATE, USER,
+ 26  	SYSDATE);
+ 27  END;
+ 28  /
+
+Disparador creado.
+
+SQL> INSERT INTO student_address
+  2  VALUES (STUDENT_ID_SEQ.NEXTVAL, 'John', 'Smith', '123 Main Street',
+  3  'New York', 'NY', '12345');
+
+1 fila creada.
+
+SQL> spool off;
