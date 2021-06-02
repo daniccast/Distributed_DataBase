@@ -1,14 +1,14 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial3\MasteringOracle\Chapter4\salida\ejercicioschapter4.txt
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\MasteringOracle\Chapter4\salida\ejercicios2chapter4.txt
 
 rem *****************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2         * 
 rem * Elaborado por:                                    *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar Oscar  *
 rem * Realizado el 7 de Junio de 2021                   *
-rem *Mishra S., Beaulieu A. (2002). 			  *
-rem *Chapter 4 Group Operations			  *
-rem * SQL (pp. 157-174).Gravenstein Highway North,	  *
-rem * Sebastopol, CA 95472. 				  *
+rem *Mishra S., Beaulieu A. (2002). 			*
+rem *Chapter 4 Group Operations			        *
+rem * SQL (pp. 157-174).Gravenstein Highway North,	*
+rem * Sebastopol, CA 95472. 				*
 rem *****************************************************
 
 rem Establecer formato para las tablas
@@ -42,7 +42,7 @@ SELECT CUST_NBR, COUNT(ORDER_NBR)
 FROM CUST_ORDER
 GROUP BY CUST_NBR
 HAVING ORDER_DT < SYSDATE;
-
+rem error porque ORDER_DT no está en lista de select
 
 rem tener HAVING Y WHERE JUNTAS
 SELECT CUST_NBR, COUNT(ORDER_NBR)

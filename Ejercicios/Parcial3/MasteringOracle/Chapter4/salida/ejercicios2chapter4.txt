@@ -1,0 +1,57 @@
+SQL> rem HAVING CLAUSE
+SQL> 
+SQL> SELECT CUST_NBR, COUNT(ORDER_NBR)
+  2  FROM CUST_ORDER
+  3  GROUP BY CUST_NBR
+  4  HAVING CUST_NBR < 260;
+
+  CUST_NBR|=|COUNT(ORDER_NBR)                                                                                                                         
+----------|=|----------------                                                                                                                         
+         1|=|               8                                                                                                                         
+         8|=|               2                                                                                                                         
+         5|=|               6                                                                                                                         
+         4|=|               4                                                                                                                         
+
+SQL> 
+SQL> rem similar a where, funciona como filtro
+SQL> 
+SQL> SELECT CUST_NBR, COUNT(ORDER_NBR)
+  2  FROM CUST_ORDER
+  3  GROUP BY CUST_NBR
+  4  HAVING COUNT(ORDER_NBR) > 2;
+
+  CUST_NBR|=|COUNT(ORDER_NBR)                                                                                                                         
+----------|=|----------------                                                                                                                         
+         1|=|               8                                                                                                                         
+         5|=|               6                                                                                                                         
+         4|=|               4                                                                                                                         
+
+SQL> 
+SQL> 
+SQL> SELECT CUST_NBR, COUNT(ORDER_NBR)
+  2  FROM CUST_ORDER
+  3  GROUP BY CUST_NBR
+  4  HAVING ORDER_DT < SYSDATE;
+HAVING ORDER_DT < SYSDATE
+       *
+ERROR en línea 4:
+ORA-00979: no es una expresión GROUP BY 
+
+
+SQL> 
+SQL> 
+SQL> rem tener HAVING Y WHERE JUNTAS
+SQL> SELECT CUST_NBR, COUNT(ORDER_NBR)
+  2  FROM CUST_ORDER
+  3  WHERE SALE_PRICE > 25
+  4  GROUP BY CUST_NBR
+  5  HAVING COUNT(ORDER_NBR) > 1;
+
+  CUST_NBR|=|COUNT(ORDER_NBR)                                                                                                                         
+----------|=|----------------                                                                                                                         
+         1|=|               4                                                                                                                         
+         8|=|               2                                                                                                                         
+         4|=|               4                                                                                                                         
+
+SQL> 
+SQL> spool OFF;

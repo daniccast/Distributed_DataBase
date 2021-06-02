@@ -1,4 +1,4 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial3\MasteringOracle\Chapter8\salida\ejercicios2chapter8.txt
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\MasteringOracle\Chapter8\salida\ejercicios2chapter8.txt
 
 rem *****************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2         * 
@@ -106,6 +106,12 @@ SELECT SUM(SALARY)
 FROM EMPLOYEE
 START WITH LNAME = 'JONES'
 CONNECT BY MANAGER_EMP_ID = PRIOR EMP_ID;
+
+SELECT SUM(SALARY)
+FROM EMPLOYEE
+START WITH LNAME = 'Clark'
+CONNECT BY MANAGER_EMP_ID = PRIOR EMP_ID;
+
 
 
 spool OFF;
