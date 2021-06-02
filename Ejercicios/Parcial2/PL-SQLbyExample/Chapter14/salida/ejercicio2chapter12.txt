@@ -1,0 +1,75 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+
+STUDENT_ID|=CITY                     |=PHONE                                                                                                          
+----------|=-------------------------|=---------------                                                                                                
+       109|=Brooklyn                 |=718-555-5555                                                                                                   
+       114|=Brooklyn                 |=718-555-5555                                                                                                   
+       120|=Brooklyn                 |=718-555-5555                                                                                                   
+       123|=Brooklyn                 |=718-555-5555                                                                                                   
+       129|=Brooklyn                 |=718-555-5555                                                                                                   
+       134|=Brooklyn                 |=718-555-5555                                                                                                   
+       135|=Brooklyn                 |=718-555-5555                                                                                                   
+       138|=Brooklyn                 |=718-555-5555                                                                                                   
+       140|=Brooklyn                 |=718-555-5555                                                                                                   
+       143|=Brooklyn                 |=718-555-5555                                                                                                   
+       147|=Brooklyn                 |=718-555-5555                                                                                                   
+       156|=Brooklyn                 |=718-555-5555                                                                                                   
+       161|=Brooklyn                 |=718-555-5555                                                                                                   
+       164|=Brooklyn                 |=718-555-5555                                                                                                   
+       165|=Brooklyn                 |=718-555-5555                                                                                                   
+
+15 filas seleccionadas.
+
+
+Procedimiento PL/SQL terminado correctamente.
+
+
+STUDENT_ID|=CITY                     |=PHONE                                                                                                          
+----------|=-------------------------|=---------------                                                                                                
+       109|=Brooklyn                 |=515-555-5555                                                                                                   
+       114|=Brooklyn                 |=515-555-5555                                                                                                   
+       120|=Brooklyn                 |=515-555-5555                                                                                                   
+       123|=Brooklyn                 |=515-555-5555                                                                                                   
+       129|=Brooklyn                 |=515-555-5555                                                                                                   
+       134|=Brooklyn                 |=515-555-5555                                                                                                   
+       135|=Brooklyn                 |=515-555-5555                                                                                                   
+       138|=Brooklyn                 |=515-555-5555                                                                                                   
+       140|=Brooklyn                 |=515-555-5555                                                                                                   
+       143|=Brooklyn                 |=515-555-5555                                                                                                   
+       147|=Brooklyn                 |=515-555-5555                                                                                                   
+       156|=Brooklyn                 |=515-555-5555                                                                                                   
+       161|=Brooklyn                 |=515-555-5555                                                                                                   
+       164|=Brooklyn                 |=515-555-5555                                                                                                   
+       165|=Brooklyn                 |=515-555-5555                                                                                                   
+
+15 filas seleccionadas.
+
+
+Procedimiento PL/SQL terminado correctamente.
+
+
+STUDENT_ID|=CITY                     |=PHONE                                                                                                          
+----------|=-------------------------|=---------------                                                                                                
+       109|=Brooklyn                 |=718-555-5555                                                                                                   
+       114|=Brooklyn                 |=718-555-5555                                                                                                   
+       120|=Brooklyn                 |=718-555-5555                                                                                                   
+       123|=Brooklyn                 |=718-555-5555                                                                                                   
+       129|=Brooklyn                 |=718-555-5555                                                                                                   
+       134|=Brooklyn                 |=718-555-5555                                                                                                   
+       135|=Brooklyn                 |=718-555-5555                                                                                                   
+       138|=Brooklyn                 |=718-555-5555                                                                                                   
+       140|=Brooklyn                 |=718-555-5555                                                                                                   
+       143|=Brooklyn                 |=718-555-5555                                                                                                   
+       147|=Brooklyn                 |=718-555-5555                                                                                                   
+       156|=Brooklyn                 |=718-555-5555                                                                                                   
+       161|=Brooklyn                 |=718-555-5555                                                                                                   
+       164|=Brooklyn                 |=718-555-5555                                                                                                   
+       165|=Brooklyn                 |=718-555-5555                                                                                                   
+
+15 filas seleccionadas.
+
