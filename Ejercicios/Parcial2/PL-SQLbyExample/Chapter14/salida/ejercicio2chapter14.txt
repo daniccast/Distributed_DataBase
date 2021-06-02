@@ -1,0 +1,147 @@
+SQL> DROP TRIGGER enrollment_biu;
+
+Disparador borrado.
+
+SQL> DROP TRIGGER enrollment_aiu;
+
+Disparador borrado.
+
+SQL> DROP PACKAGE student_adm;
+
+Paquete borrado.
+
+SQL> DELETE FROM enrollment
+  2  WHERE student_id = 399;
+
+1 fila suprimida.
+
+SQL> COMMIT;
+
+Confirmación terminada.
+
+SQL> CREATE OR REPLACE TRIGGER enrollment_compound
+  2  	FOR INSERT OR UPDATE ON enrollment
+  3  	COMPOUND TRIGGER
+  4  	v_student_id STUDENT.STUDENT_ID%TYPE;
+  5  	v_student_name VARCHAR2(50);
+  6  	v_total INTEGER;
+  7  BEFORE EACH ROW IS
+  8  	BEGIN
+  9  		IF :NEW.student_id IS NOT NULL THEN
+ 10  			BEGIN
+ 11  				v_student_id := :NEW.student_id;
+ 12  				SELECT first_name||' '||last_name
+ 13  					INTO v_student_name
+ 14  					FROM student
+ 15  					WHERE student_id = v_student_id;
+ 16  				EXCEPTION
+ 17  					WHEN NO_DATA_FOUND THEN
+ 18  						RAISE_APPLICATION_ERROR
+ 19  						(-20001, 'This is not a valid student');
+ 20  			END;
+ 21  		END IF;
+ 22  	END BEFORE EACH ROW;
+ 23  AFTER STATEMENT IS
+ 24  	BEGIN
+ 25  		SELECT COUNT(*)
+ 26  			INTO v_total
+ 27  			FROM enrollment
+ 28  			WHERE student_id = v_student_id;
+ 29  		-- check if the current student is enrolled in too
+ 30  		-- many courses
+ 31  		IF v_total >= 3 THEN
+ 32  			RAISE_APPLICATION_ERROR (-20000, 'Student, '||v_student_name|| ', is registered for 3 courses already ');
+ 33  		END IF;
+ 34  	END AFTER STATEMENT;
+ 35  END enrollment_compound;
+ 36  .
+SQL> /
+
+Disparador creado.
+
+SQL> CREATE OR REPLACE TRIGGER enrollment_compound
+  2  	FOR INSERT OR UPDATE ON enrollment
+  3  	COMPOUND TRIGGER
+  4  	v_student_id 	STUDENT.STUDENT_ID%TYPE;
+  5  	v_student_name VARCHAR2(50);
+  6  	v_total 	INTEGER;
+  7  	v_date 	DATE;
+  8  	v_user 	STUDENT.CREATED_BY%TYPE;
+  9  BEFORE STATEMENT IS
+ 10  	BEGIN
+ 11  		v_date := SYSDATE;
+ 12  		v_user := USER;
+ 13  	END BEFORE STATEMENT;
+ 14  BEFORE EACH ROW IS
+ 15  	BEGIN
+ 16  	IF INSERTING THEN
+ 17  		:NEW.created_date 	:= v_date;
+ 18  		:NEW.created_by 	:= v_user;
+ 19  	ELSIF UPDATING THEN
+ 20  		:NEW.created_date	:= :OLD.created_date;
+ 21  		:NEW.created_by 	:= :OLD.created_by;
+ 22  	END IF;
+ 23  
+ 24  	:NEW.MODIFIED_DATE 	:= v_date;
+ 25  	:NEW.MODIFIED_BY 	:= v_user;
+ 26  
+ 27  	IF :NEW.STUDENT_ID IS NOT NULL THEN
+ 28  		BEGIN
+ 29  			v_student_id := :NEW.STUDENT_ID;
+ 30  			SELECT first_name||' '||last_name
+ 31  				INTO v_student_name
+ 32  				FROM student
+ 33  				WHERE student_id = v_student_id;
+ 34  			EXCEPTION
+ 35  				WHEN NO_DATA_FOUND THEN
+ 36  					RAISE_APPLICATION_ERROR
+ 37  						(-20001, 'This is not a valid student');
+ 38  		END;
+ 39  	END IF;
+ 40  	END BEFORE EACH ROW;
+ 41  AFTER STATEMENT IS
+ 42  	BEGIN
+ 43  		SELECT COUNT(*)
+ 44  			INTO v_total
+ 45  			FROM enrollment
+ 46  			WHERE student_id = v_student_id;
+ 47  		-- check if the current student is enrolled in too
+ 48  		-- many courses
+ 49  		IF v_total >= 3 THEN
+ 50  			RAISE_APPLICATION_ERROR (-20000, 'Student, '||v_student_name||
+ 51  			', is registered for 3 courses already ');
+ 52  		END IF;
+ 53  	END AFTER STATEMENT;
+ 54  END enrollment_compound;
+ 55  .
+SQL> /
+
+Disparador creado.
+
+SQL> INSERT INTO enrollment
+  2  	(student_id, section_id, enroll_date, final_grade)
+  3  VALUES (102, 155, sysdate, null);
+INSERT INTO enrollment
+            *
+ERROR en línea 1:
+ORA-20000: Student, Fred Crocitto, is registered for 3 courses already 
+ORA-06512: en "STUDENT.ENROLLMENT_COMPOUND", línea 48 
+ORA-04088: error durante la ejecución del disparador 'STUDENT.ENROLLMENT_COMPOUND' 
+
+
+SQL> 
+SQL> INSERT INTO enrollment
+  2  	(student_id, section_id, enroll_date, final_grade)
+  3  VALUES (103, 155, sysdate, null);
+
+1 fila creada.
+
+SQL> 
+SQL> UPDATE ENROLLMENT
+  2  SET final_grade = 85
+  3  WHERE student_id = 105
+  4  AND section_id = 155;
+
+1 fila actualizada.
+
+SQL> spool off;

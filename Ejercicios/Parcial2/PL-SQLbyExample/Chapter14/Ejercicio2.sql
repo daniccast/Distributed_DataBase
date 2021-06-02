@@ -41,7 +41,7 @@ CREATE OR REPLACE TRIGGER enrollment_compound
 	v_total INTEGER;
 BEFORE EACH ROW IS
 	BEGIN
-		IF :NEW. student_id IS NOT NULL THEN
+		IF :NEW.student_id IS NOT NULL THEN
 			BEGIN
 				v_student_id := :NEW.student_id;
 				SELECT first_name||' '||last_name
@@ -64,8 +64,7 @@ AFTER STATEMENT IS
 		-- check if the current student is enrolled in too
 		-- many courses
 		IF v_total >= 3 THEN
-			RAISE_APPLICATION_ERROR (-20000, 'Student, '||v_student_name||
-			', is registered for 3 courses already ');
+			RAISE_APPLICATION_ERROR (-20000, 'Student, '||v_student_name|| ', is registered for 3 courses already ');
 		END IF;
 	END AFTER STATEMENT;
 END enrollment_compound;

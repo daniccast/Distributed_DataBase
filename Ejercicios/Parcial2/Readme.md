@@ -14,7 +14,7 @@
 - [x] Capítulo 11- Introduction to Cursors
 - [x] Capítulo 12- Advanced Cursors
 - [x] Capítulo 13- Triggers
-- [ ] Capítulo 14- Compound Triggers
+- [x] Capítulo 14- Compound Triggers
 
 ### Requísitos.
 Comentados, referenciados, cinco ejercicios por capítulo.

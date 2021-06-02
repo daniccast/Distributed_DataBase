@@ -1,0 +1,123 @@
+SQL> CREATE OR REPLACE TRIGGER enrollment_biu
+  2  	BEFORE INSERT OR UPDATE ON enrollment
+  3  	FOR EACH ROW
+  4  DECLARE
+  5  	v_total NUMBER;
+  6  	v_name VARCHAR2(30);
+  7  BEGIN
+  8  	SELECT COUNT(*)
+  9  		INTO v_total
+ 10  		FROM enrollment
+ 11  		WHERE student_id = :NEW.student_id;
+ 12  -- check if the current student is enrolled in too
+ 13  -- many courses
+ 14  	IF v_total >= 3 THEN
+ 15  		SELECT first_name||' '||last_name
+ 16  		INTO v_name
+ 17  		FROM student
+ 18  		WHERE student_id = :NEW.STUDENT_ID;
+ 19  		RAISE_APPLICATION_ERROR (-20000, 'Student, '||v_name||', is registered for 3 courses already');
+ 20  	END IF;
+ 21  EXCEPTION
+ 22  	WHEN NO_DATA_FOUND THEN
+ 23  		RAISE_APPLICATION_ERROR (-20001, 'This is not a valid student');
+ 24  END;
+ 25  .
+SQL> /
+
+Disparador creado.
+
+SQL> INSERT INTO ENROLLMENT
+  2  	(student_id, section_id, enroll_date, created_by, created_date,
+  3  	modified_by, modified_date)
+  4  VALUES (184, 98, SYSDATE, USER, SYSDATE, USER, SYSDATE);
+INSERT INTO ENROLLMENT
+            *
+ERROR en línea 1:
+ORA-20000: Student, Salewa Zuckerberg, is registered for 3 courses already 
+ORA-06512: en "STUDENT.ENROLLMENT_BIU", línea 16 
+ORA-04088: error durante la ejecución del disparador 'STUDENT.ENROLLMENT_BIU' 
+
+
+SQL> INSERT INTO ENROLLMENT
+  2  	(student_id, section_id, enroll_date, created_by, created_date,
+  3  	modified_by, modified_date)
+  4  VALUES (399, 98, SYSDATE, USER, SYSDATE, USER, SYSDATE);
+
+1 fila creada.
+
+SQL> 
+SQL> UPDATE ENROLLMENT
+  2  SET student_id = 399
+  3  WHERE student_id = 283;
+UPDATE ENROLLMENT
+       *
+ERROR en línea 1:
+ORA-04091: la tabla STUDENT.ENROLLMENT está mutando, puede que el disparador/la función no puedan verla 
+ORA-06512: en "STUDENT.ENROLLMENT_BIU", línea 5 
+ORA-04088: error durante la ejecución del disparador 'STUDENT.ENROLLMENT_BIU' 
+
+
+SQL> CREATE OR REPLACE PACKAGE student_adm AS
+  2  	v_student_id student.student_id%TYPE;
+  3  	v_student_name varchar2(50);
+  4  END;
+  5  .
+SQL> /
+
+Paquete creado.
+
+SQL> CREATE OR REPLACE TRIGGER enrollment_biu
+  2  	BEFORE INSERT OR UPDATE ON enrollment
+  3  	FOR EACH ROW
+  4  BEGIN
+  5  	IF :NEW.STUDENT_ID IS NOT NULL THEN
+  6  		BEGIN
+  7  			student_adm.v_student_id := :NEW.student_id;
+  8  			SELECT first_name||' '||last_name
+  9  				INTO student_adm.v_student_name
+ 10  				FROM student
+ 11  				WHERE student_id = student_adm.v_student_id;
+ 12  		EXCEPTION
+ 13  			WHEN NO_DATA_FOUND THEN
+ 14  				RAISE_APPLICATION_ERROR(-20001, 'This is not a valid student');
+ 15  		END;
+ 16  	END IF;
+ 17  END;
+ 18  .
+SQL> /
+
+Disparador creado.
+
+SQL> CREATE OR REPLACE TRIGGER enrollment_aiu
+  2  	AFTER INSERT OR UPDATE ON enrollment
+  3  DECLARE
+  4  	v_total INTEGER;
+  5  BEGIN
+  6  	SELECT COUNT(*)
+  7  		INTO v_total
+  8  		FROM enrollment
+  9  		WHERE student_id = student_adm.v_student_id;
+ 10  
+ 11  	-- check if the current student is enrolled in too
+ 12  	-- many courses
+ 13  	IF v_total >= 3 THEN
+ 14  		RAISE_APPLICATION_ERROR (-20000, 'Student, '|| student_adm.v_student_name|| ', is registered for 3 courses already ');
+ 15  	END IF;
+ 16  END;
+ 17  .
+SQL> /
+
+Disparador creado.
+
+SQL> UPDATE enrollment
+  2  SET student_id = 399
+  3  WHERE student_id = 283;
+UPDATE enrollment
+*
+ERROR en línea 1:
+ORA-02292: restricción de integridad (STUDENT.GR_ENR_FK) violada - registro secundario encontrado 
+
+
+SQL> 
+SQL> spool OFF;

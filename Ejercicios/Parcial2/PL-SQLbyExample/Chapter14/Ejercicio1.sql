@@ -6,7 +6,7 @@ rem * Elaborado por:                                         *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar José Oscar  *                 
 rem * Realizado el 2 de mayo  de 2021                        *
 rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).                     *
-rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.      *
+rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.       *
 rem **********************************************************
 */
 
@@ -36,7 +36,7 @@ BEGIN
 	SELECT COUNT(*)
 		INTO v_total
 		FROM enrollment
-		WHERE student_id = :NEW. student_id;
+		WHERE student_id = :NEW.student_id;
 -- check if the current student is enrolled in too
 -- many courses
 	IF v_total >= 3 THEN
@@ -44,13 +44,11 @@ BEGIN
 		INTO v_name
 		FROM student
 		WHERE student_id = :NEW.STUDENT_ID;
-		RAISE_APPLICATION_ERROR (-20000, 'Student, '||v_name||
-		', is registered for 3 courses already');
+		RAISE_APPLICATION_ERROR (-20000, 'Student, '||v_name||', is registered for 3 courses already');
 	END IF;
 EXCEPTION
 	WHEN NO_DATA_FOUND THEN
-		RAISE_APPLICATION_ERROR
-		(-20001, 'This is not a valid student');
+		RAISE_APPLICATION_ERROR (-20001, 'This is not a valid student');
 END;
 
 --Issue the following INSERT and UPDATE statements
@@ -82,15 +80,14 @@ CREATE OR REPLACE TRIGGER enrollment_biu
 BEGIN
 	IF :NEW.STUDENT_ID IS NOT NULL THEN
 		BEGIN
-			student_adm.v_student_id := :NEW. student_id;
+			student_adm.v_student_id := :NEW.student_id;
 			SELECT first_name||' '||last_name
 				INTO student_adm.v_student_name
 				FROM student
 				WHERE student_id = student_adm.v_student_id;
 		EXCEPTION
 			WHEN NO_DATA_FOUND THEN
-				RAISE_APPLICATION_ERROR
-				(-20001, 'This is not a valid student');
+				RAISE_APPLICATION_ERROR(-20001, 'This is not a valid student');
 		END;
 	END IF;
 END;
@@ -108,9 +105,7 @@ BEGIN
 	-- check if the current student is enrolled in too
 	-- many courses
 	IF v_total >= 3 THEN
-		RAISE_APPLICATION_ERROR (-20000, 'Student, '||
-		student_adm.v_student_name||
-		', is registered for 3 courses already ');
+		RAISE_APPLICATION_ERROR (-20000, 'Student, '|| student_adm.v_student_name|| ', is registered for 3 courses already ');
 	END IF;
 END;
 
