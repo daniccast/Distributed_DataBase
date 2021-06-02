@@ -1,0 +1,121 @@
+SQL> 
+SQL> set colsep '|=|'
+SQL> set describe linenum on
+SQL> SET PAGESIZE 99;
+SQL> SET LINESIZE 150
+SQL> 
+SQL> alter session set NLS_DATE_FORMAT = 'DD-MON-YYYY';
+
+Sesión modificada.
+
+SQL> alter session set NLS_DATE_LANGUAGE= 'ENGLISH';
+
+Sesión modificada.
+
+SQL> rem para estos ejercicios necesitamos este tipo de formato
+SQL> 
+SQL> rem Ejemplo (Mishra y Beaulieu, 2002, 270):
+SQL> 
+SQL> 
+SQL> SELECT c.name cust_name,
+  2  big_custs.cust_sales cust_sales, r.name region_name,
+  3  100 * ROUND(big_custs.cust_sales /
+  4  big_custs.region_sales, 2) percent_of_region
+  5  FROM region r, customer c,
+  6  	(SELECT cust_sales.cust_nbr cust_nbr, cust_sales.region_id region_id,
+  7  	cust_sales.tot_sales cust_sales,
+  8  	region_sales.tot_sales region_sales
+  9  	FROM
+ 10  		(SELECT o.region_id region_id, SUM(o.tot_sales) tot_sales
+ 11  		FROM orders o
+ 12  		WHERE o.year = 2001
+ 13  		GROUP BY o.region_id) region_sales,
+ 14  		(SELECT o.cust_nbr cust_nbr, o.region_id region_id,
+ 15  		SUM(o.tot_sales) tot_sales
+ 16  		FROM orders o
+ 17  		WHERE o.year = 2001
+ 18  		GROUP BY o.cust_nbr, o.region_id) cust_sales
+ 19  	WHERE cust_sales.region_id = region_sales.region_id
+ 20  	AND cust_sales.tot_sales > (region_sales.tot_sales * .2)) big_custs
+ 21  WHERE big_custs.cust_nbr = c.cust_nbr
+ 22  AND big_custs.region_id = r.region_id;
+
+ninguna fila seleccionada
+
+SQL> 
+SQL> SELECT c.name cust_name,
+  2  cust_sales.tot_sales cust_sales, r.name region_name,
+  3  100 * ROUND(cust_sales.tot_sales /
+  4  cust_sales.region_sales, 2) percent_of_region
+  5  FROM region r, customer c,
+  6  	(SELECT o.region_id region_id, o.cust_nbr cust_nbr,
+  7  	SUM(o.tot_sales) tot_sales,
+  8  	SUM(SUM(o.tot_sales)) OVER (PARTITION BY o.region_id) region_sales
+  9  	FROM orders o
+ 10  	WHERE o.year = 2001
+ 11  	GROUP BY o.region_id, o.cust_nbr) cust_sales
+ 12  WHERE cust_sales.tot_sales > (cust_sales.region_sales * .2)
+ 13  AND cust_sales.region_id = r.region_id
+ 14  AND cust_sales.cust_nbr = c.cust_nbr;
+
+ninguna fila seleccionada
+
+SQL> 
+SQL> 
+SQL> 
+SQL> rem Ejercicios  RANK, DENSE_RANK, and ROW_NUMBER
+SQL> 
+SQL> SELECT region_id, cust_nbr,
+  2  SUM(tot_sales) cust_sales,
+  3  RANK( ) OVER (ORDER BY SUM(tot_sales) DESC) sales_rank,
+  4  DENSE_RANK( ) OVER (ORDER BY SUM(tot_sales) DESC) sales_dense_rank,
+  5  ROW_NUMBER( ) OVER (ORDER BY SUM(tot_sales) DESC) sales_number
+  6  FROM orders
+  7  WHERE year = 2001
+  8  GROUP BY region_id, cust_nbr
+  9  ORDER BY 6;
+
+ REGION_ID|=|  CUST_NBR|=|CUST_SALES|=|SALES_RANK|=|SALES_DENSE_RANK|=|SALES_NUMBER                                                                   
+----------|=|----------|=|----------|=|----------|=|----------------|=|------------                                                                   
+         9|=|        25|=|   2232703|=|         1|=|               1|=|           1                                                                   
+         8|=|        17|=|   1944281|=|         2|=|               2|=|           2                                                                   
+         7|=|        14|=|   1929774|=|         3|=|               3|=|           3                                                                   
+         5|=|         4|=|   1878275|=|         4|=|               4|=|           4                                                                   
+        10|=|        26|=|   1808949|=|         5|=|               5|=|           5                                                                   
+         6|=|         6|=|   1788836|=|         6|=|               6|=|           6                                                                   
+         8|=|        20|=|   1413722|=|         7|=|               7|=|           7                                                                   
+        10|=|        27|=|   1322747|=|         8|=|               8|=|           8                                                                   
+         7|=|        13|=|   1310434|=|         9|=|               9|=|           9                                                                   
+         7|=|        15|=|   1255591|=|        10|=|              10|=|          10                                                                   
+         8|=|        18|=|   1253840|=|        11|=|              11|=|          11                                                                   
+         9|=|        24|=|   1224992|=|        12|=|              12|=|          12                                                                   
+         9|=|        23|=|   1224992|=|        12|=|              12|=|          13                                                                   
+         5|=|         2|=|   1224992|=|        12|=|              12|=|          14                                                                   
+        10|=|        30|=|   1216858|=|        15|=|              13|=|          15                                                                   
+         6|=|         9|=|   1208959|=|        16|=|              14|=|          16                                                                   
+         6|=|        10|=|   1196748|=|        17|=|              15|=|          17                                                                   
+         7|=|        11|=|   1190421|=|        18|=|              16|=|          18                                                                   
+         7|=|        12|=|   1182275|=|        19|=|              17|=|          19                                                                   
+         8|=|        19|=|   1174421|=|        20|=|              18|=|          20                                                                   
+         5|=|         5|=|   1169926|=|        21|=|              19|=|          21                                                                   
+         5|=|         3|=|   1161286|=|        22|=|              20|=|          22                                                                   
+         5|=|         1|=|   1151162|=|        23|=|              21|=|          23                                                                   
+         6|=|         8|=|   1141638|=|        24|=|              22|=|          24                                                                   
+         8|=|        16|=|   1068467|=|        25|=|              23|=|          25                                                                   
+         9|=|        22|=|   1036146|=|        26|=|              24|=|          26                                                                   
+         9|=|        21|=|   1020541|=|        27|=|              25|=|          27                                                                   
+        10|=|        28|=|    986964|=|        28|=|              26|=|          28                                                                   
+         6|=|         7|=|    971585|=|        29|=|              27|=|          29                                                                   
+        10|=|        29|=|    903383|=|        30|=|              28|=|          30                                                                   
+
+30 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> spool OFF;
