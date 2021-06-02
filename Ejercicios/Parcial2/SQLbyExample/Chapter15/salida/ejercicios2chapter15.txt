@@ -1,0 +1,43 @@
+SQL> SELECT zip,
+  2  REGEXP_INSTR(zip, '[[:digit:]]{5}') exp1,
+  3  REGEXP_INSTR(zip, '[[:digit:]{5}]') exp2
+  4  FROM zipcode
+  5  where zip in ('00914', '01247','065401');
+
+ZIP  |=      EXP1|=      EXP2                                                                                                                         
+-----|=----------|=----------                                                                                                                         
+00914|=         1|=         1                                                                                                                         
+01247|=         1|=         1                                                                                                                         
+
+SQL> COL LEVEL format 999;
+SQL> COL hierarchy FORMAT A50;
+SQL> 
+SQL> SELECT LEVEL, LPAD(' ', 6*(LEVEL-1)) ||course_no
+  2  || ' ' ||description hier
+  3  FROM course
+  4  START WITH course_no = 310
+  5  CONNECT BY PRIOR course_no = prerequisite
+  6  AND LEVEL <= 3;
+
+LEVEL                                                                                                                                                 
+-----                                                                                                                                                 
+HIER                                                                                                                                                  
+------------------------------------------------------------------------------------------------------------------------------------------------------
+    1                                                                                                                                                 
+310 Operating Systems                                                                                                                                 
+                                                                                                                                                      
+    2                                                                                                                                                 
+      130 Intro to Unix                                                                                                                               
+                                                                                                                                                      
+    3                                                                                                                                                 
+            132 Basics of Unix Admin                                                                                                                  
+                                                                                                                                                      
+    3                                                                                                                                                 
+            330 Network Administration                                                                                                                
+                                                                                                                                                      
+    2                                                                                                                                                 
+      145 Internet Protocols                                                                                                                          
+                                                                                                                                                      
+
+SQL> 
+SQL> spool OFF;

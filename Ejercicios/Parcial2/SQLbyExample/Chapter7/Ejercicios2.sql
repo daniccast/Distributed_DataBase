@@ -1,4 +1,4 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial2\SQLbyExample\Chapter7\salida\ejercicios2chapter7.txt
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial2\SQLbyExample\Chapter7\salida\ejercicios2chapter7.txt
 
 rem *****************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2         * 
@@ -36,9 +36,6 @@ AND (e.final_grade, e.section_id) IN
 (SELECT MAX(final_grade), section_id
 FROM enrollment
 GROUP BY section_id);
-
-
-
 
 rem ----------------------------- EJERCICIO A. LAB 7.2.2--------------------------------------------------------------------------------
 rem Write a SQL statement to determine the total number of students enrolled using the

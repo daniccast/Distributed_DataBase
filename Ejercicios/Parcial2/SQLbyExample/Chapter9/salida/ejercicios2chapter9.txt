@@ -1,0 +1,652 @@
+SQL> SELECT c.course_no, s.course_no, s.section_id,
+  2  	c.description, s.start_date_time
+  3  	FROM course c, section s
+  4  WHERE c.course_no(+) = s.course_no(+);
+WHERE c.course_no(+) = s.course_no(+)
+                     *
+ERROR en línea 4:
+ORA-01468: un predicado sólo puede hacer referencia a una tabla de unión externa 
+
+
+SQL> SELECT c.course_no, s.course_no, s.section_id,
+  2  c.description, s.start_date_time
+  3  FROM course c FULL OUTER JOIN section s
+  4  ON c.course_no = s.course_no;
+
+COURSE_NO|=COURSE_NO|=SECTION_ID|=DESCRIPTION                                       |=START_DATE_                                                     
+---------|=---------|=----------|=--------------------------------------------------|=-----------                                                     
+      350|=      350|=        79|=JDeveloper Lab                                    |=14-APR-2003                                                     
+       10|=       10|=        80|=DP Overview                                       |=24-APR-2003                                                     
+       20|=       20|=        81|=Intro to Computers                                |=24-JUL-2003                                                     
+       20|=       20|=        82|=Intro to Computers                                |=03-MAY-2003                                                     
+       20|=       20|=        83|=Intro to Computers                                |=11-JUN-2003                                                     
+       20|=       20|=        84|=Intro to Computers                                |=11-JUN-2003                                                     
+       25|=       25|=        85|=Intro to Programming                              |=14-JUL-2003                                                     
+       25|=       25|=        86|=Intro to Programming                              |=10-JUN-2003                                                     
+       25|=       25|=        87|=Intro to Programming                              |=14-APR-2003                                                     
+       25|=       25|=        88|=Intro to Programming                              |=04-MAY-2003                                                     
+       25|=       25|=        89|=Intro to Programming                              |=15-MAY-2003                                                     
+       25|=       25|=        90|=Intro to Programming                              |=12-JUN-2003                                                     
+       25|=       25|=        91|=Intro to Programming                              |=12-JUN-2003                                                     
+       25|=       25|=        92|=Intro to Programming                              |=13-JUN-2003                                                     
+       25|=       25|=        93|=Intro to Programming                              |=13-JUN-2003                                                     
+      146|=      146|=        94|=Java for C/C++ Programmers                        |=24-JUL-2003                                                     
+      147|=      147|=        95|=GUI Programming                                   |=14-APR-2003                                                     
+      204|=      204|=        96|=Intro to SQL                                      |=14-APR-2003                                                     
+      210|=      210|=        97|=Oracle Tools                                      |=07-MAY-2003                                                     
+      220|=      220|=        98|=PL/SQL Programming                                |=15-APR-2003                                                     
+      230|=      230|=        99|=Intro to Internet                                 |=07-MAY-2003                                                     
+      230|=      230|=       100|=Intro to Internet                                 |=09-JUN-2003                                                     
+      240|=      240|=       101|=Intro to the Basic Language                       |=16-APR-2003                                                     
+      240|=      240|=       102|=Intro to the Basic Language                       |=24-MAY-2003                                                     
+      310|=      310|=       103|=Operating Systems                                 |=29-APR-2003                                                     
+      330|=      330|=       104|=Network Administration                            |=14-JUL-2003                                                     
+      350|=      350|=       105|=JDeveloper Lab                                    |=09-MAY-2003                                                     
+      350|=      350|=       106|=JDeveloper Lab                                    |=03-JUN-2003                                                     
+      130|=      130|=       107|=Intro to Unix                                     |=14-JUL-2003                                                     
+      420|=      420|=       108|=Database System Principles                        |=07-MAY-2003                                                     
+      450|=      450|=       109|=DB Programming in Java                            |=14-APR-2003                                                     
+      134|=      134|=       110|=Advanced Unix Admin                               |=10-JUN-2003                                                     
+      134|=      134|=       111|=Advanced Unix Admin                               |=08-APR-2004                                                     
+      135|=      135|=       112|=Unix Tips and Techniques                          |=16-MAY-2003                                                     
+      135|=      135|=       113|=Unix Tips and Techniques                          |=02-JUN-2003                                                     
+      135|=      135|=       114|=Unix Tips and Techniques                          |=15-APR-2003                                                     
+      135|=      135|=       115|=Unix Tips and Techniques                          |=07-MAY-2003                                                     
+      140|=      140|=       116|=Structured Analysis                               |=14-JUL-2003                                                     
+      140|=      140|=       117|=Structured Analysis                               |=02-JUN-2003                                                     
+      140|=      140|=       118|=Structured Analysis                               |=09-MAY-2003                                                     
+      142|=      142|=       119|=Project Management                                |=14-JUL-2003                                                     
+      142|=      142|=       120|=Project Management                                |=10-JUN-2003                                                     
+      142|=      142|=       121|=Project Management                                |=09-APR-2003                                                     
+      144|=      144|=       122|=Database Design                                   |=15-APR-2003                                                     
+      145|=      145|=       123|=Internet Protocols                                |=14-JUL-2003                                                     
+      145|=      145|=       124|=Internet Protocols                                |=09-MAY-2003                                                     
+      146|=      146|=       125|=Java for C/C++ Programmers                        |=29-APR-2003                                                     
+      124|=      124|=       126|=Advanced Java Programming                         |=14-JUL-2003                                                     
+      124|=      124|=       127|=Advanced Java Programming                         |=24-JUL-2003                                                     
+      124|=      124|=       128|=Advanced Java Programming                         |=09-APR-2003                                                     
+      124|=      124|=       129|=Advanced Java Programming                         |=07-MAY-2003                                                     
+      125|=      125|=       130|=JDeveloper                                        |=22-MAY-2003                                                     
+      125|=      125|=       131|=JDeveloper                                        |=24-JUL-2003                                                     
+      125|=      125|=       132|=JDeveloper                                        |=09-APR-2003                                                     
+      125|=      125|=       133|=JDeveloper                                        |=03-MAY-2003                                                     
+      125|=      125|=       134|=JDeveloper                                        |=11-JUN-2003                                                     
+      130|=      130|=       135|=Intro to Unix                                     |=15-APR-2003                                                     
+      130|=      130|=       136|=Intro to Unix                                     |=24-APR-2003                                                     
+      130|=      130|=       137|=Intro to Unix                                     |=03-MAY-2003                                                     
+      132|=      132|=       138|=Basics of Unix Admin                              |=21-MAY-2003                                                     
+      132|=      132|=       139|=Basics of Unix Admin                              |=09-JUN-2003                                                     
+      134|=      134|=       140|=Advanced Unix Admin                               |=16-APR-2003                                                     
+      100|=      100|=       141|=Hands-On Windows                                  |=14-APR-2003                                                     
+      100|=      100|=       142|=Hands-On Windows                                  |=24-JUL-2003                                                     
+      100|=      100|=       143|=Hands-On Windows                                  |=03-JUN-2003                                                     
+      100|=      100|=       144|=Hands-On Windows                                  |=04-MAY-2003                                                     
+      100|=      100|=       145|=Hands-On Windows                                  |=15-MAY-2003                                                     
+      120|=      120|=       146|=Intro to Java Programming                         |=16-MAY-2003                                                     
+      120|=      120|=       147|=Intro to Java Programming                         |=24-JUL-2003                                                     
+      120|=      120|=       148|=Intro to Java Programming                         |=24-MAY-2003                                                     
+      120|=      120|=       149|=Intro to Java Programming                         |=04-MAY-2003                                                     
+      120|=      120|=       150|=Intro to Java Programming                         |=15-MAY-2003                                                     
+      120|=      120|=       151|=Intro to Java Programming                         |=12-JUN-2003                                                     
+      122|=      122|=       152|=Intermediate Java Programming                     |=29-APR-2003                                                     
+      122|=      122|=       153|=Intermediate Java Programming                     |=24-JUL-2003                                                     
+      122|=      122|=       154|=Intermediate Java Programming                     |=21-MAY-2003                                                     
+      122|=      122|=       155|=Intermediate Java Programming                     |=04-MAY-2003                                                     
+      122|=      122|=       156|=Intermediate Java Programming                     |=15-MAY-2003                                                     
+      430|=         |=          |=JDeveloper Techniques                             |=                                                                
+      453|=         |=          |=Test Course                                       |=                                                                
+       80|=         |=          |=Structured Programming Techniques                 |=                                                                
+
+81 filas seleccionadas.
+
+SQL> SELECT course_no cou, description, cost, location, last_name
+  2  	FROM course LEFT OUTER JOIN section
+  3  	USING (course_no)
+  4  	LEFT OUTER JOIN instructor
+  5  	USING (instructor_id)
+  6  	ORDER BY course_no;
+
+       COU|=DESCRIPTION                                       |=      COST|=LOCATION                                                                  
+----------|=--------------------------------------------------|=----------|=--------------------------------------------------                        
+LAST_NAME                                                                                                                                             
+-------------------------                                                                                                                             
+        10|=DP Overview                                       |=      1195|=L214                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+        20|=Intro to Computers                                |=      1195|=L210                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+        20|=Intro to Computers                                |=      1195|=L509                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+        20|=Intro to Computers                                |=      1195|=L210                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+        20|=Intro to Computers                                |=      1195|=L214                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L507                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L214                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L509                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L509                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L210                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L509                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=M311                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L507                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L210                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+        80|=Structured Programming Techniques                 |=      1595|=                                                                          
+                                                                                                                                                      
+                                                                                                                                                      
+       100|=Hands-On Windows                                  |=      1195|=L214                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       100|=Hands-On Windows                                  |=      1195|=L509                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       100|=Hands-On Windows                                  |=      1195|=L214                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       100|=Hands-On Windows                                  |=      1195|=L500                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       100|=Hands-On Windows                                  |=      1195|=L507                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       120|=Intro to Java Programming                         |=    243.67|=L509                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       120|=Intro to Java Programming                         |=    243.67|=L206                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       120|=Intro to Java Programming                         |=    243.67|=L210                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       120|=Intro to Java Programming                         |=    243.67|=L507                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       120|=Intro to Java Programming                         |=    243.67|=L509                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       120|=Intro to Java Programming                         |=    243.67|=L507                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       122|=Intermediate Java Programming                     |=    243.67|=L211                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       122|=Intermediate Java Programming                     |=    243.67|=L507                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       122|=Intermediate Java Programming                     |=    243.67|=M311                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       122|=Intermediate Java Programming                     |=    243.67|=L507                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       122|=Intermediate Java Programming                     |=    243.67|=L210                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       124|=Advanced Java Programming                         |=      1195|=M500                                                                      
+
+       COU|=DESCRIPTION                                       |=      COST|=LOCATION                                                                  
+----------|=--------------------------------------------------|=----------|=--------------------------------------------------                        
+LAST_NAME                                                                                                                                             
+-------------------------                                                                                                                             
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       124|=Advanced Java Programming                         |=      1195|=H310                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       124|=Advanced Java Programming                         |=      1195|=L210                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       124|=Advanced Java Programming                         |=      1195|=L214                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       125|=JDeveloper                                        |=      1195|=L509                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       125|=JDeveloper                                        |=      1195|=L214                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       125|=JDeveloper                                        |=      1195|=L509                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       125|=JDeveloper                                        |=      1195|=L507                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       125|=JDeveloper                                        |=      1195|=L211                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       130|=Intro to Unix                                     |=      1195|=L214                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       130|=Intro to Unix                                     |=      1195|=L509                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       130|=Intro to Unix                                     |=      1195|=L507                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       130|=Intro to Unix                                     |=      1195|=L509                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       132|=Basics of Unix Admin                              |=      1195|=L509                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       132|=Basics of Unix Admin                              |=      1195|=L509                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       134|=Advanced Unix Admin                               |=      1195|=L509                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       134|=Advanced Unix Admin                               |=      1195|=L509                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       134|=Advanced Unix Admin                               |=      1195|=L509                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       135|=Unix Tips and Techniques                          |=      1095|=L214                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       135|=Unix Tips and Techniques                          |=      1095|=L509                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       135|=Unix Tips and Techniques                          |=      1095|=M200                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       135|=Unix Tips and Techniques                          |=      1095|=L509                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       140|=Structured Analysis                               |=    243.67|=L507                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       140|=Structured Analysis                               |=    243.67|=L509                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       140|=Structured Analysis                               |=    243.67|=L210                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       142|=Project Management                                |=      1195|=L211                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       142|=Project Management                                |=      1195|=L214                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       142|=Project Management                                |=      1195|=L507                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       144|=Database Design                                   |=      1195|=L214                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       145|=Internet Protocols                                |=      1195|=L210                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       145|=Internet Protocols                                |=      1195|=L214                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       146|=Java for C/C++ Programmers                        |=      1195|=L509                                                                      
+Hanks                                                                                                                                                 
+
+       COU|=DESCRIPTION                                       |=      COST|=LOCATION                                                                  
+----------|=--------------------------------------------------|=----------|=--------------------------------------------------                        
+LAST_NAME                                                                                                                                             
+-------------------------                                                                                                                             
+                                                                                                                                                      
+       146|=Java for C/C++ Programmers                        |=      1195|=L507                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       147|=GUI Programming                                   |=      1195|=L509                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       204|=Intro to SQL                                      |=      1195|=L210                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       210|=Oracle Tools                                      |=      1195|=L507                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       220|=PL/SQL Programming                                |=      1195|=L509                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       230|=Intro to Internet                                 |=    223.26|=L500                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       230|=Intro to Internet                                 |=    223.26|=L214                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       240|=Intro to the Basic Language                       |=    223.26|=L214                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       240|=Intro to the Basic Language                       |=    223.26|=L509                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       310|=Operating Systems                                 |=      1195|=L507                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       330|=Network Administration                            |=      1195|=L511                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       350|=JDeveloper Lab                                    |=      1195|=L214                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       350|=JDeveloper Lab                                    |=      1195|=L509                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       350|=JDeveloper Lab                                    |=      1195|=L509                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       420|=Database System Principles                        |=      1195|=M311                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       430|=JDeveloper Techniques                             |=      1195|=                                                                          
+                                                                                                                                                      
+                                                                                                                                                      
+       450|=DB Programming in Java                            |=          |=L507                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       453|=Test Course                                       |=         0|=                                                                          
+                                                                                                                                                      
+                                                                                                                                                      
+
+81 filas seleccionadas.
+
+SQL> SELECT c.course_no cou, c.description, c.cost, s.location, i.last_name
+  2  	FROM course c, section s, instructor i
+  3  	WHERE c.course_no = s.course_no(+)
+  4  	AND s.instructor_id = i.instructor_id(+)
+  5  	ORDER BY c.course_no
+  6  ;
+
+       COU|=DESCRIPTION                                       |=      COST|=LOCATION                                                                  
+----------|=--------------------------------------------------|=----------|=--------------------------------------------------                        
+LAST_NAME                                                                                                                                             
+-------------------------                                                                                                                             
+        10|=DP Overview                                       |=      1195|=L214                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+        20|=Intro to Computers                                |=      1195|=L210                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+        20|=Intro to Computers                                |=      1195|=L509                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+        20|=Intro to Computers                                |=      1195|=L210                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+        20|=Intro to Computers                                |=      1195|=L214                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L507                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L214                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L509                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L509                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L210                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L509                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=M311                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L507                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+        25|=Intro to Programming                              |=    243.67|=L210                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+        80|=Structured Programming Techniques                 |=      1595|=                                                                          
+                                                                                                                                                      
+                                                                                                                                                      
+       100|=Hands-On Windows                                  |=      1195|=L214                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       100|=Hands-On Windows                                  |=      1195|=L509                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       100|=Hands-On Windows                                  |=      1195|=L214                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       100|=Hands-On Windows                                  |=      1195|=L500                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       100|=Hands-On Windows                                  |=      1195|=L507                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       120|=Intro to Java Programming                         |=    243.67|=L509                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       120|=Intro to Java Programming                         |=    243.67|=L206                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       120|=Intro to Java Programming                         |=    243.67|=L210                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       120|=Intro to Java Programming                         |=    243.67|=L507                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       120|=Intro to Java Programming                         |=    243.67|=L509                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       120|=Intro to Java Programming                         |=    243.67|=L507                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       122|=Intermediate Java Programming                     |=    243.67|=L211                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       122|=Intermediate Java Programming                     |=    243.67|=L507                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       122|=Intermediate Java Programming                     |=    243.67|=M311                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       122|=Intermediate Java Programming                     |=    243.67|=L507                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       122|=Intermediate Java Programming                     |=    243.67|=L210                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       124|=Advanced Java Programming                         |=      1195|=M500                                                                      
+
+       COU|=DESCRIPTION                                       |=      COST|=LOCATION                                                                  
+----------|=--------------------------------------------------|=----------|=--------------------------------------------------                        
+LAST_NAME                                                                                                                                             
+-------------------------                                                                                                                             
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       124|=Advanced Java Programming                         |=      1195|=H310                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       124|=Advanced Java Programming                         |=      1195|=L210                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       124|=Advanced Java Programming                         |=      1195|=L214                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       125|=JDeveloper                                        |=      1195|=L509                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       125|=JDeveloper                                        |=      1195|=L214                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       125|=JDeveloper                                        |=      1195|=L509                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       125|=JDeveloper                                        |=      1195|=L507                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       125|=JDeveloper                                        |=      1195|=L211                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       130|=Intro to Unix                                     |=      1195|=L214                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       130|=Intro to Unix                                     |=      1195|=L509                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       130|=Intro to Unix                                     |=      1195|=L507                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       130|=Intro to Unix                                     |=      1195|=L509                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       132|=Basics of Unix Admin                              |=      1195|=L509                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       132|=Basics of Unix Admin                              |=      1195|=L509                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       134|=Advanced Unix Admin                               |=      1195|=L509                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       134|=Advanced Unix Admin                               |=      1195|=L509                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       134|=Advanced Unix Admin                               |=      1195|=L509                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       135|=Unix Tips and Techniques                          |=      1095|=L214                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       135|=Unix Tips and Techniques                          |=      1095|=L509                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       135|=Unix Tips and Techniques                          |=      1095|=M200                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       135|=Unix Tips and Techniques                          |=      1095|=L509                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       140|=Structured Analysis                               |=    243.67|=L507                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       140|=Structured Analysis                               |=    243.67|=L509                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       140|=Structured Analysis                               |=    243.67|=L210                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       142|=Project Management                                |=      1195|=L211                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       142|=Project Management                                |=      1195|=L214                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       142|=Project Management                                |=      1195|=L507                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       144|=Database Design                                   |=      1195|=L214                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       145|=Internet Protocols                                |=      1195|=L210                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       145|=Internet Protocols                                |=      1195|=L214                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       146|=Java for C/C++ Programmers                        |=      1195|=L509                                                                      
+Hanks                                                                                                                                                 
+
+       COU|=DESCRIPTION                                       |=      COST|=LOCATION                                                                  
+----------|=--------------------------------------------------|=----------|=--------------------------------------------------                        
+LAST_NAME                                                                                                                                             
+-------------------------                                                                                                                             
+                                                                                                                                                      
+       146|=Java for C/C++ Programmers                        |=      1195|=L507                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       147|=GUI Programming                                   |=      1195|=L509                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       204|=Intro to SQL                                      |=      1195|=L210                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       210|=Oracle Tools                                      |=      1195|=L507                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       220|=PL/SQL Programming                                |=      1195|=L509                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       230|=Intro to Internet                                 |=    223.26|=L500                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       230|=Intro to Internet                                 |=    223.26|=L214                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       240|=Intro to the Basic Language                       |=    223.26|=L214                                                                      
+Wojick                                                                                                                                                
+                                                                                                                                                      
+       240|=Intro to the Basic Language                       |=    223.26|=L509                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       310|=Operating Systems                                 |=      1195|=L507                                                                      
+Schorin                                                                                                                                               
+                                                                                                                                                      
+       330|=Network Administration                            |=      1195|=L511                                                                      
+Pertez                                                                                                                                                
+                                                                                                                                                      
+       350|=JDeveloper Lab                                    |=      1195|=L214                                                                      
+Smythe                                                                                                                                                
+                                                                                                                                                      
+       350|=JDeveloper Lab                                    |=      1195|=L509                                                                      
+Morris                                                                                                                                                
+                                                                                                                                                      
+       350|=JDeveloper Lab                                    |=      1195|=L509                                                                      
+Frantzen                                                                                                                                              
+                                                                                                                                                      
+       420|=Database System Principles                        |=      1195|=M311                                                                      
+Lowry                                                                                                                                                 
+                                                                                                                                                      
+       430|=JDeveloper Techniques                             |=      1195|=                                                                          
+                                                                                                                                                      
+                                                                                                                                                      
+       450|=DB Programming in Java                            |=          |=L507                                                                      
+Hanks                                                                                                                                                 
+                                                                                                                                                      
+       453|=Test Course                                       |=         0|=                                                                          
+                                                                                                                                                      
+                                                                                                                                                      
+
+81 filas seleccionadas.
+
+SQL> SELECT fi.student_id, mt.numeric_grade "Midterm Grade", fi.numeric_grade "Final Grade"
+  2  	FROM grade fi JOIN grade mt
+  3  	ON (fi.section_id = mt.section_id
+  4  	AND fi.student_id = mt.student_id)
+  5  	WHERE fi.grade_type_code = 'FI'
+  6  	AND fi.section_id = 86
+  7  	AND mt.grade_type_code = 'MT'
+  8  	AND fi.numeric_grade < mt.numeric_grade;
+
+STUDENT_ID|=Midterm Grade|=Final Grade                                                                                                                
+----------|=-------------|=-----------                                                                                                                
+       102|=           90|=         85                                                                                                                
+       108|=           91|=         76                                                                                                                
+       211|=           92|=         77                                                                                                                
+
+SQL> 
+SQL> spool OFF;

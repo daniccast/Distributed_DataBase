@@ -1,4 +1,4 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial2\SQLbyExample\Chapter8\salida\ejercicios2chapter8.txt
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial2\SQLbyExample\Chapter8\salida\ejercicios2chapter8.txt
 
 rem *****************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2         * 
@@ -7,7 +7,7 @@ rem * Cortés Castilllo Daniela y Mendoza Cuellar Oscar  *
 rem * Realizado el 1 de Abril de 2021                   *
 rem * Rischert,A (2004)."Chapter 8. Set Operators". 	*
 rem *Ramagnano,L, Oracle® SQL™by Example(423-446). 	*
-rem *Pearson.  					  *
+rem *Pearson.  					        *
 rem *****************************************************
 
 rem Establecer formato para las tablas

@@ -1,0 +1,41 @@
+SQL> SELECT course_no, description
+  2  FROM course
+  3  MINUS
+  4  SELECT s.course_no, c.description
+  5  FROM section s, course c
+  6  WHERE s.course_no = c.course_no;
+
+COURSE_NO|=DESCRIPTION                                                                                                                                
+---------|=--------------------------------------------------                                                                                         
+       80|=Structured Programming Techniques                                                                                                          
+      430|=JDeveloper Techniques                                                                                                                      
+      453|=Test Course                                                                                                                                
+
+SQL> SELECT course_no, description
+  2  FROM course c
+  3  WHERE NOT EXISTS
+  4  (SELECT '*'
+  5  FROM section
+  6  WHERE c.course_no = course_no);
+
+COURSE_NO|=DESCRIPTION                                                                                                                                
+---------|=--------------------------------------------------                                                                                         
+      453|=Test Course                                                                                                                                
+       80|=Structured Programming Techniques                                                                                                          
+      430|=JDeveloper Techniques                                                                                                                      
+
+SQL> SELECT zip
+  2  FROM instructor
+  3  INTERSECT
+  4  SELECT zip
+  5  FROM student;
+
+ZIP                                                                                                                                                   
+-----                                                                                                                                                 
+10015                                                                                                                                                 
+10019                                                                                                                                                 
+10025                                                                                                                                                 
+50071                                                                                                                                                 
+
+SQL> 
+SQL> spool OFF;

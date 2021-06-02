@@ -1,13 +1,13 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejecicios\Parcial2\SQLbyExample\Chapter9\salida\ejercicios2chapter9.txt
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial2\SQLbyExample\Chapter9\salida\ejercicios2chapter9.txt
 
 rem *****************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2         * 
 rem * Elaborado por:                                    *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar Oscar  *
 rem * Realizado el 1 de Abril de 2021                   *
-rem * Rischert,A (2004)."Chapter 9. Complex Joins". 	  *
-rem *Ramagnano,L, Oracle® SQL™by Example(446-477). 	  *
-rem *Pearson.  					  *
+rem * Rischert,A (2004)."Chapter 9. Complex Joins". 	*
+rem *Ramagnano,L, Oracle® SQL™by Example(446-477). 	*
+rem *Pearson.  					        *
 rem *****************************************************
 
 rem Establecer formato para las tablas
@@ -54,7 +54,7 @@ SELECT c.course_no cou, c.description, c.cost, s.location, i.last_name
 	FROM course c, section s, instructor i
 	WHERE c.course_no = s.course_no(+)
 	AND s.instructor_id = i.instructor_id(+)
-	ORDER BY c.course_no
+	ORDER BY c.course_no;
 
 
 rem ----------------------------- EJERCICIO A. LAB 9.2.1--------------------------------------------------------------
@@ -69,7 +69,7 @@ SELECT fi.student_id, mt.numeric_grade "Midterm Grade", fi.numeric_grade "Final 
 	WHERE fi.grade_type_code = 'FI'
 	AND fi.section_id = 86
 	AND mt.grade_type_code = 'MT'
-	AND fi.numeric_grade < mt.numeric_grade
+	AND fi.numeric_grade < mt.numeric_grade;
 
 
 spool OFF;

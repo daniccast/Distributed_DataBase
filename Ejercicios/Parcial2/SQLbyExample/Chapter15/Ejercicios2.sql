@@ -31,7 +31,8 @@ rem (Rischert, 2004, 728).
 SELECT zip,
 REGEXP_INSTR(zip, '[[:digit:]]{5}') exp1,
 REGEXP_INSTR(zip, '[[:digit:]{5}]') exp2
-FROM zipcode_example;
+FROM zipcode
+where zip in ('00914', '01247','065401');
 
 
 rem la diferencia es que la primera expresion regular requiere exactamente 5 ocurrencias
@@ -42,7 +43,7 @@ rem  Execute the following query. What do you observe about the result?
  (Rischert, 2004, 748). 
 
 COL LEVEL format 999;
-COL hierarchy FORMAT A50;
+COL hierarchy FORMAT A20;
 
 SELECT LEVEL, LPAD(' ', 6*(LEVEL-1)) ||course_no
 || ' ' ||description hier
