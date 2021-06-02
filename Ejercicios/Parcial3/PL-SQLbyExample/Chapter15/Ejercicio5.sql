@@ -6,7 +6,7 @@ rem * Elaborado por:                                         *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar José Oscar  *                 
 rem * Realizado el 9 de Junio  de 2021                       *
 rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).                     *
-rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.      *
+rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.       *
 rem **********************************************************
 */
 
@@ -43,7 +43,8 @@ BEGIN
 	END LOOP;
 END;
 
-
+.
+/
 
 
 

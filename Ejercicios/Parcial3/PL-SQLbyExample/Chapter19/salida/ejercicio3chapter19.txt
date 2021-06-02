@@ -1,0 +1,113 @@
+SQL> -- Write a procedure with no parameters. The procedure should say whether the current day is a
+SQL> --weekend or weekday. Additionally, it should tell you the user's name and the current time. It also
+SQL> --should specify how many valid and invalid procedures are in the database.
+SQL> --(ROSENZWEIG y RAKHIMOV, 2009, 447).
+SQL> 
+SQL> 
+SQL> 
+SQL> CREATE OR REPLACE PROCEDURE dia
+  2  AS
+  3  	dia_hoy  VARCHAR2(10);
+  4  	user_v VARCHAR2(10);
+  5  	time_v VARCHAR2(50);
+  6  	validos_v VARCHAR2(10);
+  7  	invalidos_v VARCHAR2(10);
+  8  BEGIN
+  9  	SELECT TO_CHAR(SYSDATE,'DAY') into dia_hoy FROM dual;
+ 10  	IF dia_hoy like 'S%' then
+ 11  	DBMS_OUTPUT.PUT_LINE ('WEEKEND');
+ 12  	ELSE
+ 13  	DBMS_OUTPUT.PUT_LINE ('WEEKDAY');
+ 14  	END IF;
+ 15  
+ 16  	SELECT user into user_v from dual;
+ 17  	DBMS_OUTPUT.PUT_LINE (user_v);
+ 18  
+ 19  	SELECT TO_CHAR(SYSTIMESTAMP) into time_v from dual;
+ 20  	DBMS_OUTPUT.PUT_LINE (time_v);
+ 21  
+ 22  	SELECT COUNT(*) into validos_v
+ 23  		FROM user_objects
+ 24  		WHERE status like 'VALID';
+ 25  	DBMS_OUTPUT.PUT_LINE (validos_v);
+ 26  	SELECT COUNT(*) into invalidos_v
+ 27  		FROM user_objects
+ 28  		WHERE status not like 'VALID';
+ 29  	DBMS_OUTPUT.PUT_LINE (invalidos_v);
+ 30  
+ 31  END dia;
+ 32  .
+SQL> /
+
+Procedimiento creado.
+
+SQL> 
+SQL> 
+SQL> SELECT object_name, object_type, status
+  2  FROM user_objects;
+
+OBJECT_NAME              |=OBJECT_TYPE              |=STATUS                                                                                          
+-------------------------|=-------------------------|=-------------------------                                                                       
+ZIP_SEQ                  |=SEQUENCE                 |=VALID                                                                                           
+GRADE                    |=TABLE                    |=VALID                                                                                           
+INSTRUCTOR               |=TABLE                    |=VALID                                                                                           
+GRADE_TYPE               |=TABLE                    |=VALID                                                                                           
+GRADE_CONVERSION         |=TABLE                    |=VALID                                                                                           
+GRADE_TYPE_WEIGHT        |=TABLE                    |=VALID                                                                                           
+SECTION                  |=TABLE                    |=VALID                                                                                           
+COURSE                   |=TABLE                    |=VALID                                                                                           
+ENROLLMENT               |=TABLE                    |=VALID                                                                                           
+STUDENT                  |=TABLE                    |=VALID                                                                                           
+ZIPCODE                  |=TABLE                    |=VALID                                                                                           
+INST_ZIP_FK_I            |=INDEX                    |=VALID                                                                                           
+GR_GRTW_FK_I             |=INDEX                    |=VALID                                                                                           
+GRTW_GRTYP_FK_I          |=INDEX                    |=VALID                                                                                           
+SECT_CRSE_FK_I           |=INDEX                    |=VALID                                                                                           
+SECT_INST_FK_I           |=INDEX                    |=VALID                                                                                           
+CRSE_CRSE_FK_I           |=INDEX                    |=VALID                                                                                           
+ENR_SECT_FK_I            |=INDEX                    |=VALID                                                                                           
+STU_ZIP_FK_I             |=INDEX                    |=VALID                                                                                           
+INST_PK                  |=INDEX                    |=VALID                                                                                           
+GR_PK                    |=INDEX                    |=VALID                                                                                           
+GRTYP_PK                 |=INDEX                    |=VALID                                                                                           
+GRCON_PK                 |=INDEX                    |=VALID                                                                                           
+GRTW_PK                  |=INDEX                    |=VALID                                                                                           
+SECT_PK                  |=INDEX                    |=VALID                                                                                           
+CRSE_PK                  |=INDEX                    |=VALID                                                                                           
+ENR_PK                   |=INDEX                    |=VALID                                                                                           
+STU_PK                   |=INDEX                    |=VALID                                                                                           
+ZIP_PK                   |=INDEX                    |=VALID                                                                                           
+SECT_SECT2_UK            |=INDEX                    |=VALID                                                                                           
+INSTRUCTOR_ID_SEQ        |=SEQUENCE                 |=VALID                                                                                           
+SECTION_ID_SEQ           |=SEQUENCE                 |=VALID                                                                                           
+STUDENT_ID_SEQ           |=SEQUENCE                 |=VALID                                                                                           
+COURSE_NO_SEQ            |=SEQUENCE                 |=VALID                                                                                           
+COURSE_BI                |=TRIGGER                  |=VALID                                                                                           
+INSTRUCTOR_BI            |=TRIGGER                  |=VALID                                                                                           
+STUDENT_ADDRESS          |=VIEW                     |=VALID                                                                                           
+STUDENT_ADDRESS_INS      |=TRIGGER                  |=VALID                                                                                           
+ENROLLMENT_COMPOUND      |=TRIGGER                  |=VALID                                                                                           
+DISCOUNT                 |=PROCEDURE                |=VALID                                                                                           
+FIND_SNAME               |=PROCEDURE                |=VALID                                                                                           
+DIA                      |=PROCEDURE                |=VALID                                                                                           
+
+42 filas seleccionadas.
+
+SQL> 
+SQL> BEGIN
+  2  	dia();
+  3  	DBMS_OUTPUT.PUT_LINE ('LISTO');
+  4  END;
+  5  .
+SQL> /
+WEEKDAY                                                                                                                                               
+STUDENT                                                                                                                                               
+02/06/21 03:58:43.382000 -05:00                                                                                                                       
+42                                                                                                                                                    
+0                                                                                                                                                     
+LISTO                                                                                                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> 
+SQL> spool OFF;

@@ -1,0 +1,45 @@
+SQL> 
+SQL> DECLARE
+  2  	TYPE varray_type1 IS VARRAY(4) OF INTEGER;
+  3  	TYPE varray_type2 IS VARRAY(3) OF varray_type1;
+  4  	varray1 varray_type1 := varray_type1(2, 4, 6, 8);
+  5  	varray2 varray_type2 := varray_type2(varray1);
+  6  BEGIN
+  7  	DBMS_OUTPUT.PUT_LINE ('Varray of integers');
+  8  	FOR i IN 1..4 LOOP
+  9  		DBMS_OUTPUT.PUT_LINE ('varray1('||i||'): '||varray1(i));
+ 10  	END LOOP;
+ 11  	varray2.EXTEND;
+ 12  	varray2(2) := varray_type1(1, 3, 5, 7);
+ 13  	DBMS_OUTPUT.PUT_LINE (chr(10)||'Varray of varrays of integers');
+ 14  	FOR i IN 1..2 LOOP
+ 15  		FOR j IN 1..4 LOOP
+ 16  			DBMS_OUTPUT.PUT_LINE('varray2('||i||')('||j||'): '||varray2(i)(j));
+ 17  		END LOOP;
+ 18  	END LOOP;
+ 19  END;
+ 20  
+ 21  .
+SQL> /
+Varray of integers                                                                                                                                    
+varray1(1): 2                                                                                                                                         
+varray1(2): 4                                                                                                                                         
+varray1(3): 6                                                                                                                                         
+varray1(4): 8                                                                                                                                         
+
+Varray of varrays of integers                                                                                                                        
+varray2(1)(1): 2                                                                                                                                      
+varray2(1)(2): 4                                                                                                                                      
+varray2(1)(3): 6                                                                                                                                      
+varray2(1)(4): 8                                                                                                                                      
+varray2(2)(1): 1                                                                                                                                      
+varray2(2)(2): 3                                                                                                                                      
+varray2(2)(3): 5                                                                                                                                      
+varray2(2)(4): 7                                                                                                                                      
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> spool OFF;

@@ -22,7 +22,7 @@ SET SERVEROUTPUT ON;
 
 -- Modify script ch15_1a.sql, used in Exercise 15.1.1. Instead of using an associative array, use a nested table. (ROSENZWEIG y RAKHIMOV, 2009, 331).
 
--- ch15_2a.sql, version 1.0
+
 
 DECLARE
 	CURSOR course_cur IS
@@ -36,7 +36,9 @@ BEGIN
 		v_counter := v_counter + 1;
 		course_tab.EXTEND;
 		course_tab(v_counter) := course_rec.description;
+		DBMS_OUTPUT.PUT_LINE('course_tab('|| v_counter || ')=' || course_tab(v_counter));
 	END LOOP;
+		
 END;
 
 

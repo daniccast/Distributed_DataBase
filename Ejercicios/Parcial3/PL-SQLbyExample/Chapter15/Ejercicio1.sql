@@ -6,7 +6,7 @@ rem * Elaborado por:                                         *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar José Oscar  *                 
 rem * Realizado el 9 de Junio  de 2021                       *
 rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).                     *
-rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.      *
+rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.       *
 rem **********************************************************
 */
 
@@ -27,6 +27,7 @@ DECLARE
 		SELECT last_name
 		FROM student
 		WHERE rownum <= 10;
+	TYPE last_name_type IS TABLE OF student.last_name%TYPE
 	INDEX BY BINARY_INTEGER;
 	last_name_tab last_name_type;
 	v_counter INTEGER := 0;
@@ -38,6 +39,8 @@ BEGIN
 		last_name_tab(v_counter));
 	END LOOP;
 END;
+.
+/
 
 -- Nested table
 
@@ -59,6 +62,8 @@ BEGIN
 	END LOOP;
 END;
 
+.
+/
 
 
 -- ch15_1c.sql, version 3.0 (ROSENZWEIG y RAKHIMOV, 2009, 327). MOdificado
@@ -82,10 +87,31 @@ BEGIN
 	DBMS_OUTPUT.PUT_LINE('course('||course_tab.FIRST||'): '|| course_tab(course_tab.FIRST));
 	DBMS_OUTPUT.PUT_LINE('course('||course_tab.LAST||'): '|| course_tab(course_tab.LAST));
 	
-	DBMS_OUTPUT.PUT_LINE ('1. Total number of elements: '|| coures_tab.COUNT);
+	DBMS_OUTPUT.PUT_LINE ('Total number of elements: '|| course_tab.COUNT);
 
 END;
+.
+/
 
+--¡Que pasa si consultamos el ìndice 0?
+
+DECLARE
+	TYPE course_type IS TABLE OF INTEGER
+	INDEX BY BINARY_INTEGER;
+	course_tab course_type;
+	v_counter INTEGER := 0;
+BEGIN
+	course_tab(0):= 4;
+	course_tab(-1):= 5;
+	DBMS_OUTPUT.PUT_LINE('course(0): '|| course_tab(0));
+	DBMS_OUTPUT.PUT_LINE('course(-1): '|| course_tab(-1));
+	DBMS_OUTPUT.PUT_LINE('course('||course_tab.FIRST||'): '|| course_tab(course_tab.FIRST));
+	DBMS_OUTPUT.PUT_LINE('course('||course_tab.LAST||'): '|| course_tab(course_tab.LAST));
+	DBMS_OUTPUT.PUT_LINE ('Total number of elements: '|| course_tab.COUNT);
+END;
+.
+/
+-- SI SE PUEDE INICIAR EN 0 incluso en negativos
 
 
 spool OFF;

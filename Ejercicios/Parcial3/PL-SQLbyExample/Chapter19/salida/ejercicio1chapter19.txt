@@ -1,0 +1,78 @@
+SQL> -- In this exercise, you run a script that creates a procedure.  (ROSENZWEIG y RAKHIMOV, 2009, 442).
+SQL> 
+SQL> -- ch19_01a.sql
+SQL> CREATE OR REPLACE PROCEDURE Discount
+  2  AS
+  3  	CURSOR c_group_discount
+  4  	IS
+  5  		SELECT distinct s.course_no, c.description
+  6  			FROM section s, enrollment e, course c
+  7  			WHERE s.section_id = e.section_id
+  8  			AND c.course_no = s.course_no
+  9  			GROUP BY s.course_no, c.description,
+ 10  			e.section_id, s.section_id
+ 11  			HAVING COUNT(*) >=8;
+ 12  BEGIN
+ 13  	FOR r_group_discount IN c_group_discount
+ 14  	LOOP
+ 15  		UPDATE course
+ 16  		SET cost = cost * .95
+ 17  		WHERE course_no = r_group_discount.course_no;
+ 18  
+ 19  		DBMS_OUTPUT.PUT_LINE ('A 5% discount has been given to '||
+ 20  		r_group_discount.course_no||' '||
+ 21  		r_group_discount.description );
+ 22  	END LOOP;
+ 23  END;
+ 24  .
+SQL> /
+
+Procedimiento creado.
+
+SQL> COLUMN object_name FORMAT A25
+SQL> COLUMN object_type FORMAT A25
+SQL> COLUMN status FORMAT A25
+SQL> 
+SQL> SELECT object_name, object_type, status
+  2  FROM user_objects
+  3  WHERE object_name = 'DISCOUNT';
+
+OBJECT_NAME              |=OBJECT_TYPE              |=STATUS                                                                                          
+-------------------------|=-------------------------|=-------------------------                                                                       
+DISCOUNT                 |=PROCEDURE                |=VALID                                                                                           
+
+SQL> column text format a70
+SQL> SELECT TO_CHAR(line, 99)||'>', text
+  2  FROM user_source
+  3  WHERE name = 'DISCOUNT';
+
+TO_C|=TEXT                                                                                                                                            
+----|=----------------------------------------------------------------------                                                                          
+  1>|=PROCEDURE Discount                                                                                                                              
+  2>|=AS                                                                                                                                              
+  3>|=	CURSOR c_group_discount                                                                                                                        
+  4>|=	IS                                                                                                                                             
+  5>|=		SELECT distinct s.course_no, c.description                                                                                                    
+  6>|=			FROM section s, enrollment e, course c                                                                                                       
+  7>|=			WHERE s.section_id = e.section_id                                                                                                            
+  8>|=			AND c.course_no = s.course_no                                                                                                                
+  9>|=			GROUP BY s.course_no, c.description,                                                                                                         
+ 10>|=			e.section_id, s.section_id                                                                                                                   
+ 11>|=			HAVING COUNT(*) >=8;                                                                                                                         
+ 12>|=BEGIN                                                                                                                                           
+ 13>|=	FOR r_group_discount IN c_group_discount                                                                                                       
+ 14>|=	LOOP                                                                                                                                           
+ 15>|=		UPDATE course                                                                                                                                 
+ 16>|=		SET cost = cost * .95                                                                                                                         
+ 17>|=		WHERE course_no = r_group_discount.course_no;                                                                                                 
+ 18>|=                                                                                                                                                
+ 19>|=		DBMS_OUTPUT.PUT_LINE ('A 5% discount has been given to '||                                                                                    
+ 20>|=		r_group_discount.course_no||' '||                                                                                                             
+ 21>|=		r_group_discount.description );                                                                                                               
+ 22>|=	END LOOP;                                                                                                                                      
+ 23>|=END;                                                                                                                                            
+
+23 filas seleccionadas.
+
+SQL> 
+SQL> spool OFF;

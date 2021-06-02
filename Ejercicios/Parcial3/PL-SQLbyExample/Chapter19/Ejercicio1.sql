@@ -6,7 +6,7 @@ rem * Elaborado por:                                         *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar José Oscar  *                 
 rem * Realizado el 9 de Junio  de 2021                       *
 rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).                     *
-rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.      *
+rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.       *
 rem **********************************************************
 */
 
@@ -47,6 +47,10 @@ BEGIN
 END;
 
 
+COLUMN object_name FORMAT A25
+COLUMN object_type FORMAT A25
+COLUMN status FORMAT A25
+
 SELECT object_name, object_type, status
 FROM user_objects
 WHERE object_name = 'DISCOUNT';
@@ -55,7 +59,7 @@ WHERE object_name = 'DISCOUNT';
 column text format a70
 SELECT TO_CHAR(line, 99)||'>', text
 FROM user_source
-WHERE name = 'DISCOUNT'
+WHERE name = 'DISCOUNT';
 
 
 spool OFF;

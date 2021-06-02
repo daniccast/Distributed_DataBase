@@ -1,0 +1,52 @@
+SQL> DECLARE
+  2  	CURSOR course_cur IS
+  3  		SELECT description
+  4  			FROM course;
+  5  	TYPE course_type IS TABLE OF course.description%TYPE;
+  6  	course_tab course_type := course_type();
+  7  	v_counter INTEGER := 0;
+  8  BEGIN
+  9  	FOR course_rec IN course_cur LOOP
+ 10  		v_counter := v_counter + 1;
+ 11  		course_tab.EXTEND;
+ 12  		course_tab(v_counter) := course_rec.description;
+ 13  		DBMS_OUTPUT.PUT_LINE('course_tab('|| v_counter || ')=' || course_tab(v_counter));
+ 14  	END LOOP;
+ 15  
+ 16  END;
+ 17  /
+course_tab(1)=Test Course                                                                                                                             
+course_tab(2)=DP Overview                                                                                                                             
+course_tab(3)=Intro to Computers                                                                                                                      
+course_tab(4)=Intro to Programming                                                                                                                    
+course_tab(5)=Structured Programming Techniques                                                                                                       
+course_tab(6)=Hands-On Windows                                                                                                                        
+course_tab(7)=Intro to Java Programming                                                                                                               
+course_tab(8)=Intermediate Java Programming                                                                                                           
+course_tab(9)=Advanced Java Programming                                                                                                               
+course_tab(10)=JDeveloper                                                                                                                             
+course_tab(11)=Intro to Unix                                                                                                                          
+course_tab(12)=Basics of Unix Admin                                                                                                                   
+course_tab(13)=Advanced Unix Admin                                                                                                                    
+course_tab(14)=Unix Tips and Techniques                                                                                                               
+course_tab(15)=Structured Analysis                                                                                                                    
+course_tab(16)=Project Management                                                                                                                     
+course_tab(17)=Database Design                                                                                                                        
+course_tab(18)=Internet Protocols                                                                                                                     
+course_tab(19)=Java for C/C++ Programmers                                                                                                             
+course_tab(20)=GUI Programming                                                                                                                        
+course_tab(21)=Intro to SQL                                                                                                                           
+course_tab(22)=Oracle Tools                                                                                                                           
+course_tab(23)=PL/SQL Programming                                                                                                                     
+course_tab(24)=Intro to Internet                                                                                                                      
+course_tab(25)=Intro to the Basic Language                                                                                                            
+course_tab(26)=Operating Systems                                                                                                                      
+course_tab(27)=Network Administration                                                                                                                 
+course_tab(28)=JDeveloper Lab                                                                                                                         
+course_tab(29)=Database System Principles                                                                                                             
+course_tab(30)=JDeveloper Techniques                                                                                                                  
+course_tab(31)=DB Programming in Java                                                                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> spool OFF;

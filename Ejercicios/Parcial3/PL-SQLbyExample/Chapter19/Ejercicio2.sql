@@ -40,6 +40,7 @@ EXCEPTION
 	DBMS_OUTPUT.PUT_LINE('Error in finding student_id: '||i_student_id);
 END find_sname;
 
+
 -- ch19_03a.sql
 DECLARE
 	v_local_first_name student.first_name%TYPE;
@@ -49,6 +50,18 @@ BEGIN
 		(145, v_local_first_name, v_local_last_name);
 	DBMS_OUTPUT.PUT_LINE
 	('Student 145 is: '||v_local_first_name||
+	' '|| v_local_last_name||'.'
+	);
+END;
+
+DECLARE
+	v_local_first_name student.first_name%TYPE;
+	v_local_last_name student.last_name%TYPE;
+BEGIN
+	find_sname
+		(2005, v_local_first_name, v_local_last_name);
+	DBMS_OUTPUT.PUT_LINE
+	('Student 2005 is: '||v_local_first_name||
 	' '|| v_local_last_name||'.'
 	);
 END;
