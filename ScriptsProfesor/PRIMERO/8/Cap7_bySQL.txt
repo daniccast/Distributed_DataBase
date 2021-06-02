@@ -1,0 +1,401 @@
+SQL> --spool C:\Users\ORA_bases\2021_02_24_clase_2\salida\PL_SQL_cap_7.txt
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,84]
+SQL> rem  uso de   IF  THEN   ELSE
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set colsep '|=|'
+SQL> set underline =
+SQL> set null s/Datos
+SQL> set feedback on
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> 
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,147]
+SQL> -- ch07_1a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> DECLARE
+  2  v_counter BINARY_INTEGER := 0;
+  3  BEGIN
+  4  LOOP
+  5  -- increment loop counter by one
+  6  v_counter := v_counter + 1;
+  7  -- EXTERNO
+  8  DBMS_OUTPUT.PUT_LINE
+  9  ('EXTERNO '||'before continue condition, v_counter = '||
+ 10  v_counter);
+ 11  -- if CONTINUE condition yields TRUE pass control to the
+ 12  -- first executable statement of the loop
+ 13  IF v_counter < 3 THEN
+ 14  CONTINUE;
+ 15  END IF;
+ 16  -- INTERNO
+ 17  DBMS_OUTPUT.PUT_LINE
+ 18  (chr(10)||chr(9)||'INTERNO '||'after continue condition, v_counter = '||
+ 19  v_counter);
+ 20  -- if EXIT condition yields TRUE exit the loop
+ 21  IF v_counter = 5 THEN
+ 22  EXIT;
+ 23  END IF;
+ 24  END LOOP;
+ 25  -- control resumes here
+ 26  DBMS_OUTPUT.PUT_LINE (chr(10)||'Hola ESCOM '||'Done...');
+ 27  END;
+ 28  /
+EXTERNO before continue condition, v_counter = 1                                                                                  
+EXTERNO before continue condition, v_counter = 2                                                                                  
+EXTERNO before continue condition, v_counter = 3                                                                                  
+
+	INTERNO after continue condition, v_counter = 3                                                                                 
+EXTERNO before continue condition, v_counter = 4                                                                                  
+
+	INTERNO after continue condition, v_counter = 4                                                                                 
+EXTERNO before continue condition, v_counter = 5                                                                                  
+
+	INTERNO after continue condition, v_counter = 5                                                                                 
+
+Hola ESCOM Done...                                                                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> /*
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,149]
+SQL> -- ch07_1b.sql, version 2.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+SQL> v_counter BINARY_INTEGER := 0;
+SQL> BEGIN
+SQL> LOOP
+SQL> -- if EXIT condition yields TRUE exit the loop
+SQL> IF v_counter = 5 THEN
+SQL> EXIT;
+SQL> END IF;
+SQL> -- if CONTINUE condition yields TRUE pass control to the
+SQL> -- first executable statement of the loop
+SQL> IF v_counter > 3 THEN
+SQL> CONTINUE;
+SQL> END IF;
+SQL> DBMS_OUTPUT.PUT_LINE
+SQL> (chr(9)||'INTERNO '||'after continue condition, v_counter = '||
+SQL> v_counter);
+SQL> END LOOP;
+SQL> -- control resumes here
+SQL> DBMS_OUTPUT.PUT_LINE (chr(10)|| 'Hola ESCOM '||'Done...');
+SQL> END;
+SQL> /
+SQL> */
+SQL> 
+SQL> -- ch07_1c.sql, version 3.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_counter BINARY_INTEGER := 0;
+  3  BEGIN
+  4  LOOP
+  5  -- increment loop counter by one
+  6  v_counter := v_counter + 1;
+  7  DBMS_OUTPUT.PUT_LINE
+  8  ('EXTERNO '||'before continue condition, v_counter = '||
+  9  v_counter);
+ 10  -- if EXIT condition yields TRUE exit the loop
+ 11  IF v_counter = 5 THEN
+ 12  EXIT;
+ 13  END IF;
+ 14  -- if CONTINUE condition yields TRUE pass control to the
+ 15  -- first executable statement of the loop
+ 16  IF v_counter > 3 THEN
+ 17  CONTINUE;
+ 18  END IF;
+ 19  DBMS_OUTPUT.PUT_LINE
+ 20  (chr(9)||'INTERNO '||'after continue condition, v_counter = '||
+ 21  v_counter);
+ 22  END LOOP;
+ 23  -- control resumes here
+ 24  DBMS_OUTPUT.PUT_LINE (chr(10)||'HOLA ESCOM  ' ||'Done...');
+ 25  END;
+ 26  /
+EXTERNO before continue condition, v_counter = 1                                                                                  
+	INTERNO after continue condition, v_counter = 1                                                                                  
+EXTERNO before continue condition, v_counter = 2                                                                                  
+	INTERNO after continue condition, v_counter = 2                                                                                  
+EXTERNO before continue condition, v_counter = 3                                                                                  
+	INTERNO after continue condition, v_counter = 3                                                                                  
+EXTERNO before continue condition, v_counter = 4                                                                                  
+EXTERNO before continue condition, v_counter = 5                                                                                  
+
+HOLA ESCOM  Done...                                                                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,151]
+SQL> -- ch07_1d.sql, version 4.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_counter BINARY_INTEGER := 0;
+  3  BEGIN
+  4  LOOP
+  5  -- increment loop counter by one
+  6  v_counter := v_counter + 1;
+  7  DBMS_OUTPUT.PUT_LINE
+  8  ('EXTERNO '||'before continue condition, v_counter = '||
+  9  v_counter);
+ 10  -- if CONTINUE condition yields TRUE pass control to the
+ 11  -- first executable statement of the loop
+ 12  CONTINUE WHEN v_counter < 3;
+ 13  DBMS_OUTPUT.PUT_LINE
+ 14  (chr(9)||'INTERNO '||'after continue condition, v_counter = '||
+ 15  v_counter);
+ 16  -- if EXIT condition yields TRUE exit the loop
+ 17  IF v_counter = 5 THEN
+ 18  EXIT;
+ 19  END IF;
+ 20  END LOOP;
+ 21  -- control resumes here
+ 22  DBMS_OUTPUT.PUT_LINE (chr(10)||'Hola ESCOM '||'Done...');
+ 23  END;
+ 24  /
+EXTERNO before continue condition, v_counter = 1                                                                                  
+EXTERNO before continue condition, v_counter = 2                                                                                  
+EXTERNO before continue condition, v_counter = 3                                                                                  
+	INTERNO after continue condition, v_counter = 3                                                                                  
+EXTERNO before continue condition, v_counter = 4                                                                                  
+	INTERNO after continue condition, v_counter = 4                                                                                  
+EXTERNO before continue condition, v_counter = 5                                                                                  
+	INTERNO after continue condition, v_counter = 5                                                                                  
+
+Hola ESCOM Done...                                                                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,161]
+SQL> -- ch07_2a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_sum NUMBER := 0;
+  3  BEGIN
+  4  FOR v_counter in 1..10 LOOP
+  5  -- if v_counter is odd, pass control to the top of the loop
+  6  CONTINUE WHEN mod(v_counter, 2) != 0;
+  7  v_sum := v_sum + v_counter;
+  8  DBMS_OUTPUT.PUT_LINE ('Current sum is: '||v_sum);
+  9  END LOOP;
+ 10  -- control resumes here
+ 11  DBMS_OUTPUT.PUT_LINE ('Final sum is: '||v_sum);
+ 12  END;
+ 13  /
+Current sum is: 2                                                                                                                 
+Current sum is: 6                                                                                                                 
+Current sum is: 12                                                                                                                
+Current sum is: 20                                                                                                                
+Current sum is: 30                                                                                                                
+Final sum is: 30                                                                                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> -- ch07_2b.sql, version 2.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_sum NUMBER := 0;
+  3  BEGIN
+  4  FOR v_counter in 1..10 LOOP
+  5  -- if v_counter is even, pass control to the top of the loop
+  6  CONTINUE WHEN mod(v_counter, 2) = 0;
+  7  v_sum := v_sum + v_counter;
+  8  DBMS_OUTPUT.PUT_LINE ('Current sum is: '||v_sum);
+  9  END LOOP;
+ 10  -- control resumes here
+ 11  DBMS_OUTPUT.PUT_LINE ('Final sum is: '||v_sum);
+ 12  END;
+ 13  /
+Current sum is: 1                                                                                                                 
+Current sum is: 4                                                                                                                 
+Current sum is: 9                                                                                                                 
+Current sum is: 16                                                                                                                
+Current sum is: 25                                                                                                                
+Final sum is: 25                                                                                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,154]
+SQL> DECLARE
+  2  v_counter1 INTEGER := 0;
+  3  v_counter2 INTEGER;
+  4  BEGIN
+  5  WHILE v_counter1 < 3 LOOP
+  6  DBMS_OUTPUT.PUT_LINE ('EXTERNO  '||'v_counter1: '||v_counter1);
+  7  v_counter2 := 0;
+  8  LOOP
+  9  DBMS_OUTPUT.PUT_LINE (chr(9)||'INTERNO  '||'v_counter2: '||v_counter2);
+ 10  v_counter2 := v_counter2 + 1;
+ 11  EXIT WHEN v_counter2 >= 2;
+ 12  END LOOP;
+ 13  v_counter1 := v_counter1 + 1;
+ 14  END LOOP;
+ 15  END;
+ 16  /
+EXTERNO  v_counter1: 0                                                                                                            
+	INTERNO  v_counter2: 0                                                                                                           
+	INTERNO  v_counter2: 1                                                                                                           
+EXTERNO  v_counter1: 1                                                                                                            
+	INTERNO  v_counter2: 0                                                                                                           
+	INTERNO  v_counter2: 1                                                                                                           
+EXTERNO  v_counter1: 2                                                                                                            
+	INTERNO  v_counter2: 0                                                                                                           
+	INTERNO  v_counter2: 1                                                                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,156]
+SQL> BEGIN
+  2  <<outer_loop>>
+  3  FOR i IN 1..3 LOOP
+  4  DBMS_OUTPUT.PUT_LINE ('EXTERNO '||'i = '||i);
+  5  <<inner_loop>>
+  6  FOR j IN 1..2 LOOP
+  7  DBMS_OUTPUT.PUT_LINE (chr(9)||'INTERNO '||'j = '||j);
+  8  END LOOP inner_loop;
+  9  END LOOP outer_loop;
+ 10  END;
+ 11  rem [ROSENZWEIG &  RAKHIMOV,2009,157]
+ 12  BEGIN
+ 13  <<outer>>
+ 14  FOR v_counter IN 1..3 LOOP
+ 15  <<inner>>
+ 16  FOR v_counter IN 1..2 LOOP
+ 17  DBMS_OUTPUT.PUT_LINE ('EXTERNO '||'outer.v_counter '||outer.v_counter);
+ 18  DBMS_OUTPUT.PUT_LINE (chr(9)||'INTERNO '||'inner.v_counter '||inner.v_counter);
+ 19  END LOOP inner;
+ 20  END LOOP outer;
+ 21  END;
+ 22  /
+Enter value for rakhimov: 
+old  11: rem [ROSENZWEIG &  RAKHIMOV,2009,157]
+new  11: rem [ROSENZWEIG ,2009,157]
+rem [ROSENZWEIG ,2009,157]
+*
+ERROR at line 11:
+ORA-06550: line 11, column 1: 
+PLS-00103: Encountered the symbol "REM"  
+
+
+SQL> -- ch07_3a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_test NUMBER := 0;
+  3  BEGIN
+  4  <<outer_loop>>
+  5  FOR i IN 1..3 LOOP
+  6  DBMS_OUTPUT.PUT_LINE('Outer Loop');
+  7  DBMS_OUTPUT.PUT_LINE('i = '||i);
+  8  DBMS_OUTPUT.PUT_LINE('v_test = '||v_test);
+  9  v_test := v_test + 1;
+ 10  <<inner_loop>>
+ 11  FOR j IN 1..2 LOOP
+ 12  DBMS_OUTPUT.PUT_LINE('Inner Loop');
+ 13  DBMS_OUTPUT.PUT_LINE('j = '||j);
+ 14  DBMS_OUTPUT.PUT_LINE('i = '||i);
+ 15  DBMS_OUTPUT.PUT_LINE('v_test = '||v_test);
+ 16  END LOOP inner_loop;
+ 17  END LOOP outer_loop;
+ 18  END;
+ 19  /
+Outer Loop                                                                                                                        
+i = 1                                                                                                                             
+v_test = 0                                                                                                                        
+Inner Loop                                                                                                                        
+j = 1                                                                                                                             
+i = 1                                                                                                                             
+v_test = 1                                                                                                                        
+Inner Loop                                                                                                                        
+j = 2                                                                                                                             
+i = 1                                                                                                                             
+v_test = 1                                                                                                                        
+Outer Loop                                                                                                                        
+i = 2                                                                                                                             
+v_test = 1                                                                                                                        
+Inner Loop                                                                                                                        
+j = 1                                                                                                                             
+i = 2                                                                                                                             
+v_test = 2                                                                                                                        
+Inner Loop                                                                                                                        
+j = 2                                                                                                                             
+i = 2                                                                                                                             
+v_test = 2                                                                                                                        
+Outer Loop                                                                                                                        
+i = 3                                                                                                                             
+v_test = 2                                                                                                                        
+Inner Loop                                                                                                                        
+j = 1                                                                                                                             
+i = 3                                                                                                                             
+v_test = 3                                                                                                                        
+Inner Loop                                                                                                                        
+j = 2                                                                                                                             
+i = 3                                                                                                                             
+v_test = 3                                                                                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> -- ch07_3b.sql, version 2.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_test NUMBER := 0;
+  3  BEGIN
+  4  <<outer_loop>>
+  5  FOR i IN REVERSE 1..3 LOOP
+  6  DBMS_OUTPUT.PUT_LINE('Outer Loop');
+  7  DBMS_OUTPUT.PUT_LINE('i = '||i);
+  8  DBMS_OUTPUT.PUT_LINE('v_test = '||v_test);
+  9  v_test := v_test + 1;
+ 10  <<inner_loop>>
+ 11  FOR j IN REVERSE 1..2 LOOP
+ 12  DBMS_OUTPUT.PUT_LINE('Inner Loop');
+ 13  DBMS_OUTPUT.PUT_LINE('j = '||j);
+ 14  DBMS_OUTPUT.PUT_LINE('i = '||i);
+ 15  DBMS_OUTPUT.PUT_LINE('v_test = '||v_test);
+ 16  END LOOP inner_loop;
+ 17  END LOOP outer_loop;
+ 18  END;
+ 19  /
+Outer Loop                                                                                                                        
+i = 3                                                                                                                             
+v_test = 0                                                                                                                        
+Inner Loop                                                                                                                        
+j = 2                                                                                                                             
+i = 3                                                                                                                             
+v_test = 1                                                                                                                        
+Inner Loop                                                                                                                        
+j = 1                                                                                                                             
+i = 3                                                                                                                             
+v_test = 1                                                                                                                        
+Outer Loop                                                                                                                        
+i = 2                                                                                                                             
+v_test = 1                                                                                                                        
+Inner Loop                                                                                                                        
+j = 2                                                                                                                             
+i = 2                                                                                                                             
+v_test = 2                                                                                                                        
+Inner Loop                                                                                                                        
+j = 1                                                                                                                             
+i = 2                                                                                                                             
+v_test = 2                                                                                                                        
+Outer Loop                                                                                                                        
+i = 1                                                                                                                             
+v_test = 2                                                                                                                        
+Inner Loop                                                                                                                        
+j = 2                                                                                                                             
+i = 1                                                                                                                             
+v_test = 3                                                                                                                        
+Inner Loop                                                                                                                        
+j = 1                                                                                                                             
+i = 1                                                                                                                             
+v_test = 3                                                                                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> SPOOL OFF

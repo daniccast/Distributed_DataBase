@@ -1,0 +1,253 @@
+SQL> 
+SQL> set feedback off
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set colsep '|=|'
+SQL> set feedback on
+SQL> 
+SQL> 
+SQL> REM
+SQL> REM Owens, Kevin.
+SQL> REM  Programming Oracle triggers and stored procedures / Kevin Owens
+SQL> 
+SQL> REM [Owens,2003,section 6.1]
+SQL> set serveroutput on
+SQL> 
+SQL> drop table temp;
+
+Table dropped.
+
+SQL> CREATE TABLE temp (N NUMBER);
+I believe you have created a TABLE called TEMP                                                                                    
+
+Table created.
+
+SQL> 
+SQL> CREATE OR REPLACE TRIGGER temp_air
+  2     AFTER INSERT ON TEMP
+  3     FOR EACH ROW
+  4     BEGIN
+  5     dbms_output.put_line('         H O L A   ESCOM');
+  6     dbms_output.put_line('executing temp_air');
+  7     dbms_output.put_line
+  8  ('Estoy en clase Remota de ESCOM------------');
+  9    END;
+ 10  
+ 11  INSERT INTO temp VALUES (10);
+ 12  INSERT INTO temp VALUES (20);
+ 13  INSERT INTO temp VALUES (30);
+ 14  INSERT INTO temp VALUES (40);
+ 15  INSERT INTO temp VALUES (50);
+ 16  INSERT INTO temp VALUES (60);
+ 17  INSERT INTO temp VALUES (70);
+ 18  
+ 19  
+ 20  desc user_triggers
+ 21  
+ 22  
+ 23  col trigger_name format a13
+ 24  col trigger_type format a20
+ 25  col triggering_event format A20
+ 26  col table_owner format A10
+ 27  col status format A10
+ 28  
+ 29  select trigger_name,trigger_type,triggering_event,
+ 30  table_owner,status
+ 31  from user_triggers;
+ 32  
+ 33  alter trigger temp_air DISABLE;
+ 34  
+ 35  alter trigger temp_air ENABLE;
+ 36  
+ 37  
+ 38  CREATE OR REPLACE TRIGGER temp_air2
+ 39     AFTER INSERT ON TEMP
+ 40     FOR EACH ROW
+ 41    BEGIN
+ 42    dbms_output.put_line('executing temp_air');
+ 43    dbms_output.put_line('         H O L A  ALUMNOS DE DDB ESCOM');
+ 44    END;
+ 45  
+ 46  INSERT INTO temp VALUES (150);
+ 47  INSERT INTO temp VALUES (160);
+ 48  INSERT INTO temp VALUES (170);
+ 49  -- -------------------------------------------
+ 50  rem
+ 51  rem REM [Owens,2003,section 6.3]
+ 52  rem
+ 53  DROP TABLE TEMPORAL;
+ 54  CREATE TABLE temporal (N NUMBER DEFAULT 0, M NUMBER);
+ 55  
+ 56  rem declaremos el trigger
+ 57  CREATE OR REPLACE TRIGGER temp_aiur
+ 58  AFTER INSERT OR UPDATE ON TEMPORAL
+ 59  FOR EACH ROW
+ 60  BEGIN
+ 61      CASE
+ 62      WHEN inserting THEN
+ 63          dbms_output.put_line
+ 64              (CHR(10)||CHR(9)||'executing temp_aiur - insert');
+ 65      dbms_output.put_line
+ 66              (CHR(9)||'executando temp_aiur - al insertar insert'||CHR(10));
+ 67      WHEN updating THEN
+ 68          dbms_output.put_line
+ 69              (CHR(10)||CHR(9)||'executing temp_aiur - al actualizar update');
+ 70  dbms_output.put_line
+ 71              (CHR(9)||'executando temp_aiur - al insertar insert'||CHR(10));
+ 72      END CASE;
+ 73  END;
+ 74  
+ 75  INSERT INTO TEMPORAL (M) VALUES (30);
+ 76  INSERT INTO TEMPORAL (M) VALUES (40);
+ 77  INSERT INTO TEMPORAL (M) VALUES (50);
+ 78  INSERT INTO TEMPORAL (M) VALUES (60);
+ 79  INSERT INTO TEMPORAL (M) VALUES (70);
+ 80  -- ---------------------------------------------------
+ 81  REM
+ 82  REM REM [Owens,2003,section 6.4]
+ 83  REM 6.4 Trigger Body
+ 84  REM
+ 85  DROP TABLE TEMPORAL2;
+ 86  CREATE TABLE TEMPORAL2 (N NUMBER, M NUMBER DEFAULT 5);
+ 87  CREATE OR REPLACE TRIGGER temp_bur
+ 88  BEFORE UPDATE ON TEMPORAL2
+ 89  FOR EACH ROW
+ 90  BEGIN
+ 91      dbms_output.put_line(CHR(10)||CHR(9)||'BUR old N:'||:old.n|| ' M:'||:old.M);
+ 92      dbms_output.put_line(CHR(10)||CHR(9)||'BUR new N:'||:new.n|| ' M:'||:new.M);
+ 93  END;
+ 94  .
+SQL> /
+I believe you have created a TRIGGER called TEMP_AIR                                                                              
+
+Warning: Trigger created with compilation errors.
+
+SQL> CREATE OR REPLACE TRIGGER temp_aur
+  2  AFTER UPDATE ON TEMPORAL2
+  3  FOR EACH ROW
+  4  BEGIN
+  5      dbms_output.put_line(CHR(10)||CHR(9)||'AUR old N:'||:old.n|| ' M:'||:old.M);
+  6      dbms_output.put_line(CHR(10)||CHR(9)||'AUR new N:'||:new.n|| ' M:'||:new.M);
+  7  END;
+  8  .
+SQL> /
+I believe you have created a TRIGGER called TEMP_AUR                                                                              
+
+Trigger created.
+
+SQL> REM
+SQL> INSERT INTO TEMPORAL2 VALUES (100);
+INSERT INTO TEMPORAL2 VALUES (100)
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO TEMPORAL2 VALUES (200);
+INSERT INTO TEMPORAL2 VALUES (200)
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO TEMPORAL2 (n) VALUES (300);
+
+1 row created.
+
+SQL> INSERT INTO TEMPORAL2 (n) VALUES (400);
+
+1 row created.
+
+SQL> INSERT INTO TEMPORAL2 (n) VALUES (500);
+
+1 row created.
+
+SQL> 
+SQL> REM
+SQL> 
+SQL> UPDATE TEMPORAL2 SET n=n+1 WHERE n>=1;
+
+	BUR old N:300 M:5                                                                                                               
+
+	BUR new N:301 M:5                                                                                                               
+
+	AUR old N:300 M:5                                                                                                               
+
+	AUR new N:301 M:5                                                                                                               
+
+	BUR old N:400 M:5                                                                                                               
+
+	BUR new N:401 M:5                                                                                                               
+
+	AUR old N:400 M:5                                                                                                               
+
+	AUR new N:401 M:5                                                                                                               
+
+	BUR old N:500 M:5                                                                                                               
+
+	BUR new N:501 M:5                                                                                                               
+
+	AUR old N:500 M:5                                                                                                               
+
+	AUR new N:501 M:5                                                                                                               
+
+3 rows updated.
+
+SQL> UPDATE TEMPORAL2 SET n=n+1 WHERE n>=1;
+
+	BUR old N:301 M:5                                                                                                               
+
+	BUR new N:302 M:5                                                                                                               
+
+	AUR old N:301 M:5                                                                                                               
+
+	AUR new N:302 M:5                                                                                                               
+
+	BUR old N:401 M:5                                                                                                               
+
+	BUR new N:402 M:5                                                                                                               
+
+	AUR old N:401 M:5                                                                                                               
+
+	AUR new N:402 M:5                                                                                                               
+
+	BUR old N:501 M:5                                                                                                               
+
+	BUR new N:502 M:5                                                                                                               
+
+	AUR old N:501 M:5                                                                                                               
+
+	AUR new N:502 M:5                                                                                                               
+
+3 rows updated.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> REM BORRAR TRIGGERS
+SQL> rem
+SQL> DROP TRIGGER temp_air;
+
+Trigger dropped.
+
+SQL> DROP TRIGGER temp_aur;
+
+Trigger dropped.
+
+SQL> DROP TRIGGER temp_bur;
+
+Trigger dropped.
+
+SQL> DROP TRIGGER temp_aiur;
+
+Trigger dropped.
+
+SQL> DROP TRIGGER temp_air2;
+DROP TRIGGER temp_air2
+*
+ERROR at line 1:
+ORA-04080: trigger 'TEMP_AIR2' does not exist 
+
+
+SQL> 
+SQL> spool off

@@ -1,0 +1,458 @@
+SQL> rem EJERCICIOS CAP 3.3
+SQL> rem page 200
+SQL> 
+SQL> set pagesize 99;
+SQL> set linesize 130;
+SQL> set colsep '|=|'
+SQL> set underline =
+SQL> 
+SQL> SELECT 60+60+NULL
+  2  FROM dual;
+
+60+60+NULL                                                                                                                        
+==========                                                                                                                        
+s/Datos                                                                                                                           
+
+1 row selected.
+
+SQL> 
+SQL> SELECT 60+60+NVL(NULL, 1000)
+  2  FROM dual;
+
+60+60+NVL(NULL,1000)                                                                                                              
+====================                                                                                                              
+                1120                                                                                                              
+
+1 row selected.
+
+SQL> rem pag 201
+SQL> SELECT course_no, description,
+  2  NVL(prerequisite, 99999) prereq
+  3  FROM course
+  4  WHERE course_no IN (10, 20, 100,310,146);
+
+ COURSE_NO|=|DESCRIPTION                                       |=|    PREREQ                                                      
+==========|=|==================================================|=|==========                                                      
+        10|=|DP Overview                                       |=|     99999                                                      
+        20|=|Intro to Computers                                |=|     99999                                                      
+       100|=|Hands-On Windows                                  |=|        20                                                      
+       146|=|Java for C/C++ Programmers                        |=|     99999                                                      
+       310|=|Operating Systems                                 |=|     99999                                                      
+
+5 rows selected.
+
+SQL> 
+SQL> SELECT course_no, description,
+  2  NVL(TO_CHAR(prerequisite), 'Not Applicable') prereq
+  3  FROM course
+  4  WHERE course_no IN (20, 100,10,100,310,149)
+  5  
+SQL> SELECT course_no, description,
+  2  NVL(TO_CHAR(prerequisite), 'Sin requisitos') prereq
+  3  FROM course
+  4  WHERE course_no IN (20, 100,10,100,310,149)
+  5  
+SQL> rem FORMATO DE COLUMNAS Y LINEAS
+SQL> 
+SQL> 
+SQL> col curse_no format 9999
+SQL> set description format a25
+SP2-0735: unknown SET option beginning "descriptio..."
+SQL> set prerequisite format 9999
+SP2-0735: unknown SET option beginning "prerequisi..."
+SQL> set cost format 9,999
+SP2-0158: unknown SET option "cost"
+SQL> SELECT course_no, description,
+  2  prerequisite,cost
+  3  FROM course;
+
+ COURSE_NO|=|DESCRIPTION                                       |=|PREREQUISITE|=|      COST                                       
+==========|=|==================================================|=|============|=|==========                                       
+        10|=|DP Overview                                       |=|s/Datos     |=|      1225                                       
+        20|=|Intro to Computers                                |=|s/Datos     |=|      1225                                       
+        25|=|Intro to Programming                              |=|         140|=|      1225                                       
+        80|=|Structured Programming Techniques                 |=|         204|=|      1625                                       
+       100|=|Hands-On Windows                                  |=|          20|=|      1225                                       
+       120|=|Intro to Java Programming                         |=|          80|=|      1225                                       
+       122|=|Intermediate Java Programming                     |=|         120|=|      1225                                       
+       124|=|Advanced Java Programming                         |=|         122|=|      1225                                       
+       125|=|JDeveloper                                        |=|         122|=|      1225                                       
+       130|=|Intro to Unix                                     |=|         310|=|      1225                                       
+       132|=|Basics of Unix Admin                              |=|         130|=|      1225                                       
+       134|=|Advanced Unix Admin                               |=|         132|=|      1225                                       
+       135|=|Unix Tips and Techniques                          |=|         134|=|      1125                                       
+       140|=|Structured Analysis                               |=|          20|=|      1225                                       
+       142|=|Project Management                                |=|          20|=|      1225                                       
+       144|=|Database Design                                   |=|         420|=|      1225                                       
+       145|=|Internet Protocols                                |=|         310|=|      1225                                       
+       146|=|Java for C/C++ Programmers                        |=|s/Datos     |=|      1225                                       
+       147|=|GUI Programming                                   |=|          20|=|      1225                                       
+       204|=|Intro to SQL                                      |=|          20|=|      1225                                       
+       210|=|Oracle Tools                                      |=|         220|=|      1225                                       
+       220|=|PL/SQL Programming                                |=|          80|=|      1225                                       
+       230|=|Intro to Internet                                 |=|          10|=|      1125                                       
+       240|=|Intro to the Basic Language                       |=|          25|=|      1125                                       
+       310|=|Operating Systems                                 |=|s/Datos     |=|      1225                                       
+       330|=|Network Administration                            |=|         130|=|      1225                                       
+       350|=|JDeveloper Lab                                    |=|         125|=|      1225                                       
+       420|=|Database System Principles                        |=|          25|=|      1225                                       
+       430|=|JDeveloper Techniques                             |=|         350|=|      1225                                       
+       450|=|DB Programming in Java                            |=|         350|=|s/Datos                                          
+
+30 rows selected.
+
+SQL> 
+SQL> rem COALESCE Pag 202
+SQL> 
+SQL> SELECT student_id, midterm_grade, finalexam_grade, quiz_grade,
+  2  COALESCE(midterm_grade, finalexam_grade, quiz_grade) "Coalesce"
+  3  FROM grade_summary;
+
+STUDENT_ID|=|MIDTERM_GRADE|=|FINALEXAM_GRADE|=|QUIZ_GRADE|=|  Coalesce                                                            
+==========|=|=============|=|===============|=|==========|=|==========                                                            
+       123|=|           90|=|             50|=|       100|=|        90                                                            
+       456|=|           80|=|             95|=|s/Datos   |=|        80                                                            
+       678|=|s/Datos      |=|s/Datos        |=|        98|=|        98                                                            
+       789|=|s/Datos      |=|             78|=|        85|=|        78                                                            
+       999|=|s/Datos      |=|s/Datos        |=|s/Datos   |=|s/Datos                                                               
+
+5 rows selected.
+
+SQL> 
+SQL> rem CASE pag 206
+SQL> 
+SQL> SELECT course_no, description,cost,
+  2  CASE WHEN cost <1195 THEN 500
+  3  ELSE cost
+  4  END "Test CASE"
+  5  FROM course
+  6  WHERE course_no IN (80, 20, 135, 450)
+  7  ORDER BY 2
+  8  
+SQL> rem CASE ejercicio2 pag 207
+SQL> SELECT course_no, cost,
+  2  CASE WHEN cost <1100 THEN 1000
+  3  WHEN cost >=1100 AND cost <1500 THEN cost*1.1
+  4  WHEN cost IS NULL THEN 0
+  5  ELSE cost
+  6  END "Test CASE"
+  7  FROM course
+  8  WHERE course_no IN (80, 20, 135, 450)
+  9  ORDER BY 2;
+
+ COURSE_NO|=|      COST|=| Test CASE                                                                                              
+==========|=|==========|=|==========                                                                                              
+       135|=|      1125|=|    1237.5                                                                                              
+        20|=|      1225|=|    1347.5                                                                                              
+        80|=|      1625|=|      1625                                                                                              
+       450|=|s/Datos   |=|         0                                                                                              
+
+4 rows selected.
+
+SQL> 
+SQL> 
+SQL> SELECT course_no, cost,
+  2  CASE WHEN cost <1100 THEN 1000
+  3  WHEN cost >=1100 AND cost <1500 THEN cost*1.1
+  4  WHEN cost is NULL THEN 0
+  5  ELSE cost
+  6  END "Test CASE"
+  7  FROM course
+  8  WHERE course_no IN (80, 20, 135, 450)
+  9  ORDER BY 2;
+
+ COURSE_NO|=|      COST|=| Test CASE                                                                                              
+==========|=|==========|=|==========                                                                                              
+       135|=|      1125|=|    1237.5                                                                                              
+        20|=|      1225|=|    1347.5                                                                                              
+        80|=|      1625|=|      1625                                                                                              
+       450|=|s/Datos   |=|         0                                                                                              
+
+4 rows selected.
+
+SQL> 
+SQL> rem Ejer3 pag 208 FUNCIONA, PERO NO SABEMOS COMO, REVISAR
+SQL> SELECT DISTINCT capacity, location
+  2  FROM section
+  3  WHERE capacity*CASE
+  4  WHEN SUBSTR(location, 1,1)='L' THEN 2
+  5  WHEN SUBSTR(location, 1,1)='M' THEN 1.5
+  6  ELSE NULL
+  7  END > 30;
+
+  CAPACITY|=|LOCATION                                                                                                             
+==========|=|==================================================                                                                   
+        25|=|L509                                                                                                                 
+        25|=|L210                                                                                                                 
+        25|=|L507                                                                                                                 
+        25|=|M311                                                                                                                 
+        25|=|L211                                                                                                                 
+        25|=|L214                                                                                                                 
+        25|=|L511                                                                                                                 
+        25|=|M500                                                                                                                 
+
+8 rows selected.
+
+SQL> 
+SQL> 
+SQL> col factor 999.99
+SP2-0158: unknown COLUMN option "999.99"
+SQL> SELECT DISTINCT capacity, location,
+  2  CASE
+  3  WHEN SUBSTR(location, 1,1)='L' THEN 2
+  4  WHEN SUBSTR(location, 1,1)='M' THEN 1.5
+  5  ELSE NULL
+  6  END  factor,
+  7  capacity *CASE
+  8  WHEN SUBSTR(location, 1,1)='L' THEN 2
+  9  WHEN SUBSTR(location, 1,1)='M' THEN 1.5
+ 10  ELSE NULL
+ 11  END  factor2
+ 12  FROM section
+ 13  WHERE capacity*CASE
+ 14  WHEN SUBSTR(location, 1,1)='L' THEN 2
+ 15  WHEN SUBSTR(location, 1,1)='M' THEN 1.5
+ 16  ELSE NULL
+ 17  END > 30;
+
+  CAPACITY|=|LOCATION                                          |=|    FACTOR|=|   FACTOR2                                         
+==========|=|==================================================|=|==========|=|==========                                         
+        25|=|L509                                              |=|         2|=|        50                                         
+        25|=|M311                                              |=|       1.5|=|      37.5                                         
+        25|=|L214                                              |=|         2|=|        50                                         
+        25|=|L507                                              |=|         2|=|        50                                         
+        25|=|L210                                              |=|         2|=|        50                                         
+        25|=|L511                                              |=|         2|=|        50                                         
+        25|=|L211                                              |=|         2|=|        50                                         
+        25|=|M500                                              |=|       1.5|=|      37.5                                         
+
+8 rows selected.
+
+SQL> 
+SQL> 
+SQL> SELECT DISTINCT capacity, location
+  2  FROM section;
+
+  CAPACITY|=|LOCATION                                                                                                             
+==========|=|==================================================                                                                   
+        25|=|L509                                                                                                                 
+        25|=|L210                                                                                                                 
+        10|=|L509                                                                                                                 
+        25|=|L507                                                                                                                 
+        15|=|L211                                                                                                                 
+        15|=|L214                                                                                                                 
+        25|=|M311                                                                                                                 
+        15|=|L507                                                                                                                 
+        15|=|L509                                                                                                                 
+        25|=|L211                                                                                                                 
+        25|=|L214                                                                                                                 
+        15|=|L206                                                                                                                 
+        15|=|L210                                                                                                                 
+        15|=|L500                                                                                                                 
+        12|=|L500                                                                                                                 
+        15|=|M200                                                                                                                 
+        25|=|L511                                                                                                                 
+        25|=|M500                                                                                                                 
+        15|=|H310                                                                                                                 
+
+19 rows selected.
+
+SQL> 
+SQL> SELECT DISTINCT capacity, location
+  2  FROM section ORDER BY 1;
+
+  CAPACITY|=|LOCATION                                                                                                             
+==========|=|==================================================                                                                   
+        10|=|L509                                                                                                                 
+        12|=|L500                                                                                                                 
+        15|=|H310                                                                                                                 
+        15|=|L206                                                                                                                 
+        15|=|L210                                                                                                                 
+        15|=|L211                                                                                                                 
+        15|=|L214                                                                                                                 
+        15|=|L500                                                                                                                 
+        15|=|L507                                                                                                                 
+        15|=|L509                                                                                                                 
+        15|=|M200                                                                                                                 
+        25|=|L210                                                                                                                 
+        25|=|L211                                                                                                                 
+        25|=|L214                                                                                                                 
+        25|=|L507                                                                                                                 
+        25|=|L509                                                                                                                 
+        25|=|L511                                                                                                                 
+        25|=|M311                                                                                                                 
+        25|=|M500                                                                                                                 
+
+19 rows selected.
+
+SQL> 
+SQL> SELECT DISTINCT capacity, location
+  2  FROM section
+  3  WHERE capacity*CASE
+  4  WHEN SUBSTR(location, 1,1)='L' THEN 2
+  5  WHEN SUBSTR(location, 1,1)='M' THEN 1.5
+  6  ELSE NULL
+  7  END > 30;
+
+  CAPACITY|=|LOCATION                                                                                                             
+==========|=|==================================================                                                                   
+        25|=|L509                                                                                                                 
+        25|=|L210                                                                                                                 
+        25|=|L507                                                                                                                 
+        25|=|M311                                                                                                                 
+        25|=|L211                                                                                                                 
+        25|=|L214                                                                                                                 
+        25|=|L511                                                                                                                 
+        25|=|M500                                                                                                                 
+
+8 rows selected.
+
+SQL> 
+SQL> rem EJER4 PAG 208
+SQL> SELECT section_id, capacity,
+  2  CASE WHEN capacity >=15 THEN TO_CHAR(capacity)
+  3  WHEN capacity < 15 THEN 'Room too small'
+  4  END AS "Capacity"
+  5  FROM section
+  6  WHERE section_id IN (101, 146, 147);
+
+SECTION_ID|=|  CAPACITY|=|Capacity                                                                                                
+==========|=|==========|=|========================================                                                                
+       101|=|        10|=|Room too small                                                                                          
+       146|=|        25|=|25                                                                                                      
+       147|=|        15|=|15                                                                                                      
+
+3 rows selected.
+
+SQL> 
+SQL> rem Simple Case PAG 209
+SQL> SELECT course_no, cost,
+  2  CASE cost WHEN 1095 THEN cost/2
+  3  WHEN 1195 THEN cost*1.1
+  4  WHEN 1595 THEN cost
+  5  ELSE cost*0.5
+  6  END "Simple CASE"
+  7  FROM course
+  8  WHERE course_no IN (80, 20, 135, 450)
+  9  ORDER BY 2;
+
+ COURSE_NO|=|      COST|=|Simple CASE                                                                                             
+==========|=|==========|=|===========                                                                                             
+       135|=|      1125|=|      562.5                                                                                             
+        20|=|      1225|=|      612.5                                                                                             
+        80|=|      1625|=|      812.5                                                                                             
+       450|=|s/Datos   |=|s/Datos                                                                                                 
+
+4 rows selected.
+
+SQL> 
+SQL> rem EJER5 PAG 213
+SQL> SELECT first_name||' '|| last_name name,
+  2  phone oldphone,
+  3  NVL(phone, '212-555-1212') newphone
+  4  FROM student
+  5  WHERE phone IS NULL;
+
+NAME                                               |=|OLDPHONE       |=|NEWPHONE                                                  
+===================================================|=|===============|=|===============                                           
+Peggy Noviello                                     |=|s/Datos        |=|212-555-1212                                              
+ Tashi                                             |=|s/Datos        |=|212-555-1212                                              
+ Tashi                                             |=|s/Datos        |=|212-555-1212                                              
+ Sonam                                             |=|s/Datos        |=|212-555-1212                                              
+ Tashi                                             |=|s/Datos        |=|212-555-1212                                              
+ Sonam                                             |=|s/Datos        |=|212-555-1212                                              
+ Tashi                                             |=|s/Datos        |=|212-555-1212                                              
+ Sonam                                             |=|s/Datos        |=|212-555-1212                                              
+John Smith                                         |=|s/Datos        |=|212-555-1212                                              
+
+9 rows selected.
+
+SQL> 
+SQL> SELECT first_name||' '|| last_name name,
+  2  phone oldphone
+  3  FROM student
+  4  WHERE phone IS NULL
+  5  or rownum < 15;
+
+NAME                                               |=|OLDPHONE                                                                    
+===================================================|=|===============                                                             
+Fred Crocitto                                      |=|718-555-5555                                                                
+J. Landry                                          |=|201-555-5555                                                                
+Laetia Enison                                      |=|718-555-5555                                                                
+A Moskowitz                                        |=|201-555-5555                                                                
+Judith Olvsade                                     |=|201-555-5555                                                                
+Catherine Mierzwa                                  |=|718-555-5555                                                                
+Judy Sethi                                         |=|617-555-5555                                                                
+Larry Walter                                       |=|718-555-5555                                                                
+Maria Martin                                       |=|718-555-5555                                                                
+Peggy Noviello                                     |=|s/Datos                                                                     
+Thomas Thomas                                      |=|201-555-5555                                                                
+A Kulina                                           |=|718-555-5555                                                                
+Winsome Laporte                                    |=|718-555-5555                                                                
+N Kuehn                                            |=|718-555-5555                                                                
+ Tashi                                             |=|s/Datos                                                                     
+ Tashi                                             |=|s/Datos                                                                     
+ Sonam                                             |=|s/Datos                                                                     
+ Tashi                                             |=|s/Datos                                                                     
+ Sonam                                             |=|s/Datos                                                                     
+ Tashi                                             |=|s/Datos                                                                     
+ Sonam                                             |=|s/Datos                                                                     
+John Smith                                         |=|s/Datos                                                                     
+
+22 rows selected.
+
+SQL> 
+SQL> rem EJERCIO 6 PAG 213
+SQL> SELECT first_name||' '|| last_name name,
+  2  phone oldphone,
+  3  COALESCE(phone, '212-555-1212') newphone
+  4  FROM student
+  5  WHERE COALESCE(phone, 'NONE') ='NONE';
+
+NAME                                               |=|OLDPHONE       |=|NEWPHONE                                                  
+===================================================|=|===============|=|===============                                           
+Peggy Noviello                                     |=|s/Datos        |=|212-555-1212                                              
+ Tashi                                             |=|s/Datos        |=|212-555-1212                                              
+ Tashi                                             |=|s/Datos        |=|212-555-1212                                              
+ Sonam                                             |=|s/Datos        |=|212-555-1212                                              
+ Tashi                                             |=|s/Datos        |=|212-555-1212                                              
+ Sonam                                             |=|s/Datos        |=|212-555-1212                                              
+ Tashi                                             |=|s/Datos        |=|212-555-1212                                              
+ Sonam                                             |=|s/Datos        |=|212-555-1212                                              
+John Smith                                         |=|s/Datos        |=|212-555-1212                                              
+
+9 rows selected.
+
+SQL> 
+SQL> rem EJER8 PAG 215
+SQL> SELECT course_no, description, prerequisite "ORIGINAL",
+  2  CASE WHEN prerequisite = 120 THEN '200'
+  3  WHEN prerequisite = 130 THEN 'N/A'
+  4  WHEN prerequisite IS NULL THEN 'None'
+  5  ELSE TO_CHAR(prerequisite)
+  6  END "NEW"
+  7  FROM course
+  8  WHERE course_no IN (20, 120, 122, 132)
+  9  ORDER BY course_no DESC;
+
+ COURSE_NO|=|DESCRIPTION                                       |=|  ORIGINAL|=|NEW                                                
+==========|=|==================================================|=|==========|=|========================================           
+       132|=|Basics of Unix Admin                              |=|       130|=|N/A                                                
+       122|=|Intermediate Java Programming                     |=|       120|=|200                                                
+       120|=|Intro to Java Programming                         |=|        80|=|80                                                 
+        20|=|Intro to Computers                                |=|s/Datos   |=|None                                               
+
+4 rows selected.
+
+SQL> 
+SQL> rem pag 217 EJER 9
+SQL> SELECT student_id, zip, phone,
+  2  DECODE(SUBSTR(phone, 1, 3), '212',
+  3  DECODE(zip, '10048', 'North Campus',
+  4  'West Campus'),
+  5  'Off Campus') loc
+  6  FROM student
+  7  WHERE student_id IN (150, 145, 325)
+  8  
+SQL> 
+SQL> spool off

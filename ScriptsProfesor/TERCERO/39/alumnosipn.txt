@@ -1,0 +1,559 @@
+SQL> 
+SQL> 
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set colsep '|=|'
+SQL> set feedback on
+SQL>  SET NULL 'NADA'
+SQL> 
+SQL> REM PROPUESTA UTILIZAR UNA SEQUENCIA PARA LAS MATRICULAS
+SQL> 
+SQL> 
+SQL> drop sequence id_alumno_sq;
+
+Sequence dropped.
+
+SQL> create sequence id_alumno_sq
+  2  increment by 1
+  3  start with 1000
+  4  minvalue 1000
+  5  maxvalue 1000000;
+
+Sequence created.
+
+SQL> 
+SQL> select id_alumno_sq.NEXTVAL from dual;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+NEXTVAL                                                                                                                           
+=======                                                                                                                           
+   1000                                                                                                                           
+
+1 row selected.
+
+SQL> select id_alumno_sq.CURRVAL from dual;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+CURRVAL                                                                                                                           
+=======                                                                                                                           
+   1000                                                                                                                           
+
+1 row selected.
+
+SQL> 
+SQL> ----------------------------
+SQL> REM PARA UTLIZAR EL MODELO QUE SIGUE PARA GENERAR DATOS}
+SQL> 
+SQL> /*
+SQL> 
+SQL>  insert into alumnos_ESIAZ
+SQL>  select id_alumno_sq.NEXTVAL,'ESIAZ',SYSDATE
+SQL> FROM DUAL CONNECT BY LEVEL < 20;
+SQL> 
+SQL> */
+SQL> 
+SQL> 
+SQL> 
+SQL> REM  CONSULTAR LOS DIRECTORIOS
+SQL> REM
+SQL> select * from dba_directories;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+OWNER     |=|DIRECTORY_NAME           |=|DIRECTORY_PATH                                                                           
+==========|=|=========================|=|=================================================================                        
+SYS       |=|ORACLECLRDIR             |=|C:\oraclexe\app\oracle\product\11.2.0\server\bin\clr                                     
+SYS       |=|DATA_PUMP_DIR            |=|C:\oraclexe\app\oracle\admin\xe\dpdump\                                                  
+SYS       |=|XMLDIR                   |=|C:\oraclexe\app\oracle\product\11.2.0\server\rdbms\xml                                   
+SYS       |=|ORACLE_OCM_CONFIG_DIR    |=|C:/ADE/jaikrish_xe/oracle\ccr\state                                                      
+
+4 rows selected.
+
+SQL> desc dba_directories
+ Name                                                                    Null?    Type
+ ----------------------------------------------------------------------- -------- ------------------------------------------------
+ OWNER                                                                   NOT NULL VARCHAR2(30)
+ DIRECTORY_NAME                                                          NOT NULL VARCHAR2(30)
+ DIRECTORY_PATH                                                                   VARCHAR2(4000)
+
+SQL> column owner format a10
+SQL> column directory_name format a25
+SQL> column directory_path format a65
+SQL> select owner, directory_name, directory_path
+  2  from dba_directories;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+OWNER     |=|DIRECTORY_NAME           |=|DIRECTORY_PATH                                                                           
+==========|=|=========================|=|=================================================================                        
+SYS       |=|ORACLECLRDIR             |=|C:\oraclexe\app\oracle\product\11.2.0\server\bin\clr                                     
+SYS       |=|DATA_PUMP_DIR            |=|C:\oraclexe\app\oracle\admin\xe\dpdump\                                                  
+SYS       |=|XMLDIR                   |=|C:\oraclexe\app\oracle\product\11.2.0\server\rdbms\xml                                   
+SYS       |=|ORACLE_OCM_CONFIG_DIR    |=|C:/ADE/jaikrish_xe/oracle\ccr\state                                                      
+
+4 rows selected.
+
+SQL> 
+SQL> REM CONSULTAR LOS TABLESPACE
+SQL> 
+SQL> desc dba_tablespaces
+ Name                                                                    Null?    Type
+ ----------------------------------------------------------------------- -------- ------------------------------------------------
+ TABLESPACE_NAME                                                         NOT NULL VARCHAR2(30)
+ BLOCK_SIZE                                                              NOT NULL NUMBER
+ INITIAL_EXTENT                                                                   NUMBER
+ NEXT_EXTENT                                                                      NUMBER
+ MIN_EXTENTS                                                             NOT NULL NUMBER
+ MAX_EXTENTS                                                                      NUMBER
+ MAX_SIZE                                                                         NUMBER
+ PCT_INCREASE                                                                     NUMBER
+ MIN_EXTLEN                                                                       NUMBER
+ STATUS                                                                           VARCHAR2(9)
+ CONTENTS                                                                         VARCHAR2(9)
+ LOGGING                                                                          VARCHAR2(9)
+ FORCE_LOGGING                                                                    VARCHAR2(3)
+ EXTENT_MANAGEMENT                                                                VARCHAR2(10)
+ ALLOCATION_TYPE                                                                  VARCHAR2(9)
+ PLUGGED_IN                                                                       VARCHAR2(3)
+ SEGMENT_SPACE_MANAGEMENT                                                         VARCHAR2(6)
+ DEF_TAB_COMPRESSION                                                              VARCHAR2(8)
+ RETENTION                                                                        VARCHAR2(11)
+ BIGFILE                                                                          VARCHAR2(3)
+ PREDICATE_EVALUATION                                                             VARCHAR2(7)
+ ENCRYPTED                                                                        VARCHAR2(3)
+ COMPRESS_FOR                                                                     VARCHAR2(12)
+
+SQL> select tablespace_name, initial_extent,
+  2  max_extents,max_size
+  3  from dba_tablespaces;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+TABLESPACE|=|INITIAL_EXTENT|=|MAX_EXTENTS|=|MAX_SIZE                                                                              
+==========|=|==============|=|===========|=|========                                                                              
+SYSTEM    |=|         65536|=|    2.1E+09|=| 2.1E+09                                                                              
+SYSAUX    |=|         65536|=|    2.1E+09|=| 2.1E+09                                                                              
+UNDOTBS1  |=|         65536|=|    2.1E+09|=| 2.1E+09                                                                              
+TEMP      |=|       1048576|=|NADA       |=| 2.1E+09                                                                              
+USERS     |=|         65536|=|    2.1E+09|=| 2.1E+09                                                                              
+
+5 rows selected.
+
+SQL> REM
+SQL> REM  CREAR LOS TABLESPACES CON USUARIO SYS
+SQL> REM
+SQL> CREATE TABLESPACE TBS_ESIME
+  2  DATAFILE 'C:\Users\ORA_bases\ALUMNOS_ESIME.BDF'
+  3  SIZE 2G;
+CREATE TABLESPACE TBS_ESIME
+*
+ERROR at line 1:
+ORA-01119: error in creating database file 'C:\Users\ORA_bases\ALUMNOS_ESIME.BDF' 
+ORA-27040: file create error, unable to create file 
+OSD-04002: unable to open file 
+O/S-Error: (OS 3) El sistema no puede encontrar la ruta especificada. 
+
+
+SQL> CREATE TABLESPACE TBS_ESCOM
+  2  DATAFILE 'C:\Users\ORA_bases\ALUMNOS_ESCOM.BDF'
+  3  SIZE 2G;
+CREATE TABLESPACE TBS_ESCOM
+*
+ERROR at line 1:
+ORA-01119: error in creating database file 'C:\Users\ORA_bases\ALUMNOS_ESCOM.BDF' 
+ORA-27040: file create error, unable to create file 
+OSD-04002: unable to open file 
+O/S-Error: (OS 3) El sistema no puede encontrar la ruta especificada. 
+
+
+SQL> CREATE TABLESPACE TBS_ESIAT
+  2  DATAFILE 'C:\Users\ORA_bases\ALUMNOS_ESIAT.BDF'
+  3  SIZE 2G;
+CREATE TABLESPACE TBS_ESIAT
+*
+ERROR at line 1:
+ORA-01119: error in creating database file 'C:\Users\ORA_bases\ALUMNOS_ESIAT.BDF' 
+ORA-27040: file create error, unable to create file 
+OSD-04002: unable to open file 
+O/S-Error: (OS 3) El sistema no puede encontrar la ruta especificada. 
+
+
+SQL> CREATE TABLESPACE TBS_ESIAZ
+  2  DATAFILE 'C:\Users\ORA_bases\ALUMNOS_ESIAZ.BDF'
+  3  SIZE 2G;
+CREATE TABLESPACE TBS_ESIAZ
+*
+ERROR at line 1:
+ORA-01119: error in creating database file 'C:\Users\ORA_bases\ALUMNOS_ESIAZ.BDF' 
+ORA-27040: file create error, unable to create file 
+OSD-04002: unable to open file 
+O/S-Error: (OS 3) El sistema no puede encontrar la ruta especificada. 
+
+
+SQL> REM CONSULTAR LOS TABLESPACES
+SQL> 
+SQL> select tablespace_name, initial_extent,
+  2  max_extents,max_size/1024/1024 MEGAS
+  3  from dba_tablespaces;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+TABLESPACE|=|INITIAL_EXTENT|=|MAX_EXTENTS|=|  MEGAS                                                                               
+==========|=|==============|=|===========|=|=======                                                                               
+SYSTEM    |=|         65536|=|    2.1E+09|=|   2048                                                                               
+SYSAUX    |=|         65536|=|    2.1E+09|=|   2048                                                                               
+UNDOTBS1  |=|         65536|=|    2.1E+09|=|   2048                                                                               
+TEMP      |=|       1048576|=|NADA       |=|   2048                                                                               
+USERS     |=|         65536|=|    2.1E+09|=|   2048                                                                               
+
+5 rows selected.
+
+SQL> 
+SQL> REM GENERAR UNA TABLA GLOBAL GENERALIZADA CON PARTICIONES
+SQL> REM  SE REQUIERE LA EDICION ENTREPRISE
+SQL> 
+SQL> 
+SQL> DROP  TABLE ALUMNOS_IPN;
+DROP  TABLE ALUMNOS_IPN
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE TABLE ALUMNOS_IPN
+  2   (ID_ALUMNO NUMBER(10),
+  3   ESCUELA VARCHAR2(6),
+  4   FECHA DATE DEFAULT SYSDATE)
+  5   PARTITION BY LIST(ESCUELA)
+  6  (PARTITION ESIME VALUES('ESIME') TABLESPACE TBS_ESIME,
+  7   PARTITION ESCOM VALUES('ESCOM') TABLESPACE TBS_ESIAT,
+  8   PARTITION ESIAT VALUES('ESIAT') TABLESPACE TBS_ESIAT,
+  9   PARTITION ESIAZ VALUES('ESIAZ') TABLESPACE TBS_ESIAZ);
+CREATE TABLE ALUMNOS_IPN
+*
+ERROR at line 1:
+ORA-00439: feature not enabled: Partitioning 
+
+
+SQL> 
+SQL>  REM SI TUVIERAMOS HABILITADA LA OPCION EL EXPRESS EDITION
+SQL>  REM EJECUTARLO EN ENTERPRISE EDITION
+SQL>  REM   POR LO TANTO
+SQL>  --
+SQL>  REM LO EJECUTAREMOS EN TABLAS REGULARES INDIVIDUALES
+SQL>  REM CREATNDO UNA TABLA PARA CADA ESCUELA.
+SQL>  REM   ALUMNOS DE    ESIME
+SQL>  DROP  TABLE ALUMNOS_ESIME;
+ DROP  TABLE ALUMNOS_ESIME
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE TABLE ALUMNOS_ESIME
+  2   (ID_ALUMNO NUMBER(10),
+  3   ESCUELA VARCHAR2(6),
+  4   FECHA DATE DEFAULT SYSDATE) TABLESPACE TBS_ESIME;
+ FECHA DATE DEFAULT SYSDATE) TABLESPACE TBS_ESIME
+                                        *
+ERROR at line 4:
+ORA-00959: tablespace 'TBS_ESIME' does not exist 
+
+
+SQL> 
+SQL>  insert into alumnos_ESIME
+  2   select level,'ESIME',SYSDATE
+  3  FROM DUAL CONNECT BY LEVEL < 20;
+ insert into alumnos_ESIME
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL>  insert into alumnos_ESIME
+  2   select id_alumno_sq.NEXTVAL,'ESIME',SYSDATE
+  3  FROM DUAL CONNECT BY LEVEL < 20;
+ insert into alumnos_ESIME
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> SELECT * FROM ALUMNOS_ESIME;
+SELECT * FROM ALUMNOS_ESIME
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> --------------------------------------------
+SQL>  REM   ALUMNOS DE    ESCOM
+SQL>  DROP  TABLE ALUMNOS_ESCOM;
+ DROP  TABLE ALUMNOS_ESCOM
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE TABLE ALUMNOS_ESCOM
+  2   (ID_ALUMNO NUMBER(10),
+  3   ESCUELA VARCHAR2(6),
+  4   FECHA DATE DEFAULT SYSDATE) TABLESPACE TBS_ESCOM;
+ FECHA DATE DEFAULT SYSDATE) TABLESPACE TBS_ESCOM
+                                        *
+ERROR at line 4:
+ORA-00959: tablespace 'TBS_ESCOM' does not exist 
+
+
+SQL> 
+SQL>  insert into alumnos_ESCOM
+  2   select id_alumno_sq.NEXTVAL,'ESCOM',SYSDATE
+  3  FROM DUAL CONNECT BY LEVEL < 20;
+ insert into alumnos_ESCOM
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> SELECT * FROM ALUMNOS_ESCOM;
+SELECT * FROM ALUMNOS_ESCOM
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> -- -----------------------------------------------
+SQL>  REM   ALUMNOS DE    ESIAT
+SQL>  DROP  TABLE ALUMNOS_ESIAT;
+ DROP  TABLE ALUMNOS_ESIAT
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE TABLE ALUMNOS_ESIAT
+  2   (ID_ALUMNO NUMBER(10),
+  3   ESCUELA VARCHAR2(6),
+  4   FECHA DATE DEFAULT SYSDATE) TABLESPACE TBS_ESIAT;
+ FECHA DATE DEFAULT SYSDATE) TABLESPACE TBS_ESIAT
+                                        *
+ERROR at line 4:
+ORA-00959: tablespace 'TBS_ESIAT' does not exist 
+
+
+SQL> 
+SQL>  insert into alumnos_ESIAT
+  2   select id_alumno_sq.NEXTVAL,'ESIAT',SYSDATE
+  3  FROM DUAL CONNECT BY LEVEL < 20;
+ insert into alumnos_ESIAT
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> SELECT * FROM ALUMNOS_ESIAT;
+SELECT * FROM ALUMNOS_ESIAT
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> --   -----------------------------------------------
+SQL>  REM   ALUMNOS DE    ESIAZ
+SQL>  DROP  TABLE ALUMNOS_ESIAZ;
+ DROP  TABLE ALUMNOS_ESIAZ
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE TABLE ALUMNOS_ESIAZ
+  2   (ID_ALUMNO NUMBER(10),
+  3   ESCUELA VARCHAR2(6),
+  4   FECHA DATE DEFAULT SYSDATE) TABLESPACE TBS_ESIAZ;
+ FECHA DATE DEFAULT SYSDATE) TABLESPACE TBS_ESIAZ
+                                        *
+ERROR at line 4:
+ORA-00959: tablespace 'TBS_ESIAZ' does not exist 
+
+
+SQL> 
+SQL>  insert into alumnos_ESIAZ
+  2   select id_alumno_sq.NEXTVAL,'ESIAZ',SYSDATE
+  3  FROM DUAL CONNECT BY LEVEL < 20;
+ insert into alumnos_ESIAZ
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> SELECT * FROM ALUMNOS_ESIAZ;
+SELECT * FROM ALUMNOS_ESIAZ
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> -- --------------------------------
+SQL> 
+SQL> REM CIFRAS DE CONTROL
+SQL> 
+SQL> SELECT COUNT(*) FROM ALUMNOS_ESIME;
+SELECT COUNT(*) FROM ALUMNOS_ESIME
+                     *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT COUNT(*) FROM ALUMNOS_ESCOM;
+SELECT COUNT(*) FROM ALUMNOS_ESCOM
+                     *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT COUNT(*) FROM ALUMNOS_ESIAT;
+SELECT COUNT(*) FROM ALUMNOS_ESIAT
+                     *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT COUNT(*) FROM ALUMNOS_ESIAZ;
+SELECT COUNT(*) FROM ALUMNOS_ESIAZ
+                     *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> REM ULTIMA MATRICULA GENERADA
+SQL> 
+SQL> SELECT 'ULTIMA MATRICULA ',id_alumno_sq.CURRVAL FROM DUAL;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+'ULTIMAMATRICULA'|=|CURRVAL                                                                                                       
+=================|=|=======                                                                                                       
+ULTIMA MATRICULA |=|   1000                                                                                                       
+
+1 row selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT COUNT(*) FROM ALUMNOS_ESIAZ;
+SELECT COUNT(*) FROM ALUMNOS_ESIAZ
+                     *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> REM
+SQL> REM  AHORA CONSULTEMOS LAS TABLAS DEL DICCIONARIO DE DATOS
+SQL> REM
+SQL> 
+SQL> REM CONNECTADO COMO    sys
+SQL> 
+SQL> SELECT OWNER,TABLE_NAME, TABLESPACE_NAME,
+  2  NUM_ROWS
+  3  FROM DBA_TABLES
+  4  WHERE OWNER = 'SERGIONAVA';
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+OWNER     |=|TABLE_NAME                   |=|TABLESPACE|=|NUM_ROWS                                                                
+==========|=|=============================|=|==========|=|========                                                                
+SERGIONAVA|=|EMPLOYEE                     |=|USERS     |=|      14                                                                
+SERGIONAVA|=|DEPARTMENT                   |=|USERS     |=|       3                                                                
+SERGIONAVA|=|DEPT_LOCATIONS               |=|USERS     |=|       5                                                                
+SERGIONAVA|=|DEPENDENT                    |=|USERS     |=|       7                                                                
+SERGIONAVA|=|WORKS_ON                     |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|PROJECT                      |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|EMP                          |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|ASG                          |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|PROJ                         |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|PAY                          |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|TEMP                         |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|TEMPORAL5                    |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|PROFESSORS                   |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|AUTOS                        |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|MODELO_MARCA                 |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|MODELO_MOTOR                 |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|MODELO_COLOR                 |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|MODELO_COLOR_ADORNOS_TOLDO   |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|MODELO_COLOR_ADORNOS         |=|USERS     |=|NADA                                                                    
+SERGIONAVA|=|MODELO_COLOR_TOLDO           |=|USERS     |=|NADA                                                                    
+
+20 rows selected.
+
+SQL> 
+SQL> SELECT OWNER,TABLE_NAME, TABLESPACE_NAME,
+  2  NUM_ROWS, IOT_NAME
+  3  FROM DBA_TABLES
+  4  WHERE OWNER = 'SERGIONAVA'
+  5  AND TABLE_NAME
+  6   IN ('ALUMNOS_ESCOM','ALUMNOS_ESIAT','ALUMNOS_ESIAZ','ALUMNOS_ESIME');
+
+no rows selected
+
+SQL> 
+SQL>  select tablespace_name, initial_extent,NEXT_EXTENT,
+  2  max_extents,max_size/1024/1024 MEGAS
+  3  from dba_tablespaces;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+TABLESPACE|=|INITIAL_EXTENT|=|NEXT_EXTENT|=|MAX_EXTENTS|=|  MEGAS                                                                 
+==========|=|==============|=|===========|=|===========|=|=======                                                                 
+SYSTEM    |=|         65536|=|NADA       |=|    2.1E+09|=|   2048                                                                 
+SYSAUX    |=|         65536|=|NADA       |=|    2.1E+09|=|   2048                                                                 
+UNDOTBS1  |=|         65536|=|NADA       |=|    2.1E+09|=|   2048                                                                 
+TEMP      |=|       1048576|=|    1048576|=|NADA       |=|   2048                                                                 
+USERS     |=|         65536|=|NADA       |=|    2.1E+09|=|   2048                                                                 
+
+5 rows selected.
+
+SQL> 
+SQL> 
+SQL> spool off;

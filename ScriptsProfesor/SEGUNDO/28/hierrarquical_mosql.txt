@@ -1,0 +1,337 @@
+SQL> 
+SQL> REM Mastering Oracle SQL [ Mishra,2002,163]
+SQL> SET PAGESIZE 99
+SQL> SET LINESIZE 130
+SQL> SET COLSEP '|=|'
+SQL> SET NULL S/Data
+SQL> 
+SQL> SELECT E_TOP.LNAME, E_2.LNAME, E_3.LNAME, E_4.LNAME
+  2  FROM EMPLOYEE E_TOP, EMPLOYEE E_2, EMPLOYEE E_3, EMPLOYEE E_4
+  3  WHERE E_TOP.MANAGER_EMP_ID IS NULL
+  4  AND E_TOP.EMP_ID = E_2.MANAGER_EMP_ID (+)
+  5  AND E_2.EMP_ID = E_3.MANAGER_EMP_ID (+)
+  6  AND E_3.EMP_ID = E_4.MANAGER_EMP_ID (+);
+
+LNAME               |=|LNAME               |=|LNAME               |=|LNAME                                                        
+--------------------|=|--------------------|=|--------------------|=|--------------------                                         
+KING                |=|JONES               |=|FORD                |=|SMITH                                                        
+KING                |=|JONES               |=|SCOTT               |=|ADAMS                                                        
+KING                |=|BLAKE               |=|TURNER              |=|S/Data                                                       
+KING                |=|BLAKE               |=|ALLEN               |=|S/Data                                                       
+KING                |=|BLAKE               |=|WARD                |=|S/Data                                                       
+KING                |=|CLARK               |=|MILLER              |=|S/Data                                                       
+KING                |=|BLAKE               |=|MARTIN              |=|S/Data                                                       
+KING                |=|BLAKE               |=|JAMES               |=|S/Data                                                       
+
+8 rows selected.
+
+SQL> 
+SQL> REM Mastering Oracle SQL [ Mishra,2002,168]
+SQL> 
+SQL> SELECT LNAME, EMP_ID, MANAGER_EMP_ID
+  2  FROM EMPLOYEE
+  3  START WITH MANAGER_EMP_ID IS NULL
+  4  CONNECT BY PRIOR EMP_ID = MANAGER_EMP_ID;
+
+LNAME               |=|EMP_ID|=|MANAGER_EMP_ID                                                                                    
+--------------------|=|------|=|--------------                                                                                    
+KING                |=|  7839|=|S/Data                                                                                            
+JONES               |=|  7566|=|          7839                                                                                    
+SCOTT               |=|  7788|=|          7566                                                                                    
+ADAMS               |=|  7876|=|          7788                                                                                    
+FORD                |=|  7902|=|          7566                                                                                    
+SMITH               |=|  7369|=|          7902                                                                                    
+BLAKE               |=|  7698|=|          7839                                                                                    
+ALLEN               |=|  7499|=|          7698                                                                                    
+WARD                |=|  7521|=|          7698                                                                                    
+MARTIN              |=|  7654|=|          7698                                                                                    
+TURNER              |=|  7844|=|          7698                                                                                    
+JAMES               |=|  7900|=|          7698                                                                                    
+CLARK               |=|  7782|=|          7839                                                                                    
+MILLER              |=|  7934|=|          7782                                                                                    
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> SELECT LNAME, EMP_ID, MANAGER_EMP_ID
+  2  FROM EMPLOYEE
+  3  START WITH MANAGER_EMP_ID IS NULL
+  4  CONNECT BY MANAGER_EMP_ID = PRIOR EMP_ID;
+
+LNAME               |=|EMP_ID|=|MANAGER_EMP_ID                                                                                    
+--------------------|=|------|=|--------------                                                                                    
+KING                |=|  7839|=|S/Data                                                                                            
+JONES               |=|  7566|=|          7839                                                                                    
+SCOTT               |=|  7788|=|          7566                                                                                    
+ADAMS               |=|  7876|=|          7788                                                                                    
+FORD                |=|  7902|=|          7566                                                                                    
+SMITH               |=|  7369|=|          7902                                                                                    
+BLAKE               |=|  7698|=|          7839                                                                                    
+ALLEN               |=|  7499|=|          7698                                                                                    
+WARD                |=|  7521|=|          7698                                                                                    
+MARTIN              |=|  7654|=|          7698                                                                                    
+TURNER              |=|  7844|=|          7698                                                                                    
+JAMES               |=|  7900|=|          7698                                                                                    
+CLARK               |=|  7782|=|          7839                                                                                    
+MILLER              |=|  7934|=|          7782                                                                                    
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> SELECT LNAME, EMP_ID, MANAGER_EMP_ID
+  2  FROM EMPLOYEE
+  3  START WITH MANAGER_EMP_ID = 7698
+  4  CONNECT BY MANAGER_EMP_ID = PRIOR EMP_ID;
+
+LNAME               |=|EMP_ID|=|MANAGER_EMP_ID                                                                                    
+--------------------|=|------|=|--------------                                                                                    
+ALLEN               |=|  7499|=|          7698                                                                                    
+WARD                |=|  7521|=|          7698                                                                                    
+MARTIN              |=|  7654|=|          7698                                                                                    
+TURNER              |=|  7844|=|          7698                                                                                    
+JAMES               |=|  7900|=|          7698                                                                                    
+
+5 rows selected.
+
+SQL> 
+SQL> 
+SQL> SELECT COUNT(DISTINCT LEVEL)
+  2  FROM EMPLOYEE
+  3  START WITH MANAGER_EMP_ID IS NULL
+  4  CONNECT BY PRIOR EMP_ID = MANAGER_EMP_ID;
+
+COUNT(DISTINCTLEVEL)                                                                                                              
+--------------------                                                                                                              
+                   4                                                                                                              
+
+1 row selected.
+
+SQL> 
+SQL> SELECT COUNT(DISTINCT LEVEL)  nivel_jer
+  2  FROM EMPLOYEE
+  3  START WITH MANAGER_EMP_ID = 7698
+  4  CONNECT BY PRIOR EMP_ID = MANAGER_EMP_ID;
+
+ NIVEL_JER                                                                                                                        
+----------                                                                                                                        
+         1                                                                                                                        
+
+1 row selected.
+
+SQL> 
+SQL> ------------------
+SQL> COL "EMPLOYEE" FORMAT A27
+SQL> SELECT LEVEL, LPAD(' ',2*(LEVEL - 1)) || LNAME "EMPLOYEE",
+  2   EMP_ID, MANAGER_EMP_ID
+  3  FROM EMPLOYEE
+  4  START WITH MANAGER_EMP_ID IS NULL
+  5  CONNECT BY PRIOR EMP_ID = MANAGER_EMP_ID;
+
+     LEVEL|=|EMPLOYEE                   |=|EMP_ID|=|MANAGER_EMP_ID                                                                
+----------|=|---------------------------|=|------|=|--------------                                                                
+         1|=|KING                       |=|  7839|=|S/Data                                                                        
+         2|=|  JONES                    |=|  7566|=|          7839                                                                
+         3|=|    SCOTT                  |=|  7788|=|          7566                                                                
+         4|=|      ADAMS                |=|  7876|=|          7788                                                                
+         3|=|    FORD                   |=|  7902|=|          7566                                                                
+         4|=|      SMITH                |=|  7369|=|          7902                                                                
+         2|=|  BLAKE                    |=|  7698|=|          7839                                                                
+         3|=|    ALLEN                  |=|  7499|=|          7698                                                                
+         3|=|    WARD                   |=|  7521|=|          7698                                                                
+         3|=|    MARTIN                 |=|  7654|=|          7698                                                                
+         3|=|    TURNER                 |=|  7844|=|          7698                                                                
+         3|=|    JAMES                  |=|  7900|=|          7698                                                                
+         2|=|  CLARK                    |=|  7782|=|          7839                                                                
+         3|=|    MILLER                 |=|  7934|=|          7782                                                                
+
+14 rows selected.
+
+SQL> 
+SQL> SELECT LEVEL, LPAD(' ',2*(LEVEL - 1)) || LNAME "EMPLOYEE",
+  2   EMP_ID, MANAGER_EMP_ID
+  3  FROM EMPLOYEE
+  4  START WITH MANAGER_EMP_ID = 7698
+  5  CONNECT BY PRIOR EMP_ID = MANAGER_EMP_ID;
+
+     LEVEL|=|EMPLOYEE                   |=|EMP_ID|=|MANAGER_EMP_ID                                                                
+----------|=|---------------------------|=|------|=|--------------                                                                
+         1|=|ALLEN                      |=|  7499|=|          7698                                                                
+         1|=|WARD                       |=|  7521|=|          7698                                                                
+         1|=|MARTIN                     |=|  7654|=|          7698                                                                
+         1|=|TURNER                     |=|  7844|=|          7698                                                                
+         1|=|JAMES                      |=|  7900|=|          7698                                                                
+
+5 rows selected.
+
+SQL> 
+SQL> 
+SQL> SELECT LEVEL, LPAD(' ',2*(LEVEL - 1)) || LNAME "EMPLOYEE",
+  2   EMP_ID, MANAGER_EMP_ID, SALARY
+  3  FROM EMPLOYEE
+  4  WHERE SALARY > 2000
+  5  START WITH MANAGER_EMP_ID IS NULL
+  6  CONNECT BY MANAGER_EMP_ID = PRIOR EMP_ID;
+
+     LEVEL|=|EMPLOYEE                   |=|EMP_ID|=|MANAGER_EMP_ID|=|    SALARY                                                   
+----------|=|---------------------------|=|------|=|--------------|=|----------                                                   
+         1|=|KING                       |=|  7839|=|S/Data        |=|  5,000.00                                                   
+         3|=|    SCOTT                  |=|  7788|=|          7566|=|  3,000.00                                                   
+         3|=|    FORD                   |=|  7902|=|          7566|=|  3,000.00                                                   
+         2|=|  BLAKE                    |=|  7698|=|          7839|=|  2,850.00                                                   
+         2|=|  CLARK                    |=|  7782|=|          7839|=|  2,450.00                                                   
+
+5 rows selected.
+
+SQL> 
+SQL> REM Checking for Ascendancy
+SQL> 
+SQL> SELECT EMP_ID, LNAME, DEPT_ID, MANAGER_EMP_ID, SALARY, HIRE_DATE
+  2  FROM EMPLOYEE
+  3  WHERE LNAME = 'SMITH'
+  4  START WITH LNAME = 'JONES'
+  5  CONNECT BY MANAGER_EMP_ID = PRIOR EMP_ID;
+
+EMP_ID|=|LNAME               |=|DEPT_ID|=|MANAGER_EMP_ID|=|    SALARY|=|HIRE_DATE                                                 
+------|=|--------------------|=|-------|=|--------------|=|----------|=|---------                                                 
+  7369|=|SMITH               |=|     20|=|          7902|=|    800.00|=|17-DEC-80                                                 
+
+1 row selected.
+
+SQL> 
+SQL> 
+SQL> REM Listing the Top Few Levels of a Hierarchy
+SQL> 
+SQL> SELECT EMP_ID, LNAME, DEPT_ID, MANAGER_EMP_ID, SALARY, HIRE_DATE
+  2  FROM EMPLOYEE
+  3  START WITH MANAGER_EMP_ID IS NULL
+  4  CONNECT BY MANAGER_EMP_ID = PRIOR EMP_ID
+  5  AND DEPT_ID != PRIOR DEPT_ID;
+
+EMP_ID|=|LNAME               |=|DEPT_ID|=|MANAGER_EMP_ID|=|    SALARY|=|HIRE_DATE                                                 
+------|=|--------------------|=|-------|=|--------------|=|----------|=|---------                                                 
+  7839|=|KING                |=|     10|=|S/Data        |=|  5,000.00|=|17-NOV-81                                                 
+  7566|=|JONES               |=|     20|=|          7839|=|  2,000.00|=|02-APR-81                                                 
+  7698|=|BLAKE               |=|     30|=|          7839|=|  2,850.00|=|01-MAY-80                                                 
+
+3 rows selected.
+
+SQL> 
+SQL> 
+SQL> SELECT EMP_ID, LNAME, DEPT_ID, MANAGER_EMP_ID, SALARY, HIRE_DATE
+  2  FROM EMPLOYEE
+  3  WHERE LEVEL <= 2
+  4  START WITH MANAGER_EMP_ID IS NULL
+  5  CONNECT BY MANAGER_EMP_ID = PRIOR EMP_ID;
+
+EMP_ID|=|LNAME               |=|DEPT_ID|=|MANAGER_EMP_ID|=|    SALARY|=|HIRE_DATE                                                 
+------|=|--------------------|=|-------|=|--------------|=|----------|=|---------                                                 
+  7839|=|KING                |=|     10|=|S/Data        |=|  5,000.00|=|17-NOV-81                                                 
+  7566|=|JONES               |=|     20|=|          7839|=|  2,000.00|=|02-APR-81                                                 
+  7698|=|BLAKE               |=|     30|=|          7839|=|  2,850.00|=|01-MAY-80                                                 
+  7782|=|CLARK               |=|     10|=|          7839|=|  2,450.00|=|09-JUN-81                                                 
+
+4 rows selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT SUM(SALARY) SALARIO
+  2  FROM EMPLOYEE
+  3  START WITH LNAME = 'JONES'
+  4  CONNECT BY MANAGER_EMP_ID = PRIOR EMP_ID;
+
+   SALARIO                                                                                                                        
+----------                                                                                                                        
+      9900                                                                                                                        
+
+1 row selected.
+
+SQL> 
+SQL> 
+SQL> SELECT LNAME, SALARY,
+  2  (SELECT SUM(SALARY) FROM EMPLOYEE T1
+  3  START WITH LNAME = T2.LNAME
+  4  CONNECT BY MANAGER_EMP_ID = PRIOR EMP_ID) SUM_SALARY
+  5  FROM EMPLOYEE T2;
+
+LNAME               |=|    SALARY|=|SUM_SALARY                                                                                    
+--------------------|=|----------|=|----------                                                                                    
+SMITH               |=|    800.00|=|       800                                                                                    
+ALLEN               |=|  1,600.00|=|      1600                                                                                    
+WARD                |=|  1,250.00|=|      1250                                                                                    
+JONES               |=|  2,000.00|=|      9900                                                                                    
+MARTIN              |=|  1,250.00|=|      1250                                                                                    
+BLAKE               |=|  2,850.00|=|      9400                                                                                    
+CLARK               |=|  2,450.00|=|      3750                                                                                    
+SCOTT               |=|  3,000.00|=|      4100                                                                                    
+KING                |=|  5,000.00|=|     28050                                                                                    
+TURNER              |=|  1,500.00|=|      1500                                                                                    
+ADAMS               |=|  1,100.00|=|      1100                                                                                    
+JAMES               |=|    950.00|=|       950                                                                                    
+FORD                |=|  3,000.00|=|      3800                                                                                    
+MILLER              |=|  1,300.00|=|      1300                                                                                    
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> SELECT LEVEL, LPAD(' ',2*(LEVEL - 1)) || LNAME "EMPLOYEE",
+  2   EMP_ID, MANAGER_EMP_ID, SALARY
+  3  FROM EMPLOYEE
+  4  START WITH MANAGER_EMP_ID IS NULL
+  5  CONNECT BY MANAGER_EMP_ID = PRIOR EMP_ID
+  6  ORDER BY SALARY;
+
+     LEVEL|=|EMPLOYEE                   |=|EMP_ID|=|MANAGER_EMP_ID|=|    SALARY                                                   
+----------|=|---------------------------|=|------|=|--------------|=|----------                                                   
+         4|=|      SMITH                |=|  7369|=|          7902|=|    800.00                                                   
+         3|=|    JAMES                  |=|  7900|=|          7698|=|    950.00                                                   
+         4|=|      ADAMS                |=|  7876|=|          7788|=|  1,100.00                                                   
+         3|=|    WARD                   |=|  7521|=|          7698|=|  1,250.00                                                   
+         3|=|    MARTIN                 |=|  7654|=|          7698|=|  1,250.00                                                   
+         3|=|    MILLER                 |=|  7934|=|          7782|=|  1,300.00                                                   
+         3|=|    TURNER                 |=|  7844|=|          7698|=|  1,500.00                                                   
+         3|=|    ALLEN                  |=|  7499|=|          7698|=|  1,600.00                                                   
+         2|=|  JONES                    |=|  7566|=|          7839|=|  2,000.00                                                   
+         2|=|  CLARK                    |=|  7782|=|          7839|=|  2,450.00                                                   
+         2|=|  BLAKE                    |=|  7698|=|          7839|=|  2,850.00                                                   
+         3|=|    SCOTT                  |=|  7788|=|          7566|=|  3,000.00                                                   
+         3|=|    FORD                   |=|  7902|=|          7566|=|  3,000.00                                                   
+         1|=|KING                       |=|  7839|=|S/Data        |=|  5,000.00                                                   
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> REM   AHORA SIN   ORDER BY
+SQL> 
+SQL> SELECT LEVEL, LPAD(' ',2*(LEVEL - 1)) || LNAME "EMPLOYEE",
+  2   EMP_ID, MANAGER_EMP_ID, SALARY
+  3  FROM EMPLOYEE
+  4  START WITH MANAGER_EMP_ID IS NULL
+  5  CONNECT BY MANAGER_EMP_ID = PRIOR EMP_ID;
+
+     LEVEL|=|EMPLOYEE                   |=|EMP_ID|=|MANAGER_EMP_ID|=|    SALARY                                                   
+----------|=|---------------------------|=|------|=|--------------|=|----------                                                   
+         1|=|KING                       |=|  7839|=|S/Data        |=|  5,000.00                                                   
+         2|=|  JONES                    |=|  7566|=|          7839|=|  2,000.00                                                   
+         3|=|    SCOTT                  |=|  7788|=|          7566|=|  3,000.00                                                   
+         4|=|      ADAMS                |=|  7876|=|          7788|=|  1,100.00                                                   
+         3|=|    FORD                   |=|  7902|=|          7566|=|  3,000.00                                                   
+         4|=|      SMITH                |=|  7369|=|          7902|=|    800.00                                                   
+         2|=|  BLAKE                    |=|  7698|=|          7839|=|  2,850.00                                                   
+         3|=|    ALLEN                  |=|  7499|=|          7698|=|  1,600.00                                                   
+         3|=|    WARD                   |=|  7521|=|          7698|=|  1,250.00                                                   
+         3|=|    MARTIN                 |=|  7654|=|          7698|=|  1,250.00                                                   
+         3|=|    TURNER                 |=|  7844|=|          7698|=|  1,500.00                                                   
+         3|=|    JAMES                  |=|  7900|=|          7698|=|    950.00                                                   
+         2|=|  CLARK                    |=|  7782|=|          7839|=|  2,450.00                                                   
+         3|=|    MILLER                 |=|  7934|=|          7782|=|  1,300.00                                                   
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> SPOOL OFF;

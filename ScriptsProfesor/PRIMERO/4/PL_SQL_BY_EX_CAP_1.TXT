@@ -1,0 +1,316 @@
+SQL> 
+SQL> rem ROSENZWEIG,B &  RAKHIMOV,E (2009).Oracle© PL/SQLTby Example,Boston,MA,USA:Perarson.
+SQL> rem ejercicios cap PL/SQL CONCEPTS
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set colsep '|=|'
+SQL> set underline =
+SQL> set null s/Datos
+SQL> set feedback on
+SQL> 
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,7]
+SQL> -- c¢digo ejecutable
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_first_name VARCHAR2(35);
+  3  v_last_name VARCHAR2(35);
+  4  BEGIN
+  5  SELECT first_name, last_name
+  6  INTO v_first_name, v_last_name
+  7  FROM student
+  8  WHERE student_id = 123;
+  9  DBMS_OUTPUT.PUT_LINE (chr(10)||chr(10)||chr(10)||chr(9)||chr(7)||
+ 10    'Student name: '||v_first_name||' -->  '||v_last_name
+ 11    ||chr(10)||
+ 12    chr(10)||
+ 13    chr(10));
+ 14  EXCEPTION
+ 15  WHEN NO_DATA_FOUND THEN
+ 16  DBMS_OUTPUT.PUT_LINE ('There is no student with '||
+ 17  'student id 123');
+ 18  END;
+ 19  
+ 20  ------------------------------------------
+ 21  rem consultas previas
+ 22  
+ 23  select student_id, last_name, first_name
+ 24  from student
+ 25  where rownum <= 25
+ 26  order by 1 ;
+ 27  
+ 28  ----------
+ 29  rem consultar un una matricula que no existe
+ 30  SET SERVEROUTPUT ON
+ 31  DECLARE
+ 32  v_first_name VARCHAR2(35);
+ 33  v_last_name VARCHAR2(35);
+ 34  BEGIN
+ 35  SELECT first_name, last_name
+ 36  INTO v_first_name, v_last_name
+ 37  FROM student
+ 38  WHERE student_id = 115;
+ 39  DBMS_OUTPUT.PUT_LINE (chr(10)||chr(10)||chr(10)||chr(9)||chr(7)||
+ 40    'Student name: '||v_first_name||' -->  '||v_last_name
+ 41    ||chr(10)||
+ 42    chr(10)||
+ 43    chr(10));
+ 44  EXCEPTION
+ 45  WHEN NO_DATA_FOUND THEN
+ 46  DBMS_OUTPUT.PUT_LINE ('No  hay estudiante con el n£mero : ---> '||
+ 47  'student id -->   115');
+ 48  END;
+ 49  /
+rem consultas previas
+*
+ERROR at line 21:
+ORA-06550: line 21, column 1: 
+PLS-00103: Encountered the symbol "REM"  
+
+
+SQL> ------------------------------------------
+SQL> rem ROSENZWEIG,B &  RAKHIMOV,E (2009).Oracle© PL/SQLTby Example,Boston,MA,USA:Perarson.
+SQL> rem [ROSENZWEIG, 2009, p 8]
+SQL> ---
+SQL> DECLARE
+  2  v_name VARCHAR2(50);
+  3  v_total NUMBER;
+  4  BEGIN
+  5  SELECT i.first_name||' '||i.last_name, COUNT(*)
+  6  INTO v_name, v_total
+  7  FROM instructor i, section s
+  8  WHERE i.instructor_id = s.instructor_id
+  9  AND i.instructor_id = 102
+ 10  GROUP BY i.first_name||' '||i.last_name;
+ 11  DBMS_OUTPUT.PUT_LINE
+ 12  ('Instructor : --> '||v_name||' imparte --> :  '||v_total||' cursos');
+ 13  EXCEPTION
+ 14  WHEN NO_DATA_FOUND THEN
+ 15  DBMS_OUTPUT.PUT_LINE ('El instructor no existe  --> :');
+ 16  END;
+ 17  /
+Instructor : --> Tom Wojick imparte --> :  10 cursos                                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> ----
+SQL> DECLARE
+  2  v_name VARCHAR2(50);
+  3  v_total NUMBER;
+  4  BEGIN
+  5  SELECT i.first_name||' '||i.last_name, COUNT(*)
+  6  INTO v_name, v_total
+  7  FROM instructor i, section s
+  8  WHERE i.instructor_id = s.instructor_id
+  9  AND i.instructor_id = 113
+ 10  GROUP BY i.first_name||' '||i.last_name;
+ 11  DBMS_OUTPUT.PUT_LINE
+ 12  ('Instructor : --> '||v_name||' imparte --> :  '||v_total||' cursos');
+ 13  EXCEPTION
+ 14  WHEN NO_DATA_FOUND THEN
+ 15  DBMS_OUTPUT.PUT_LINE ('El instructor no existe  --> :');
+ 16  END;
+ 17  /
+El instructor no existe  --> :                                                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> 
+SQL> rem consultas previas
+SQL> 
+SQL> select instructor_id, first_name,last_name
+  2  from instructor;
+
+INSTRUCTOR_ID|=|FIRST_NAME               |=|LAST_NAME                                                                             
+=============|=|=========================|=|=========================                                                             
+          101|=|Fernand                  |=|Hanks                                                                                 
+          102|=|Tom                      |=|Wojick                                                                                
+          103|=|Nina                     |=|Schorin                                                                               
+          104|=|Gary                     |=|Pertez                                                                                
+          105|=|Anita                    |=|Morris                                                                                
+          106|=|Todd                     |=|Smythe                                                                                
+          107|=|Marilyn                  |=|Frantzen                                                                              
+          108|=|Charles                  |=|Lowry                                                                                 
+          109|=|Rick                     |=|Chow                                                                                  
+          110|=|Irene                    |=|Willig                                                                                
+
+10 rows selected.
+
+SQL> ------------------------------------
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,13]
+SQL> DECLARE
+  2  v_student_id NUMBER := &sv_student_id;
+  3  v_first_name VARCHAR2(35);
+  4  v_last_name VARCHAR2(35);
+  5  BEGIN
+  6  SELECT first_name, last_name
+  7  INTO v_first_name, v_last_name
+  8  FROM student
+  9  WHERE student_id = v_student_id;
+ 10  DBMS_OUTPUT.PUT_LINE (chr(10)||chr(10)||chr(10)||chr(9)||
+ 11  'Student name: '||v_first_name||' '||
+ 12  v_last_name);
+ 13  EXCEPTION
+ 14  WHEN NO_DATA_FOUND THEN
+ 15  DBMS_OUTPUT.PUT_LINE (chr(10)||chr(10)||chr(10)||chr(9)||
+ 16  'There is no such student');
+ 17  END;
+ 18  /
+Enter value for sv_student_id: rem probar con el alumno 110
+old   2: v_student_id NUMBER := &sv_student_id;
+new   2: v_student_id NUMBER := rem probar con el alumno 110;
+v_student_id NUMBER := rem probar con el alumno 110;
+                           *
+ERROR at line 2:
+ORA-06550: line 2, column 28: 
+PLS-00103: Encountered the symbol "PROBAR" when expecting one of the following: 
+. ( * @ % & = - + ; < / > at in is mod remainder not rem 
+<an exponent (**)> <> or != or ~= >= <= <> and or like like2 
+like4 likec between || multiset member submultiset 
+
+
+SQL> rem probar con 121
+SQL> rem probar con 125
+SQL> rem probar  con 134
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,16]
+SQL> -- ch01_1a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_num NUMBER := &&sv_num;
+  3  v_result NUMBER;
+  4  BEGIN
+  5  v_result := POWER(v_num, 2);
+  6  DBMS_OUTPUT.PUT_LINE ('The value of v_result is: '||
+  7  v_result);
+  8  END;
+  9  /
+Enter value for sv_num: rem [ROSENZWEIG &  RAKHIMOV,2009,17]
+old   2: v_num NUMBER := &&sv_num;
+new   2: v_num NUMBER := rem [ROSENZWEIG &  RAKHIMOV,2009,17];
+SP2-0552: Bind variable "RAKHIMOV" not declared.
+SQL> -- ch01_2a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_day VARCHAR2(20);
+  3  BEGIN
+  4  v_day := TO_CHAR(SYSDATE, 'Day');
+  5  DBMS_OUTPUT.PUT_LINE ('Today is '||v_day);
+  6  END;
+  7  /
+Today is Friday                                                                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,18]
+SQL> -- ch01_2b.sql, version 2.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_day VARCHAR2(20);
+  3  BEGIN
+  4  v_day := TO_CHAR(SYSDATE, 'Day, HH24:MI');
+  5  DBMS_OUTPUT.PUT_LINE ('Today is '|| v_day);
+  6  END;
+  7  /
+Today is Friday   , 03:04                                                                                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> -- ch01_2b.sql, version 2.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_day VARCHAR2(20);
+  3  BEGIN
+  4  v_day := TO_CHAR(SYSDATE, 'DY, HH24:MI');
+  5  DBMS_OUTPUT.PUT_LINE ('Today is '|| v_day);
+  6  END;
+  7  /
+Today is FRI, 03:04                                                                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  v_day VARCHAR2(20);
+  3  BEGIN
+  4  v_day := TO_CHAR(SYSDATE, 'DY, HH24:MI');
+  5  DBMS_OUTPUT.PUT_LINE ('Today is '|| v_day);
+  6  END;
+  7  /
+Today is FRI, 03:04                                                                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  v_day VARCHAR2(20);
+  3  BEGIN
+  4  v_day := TO_CHAR(SYSDATE, 'SSSSS, HH24:MI');
+  5  DBMS_OUTPUT.PUT_LINE ('Today is '|| v_day);
+  6  END;
+  7  /
+Today is 11046, 03:04                                                                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  v_day VARCHAR2(20);
+  3  BEGIN
+  4  v_day := TO_CHAR(SYSDATE, 'W, HH24:MI');
+  5  DBMS_OUTPUT.PUT_LINE ('Today is '|| v_day);
+  6  END;
+  7  /
+Today is 2, 03:04                                                                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> DECLARE
+  2  v_day VARCHAR2(20);
+  3  BEGIN
+  4  v_day := TO_CHAR(SYSDATE, 'WW, HH24:MI');
+  5  DBMS_OUTPUT.PUT_LINE ('Today is '|| v_day);
+  6  END;
+  7  /
+Today is 24, 03:04                                                                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  v_day VARCHAR2(20);
+  3  BEGIN
+  4  v_day := TO_CHAR(SYSDATE, 'TS, HH24:MI');
+  5  DBMS_OUTPUT.PUT_LINE ('Today is '|| v_day);
+  6  END;
+  7  /
+Today is 3:04:06 AM, 03:04                                                                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  v_day VARCHAR2(20);
+  3  BEGIN
+  4  v_day := TO_CHAR(SYSDATE, 'DDD, HH24:MI');
+  5  DBMS_OUTPUT.PUT_LINE ('Today is '|| v_day);
+  6  END;
+  7  /
+Today is 162, 03:04                                                                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> DECLARE
+  2  v_day VARCHAR2(60);
+  3  BEGIN
+  4  v_day := TO_CHAR(SYSDATE, 'DL');
+  5  DBMS_OUTPUT.PUT_LINE ('Today is '|| v_day);
+  6  END;
+  7  /
+Today is Friday, June 11, 2021                                                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> SPOOL OFF

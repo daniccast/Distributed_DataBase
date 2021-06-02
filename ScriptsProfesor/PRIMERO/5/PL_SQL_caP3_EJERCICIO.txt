@@ -1,0 +1,1286 @@
+SQL> 
+SQL> rem ROSENZWEIG,B &  RAKHIMOV,E (2009).Oracle© PL/SQLTby Example,Boston,MA,USA:Perarson.
+SQL> rem ejercicios cap PL/SQL CONCEPTS
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set colsep '|=|'
+SQL> set underline =
+SQL> set null s/Datos
+SQL> set feedback on
+SQL> 
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,42]
+SQL> -- ch03_1a.sql
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_average_cost VARCHAR2(10);
+  3  BEGIN
+  4  SELECT TO_CHAR(AVG(cost), '$9,999.99')
+  5  INTO v_average_cost
+  6  FROM course;
+  7  DBMS_OUTPUT.PUT_LINE( chr(10)||chr(9)||'The average cost of a '||
+  8  'course in the CTA program is '||
+  9  v_average_cost);
+ 10  END;
+ 11  /
+
+	The average cost of a course in the CTA program is  $1,228.45                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> -------
+SQL> -- ch03_2a.sql
+SQL> DECLARE
+  2  v_city zipcode.city%TYPE;
+  3  BEGIN
+  4  SELECT 'COLUMBUS'
+  5  INTO v_city
+  6  FROM dual;
+  7  UPDATE zipcode
+  8  SET city = v_city
+  9  WHERE ZIP = 43224;
+ 10  END;
+ 11  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> -- ch03_3a.sql
+SQL> DECLARE
+  2  v_zip zipcode.zip%TYPE;
+  3  v_user zipcode.created_by%TYPE;
+  4  v_date zipcode.created_date%TYPE;
+  5  BEGIN
+  6  SELECT 43438, USER, SYSDATE
+  7  INTO v_zip, v_user, v_date
+  8  FROM dual;
+  9  INSERT INTO zipcode
+ 10  (ZIP, CREATED_BY ,CREATED_DATE, MODIFIED_BY,
+ 11  MODIFIED_DATE
+ 12  )
+ 13  VALUES(v_zip, v_user, v_date, v_user, v_date);
+ 14  END;
+ 15  /
+DECLARE
+*
+ERROR at line 1:
+ORA-00001: unique constraint (STUDENT.ZIP_PK) violated 
+ORA-06512: at line 9 
+
+
+SQL> ------
+SQL> -- ch03_4a.sql
+SQL> DECLARE
+  2  v_max_id number;
+  3  BEGIN
+  4  SELECT MAX(student_id)
+  5  INTO v_max_id
+  6  FROM student;
+  7  INSERT into student
+  8  (student_id, last_name, zip,
+  9  created_by, created_date,
+ 10  modified_by, modified_date,
+ 11  registration_date
+ 12  )
+ 13  VALUES (STUDENT_ID_SEQ.NEXTVAL, 'Rosenzweig',
+ 14  11238, 'BROSENZ ', '01-JAN-99',
+ 15  'BROSENZ', '01-01-99', '01-01-99'
+ 16  );
+ 17  END;
+ 18  /
+DECLARE
+*
+ERROR at line 1:
+ORA-01843: not a valid month 
+ORA-06512: at line 7 
+
+
+SQL> SELECT student_id
+  2  FROM student;
+
+STUDENT_ID                                                                                                                        
+==========                                                                                                                        
+       102                                                                                                                        
+       103                                                                                                                        
+       104                                                                                                                        
+       105                                                                                                                        
+       106                                                                                                                        
+       107                                                                                                                        
+       108                                                                                                                        
+       109                                                                                                                        
+       110                                                                                                                        
+       111                                                                                                                        
+       112                                                                                                                        
+       113                                                                                                                        
+       114                                                                                                                        
+       117                                                                                                                        
+       118                                                                                                                        
+       119                                                                                                                        
+       120                                                                                                                        
+       121                                                                                                                        
+       122                                                                                                                        
+       123                                                                                                                        
+       124                                                                                                                        
+       127                                                                                                                        
+       128                                                                                                                        
+       129                                                                                                                        
+       130                                                                                                                        
+       133                                                                                                                        
+       134                                                                                                                        
+       135                                                                                                                        
+       136                                                                                                                        
+       137                                                                                                                        
+       138                                                                                                                        
+       139                                                                                                                        
+       140                                                                                                                        
+       141                                                                                                                        
+       142                                                                                                                        
+       143                                                                                                                        
+       144                                                                                                                        
+       145                                                                                                                        
+       146                                                                                                                        
+       147                                                                                                                        
+       148                                                                                                                        
+       149                                                                                                                        
+       150                                                                                                                        
+       151                                                                                                                        
+       152                                                                                                                        
+       153                                                                                                                        
+       154                                                                                                                        
+       156                                                                                                                        
+       157                                                                                                                        
+       158                                                                                                                        
+       159                                                                                                                        
+       160                                                                                                                        
+       161                                                                                                                        
+       162                                                                                                                        
+       163                                                                                                                        
+       164                                                                                                                        
+       165                                                                                                                        
+       166                                                                                                                        
+       167                                                                                                                        
+       168                                                                                                                        
+       169                                                                                                                        
+       170                                                                                                                        
+       171                                                                                                                        
+       172                                                                                                                        
+       173                                                                                                                        
+       174                                                                                                                        
+       175                                                                                                                        
+       176                                                                                                                        
+       178                                                                                                                        
+       179                                                                                                                        
+       180                                                                                                                        
+       181                                                                                                                        
+       182                                                                                                                        
+       184                                                                                                                        
+       185                                                                                                                        
+       186                                                                                                                        
+       187                                                                                                                        
+       188                                                                                                                        
+       189                                                                                                                        
+       190                                                                                                                        
+       191                                                                                                                        
+       192                                                                                                                        
+       193                                                                                                                        
+       194                                                                                                                        
+       195                                                                                                                        
+       196                                                                                                                        
+       197                                                                                                                        
+       198                                                                                                                        
+       199                                                                                                                        
+       200                                                                                                                        
+       201                                                                                                                        
+       202                                                                                                                        
+       203                                                                                                                        
+       204                                                                                                                        
+       205                                                                                                                        
+       206                                                                                                                        
+
+STUDENT_ID                                                                                                                        
+==========                                                                                                                        
+       207                                                                                                                        
+       208                                                                                                                        
+       209                                                                                                                        
+       210                                                                                                                        
+       211                                                                                                                        
+       212                                                                                                                        
+       214                                                                                                                        
+       215                                                                                                                        
+       216                                                                                                                        
+       217                                                                                                                        
+       218                                                                                                                        
+       220                                                                                                                        
+       221                                                                                                                        
+       223                                                                                                                        
+       224                                                                                                                        
+       225                                                                                                                        
+       227                                                                                                                        
+       228                                                                                                                        
+       229                                                                                                                        
+       230                                                                                                                        
+       232                                                                                                                        
+       233                                                                                                                        
+       234                                                                                                                        
+       235                                                                                                                        
+       236                                                                                                                        
+       237                                                                                                                        
+       238                                                                                                                        
+       240                                                                                                                        
+       241                                                                                                                        
+       242                                                                                                                        
+       243                                                                                                                        
+       244                                                                                                                        
+       245                                                                                                                        
+       246                                                                                                                        
+       247                                                                                                                        
+       248                                                                                                                        
+       250                                                                                                                        
+       251                                                                                                                        
+       252                                                                                                                        
+       253                                                                                                                        
+       254                                                                                                                        
+       256                                                                                                                        
+       257                                                                                                                        
+       258                                                                                                                        
+       259                                                                                                                        
+       260                                                                                                                        
+       261                                                                                                                        
+       262                                                                                                                        
+       263                                                                                                                        
+       264                                                                                                                        
+       265                                                                                                                        
+       266                                                                                                                        
+       267                                                                                                                        
+       268                                                                                                                        
+       269                                                                                                                        
+       270                                                                                                                        
+       271                                                                                                                        
+       272                                                                                                                        
+       273                                                                                                                        
+       274                                                                                                                        
+       275                                                                                                                        
+       276                                                                                                                        
+       277                                                                                                                        
+       278                                                                                                                        
+       279                                                                                                                        
+       280                                                                                                                        
+       281                                                                                                                        
+       282                                                                                                                        
+       283                                                                                                                        
+       284                                                                                                                        
+       285                                                                                                                        
+       286                                                                                                                        
+       288                                                                                                                        
+       289                                                                                                                        
+       290                                                                                                                        
+       291                                                                                                                        
+       292                                                                                                                        
+       293                                                                                                                        
+       294                                                                                                                        
+       296                                                                                                                        
+       298                                                                                                                        
+       299                                                                                                                        
+       300                                                                                                                        
+       301                                                                                                                        
+       302                                                                                                                        
+       303                                                                                                                        
+       304                                                                                                                        
+       305                                                                                                                        
+       306                                                                                                                        
+       307                                                                                                                        
+       309                                                                                                                        
+       310                                                                                                                        
+       311                                                                                                                        
+       312                                                                                                                        
+       313                                                                                                                        
+       314                                                                                                                        
+
+STUDENT_ID                                                                                                                        
+==========                                                                                                                        
+       315                                                                                                                        
+       317                                                                                                                        
+       319                                                                                                                        
+       320                                                                                                                        
+       321                                                                                                                        
+       322                                                                                                                        
+       323                                                                                                                        
+       324                                                                                                                        
+       325                                                                                                                        
+       326                                                                                                                        
+       328                                                                                                                        
+       330                                                                                                                        
+       331                                                                                                                        
+       332                                                                                                                        
+       333                                                                                                                        
+       334                                                                                                                        
+       335                                                                                                                        
+       336                                                                                                                        
+       337                                                                                                                        
+       338                                                                                                                        
+       339                                                                                                                        
+       340                                                                                                                        
+       341                                                                                                                        
+       342                                                                                                                        
+       343                                                                                                                        
+       344                                                                                                                        
+       345                                                                                                                        
+       346                                                                                                                        
+       347                                                                                                                        
+       348                                                                                                                        
+       349                                                                                                                        
+       351                                                                                                                        
+       352                                                                                                                        
+       353                                                                                                                        
+       355                                                                                                                        
+       356                                                                                                                        
+       357                                                                                                                        
+       358                                                                                                                        
+       359                                                                                                                        
+       360                                                                                                                        
+       361                                                                                                                        
+       362                                                                                                                        
+       363                                                                                                                        
+       364                                                                                                                        
+       365                                                                                                                        
+       366                                                                                                                        
+       367                                                                                                                        
+       368                                                                                                                        
+       369                                                                                                                        
+       370                                                                                                                        
+       371                                                                                                                        
+       372                                                                                                                        
+       373                                                                                                                        
+       374                                                                                                                        
+       375                                                                                                                        
+       376                                                                                                                        
+       378                                                                                                                        
+       379                                                                                                                        
+       380                                                                                                                        
+       381                                                                                                                        
+       382                                                                                                                        
+       383                                                                                                                        
+       384                                                                                                                        
+       385                                                                                                                        
+       386                                                                                                                        
+       387                                                                                                                        
+       388                                                                                                                        
+       389                                                                                                                        
+       390                                                                                                                        
+       391                                                                                                                        
+       392                                                                                                                        
+       393                                                                                                                        
+       394                                                                                                                        
+       396                                                                                                                        
+       397                                                                                                                        
+       399                                                                                                                        
+       401                                                                                                                        
+       402                                                                                                                        
+       403                                                                                                                        
+       405                                                                                                                        
+       406                                                                                                                        
+       409                                                                                                                        
+       411                                                                                                                        
+       415                                                                                                                        
+
+276 rows selected.
+
+SQL> 
+SQL> rem cambiar formato de lenguaje
+SQL> 
+SQL> SELECT MAX(student_id)
+  2  FROM student;
+
+MAX(STUDENT_ID)                                                                                                                   
+===============                                                                                                                   
+            415                                                                                                                   
+
+1 row selected.
+
+SQL> 
+SQL> DECLARE
+  2  v_max_id number;
+  3  BEGIN
+  4  SELECT MAX(student_id)
+  5  INTO v_max_id
+  6  FROM student;
+  7  INSERT into student
+  8  (student_id, last_name, zip,
+  9  created_by, created_date,
+ 10  modified_by, modified_date,
+ 11  registration_date
+ 12  )
+ 13  VALUES (STUDENT_ID_SEQ.NEXTVAL, 'Ordo¤ez',
+ 14  11238, 'Dayann ', '31-JAN-21',
+ 15  'Dayann', '31-JAN-21', '31-JAN-21'
+ 16  );
+ 17  END;
+ 18  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> SELECT student_id, first_name, last_name, registration_date, created_by, created_date
+  2  FROM student
+  3  ORDER BY 1;
+
+STUDENT_ID|=|FIRST_NAME               |=|LAST_NAME                |=|REGISTRAT|=|CREATED_BY                    |=|CREATED_D       
+==========|=|=========================|=|=========================|=|=========|=|==============================|=|=========       
+       102|=|Fred                     |=|Crocitto                 |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       103|=|J.                       |=|Landry                   |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       104|=|Laetia                   |=|Enison                   |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       105|=|A                        |=|Moskowitz                |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       106|=|Judith                   |=|Olvsade                  |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       107|=|Catherine                |=|Mierzwa                  |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       108|=|Judy                     |=|Sethi                    |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       109|=|Larry                    |=|Walter                   |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       110|=|Maria                    |=|Martin                   |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       111|=|Peggy                    |=|Noviello                 |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       112|=|Thomas                   |=|Thomas                   |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       113|=|A                        |=|Kulina                   |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       114|=|Winsome                  |=|Laporte                  |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       117|=|N                        |=|Kuehn                    |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       118|=|Hiedi                    |=|Lopez                    |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       119|=|Mardig                   |=|Abdou                    |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       120|=|Ralph                    |=|Alexander                |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       121|=|Sean                     |=|Pineda                   |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       122|=|Julita                   |=|Lippen                   |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       123|=|Pierre                   |=|Radicola                 |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       124|=|Daniel                   |=|Wicelinski               |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       127|=|Gary                     |=|Aung                     |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       128|=|Jeff                     |=|Runyan                   |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       129|=|Omaira                   |=|Grant                    |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       130|=|Lula                     |=|Oates                    |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       133|=|James                    |=|Reed                     |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       134|=|A                        |=|Torres                   |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       135|=|Michelle                 |=|Masser                   |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       136|=|Hazel                    |=|Lasseter                 |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       137|=|James                    |=|Miller                   |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       138|=|John                     |=|Smith                    |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       139|=|A                        |=|Garshman                 |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       140|=|Derrick                  |=|Baltazar                 |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       141|=|Robert                   |=|Boyd                     |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       142|=|Monica                   |=|Waldman                  |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       143|=|Gerard                   |=|Biers                    |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       144|=|David                    |=|Essner                   |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       145|=|Paul                     |=|Lefkowitz                |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       146|=|Joseph                   |=|German                   |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       147|=|Judy                     |=|Cahouet                  |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       148|=|D.                       |=|Orent                    |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       149|=|Judith                   |=|Prochaska                |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       150|=|Regina                   |=|Gates                    |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       151|=|A                        |=|Sheppard                 |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       152|=|Thomas                   |=|Edwards                  |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       153|=|Mrudula                  |=|Philpotts                |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       154|=|Dawn                     |=|Dennis                   |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       156|=|Scott                    |=|Grant                    |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       157|=|Shirley                  |=|Jameson                  |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       158|=|Roy                      |=|Limate                   |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       159|=|Thomas                   |=|Edwards                  |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       160|=|John T.                  |=|Beitler                  |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       161|=|Eilene                   |=|Grant                    |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       162|=|Genny                    |=|Andrew                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       163|=|Nicole                   |=|Gillen                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       164|=|Sylvia                   |=|Perrin                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       165|=|Peter                    |=|Daly                     |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       166|=|May                      |=|Jodoin                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       167|=|Jim                      |=|Joas                     |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       168|=|Sally                    |=|Naso                     |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       169|=|Frantz                   |=|McLean                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       170|=|P.                       |=|Balterzar                |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       171|=|Denise                   |=|Brownstein               |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       172|=|Maria                    |=|Arias                    |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       173|=|Oscar                    |=|McGill                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       174|=|Michael                  |=|Brown                    |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       175|=|Debra                    |=|Boyce                    |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       176|=|A                        |=|Satterfield              |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       178|=|Ricardo                  |=|Kurtz                    |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       179|=|Simon                    |=|Ramesh                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       180|=|E.A.                     |=|Torres                   |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       181|=|A                        |=|Bullock                  |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       182|=|Jeffrey                  |=|Delbrun                  |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       184|=|Salewa                   |=|Zuckerberg               |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       185|=|Dennis                   |=|Mehta                    |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       186|=|Christine                |=|Sheppard                 |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       187|=|O.                       |=|Garnes                   |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       188|=|Phil                     |=|Gilloon                  |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       189|=|Deborah                  |=|Reyes                    |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       190|=|A                        |=|Affinito                 |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       191|=|Steven                   |=|M. Orent                 |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       192|=|Frank                    |=|Viotty                   |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       193|=|A                        |=|Jamerncy                 |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       194|=|Verona                   |=|Grant                    |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       195|=|Regina                   |=|Bose                     |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       196|=|Victor                   |=|Meshaj                   |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       197|=|J.                       |=|Dalvi                    |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       198|=|Edwin                    |=|Allende                  |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       199|=|J.                       |=|Segall                   |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       200|=|Gene                     |=|Bresser, HR Rep.         |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       201|=|Michael                  |=|Lefbowitz                |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       202|=|Mary                     |=|Axch                     |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       203|=|A                        |=|Cook                     |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       204|=|A                        |=|Griffen                  |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       205|=|A                        |=|Hutheesing               |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       206|=|Freedon                  |=|annunziato               |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+
+STUDENT_ID|=|FIRST_NAME               |=|LAST_NAME                |=|REGISTRAT|=|CREATED_BY                    |=|CREATED_D       
+==========|=|=========================|=|=========================|=|=========|=|==============================|=|=========       
+       207|=|A                        |=|Montanez                 |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       208|=|A                        |=|Tucker                   |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       209|=|Lloyd                    |=|Kellam                   |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       210|=|David                    |=|Thares                   |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       211|=|Jenny                    |=|Goldsmith                |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       212|=|A                        |=|Robichaud                |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       214|=|Yvonne                   |=|Williams                 |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       215|=|Reynaldo                 |=|Chatman                  |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       216|=|Madhav                   |=|Dusenberry               |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       217|=|Jeffrey                  |=|Citron                   |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       218|=|Eric                     |=|Da Silva                 |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       220|=|Robert                   |=|Segall                   |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       221|=|Sheradha                 |=|Malone                   |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       223|=|Frank                    |=|Pace                     |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       224|=|M.                       |=|Diokno                   |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       225|=|Edgar                    |=|Moffat                   |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       227|=|A                        |=|Heedles                  |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       228|=|Mohamed                  |=|Valentine                |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       229|=|A                        |=|Lopez                    |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       230|=|George                   |=|Kocka                    |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       232|=|Janet                    |=|Jung                     |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       233|=|Kathleen                 |=|Mulroy                   |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       234|=|Joel                     |=|Brendler                 |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       235|=|Michael                  |=|Carcia                   |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       236|=|Gerry                    |=|Tripp                    |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       237|=|Rommel                   |=|Frost                    |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       238|=|Roger                    |=|Snow                     |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       240|=|Z.A.                     |=|Scrittorale              |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       241|=|Joseph                   |=|Yourish                  |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       242|=|Daniel                   |=|Ordes                    |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       243|=|A                        |=|Roberts                  |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       244|=|Sarah                    |=|Wilson                   |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       245|=|Irv                      |=|Dalvi                    |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       246|=|Meryl                    |=|Owens                    |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       247|=|Frank                    |=|Bunnell                  |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       248|=|Tamara                   |=|Zapulla                  |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       250|=|Evan                     |=|Fielding                 |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       251|=|Catherine                |=|Frangopoulos             |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       252|=|Nana                     |=|Barogh                   |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       253|=|Walter                   |=|Boremmann                |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       254|=|Melvina                  |=|Chamnonkool              |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       256|=|Lorrane                  |=|Velasco                  |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       257|=|Suzanne M.               |=|Abid                     |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       258|=|Suzanna                  |=|Velasco                  |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       259|=|George                   |=|Merriman                 |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       260|=|Jean                     |=|Griffith                 |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       261|=|Vinnie                   |=|Moon                     |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       262|=|Donna                    |=|Walston                  |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       263|=|Radharam                 |=|King                     |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       264|=|Lorraine                 |=|Harty                    |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       265|=|A                        |=|Rothstein                |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       266|=|Kate                     |=|Page                     |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       267|=|Julius                   |=|Kwong                    |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       268|=|Ronald                   |=|Tangaribuan              |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       269|=|Sharon                   |=|Thompson                 |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       270|=|Charles                  |=|Caro                     |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       271|=|Jose                     |=|Benitez                  |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       272|=|Kevin                    |=|Porch                    |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       273|=|Hedy                     |=|Naso                     |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       274|=|John                     |=|De Simone                |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       275|=|George                   |=|Ross                     |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       276|=|Florence                 |=|Valamas                  |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       277|=|Evelyn                   |=|Liggons                  |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       278|=|Thomas E.                |=|La Blank                 |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       279|=|George                   |=|Korka                    |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       280|=|A                        |=|Engongoro                |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       281|=|Virginia                 |=|Ocampo                   |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       282|=|Jonathan                 |=|Jaele                    |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       283|=|A                        |=|Perkins                  |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       284|=|Salewa                   |=|Lindeman                 |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       285|=|Paul                     |=|Sikinger                 |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       286|=|Robin                    |=|Kelly                    |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       288|=|Rosemary                 |=|Ellman                   |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       289|=|Shirley                  |=|Murray                   |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       290|=|A                        |=|Robles                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       291|=|D.                       |=|Dewitt                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       292|=|A                        |=|Cadet                    |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       293|=|Frank                    |=|M. Orent                 |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       294|=|Yvonne                   |=|Winnicki                 |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       296|=|Mike                     |=|Madej                    |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       298|=|Paula                    |=|Valentine                |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       299|=|A                        |=|Saluja                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       300|=|Frances                  |=|Lawson                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       301|=|A                        |=|Dunkon                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       302|=|Rita                     |=|Archor                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       303|=|George                   |=|Milano                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       304|=|Kardik                   |=|Guarino                  |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       305|=|Preston                  |=|Larcia                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       306|=|Norman                   |=|Callender                |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       307|=|Salondra                 |=|Galik                    |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       309|=|Carlos                   |=|Airall                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       310|=|Joseph                   |=|Jimenes                  |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       311|=|Henry                    |=|Masser                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       312|=|Maria                    |=|Allende                  |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       313|=|John                     |=|Velie                    |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       314|=|A                        |=|Dermody                  |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+
+STUDENT_ID|=|FIRST_NAME               |=|LAST_NAME                |=|REGISTRAT|=|CREATED_BY                    |=|CREATED_D       
+==========|=|=========================|=|=========================|=|=========|=|==============================|=|=========       
+       315|=|Daniel                   |=|McHowell                 |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       317|=|Cathy                    |=|Austin                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       319|=|George                   |=|Eakheit                  |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       320|=|Mark                     |=|Miller                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       321|=|Jeannette                |=|Smagler                  |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       322|=|Oscar                    |=|Archer                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       323|=|Gilbert                  |=|Ginestra                 |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       324|=|Price                    |=|Marten                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       325|=|Pat                      |=|Puetrino                 |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       326|=|Piotr                    |=|Padel                    |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       328|=|Lynwood A.               |=|Thorton                  |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       330|=|John                     |=|Tabs                     |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       331|=|Mei-Wah                  |=|Zopf                     |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       332|=|Paula                    |=|Mwangi                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       333|=|A                        |=|Ward                     |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       334|=|Sarah                    |=|Annina                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       335|=|Jane                     |=|Jackson                  |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       336|=|Steven                   |=|Gallagher                |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       337|=|Preston                  |=|Cross                    |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       338|=|Helga                    |=|Towle                    |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       339|=|Piang                    |=|Nyziak                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       340|=|David                    |=|Eng                      |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       341|=|Kevin                    |=|Porch                    |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       342|=|Marianne                 |=|De Armas                 |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       343|=|Ray                      |=|Schafer                  |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       344|=|R.                       |=|Sprouse                  |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       345|=|Peter                    |=|Carey                    |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       346|=|Joane                    |=|Buckberg                 |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       347|=|Edith                    |=|Daly                     |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       348|=|Morty                    |=|Miller                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       349|=|Margaret                 |=|Mandel                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       351|=|A                        |=|Galik                    |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       352|=|Debra                    |=|Shah                     |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       353|=|Paul                     |=|Intal                    |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       355|=|Romeo                    |=|Ittoop                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       356|=|John                     |=|Ancean                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       357|=|Tom                      |=|Vargas                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       358|=|Valerie                  |=|Avia                     |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       359|=|Fermin                   |=|Galik                    |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       360|=|Calvin                   |=|Kiraly                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       361|=|Rawan                    |=|Rosenberg                |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       362|=|Yu                       |=|Sentell                  |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       363|=|A                        |=|Hagel                    |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       364|=|Howard                   |=|Leopta                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       365|=|Kathleen                 |=|Mastandora               |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       366|=|Gabriel                  |=|Smith                    |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       367|=|Raymond                  |=|Cheevens                 |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       368|=|Kevin                    |=|Lin                      |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       369|=|Lorraine                 |=|Tucker                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       370|=|John                     |=|Mithane                  |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       371|=|Craig                    |=|Anglin                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       372|=|Zalman                   |=|Draquez                  |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       373|=|Reeva                    |=|Yeroushalmi              |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       374|=|Leonard                  |=|Millstein                |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       375|=|Jack                     |=|Kasperovich              |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       376|=|Lorelei                  |=|McNeal                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       378|=|William                  |=|Gallo                    |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       379|=|Craig                    |=|Padron                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       380|=|Joel                     |=|Krot                     |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       381|=|A                        |=|Simmons                  |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       382|=|Michael                  |=|Miroff                   |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       383|=|Roger                    |=|Cowie                    |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       384|=|A                        |=|Chirichella              |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       385|=|Yvonne                   |=|Allende                  |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       386|=|Sengita                  |=|MacDonald, Jr.           |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       387|=|Paul                     |=|Braun                    |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       388|=|A                        |=|Bathmanapan              |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       389|=|Shirley                  |=|Leung                    |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       390|=|V.                       |=|Greenberg                |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       391|=|Rafael A.                |=|Torres                   |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       392|=|V.                       |=|Saliternan               |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       393|=|Melvin                   |=|Martin                   |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       394|=|Vera                     |=|Wetcel                   |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       396|=|James E.                 |=|Norman                   |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       397|=|Margaret                 |=|Lloyd                    |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       399|=|Jerry                    |=|Abdou                    |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       401|=|s/Datos                  |=|Tashi                    |=|01-JAN-99|=|STUDENTA                      |=|01-JAN-99       
+       402|=|s/Datos                  |=|Tashi                    |=|01-JAN-99|=|STUDENTA                      |=|01-JAN-99       
+       403|=|s/Datos                  |=|Sonam                    |=|01-JAN-99|=|STUDENTB                      |=|01-JAN-99       
+       405|=|s/Datos                  |=|Tashi                    |=|01-JAN-99|=|STUDENTA                      |=|01-JAN-99       
+       406|=|s/Datos                  |=|Sonam                    |=|01-JAN-99|=|STUDENTB                      |=|01-JAN-99       
+       409|=|s/Datos                  |=|Tashi                    |=|01-JAN-99|=|STUDENT                       |=|11-JUN-21       
+       411|=|s/Datos                  |=|Sonam                    |=|01-JAN-99|=|STUDENT                       |=|11-JUN-21       
+       415|=|John                     |=|Smith                    |=|11-JUN-21|=|STUDENT                       |=|11-JUN-21       
+       422|=|s/Datos                  |=|Ordo¤ez                  |=|31-JAN-21|=|STUDENT                       |=|11-JUN-21       
+
+277 rows selected.
+
+SQL> 
+SQL> DECLARE
+  2  v_max_id number;
+  3  BEGIN
+  4  SELECT MAX(student_id)
+  5  INTO v_max_id
+  6  FROM student;
+  7  INSERT into student
+  8  (student_id, first_name, last_name, zip,
+  9  created_by, created_date,
+ 10  modified_by, modified_date,
+ 11  registration_date
+ 12  )
+ 13  VALUES (STUDENT_ID_SEQ.NEXTVAL,' Dayann','Ordo¤ez',
+ 14  11238, 'Dayann ', '31-JAN-21',
+ 15  'Dayann', '31-JAN-21', '31-JAN-21'
+ 16  );
+ 17  END;
+ 18  /
+
+PL/SQL procedure successfully completed.
+
+SQL> -------------------
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,44]
+SQL> -- ch03_3a.sql
+SQL> CREATE TABLE test01 (col1 number);
+CREATE TABLE test01 (col1 number)
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> CREATE SEQUENCE test_seq
+  2  INCREMENT BY 5;
+CREATE SEQUENCE test_seq
+                *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> BEGIN
+  2  INSERT INTO test01
+  3  VALUES (test_seq.NEXTVAL);
+  4  END;
+  5  /
+
+PL/SQL procedure successfully completed.
+
+SQL> Select * FROM test01;
+
+      COL1                                                                                                                        
+==========                                                                                                                        
+       101                                                                                                                        
+
+1 row selected.
+
+SQL> SELECT test_seq.CURRVAL FROM DUAL;
+
+   CURRVAL                                                                                                                        
+==========                                                                                                                        
+       101                                                                                                                        
+
+1 row selected.
+
+SQL> SELECT test_seq.NEXTVAL FROM DUAL;
+
+   NEXTVAL                                                                                                                        
+==========                                                                                                                        
+       106                                                                                                                        
+
+1 row selected.
+
+SQL> --------------
+SQL> -- ch03_5a.sql
+SQL> DECLARE
+  2  v_user student.created_by%TYPE;
+  3  v_date student.created_date%TYPE;
+  4  BEGIN
+  5  SELECT USER, sysdate
+  6  INTO v_user, v_date
+  7  FROM dual;
+  8  INSERT INTO student
+  9  (student_id, last_name, zip,
+ 10  created_by, created_date, modified_by,
+ 11  modified_date, registration_date
+ 12  )
+ 13  VALUES (student_id_seq.nextval, 'Smith',
+ 14  11238, v_user, v_date, v_user, v_date,
+ 15  v_date
+ 16  );
+ 17  END;
+ 18  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> SELECT student_id_seq.CURRVAL FROM dual;
+
+   CURRVAL                                                                                                                        
+==========                                                                                                                        
+       426                                                                                                                        
+
+1 row selected.
+
+SQL> --------------------------------------------------------
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,46]
+SQL> 
+SQL> -- ch03_6a.sql
+SQL> BEGIN
+  2  -- STEP 1
+  3  UPDATE course
+  4  SET cost = cost - (cost * 0.10)
+  5  WHERE prerequisite IS NULL;
+  6  -- STEP 2
+  7  UPDATE course
+  8  SET cost = cost + (cost * 0.10)
+  9  WHERE prerequisite IS NOT NULL;
+ 10  END;
+ 11  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> SELECT COURSE_NO, DESCRIPTION, COST, PREREQUISITE FROM COURSE;
+
+ COURSE_NO|=|DESCRIPTION                                       |=|      COST|=|PREREQUISITE                                       
+==========|=|==================================================|=|==========|=|============                                       
+        10|=|DP Overview                                       |=|    1102.5|=|s/Datos                                            
+        20|=|Intro to Computers                                |=|    1102.5|=|s/Datos                                            
+        25|=|Intro to Programming                              |=|    1347.5|=|         140                                       
+        80|=|Structured Programming Techniques                 |=|    1787.5|=|         204                                       
+       100|=|Hands-On Windows                                  |=|    1347.5|=|          20                                       
+       120|=|Intro to Java Programming                         |=|    1347.5|=|          80                                       
+       122|=|Intermediate Java Programming                     |=|    1347.5|=|         120                                       
+       124|=|Advanced Java Programming                         |=|    1347.5|=|         122                                       
+       125|=|JDeveloper                                        |=|    1347.5|=|         122                                       
+       130|=|Intro to Unix                                     |=|    1347.5|=|         310                                       
+       132|=|Basics of Unix Admin                              |=|    1347.5|=|         130                                       
+       134|=|Advanced Unix Admin                               |=|    1347.5|=|         132                                       
+       135|=|Unix Tips and Techniques                          |=|    1237.5|=|         134                                       
+       140|=|Structured Analysis                               |=|    1347.5|=|          20                                       
+       142|=|Project Management                                |=|    1347.5|=|          20                                       
+       144|=|Database Design                                   |=|    1347.5|=|         420                                       
+       145|=|Internet Protocols                                |=|    1347.5|=|         310                                       
+       146|=|Java for C/C++ Programmers                        |=|    1102.5|=|s/Datos                                            
+       147|=|GUI Programming                                   |=|    1347.5|=|          20                                       
+       204|=|Intro to SQL                                      |=|    1347.5|=|          20                                       
+       210|=|Oracle Tools                                      |=|    1347.5|=|         220                                       
+       220|=|PL/SQL Programming                                |=|    1347.5|=|          80                                       
+       230|=|Intro to Internet                                 |=|    1237.5|=|          10                                       
+       240|=|Intro to the Basic Language                       |=|    1237.5|=|          25                                       
+       310|=|Operating Systems                                 |=|    1102.5|=|s/Datos                                            
+       330|=|Network Administration                            |=|    1347.5|=|         130                                       
+       350|=|JDeveloper Lab                                    |=|    1347.5|=|         125                                       
+       420|=|Database System Principles                        |=|    1347.5|=|          25                                       
+       430|=|JDeveloper Techniques                             |=|    1347.5|=|         350                                       
+       450|=|DB Programming in Java                            |=|s/Datos   |=|         350                                       
+
+30 rows selected.
+
+SQL> SELECT DISTINCT COST FROM COURSE;
+
+      COST                                                                                                                        
+==========                                                                                                                        
+s/Datos                                                                                                                           
+    1102.5                                                                                                                        
+    1787.5                                                                                                                        
+    1237.5                                                                                                                        
+    1347.5                                                                                                                        
+
+5 rows selected.
+
+SQL> 
+SQL> rem deshace los cambios
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> rem hace los cambios permanentes
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> ------------------------------------------------------------
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,48]
+SQL> -- ch03_7a.sql
+SQL> BEGIN
+  2  INSERT INTO student
+  3  ( student_id, Last_name, zip, registration_date,
+  4  created_by, created_date, modified_by,
+  5  modified_date
+  6  )
+  7  VALUES ( student_id_seq.nextval, 'Tashi', 10015,
+  8  '01-JAN-99', 'STUDENTA', '01-JAN-99',
+  9  'STUDENTA','01-JAN-99'
+ 10  );
+ 11  SAVEPOINT A;
+ 12  INSERT INTO student
+ 13  ( student_id, Last_name, zip, registration_date,
+ 14  created_by, created_date, modified_by,
+ 15  modified_date
+ 16  )
+ 17  VALUES (student_id_seq.nextval, 'Sonam', 10015,
+ 18  '01-JAN-99', 'STUDENTB','01-JAN-99',
+ 19  'STUDENTB', '01-JAN-99'
+ 20  );
+ 21  SAVEPOINT B;
+ 22  INSERT INTO student
+ 23  ( student_id, Last_name, zip, registration_date,
+ 24  created_by, created_date, modified_by,
+ 25  modified_date
+ 26  )
+ 27  VALUES (student_id_seq.nextval, 'Norbu', 10015,
+ 28  '01-JAN-99', 'STUDENTB', '01-JAN-99',
+ 29  'STUDENTB', '01-JAN-99'
+ 30  );
+ 31  SAVEPOINT C;
+ 32  ROLLBACK TO B;
+ 33  END;
+ 34  /
+
+PL/SQL procedure successfully completed.
+
+SQL> rem verificamos que el ultimo estudiante si se registro pero
+SQL> rem por el SAVEPOINT al punto B, ya no se registro
+SQL> SELECT student_id, first_name, last_name, registration_date, created_by, created_date
+  2  FROM student
+  3  ORDER BY 1;
+
+STUDENT_ID|=|FIRST_NAME               |=|LAST_NAME                |=|REGISTRAT|=|CREATED_BY                    |=|CREATED_D       
+==========|=|=========================|=|=========================|=|=========|=|==============================|=|=========       
+       102|=|Fred                     |=|Crocitto                 |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       103|=|J.                       |=|Landry                   |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       104|=|Laetia                   |=|Enison                   |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       105|=|A                        |=|Moskowitz                |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       106|=|Judith                   |=|Olvsade                  |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       107|=|Catherine                |=|Mierzwa                  |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       108|=|Judy                     |=|Sethi                    |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       109|=|Larry                    |=|Walter                   |=|22-JAN-03|=|BROSENZWEIG                   |=|19-JAN-03       
+       110|=|Maria                    |=|Martin                   |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       111|=|Peggy                    |=|Noviello                 |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       112|=|Thomas                   |=|Thomas                   |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       113|=|A                        |=|Kulina                   |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       114|=|Winsome                  |=|Laporte                  |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       117|=|N                        |=|Kuehn                    |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       118|=|Hiedi                    |=|Lopez                    |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       119|=|Mardig                   |=|Abdou                    |=|25-JAN-03|=|BROSENZWEIG                   |=|22-JAN-03       
+       120|=|Ralph                    |=|Alexander                |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       121|=|Sean                     |=|Pineda                   |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       122|=|Julita                   |=|Lippen                   |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       123|=|Pierre                   |=|Radicola                 |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       124|=|Daniel                   |=|Wicelinski               |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       127|=|Gary                     |=|Aung                     |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       128|=|Jeff                     |=|Runyan                   |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       129|=|Omaira                   |=|Grant                    |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       130|=|Lula                     |=|Oates                    |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       133|=|James                    |=|Reed                     |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       134|=|A                        |=|Torres                   |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       135|=|Michelle                 |=|Masser                   |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       136|=|Hazel                    |=|Lasseter                 |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       137|=|James                    |=|Miller                   |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       138|=|John                     |=|Smith                    |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       139|=|A                        |=|Garshman                 |=|27-JAN-03|=|BROSENZWEIG                   |=|24-JAN-03       
+       140|=|Derrick                  |=|Baltazar                 |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       141|=|Robert                   |=|Boyd                     |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       142|=|Monica                   |=|Waldman                  |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       143|=|Gerard                   |=|Biers                    |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       144|=|David                    |=|Essner                   |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       145|=|Paul                     |=|Lefkowitz                |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       146|=|Joseph                   |=|German                   |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       147|=|Judy                     |=|Cahouet                  |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       148|=|D.                       |=|Orent                    |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       149|=|Judith                   |=|Prochaska                |=|30-JAN-03|=|BROSENZWEIG                   |=|27-JAN-03       
+       150|=|Regina                   |=|Gates                    |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       151|=|A                        |=|Sheppard                 |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       152|=|Thomas                   |=|Edwards                  |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       153|=|Mrudula                  |=|Philpotts                |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       154|=|Dawn                     |=|Dennis                   |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       156|=|Scott                    |=|Grant                    |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       157|=|Shirley                  |=|Jameson                  |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       158|=|Roy                      |=|Limate                   |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       159|=|Thomas                   |=|Edwards                  |=|30-JAN-03|=|BROSENZWEIG                   |=|30-JAN-03       
+       160|=|John T.                  |=|Beitler                  |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       161|=|Eilene                   |=|Grant                    |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       162|=|Genny                    |=|Andrew                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       163|=|Nicole                   |=|Gillen                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       164|=|Sylvia                   |=|Perrin                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       165|=|Peter                    |=|Daly                     |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       166|=|May                      |=|Jodoin                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       167|=|Jim                      |=|Joas                     |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       168|=|Sally                    |=|Naso                     |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       169|=|Frantz                   |=|McLean                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       170|=|P.                       |=|Balterzar                |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       171|=|Denise                   |=|Brownstein               |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       172|=|Maria                    |=|Arias                    |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       173|=|Oscar                    |=|McGill                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       174|=|Michael                  |=|Brown                    |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       175|=|Debra                    |=|Boyce                    |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       176|=|A                        |=|Satterfield              |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       178|=|Ricardo                  |=|Kurtz                    |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       179|=|Simon                    |=|Ramesh                   |=|02-FEB-03|=|BROSENZWEIG                   |=|02-FEB-03       
+       180|=|E.A.                     |=|Torres                   |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       181|=|A                        |=|Bullock                  |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       182|=|Jeffrey                  |=|Delbrun                  |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       184|=|Salewa                   |=|Zuckerberg               |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       185|=|Dennis                   |=|Mehta                    |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       186|=|Christine                |=|Sheppard                 |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       187|=|O.                       |=|Garnes                   |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       188|=|Phil                     |=|Gilloon                  |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       189|=|Deborah                  |=|Reyes                    |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       190|=|A                        |=|Affinito                 |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       191|=|Steven                   |=|M. Orent                 |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       192|=|Frank                    |=|Viotty                   |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       193|=|A                        |=|Jamerncy                 |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       194|=|Verona                   |=|Grant                    |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       195|=|Regina                   |=|Bose                     |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       196|=|Victor                   |=|Meshaj                   |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       197|=|J.                       |=|Dalvi                    |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       198|=|Edwin                    |=|Allende                  |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       199|=|J.                       |=|Segall                   |=|03-FEB-03|=|BROSENZWEIG                   |=|03-FEB-03       
+       200|=|Gene                     |=|Bresser, HR Rep.         |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       201|=|Michael                  |=|Lefbowitz                |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       202|=|Mary                     |=|Axch                     |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       203|=|A                        |=|Cook                     |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       204|=|A                        |=|Griffen                  |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       205|=|A                        |=|Hutheesing               |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       206|=|Freedon                  |=|annunziato               |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+
+STUDENT_ID|=|FIRST_NAME               |=|LAST_NAME                |=|REGISTRAT|=|CREATED_BY                    |=|CREATED_D       
+==========|=|=========================|=|=========================|=|=========|=|==============================|=|=========       
+       207|=|A                        |=|Montanez                 |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       208|=|A                        |=|Tucker                   |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       209|=|Lloyd                    |=|Kellam                   |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       210|=|David                    |=|Thares                   |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       211|=|Jenny                    |=|Goldsmith                |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       212|=|A                        |=|Robichaud                |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       214|=|Yvonne                   |=|Williams                 |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       215|=|Reynaldo                 |=|Chatman                  |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       216|=|Madhav                   |=|Dusenberry               |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       217|=|Jeffrey                  |=|Citron                   |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       218|=|Eric                     |=|Da Silva                 |=|05-FEB-03|=|BROSENZWEIG                   |=|05-FEB-03       
+       220|=|Robert                   |=|Segall                   |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       221|=|Sheradha                 |=|Malone                   |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       223|=|Frank                    |=|Pace                     |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       224|=|M.                       |=|Diokno                   |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       225|=|Edgar                    |=|Moffat                   |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       227|=|A                        |=|Heedles                  |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       228|=|Mohamed                  |=|Valentine                |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       229|=|A                        |=|Lopez                    |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       230|=|George                   |=|Kocka                    |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       232|=|Janet                    |=|Jung                     |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       233|=|Kathleen                 |=|Mulroy                   |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       234|=|Joel                     |=|Brendler                 |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       235|=|Michael                  |=|Carcia                   |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       236|=|Gerry                    |=|Tripp                    |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       237|=|Rommel                   |=|Frost                    |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       238|=|Roger                    |=|Snow                     |=|08-FEB-03|=|BROSENZWEIG                   |=|08-FEB-03       
+       240|=|Z.A.                     |=|Scrittorale              |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       241|=|Joseph                   |=|Yourish                  |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       242|=|Daniel                   |=|Ordes                    |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       243|=|A                        |=|Roberts                  |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       244|=|Sarah                    |=|Wilson                   |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       245|=|Irv                      |=|Dalvi                    |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       246|=|Meryl                    |=|Owens                    |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       247|=|Frank                    |=|Bunnell                  |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       248|=|Tamara                   |=|Zapulla                  |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       250|=|Evan                     |=|Fielding                 |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       251|=|Catherine                |=|Frangopoulos             |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       252|=|Nana                     |=|Barogh                   |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       253|=|Walter                   |=|Boremmann                |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       254|=|Melvina                  |=|Chamnonkool              |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       256|=|Lorrane                  |=|Velasco                  |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       257|=|Suzanne M.               |=|Abid                     |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       258|=|Suzanna                  |=|Velasco                  |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       259|=|George                   |=|Merriman                 |=|11-FEB-03|=|BROSENZWEIG                   |=|11-FEB-03       
+       260|=|Jean                     |=|Griffith                 |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       261|=|Vinnie                   |=|Moon                     |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       262|=|Donna                    |=|Walston                  |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       263|=|Radharam                 |=|King                     |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       264|=|Lorraine                 |=|Harty                    |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       265|=|A                        |=|Rothstein                |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       266|=|Kate                     |=|Page                     |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       267|=|Julius                   |=|Kwong                    |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       268|=|Ronald                   |=|Tangaribuan              |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       269|=|Sharon                   |=|Thompson                 |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       270|=|Charles                  |=|Caro                     |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       271|=|Jose                     |=|Benitez                  |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       272|=|Kevin                    |=|Porch                    |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       273|=|Hedy                     |=|Naso                     |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       274|=|John                     |=|De Simone                |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       275|=|George                   |=|Ross                     |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       276|=|Florence                 |=|Valamas                  |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       277|=|Evelyn                   |=|Liggons                  |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       278|=|Thomas E.                |=|La Blank                 |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       279|=|George                   |=|Korka                    |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       280|=|A                        |=|Engongoro                |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       281|=|Virginia                 |=|Ocampo                   |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       282|=|Jonathan                 |=|Jaele                    |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       283|=|A                        |=|Perkins                  |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       284|=|Salewa                   |=|Lindeman                 |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       285|=|Paul                     |=|Sikinger                 |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       286|=|Robin                    |=|Kelly                    |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       288|=|Rosemary                 |=|Ellman                   |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       289|=|Shirley                  |=|Murray                   |=|13-FEB-03|=|BROSENZWEIG                   |=|13-FEB-03       
+       290|=|A                        |=|Robles                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       291|=|D.                       |=|Dewitt                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       292|=|A                        |=|Cadet                    |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       293|=|Frank                    |=|M. Orent                 |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       294|=|Yvonne                   |=|Winnicki                 |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       296|=|Mike                     |=|Madej                    |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       298|=|Paula                    |=|Valentine                |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       299|=|A                        |=|Saluja                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       300|=|Frances                  |=|Lawson                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       301|=|A                        |=|Dunkon                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       302|=|Rita                     |=|Archor                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       303|=|George                   |=|Milano                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       304|=|Kardik                   |=|Guarino                  |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       305|=|Preston                  |=|Larcia                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       306|=|Norman                   |=|Callender                |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       307|=|Salondra                 |=|Galik                    |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       309|=|Carlos                   |=|Airall                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       310|=|Joseph                   |=|Jimenes                  |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       311|=|Henry                    |=|Masser                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       312|=|Maria                    |=|Allende                  |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       313|=|John                     |=|Velie                    |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       314|=|A                        |=|Dermody                  |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+
+STUDENT_ID|=|FIRST_NAME               |=|LAST_NAME                |=|REGISTRAT|=|CREATED_BY                    |=|CREATED_D       
+==========|=|=========================|=|=========================|=|=========|=|==============================|=|=========       
+       315|=|Daniel                   |=|McHowell                 |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       317|=|Cathy                    |=|Austin                   |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       319|=|George                   |=|Eakheit                  |=|17-FEB-03|=|BROSENZWEIG                   |=|17-FEB-03       
+       320|=|Mark                     |=|Miller                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       321|=|Jeannette                |=|Smagler                  |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       322|=|Oscar                    |=|Archer                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       323|=|Gilbert                  |=|Ginestra                 |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       324|=|Price                    |=|Marten                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       325|=|Pat                      |=|Puetrino                 |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       326|=|Piotr                    |=|Padel                    |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       328|=|Lynwood A.               |=|Thorton                  |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       330|=|John                     |=|Tabs                     |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       331|=|Mei-Wah                  |=|Zopf                     |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       332|=|Paula                    |=|Mwangi                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       333|=|A                        |=|Ward                     |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       334|=|Sarah                    |=|Annina                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       335|=|Jane                     |=|Jackson                  |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       336|=|Steven                   |=|Gallagher                |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       337|=|Preston                  |=|Cross                    |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       338|=|Helga                    |=|Towle                    |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       339|=|Piang                    |=|Nyziak                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       340|=|David                    |=|Eng                      |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       341|=|Kevin                    |=|Porch                    |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       342|=|Marianne                 |=|De Armas                 |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       343|=|Ray                      |=|Schafer                  |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       344|=|R.                       |=|Sprouse                  |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       345|=|Peter                    |=|Carey                    |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       346|=|Joane                    |=|Buckberg                 |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       347|=|Edith                    |=|Daly                     |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       348|=|Morty                    |=|Miller                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       349|=|Margaret                 |=|Mandel                   |=|19-FEB-03|=|BROSENZWEIG                   |=|19-FEB-03       
+       351|=|A                        |=|Galik                    |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       352|=|Debra                    |=|Shah                     |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       353|=|Paul                     |=|Intal                    |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       355|=|Romeo                    |=|Ittoop                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       356|=|John                     |=|Ancean                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       357|=|Tom                      |=|Vargas                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       358|=|Valerie                  |=|Avia                     |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       359|=|Fermin                   |=|Galik                    |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       360|=|Calvin                   |=|Kiraly                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       361|=|Rawan                    |=|Rosenberg                |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       362|=|Yu                       |=|Sentell                  |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       363|=|A                        |=|Hagel                    |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       364|=|Howard                   |=|Leopta                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       365|=|Kathleen                 |=|Mastandora               |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       366|=|Gabriel                  |=|Smith                    |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       367|=|Raymond                  |=|Cheevens                 |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       368|=|Kevin                    |=|Lin                      |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       369|=|Lorraine                 |=|Tucker                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       370|=|John                     |=|Mithane                  |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       371|=|Craig                    |=|Anglin                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       372|=|Zalman                   |=|Draquez                  |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       373|=|Reeva                    |=|Yeroushalmi              |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       374|=|Leonard                  |=|Millstein                |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       375|=|Jack                     |=|Kasperovich              |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       376|=|Lorelei                  |=|McNeal                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       378|=|William                  |=|Gallo                    |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       379|=|Craig                    |=|Padron                   |=|21-FEB-03|=|BROSENZWEIG                   |=|21-FEB-03       
+       380|=|Joel                     |=|Krot                     |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       381|=|A                        |=|Simmons                  |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       382|=|Michael                  |=|Miroff                   |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       383|=|Roger                    |=|Cowie                    |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       384|=|A                        |=|Chirichella              |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       385|=|Yvonne                   |=|Allende                  |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       386|=|Sengita                  |=|MacDonald, Jr.           |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       387|=|Paul                     |=|Braun                    |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       388|=|A                        |=|Bathmanapan              |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       389|=|Shirley                  |=|Leung                    |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       390|=|V.                       |=|Greenberg                |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       391|=|Rafael A.                |=|Torres                   |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       392|=|V.                       |=|Saliternan               |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       393|=|Melvin                   |=|Martin                   |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       394|=|Vera                     |=|Wetcel                   |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       396|=|James E.                 |=|Norman                   |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       397|=|Margaret                 |=|Lloyd                    |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       399|=|Jerry                    |=|Abdou                    |=|23-FEB-03|=|BROSENZWEIG                   |=|23-FEB-03       
+       401|=|s/Datos                  |=|Tashi                    |=|01-JAN-99|=|STUDENTA                      |=|01-JAN-99       
+       402|=|s/Datos                  |=|Tashi                    |=|01-JAN-99|=|STUDENTA                      |=|01-JAN-99       
+       403|=|s/Datos                  |=|Sonam                    |=|01-JAN-99|=|STUDENTB                      |=|01-JAN-99       
+       405|=|s/Datos                  |=|Tashi                    |=|01-JAN-99|=|STUDENTA                      |=|01-JAN-99       
+       406|=|s/Datos                  |=|Sonam                    |=|01-JAN-99|=|STUDENTB                      |=|01-JAN-99       
+       409|=|s/Datos                  |=|Tashi                    |=|01-JAN-99|=|STUDENT                       |=|11-JUN-21       
+       411|=|s/Datos                  |=|Sonam                    |=|01-JAN-99|=|STUDENT                       |=|11-JUN-21       
+       415|=|John                     |=|Smith                    |=|11-JUN-21|=|STUDENT                       |=|11-JUN-21       
+       422|=|s/Datos                  |=|Ordo¤ez                  |=|31-JAN-21|=|STUDENT                       |=|11-JUN-21       
+       424|=| Dayann                  |=|Ordo¤ez                  |=|31-JAN-21|=|STUDENT                       |=|11-JUN-21       
+       428|=|s/Datos                  |=|Tashi                    |=|01-JAN-99|=|STUDENT                       |=|11-JUN-21       
+       430|=|s/Datos                  |=|Sonam                    |=|01-JAN-99|=|STUDENT                       |=|11-JUN-21       
+
+280 rows selected.
+
+SQL> 
+SQL> --------------------------
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,50]
+SQL> DECLARE
+  2  v_Counter NUMBER;
+  3  BEGIN
+  4  v_counter := 0;
+  5  FOR i IN 1..100
+  6  LOOP
+  7  v_counter := v_counter + 1;
+  8  IF v_counter = 10
+  9  THEN
+ 10  DBMS_OUTPUT.PUT_LINE( chr(10)||chr(9)||'RESULTADO'||
+ 11  'PARCIAL '|| v_Counter);
+ 12  COMMIT;
+ 13  v_counter := 0;
+ 14  END IF;
+ 15  END LOOP;
+ 16  DBMS_OUTPUT.PUT_LINE( chr(10)||chr(9)||'RESULTADO'||
+ 17  'ESTAMOS EN ESCOM '||
+ 18  v_Counter);
+ 19  END;
+ 20  /
+
+	RESULTADOPARCIAL 10                                                                                                             
+
+	RESULTADOPARCIAL 10                                                                                                             
+
+	RESULTADOPARCIAL 10                                                                                                             
+
+	RESULTADOPARCIAL 10                                                                                                             
+
+	RESULTADOPARCIAL 10                                                                                                             
+
+	RESULTADOPARCIAL 10                                                                                                             
+
+	RESULTADOPARCIAL 10                                                                                                             
+
+	RESULTADOPARCIAL 10                                                                                                             
+
+	RESULTADOPARCIAL 10                                                                                                             
+
+	RESULTADOPARCIAL 10                                                                                                             
+
+	RESULTADOESTAMOS EN ESCOM 0                                                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> rem un displAy es el DBMS_OUTPUT....
+SQL> spool off

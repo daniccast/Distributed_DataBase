@@ -1,0 +1,1098 @@
+SQL> 
+SQL> /*
+SQL> 
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set null s/Datos
+SQL> set colsep '|=|'
+SQL> SET SQLNUMBER ON
+SQL> normalizazion de la cuarta forma normal
+SQL> de dependencias multivaluadas
+SQL> 
+SQL> DF   1      [modelo]  ->  Marca
+SQL> 
+SQL> DMV 1       [modelo]  -->>  motor
+SQL> DMV 2       [modelo]  -->>   COLOR
+SQL> DMV 3       [modelo, COLOR ]  -->>   adornos |  toldo
+SQL> 
+SQL> DMV 3a      [modelo, COLOR ]  -->>   adornos
+SQL> DMV 3b      [modelo, COLOR]   -->>  toldo
+SQL> 
+SQL> */
+SQL> 
+SQL> 
+SQL> drop table AUTOS;
+
+Table dropped.
+
+SQL> create table AUTOS(
+  2  modelo varchar2(10),
+  3  color  varchar2(10),
+  4  motor  varchar2(10),
+  5  adornos varchar2(10),
+  6  toldo   varchar2(10),
+  7  marca   varchar2(10));
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Red','F3.2L','white','black','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Red','F3.2L','white','white','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Red','F3.2L','blue','black','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Red','F3.2L','blue','white','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Red','F4.5L','white','black','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Red','F4.5L','white','white','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Red','F4.5L','blue','black','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Red','F4.5L','blue','white','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','White','F3.2L','red','white','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','White','F3.2L','red','red','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','White','F3.2L','black','white','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','White','F3.2L','black','red','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','White','F4.5L','red','white','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','White','F4.5L','red','red','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','White','F4.5L','black','white','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','White','F4.5L','black','red','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Blue','F3.2L','white','black','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Blue','F3.2L','white','whiteFord');
+INSERT INTO AUTOS VALUES ('Mustang','Blue','F3.2L','white','whiteFord')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Blue','F3.2L','yellow','black','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Blue','F3.2L','yellow','white','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Blue','F4.5L','white','black','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Blue','F4.5L','white','white','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Blue','F4.5L','yellow','black','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Mustang','Blue','F4.5L','yellow','white','Ford');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Red','C2.1L','white','black','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Red','C2.1L','white','blue','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Red','C2.1L','black','black','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Red','C2.1L','black','blue','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Red','C3.0L','white','black','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Red','C3.0L','white','blue','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Red','C3.0L','black','black','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Red','C3.0L','black','blue','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Green','C2.1L','white','brown','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Green','C2.1L','white','white','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Green','C2.1L','brown','brown','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Green','C2.1L','brown','white','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Green','C3.0L','white','brown','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Green','C3.0L','white','white','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Green','C3.0L','brown','brown','Chrysler');
+
+1 row created.
+
+SQL> INSERT INTO AUTOS VALUES ('Cirrus','Green','C3.0L','brown','white','Chrysler');
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> --           ----------------------------------------------------
+SQL> rem desplegar de la relaci¢n universal
+SQL> rem  los valores distintos de cada atributo
+SQL> rem
+SQL> select distinct modelo from autos order by 1;
+
+MODELO                                                                                                                            
+==========                                                                                                                        
+Cirrus                                                                                                                            
+Mustang                                                                                                                           
+
+2 rows selected.
+
+SQL> select distinct color from autos order by 1;
+
+COLOR                                                                                                                             
+==========                                                                                                                        
+Blue                                                                                                                              
+Green                                                                                                                             
+Red                                                                                                                               
+White                                                                                                                             
+
+4 rows selected.
+
+SQL> select distinct motor from autos order by 1;
+
+MOTOR                                                                                                                             
+==========                                                                                                                        
+C2.1L                                                                                                                             
+C3.0L                                                                                                                             
+F3.2L                                                                                                                             
+F4.5L                                                                                                                             
+
+4 rows selected.
+
+SQL> select distinct adornos from autos order by 1;
+
+ADORNOS                                                                                                                           
+==========                                                                                                                        
+black                                                                                                                             
+blue                                                                                                                              
+brown                                                                                                                             
+red                                                                                                                               
+white                                                                                                                             
+yellow                                                                                                                            
+
+6 rows selected.
+
+SQL> select distinct toldo from autos order by 1;
+
+TOLDO                                                                                                                             
+==========                                                                                                                        
+black                                                                                                                             
+blue                                                                                                                              
+brown                                                                                                                             
+red                                                                                                                               
+white                                                                                                                             
+
+5 rows selected.
+
+SQL> select distinct marca from autos order by 1;
+
+MARCA                                                                                                                             
+==========                                                                                                                        
+Chrysler                                                                                                                          
+Ford                                                                                                                              
+
+2 rows selected.
+
+SQL> 
+SQL> rem determinar el numero de tuplas de cada categoria
+SQL> prompt modelo
+modelo
+SQL> select  modelo, count(*) total
+  2  from autos
+  3  group by modelo
+  4      order by 1;
+
+MODELO    |=|     TOTAL                                                                                                           
+==========|=|==========                                                                                                           
+Cirrus    |=|        16                                                                                                           
+Mustang   |=|        23                                                                                                           
+
+2 rows selected.
+
+SQL> 
+SQL> rem determinar el numero de tuplas de cada categoria
+SQL> prompt color
+color
+SQL> select  color, count(*) total
+  2  from autos
+  3  group by color
+  4      order by 1;
+
+COLOR     |=|     TOTAL                                                                                                           
+==========|=|==========                                                                                                           
+Blue      |=|         7                                                                                                           
+Green     |=|         8                                                                                                           
+Red       |=|        16                                                                                                           
+White     |=|         8                                                                                                           
+
+4 rows selected.
+
+SQL> 
+SQL> rem determinar el numero de tuplas de cada categoria
+SQL> prompt motor
+motor
+SQL> select  motor, count(*) total
+  2  from autos
+  3  group by motor
+  4      order by 1;
+
+MOTOR     |=|     TOTAL                                                                                                           
+==========|=|==========                                                                                                           
+C2.1L     |=|         8                                                                                                           
+C3.0L     |=|         8                                                                                                           
+F3.2L     |=|        11                                                                                                           
+F4.5L     |=|        12                                                                                                           
+
+4 rows selected.
+
+SQL> 
+SQL> rem determinar el numero de tuplas de cada categoria
+SQL> prompt adornos
+adornos
+SQL> select  adornos, count(*) total
+  2  from autos
+  3  group by adornos
+  4      order by 1;
+
+ADORNOS   |=|     TOTAL                                                                                                           
+==========|=|==========                                                                                                           
+black     |=|         8                                                                                                           
+blue      |=|         4                                                                                                           
+brown     |=|         4                                                                                                           
+red       |=|         4                                                                                                           
+white     |=|        15                                                                                                           
+yellow    |=|         4                                                                                                           
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> rem determinar el numero de tuplas de cada categoria
+SQL> prompt toldo
+toldo
+SQL> select toldo, count(*) total
+  2  from autos
+  3  group by toldo
+  4      order by 1;
+
+TOLDO     |=|     TOTAL                                                                                                           
+==========|=|==========                                                                                                           
+black     |=|        12                                                                                                           
+blue      |=|         4                                                                                                           
+brown     |=|         4                                                                                                           
+red       |=|         4                                                                                                           
+white     |=|        15                                                                                                           
+
+5 rows selected.
+
+SQL> 
+SQL> rem determinar el numero de tuplas de cada categoria
+SQL> prompt marca
+marca
+SQL> select  marca, count(*) total
+  2  from autos
+  3  group by marca
+  4      order by 1;
+
+MARCA     |=|     TOTAL                                                                                                           
+==========|=|==========                                                                                                           
+Chrysler  |=|        16                                                                                                           
+Ford      |=|        23                                                                                                           
+
+2 rows selected.
+
+SQL> 
+SQL> rem desplegar marcas y modelo
+SQL> rem en la relacion universal de atributos
+SQL> rem sin normalizar
+SQL> rem  despleguemos marca y modelo
+SQL> rem   sin agrupar  por esos atributos
+SQL> 
+SQL> select marca,modelo
+  2  from autos
+  3  order by 1;
+
+MARCA     |=|MODELO                                                                                                               
+==========|=|==========                                                                                                           
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Chrysler  |=|Cirrus                                                                                                               
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+Ford      |=|Mustang                                                                                                              
+
+39 rows selected.
+
+SQL> 
+SQL> rem despleguemos por marca modelo
+SQL> rem agrupandolos y contandolos
+SQL> 
+SQL> select marca,modelo, count(*) total
+  2  from autos
+  3  group by marca, modelo
+  4  order by 1;
+
+MARCA     |=|MODELO    |=|     TOTAL                                                                                              
+==========|=|==========|=|==========                                                                                              
+Chrysler  |=|Cirrus    |=|        16                                                                                              
+Ford      |=|Mustang   |=|        23                                                                                              
+
+2 rows selected.
+
+SQL> 
+SQL> rem despleguemos por marca modelo, color
+SQL> rem agrupandolos por marca modelo color
+SQL> select marca,modelo,color, count(*) total
+  2  from autos
+  3  group by marca, modelo, color
+  4  order by 1;
+
+MARCA     |=|MODELO    |=|COLOR     |=|     TOTAL                                                                                 
+==========|=|==========|=|==========|=|==========                                                                                 
+Chrysler  |=|Cirrus    |=|Green     |=|         8                                                                                 
+Chrysler  |=|Cirrus    |=|Red       |=|         8                                                                                 
+Ford      |=|Mustang   |=|Blue      |=|         7                                                                                 
+Ford      |=|Mustang   |=|Red       |=|         8                                                                                 
+Ford      |=|Mustang   |=|White     |=|         8                                                                                 
+
+5 rows selected.
+
+SQL> 
+SQL> rem despleguemos por marca modelo, color, adornos
+SQL> rem agrupandolos por marca modelo, color, adornos
+SQL> select marca,modelo,color, adornos, count(*) total
+  2  from autos
+  3  group by marca, modelo, color,adornos
+  4  order by 1,2,3;
+
+MARCA     |=|MODELO    |=|COLOR     |=|ADORNOS   |=|     TOTAL                                                                    
+==========|=|==========|=|==========|=|==========|=|==========                                                                    
+Chrysler  |=|Cirrus    |=|Green     |=|brown     |=|         4                                                                    
+Chrysler  |=|Cirrus    |=|Green     |=|white     |=|         4                                                                    
+Chrysler  |=|Cirrus    |=|Red       |=|black     |=|         4                                                                    
+Chrysler  |=|Cirrus    |=|Red       |=|white     |=|         4                                                                    
+Ford      |=|Mustang   |=|Blue      |=|white     |=|         3                                                                    
+Ford      |=|Mustang   |=|Blue      |=|yellow    |=|         4                                                                    
+Ford      |=|Mustang   |=|Red       |=|blue      |=|         4                                                                    
+Ford      |=|Mustang   |=|Red       |=|white     |=|         4                                                                    
+Ford      |=|Mustang   |=|White     |=|black     |=|         4                                                                    
+Ford      |=|Mustang   |=|White     |=|red       |=|         4                                                                    
+
+10 rows selected.
+
+SQL> 
+SQL> rem despleguemos por marca modelo, color, adornos, toldo
+SQL> rem agrupandolos por marca modelo, color, adornos, toldo
+SQL> select marca,modelo,color,adornos, toldo, count(*) total
+  2  from autos
+  3  group by marca, modelo, color, adornos, toldo
+  4  order by 1,2,3,4;
+
+MARCA     |=|MODELO    |=|COLOR     |=|ADORNOS   |=|TOLDO     |=|     TOTAL                                                       
+==========|=|==========|=|==========|=|==========|=|==========|=|==========                                                       
+Chrysler  |=|Cirrus    |=|Green     |=|brown     |=|brown     |=|         2                                                       
+Chrysler  |=|Cirrus    |=|Green     |=|brown     |=|white     |=|         2                                                       
+Chrysler  |=|Cirrus    |=|Green     |=|white     |=|brown     |=|         2                                                       
+Chrysler  |=|Cirrus    |=|Green     |=|white     |=|white     |=|         2                                                       
+Chrysler  |=|Cirrus    |=|Red       |=|black     |=|black     |=|         2                                                       
+Chrysler  |=|Cirrus    |=|Red       |=|black     |=|blue      |=|         2                                                       
+Chrysler  |=|Cirrus    |=|Red       |=|white     |=|black     |=|         2                                                       
+Chrysler  |=|Cirrus    |=|Red       |=|white     |=|blue      |=|         2                                                       
+Ford      |=|Mustang   |=|Blue      |=|white     |=|black     |=|         2                                                       
+Ford      |=|Mustang   |=|Blue      |=|white     |=|white     |=|         1                                                       
+Ford      |=|Mustang   |=|Blue      |=|yellow    |=|black     |=|         2                                                       
+Ford      |=|Mustang   |=|Blue      |=|yellow    |=|white     |=|         2                                                       
+Ford      |=|Mustang   |=|Red       |=|blue      |=|black     |=|         2                                                       
+Ford      |=|Mustang   |=|Red       |=|blue      |=|white     |=|         2                                                       
+Ford      |=|Mustang   |=|Red       |=|white     |=|black     |=|         2                                                       
+Ford      |=|Mustang   |=|Red       |=|white     |=|white     |=|         2                                                       
+Ford      |=|Mustang   |=|White     |=|black     |=|red       |=|         2                                                       
+Ford      |=|Mustang   |=|White     |=|black     |=|white     |=|         2                                                       
+Ford      |=|Mustang   |=|White     |=|red       |=|red       |=|         2                                                       
+Ford      |=|Mustang   |=|White     |=|red       |=|white     |=|         2                                                       
+
+20 rows selected.
+
+SQL> 
+SQL> rem ahora eliminando atributos a desplegar
+SQL> rem sin eliminarlos de la clausula group by
+SQL> rem observemos con cuidado !!!!!!!!
+SQL> 
+SQL> rem tengan cuidado con la interpretaci¢n de los resultados
+SQL> select marca,modelo,color,adornos,  count(*) total
+  2  from autos
+  3  group by marca, modelo, color, adornos, toldo
+  4  order by 1,2,3,4;
+
+MARCA     |=|MODELO    |=|COLOR     |=|ADORNOS   |=|     TOTAL                                                                    
+==========|=|==========|=|==========|=|==========|=|==========                                                                    
+Chrysler  |=|Cirrus    |=|Green     |=|brown     |=|         2                                                                    
+Chrysler  |=|Cirrus    |=|Green     |=|brown     |=|         2                                                                    
+Chrysler  |=|Cirrus    |=|Green     |=|white     |=|         2                                                                    
+Chrysler  |=|Cirrus    |=|Green     |=|white     |=|         2                                                                    
+Chrysler  |=|Cirrus    |=|Red       |=|black     |=|         2                                                                    
+Chrysler  |=|Cirrus    |=|Red       |=|black     |=|         2                                                                    
+Chrysler  |=|Cirrus    |=|Red       |=|white     |=|         2                                                                    
+Chrysler  |=|Cirrus    |=|Red       |=|white     |=|         2                                                                    
+Ford      |=|Mustang   |=|Blue      |=|white     |=|         2                                                                    
+Ford      |=|Mustang   |=|Blue      |=|white     |=|         1                                                                    
+Ford      |=|Mustang   |=|Blue      |=|yellow    |=|         2                                                                    
+Ford      |=|Mustang   |=|Blue      |=|yellow    |=|         2                                                                    
+Ford      |=|Mustang   |=|Red       |=|blue      |=|         2                                                                    
+Ford      |=|Mustang   |=|Red       |=|blue      |=|         2                                                                    
+Ford      |=|Mustang   |=|Red       |=|white     |=|         2                                                                    
+Ford      |=|Mustang   |=|Red       |=|white     |=|         2                                                                    
+Ford      |=|Mustang   |=|White     |=|black     |=|         2                                                                    
+Ford      |=|Mustang   |=|White     |=|black     |=|         2                                                                    
+Ford      |=|Mustang   |=|White     |=|red       |=|         2                                                                    
+Ford      |=|Mustang   |=|White     |=|red       |=|         2                                                                    
+
+20 rows selected.
+
+SQL> 
+SQL> rem desplegando solo tres atributos pero agrupandolos por 5
+SQL> rem tengan cuidado con la interpretaci¢n de los resultados
+SQL> select marca,modelo,color,  count(*) total
+  2  from autos
+  3  group by marca, modelo, color, adornos, toldo
+  4  order by 1,2,3;
+
+MARCA     |=|MODELO    |=|COLOR     |=|     TOTAL                                                                                 
+==========|=|==========|=|==========|=|==========                                                                                 
+Chrysler  |=|Cirrus    |=|Green     |=|         2                                                                                 
+Chrysler  |=|Cirrus    |=|Green     |=|         2                                                                                 
+Chrysler  |=|Cirrus    |=|Green     |=|         2                                                                                 
+Chrysler  |=|Cirrus    |=|Green     |=|         2                                                                                 
+Chrysler  |=|Cirrus    |=|Red       |=|         2                                                                                 
+Chrysler  |=|Cirrus    |=|Red       |=|         2                                                                                 
+Chrysler  |=|Cirrus    |=|Red       |=|         2                                                                                 
+Chrysler  |=|Cirrus    |=|Red       |=|         2                                                                                 
+Ford      |=|Mustang   |=|Blue      |=|         2                                                                                 
+Ford      |=|Mustang   |=|Blue      |=|         1                                                                                 
+Ford      |=|Mustang   |=|Blue      |=|         2                                                                                 
+Ford      |=|Mustang   |=|Blue      |=|         2                                                                                 
+Ford      |=|Mustang   |=|Red       |=|         2                                                                                 
+Ford      |=|Mustang   |=|Red       |=|         2                                                                                 
+Ford      |=|Mustang   |=|Red       |=|         2                                                                                 
+Ford      |=|Mustang   |=|Red       |=|         2                                                                                 
+Ford      |=|Mustang   |=|White     |=|         2                                                                                 
+Ford      |=|Mustang   |=|White     |=|         2                                                                                 
+Ford      |=|Mustang   |=|White     |=|         2                                                                                 
+Ford      |=|Mustang   |=|White     |=|         2                                                                                 
+
+20 rows selected.
+
+SQL> 
+SQL> rem desplegando solo dos atributos pero agrupandolos por 5
+SQL> rem tengan cuidado con la interpretaci¢n de los resultados
+SQL> 
+SQL> select marca,modelo,  count(*) total
+  2  from autos
+  3  group by marca, modelo, color, adornos, toldo
+  4  order by 1,2,3;
+
+MARCA     |=|MODELO    |=|     TOTAL                                                                                              
+==========|=|==========|=|==========                                                                                              
+Chrysler  |=|Cirrus    |=|         2                                                                                              
+Chrysler  |=|Cirrus    |=|         2                                                                                              
+Chrysler  |=|Cirrus    |=|         2                                                                                              
+Chrysler  |=|Cirrus    |=|         2                                                                                              
+Chrysler  |=|Cirrus    |=|         2                                                                                              
+Chrysler  |=|Cirrus    |=|         2                                                                                              
+Chrysler  |=|Cirrus    |=|         2                                                                                              
+Chrysler  |=|Cirrus    |=|         2                                                                                              
+Ford      |=|Mustang   |=|         1                                                                                              
+Ford      |=|Mustang   |=|         2                                                                                              
+Ford      |=|Mustang   |=|         2                                                                                              
+Ford      |=|Mustang   |=|         2                                                                                              
+Ford      |=|Mustang   |=|         2                                                                                              
+Ford      |=|Mustang   |=|         2                                                                                              
+Ford      |=|Mustang   |=|         2                                                                                              
+Ford      |=|Mustang   |=|         2                                                                                              
+Ford      |=|Mustang   |=|         2                                                                                              
+Ford      |=|Mustang   |=|         2                                                                                              
+Ford      |=|Mustang   |=|         2                                                                                              
+Ford      |=|Mustang   |=|         2                                                                                              
+
+20 rows selected.
+
+SQL> 
+SQL> rem desplegando solo un atributo pero agrupandolos por 5
+SQL> rem tengan cuidado con la interpretaci¢n de los resultados
+SQL> 
+SQL> select marca,  count(*) total
+  2  from autos
+  3  group by marca, modelo, color, adornos, toldo
+  4  order by 1;
+
+MARCA     |=|     TOTAL                                                                                                           
+==========|=|==========                                                                                                           
+Chrysler  |=|         2                                                                                                           
+Chrysler  |=|         2                                                                                                           
+Chrysler  |=|         2                                                                                                           
+Chrysler  |=|         2                                                                                                           
+Chrysler  |=|         2                                                                                                           
+Chrysler  |=|         2                                                                                                           
+Chrysler  |=|         2                                                                                                           
+Chrysler  |=|         2                                                                                                           
+Ford      |=|         2                                                                                                           
+Ford      |=|         1                                                                                                           
+Ford      |=|         2                                                                                                           
+Ford      |=|         2                                                                                                           
+Ford      |=|         2                                                                                                           
+Ford      |=|         2                                                                                                           
+Ford      |=|         2                                                                                                           
+Ford      |=|         2                                                                                                           
+Ford      |=|         2                                                                                                           
+Ford      |=|         2                                                                                                           
+Ford      |=|         2                                                                                                           
+Ford      |=|         2                                                                                                           
+
+20 rows selected.
+
+SQL> 
+SQL> 
+SQL> ------
+SQL> rem ahora utilizamos las dependencias funcionales
+SQL> rem con  la extracci¢n de las tuplas de la relaci¢n universal
+SQL> rem    DF:1      [modelo]  ->  Marca
+SQL> 
+SQL> drop  table modelo_marca;
+
+Table dropped.
+
+SQL> create table modelo_marca as
+  2  select distinct modelo,marca from autos order by 1,2;
+
+Table created.
+
+SQL> 
+SQL> select * from modelo_marca;
+
+MODELO    |=|MARCA                                                                                                                
+==========|=|==========                                                                                                           
+Cirrus    |=|Chrysler                                                                                                             
+Mustang   |=|Ford                                                                                                                 
+
+2 rows selected.
+
+SQL> --- ---
+SQL> rem    DMV 1:       [modeo]  -->>  motor
+SQL> drop table modelo_motor;
+
+Table dropped.
+
+SQL> create table modelo_motor as
+  2  select distinct modelo, motor from autos   ORDER BY 1,2;
+
+Table created.
+
+SQL> 
+SQL> select * from modelo_motor;
+
+MODELO    |=|MOTOR                                                                                                                
+==========|=|==========                                                                                                           
+Cirrus    |=|C2.1L                                                                                                                
+Cirrus    |=|C3.0L                                                                                                                
+Mustang   |=|F3.2L                                                                                                                
+Mustang   |=|F4.5L                                                                                                                
+
+4 rows selected.
+
+SQL> ----
+SQL> ---------------
+SQL> 
+SQL> rem    DMV 2:       [modelo]  -->>   COLOR
+SQL> drop table modelo_color;
+
+Table dropped.
+
+SQL> create table modelo_color as
+  2  select distinct modelo, color from autos order by 1,2;
+
+Table created.
+
+SQL> 
+SQL> select * from modelo_color;
+
+MODELO    |=|COLOR                                                                                                                
+==========|=|==========                                                                                                           
+Cirrus    |=|Green                                                                                                                
+Cirrus    |=|Red                                                                                                                  
+Mustang   |=|Blue                                                                                                                 
+Mustang   |=|Red                                                                                                                  
+Mustang   |=|White                                                                                                                
+
+5 rows selected.
+
+SQL> 
+SQL> ----
+SQL> -----------------
+SQL> 
+SQL> rem    DMV 3:       [modelo, COLOR ]  -->>   adornos |  toldo
+SQL> drop  table modelo_color_adornos_toldo;
+
+Table dropped.
+
+SQL> create  table modelo_color_adornos_toldo as
+  2  select distinct modelo, color, adornos,toldo from autos ORDER BY 1,2,3;
+
+Table created.
+
+SQL> 
+SQL> SELECT * FROM modelo_color_adornos_toldo order by 1,2,3,4;
+
+MODELO    |=|COLOR     |=|ADORNOS   |=|TOLDO                                                                                      
+==========|=|==========|=|==========|=|==========                                                                                 
+Cirrus    |=|Green     |=|brown     |=|brown                                                                                      
+Cirrus    |=|Green     |=|brown     |=|white                                                                                      
+Cirrus    |=|Green     |=|white     |=|brown                                                                                      
+Cirrus    |=|Green     |=|white     |=|white                                                                                      
+Cirrus    |=|Red       |=|black     |=|black                                                                                      
+Cirrus    |=|Red       |=|black     |=|blue                                                                                       
+Cirrus    |=|Red       |=|white     |=|black                                                                                      
+Cirrus    |=|Red       |=|white     |=|blue                                                                                       
+Mustang   |=|Blue      |=|white     |=|black                                                                                      
+Mustang   |=|Blue      |=|white     |=|white                                                                                      
+Mustang   |=|Blue      |=|yellow    |=|black                                                                                      
+Mustang   |=|Blue      |=|yellow    |=|white                                                                                      
+Mustang   |=|Red       |=|blue      |=|black                                                                                      
+Mustang   |=|Red       |=|blue      |=|white                                                                                      
+Mustang   |=|Red       |=|white     |=|black                                                                                      
+Mustang   |=|Red       |=|white     |=|white                                                                                      
+Mustang   |=|White     |=|black     |=|red                                                                                        
+Mustang   |=|White     |=|black     |=|white                                                                                      
+Mustang   |=|White     |=|red       |=|red                                                                                        
+Mustang   |=|White     |=|red       |=|white                                                                                      
+
+20 rows selected.
+
+SQL> 
+SQL> rem    DMV 3a:      [modelo, COLOR ]  -->>   adornos
+SQL> 
+SQL> drop  table modelo_color_adornos;
+
+Table dropped.
+
+SQL> create table modelo_color_adornos as
+  2  select distinct modelo, color, adornos from autos ORDER BY 1,2,3;
+
+Table created.
+
+SQL> 
+SQL> select * from modelo_color_adornos;
+
+MODELO    |=|COLOR     |=|ADORNOS                                                                                                 
+==========|=|==========|=|==========                                                                                              
+Cirrus    |=|Green     |=|brown                                                                                                   
+Cirrus    |=|Green     |=|white                                                                                                   
+Cirrus    |=|Red       |=|black                                                                                                   
+Cirrus    |=|Red       |=|white                                                                                                   
+Mustang   |=|Blue      |=|white                                                                                                   
+Mustang   |=|Blue      |=|yellow                                                                                                  
+Mustang   |=|Red       |=|blue                                                                                                    
+Mustang   |=|Red       |=|white                                                                                                   
+Mustang   |=|White     |=|black                                                                                                   
+Mustang   |=|White     |=|red                                                                                                     
+
+10 rows selected.
+
+SQL> 
+SQL> -----  ----------------
+SQL> 
+SQL> rem     DMV 3b:      [modelo, COLOR]   -->>  toldo
+SQL> 
+SQL> drop  table modelo_color_toldo;
+
+Table dropped.
+
+SQL> create table modelo_color_toldo as
+  2  select distinct modelo,color,toldo  from autos order by 1,2,3;
+
+Table created.
+
+SQL> 
+SQL> select * from modelo_color_toldo;
+
+MODELO    |=|COLOR     |=|TOLDO                                                                                                   
+==========|=|==========|=|==========                                                                                              
+Cirrus    |=|Green     |=|brown                                                                                                   
+Cirrus    |=|Green     |=|white                                                                                                   
+Cirrus    |=|Red       |=|black                                                                                                   
+Cirrus    |=|Red       |=|blue                                                                                                    
+Mustang   |=|Blue      |=|black                                                                                                   
+Mustang   |=|Blue      |=|white                                                                                                   
+Mustang   |=|Red       |=|black                                                                                                   
+Mustang   |=|Red       |=|white                                                                                                   
+Mustang   |=|White     |=|red                                                                                                     
+Mustang   |=|White     |=|white                                                                                                   
+
+10 rows selected.
+
+SQL> --- ------------------------------
+SQL> 
+SQL> rem resumen dependencias funcionales
+SQL> rem rem    DMV 1       [modeo]  -->>  motor
+SQL> select count (*) from modelo_motor;
+
+  COUNT(*)                                                                                                                        
+==========                                                                                                                        
+         4                                                                                                                        
+
+1 row selected.
+
+SQL> 
+SQL> --
+SQL> rem DMV 2       [modelo]  -->>   COLOR
+SQL> select * from modelo_color;
+
+MODELO    |=|COLOR                                                                                                                
+==========|=|==========                                                                                                           
+Cirrus    |=|Green                                                                                                                
+Cirrus    |=|Red                                                                                                                  
+Mustang   |=|Blue                                                                                                                 
+Mustang   |=|Red                                                                                                                  
+Mustang   |=|White                                                                                                                
+
+5 rows selected.
+
+SQL> --
+SQL> DMV 3a      [modelo, COLOR ]  -->>   adornos
+SP2-0734: unknown command beginning "DMV 3a    ..." - rest of line ignored.
+SQL> select count (*) from modelo_color_adornos;
+
+  COUNT(*)                                                                                                                        
+==========                                                                                                                        
+        10                                                                                                                        
+
+1 row selected.
+
+SQL> --
+SQL> DMV 3b      [modelo, COLOR]   -->>  toldo
+SP2-0734: unknown command beginning "DMV 3b    ..." - rest of line ignored.
+SQL> select count (*) from modelo_color_adornos;
+
+  COUNT(*)                                                                                                                        
+==========                                                                                                                        
+        10                                                                                                                        
+
+1 row selected.
+
+SQL> 
+SQL> rem ahora querys que intervengan las dependencias funcionales
+SQL> REM    ----------------------------
+> rem desplegar adornos de vehiculos tenemos de
+SQL> rem acuerdo a la marca, modelo y color
+SQL> REM ---------------
+> REM GEBERA TUPLAS ESPUREAS AL NO INCLUIR EL PREDICADO
+SQL> REM
+SQL> REM
+SQL> select marca, mm.modelo, color, adornos
+  2  from modelo_marca mm, modelo_color_adornos mca
+  3  order by 1,2,3,4;
+
+MARCA     |=|MODELO    |=|COLOR     |=|ADORNOS                                                                                    
+==========|=|==========|=|==========|=|==========                                                                                 
+Chrysler  |=|Cirrus    |=|Blue      |=|white                                                                                      
+Chrysler  |=|Cirrus    |=|Blue      |=|yellow                                                                                     
+Chrysler  |=|Cirrus    |=|Green     |=|brown                                                                                      
+Chrysler  |=|Cirrus    |=|Green     |=|white                                                                                      
+Chrysler  |=|Cirrus    |=|Red       |=|black                                                                                      
+Chrysler  |=|Cirrus    |=|Red       |=|blue                                                                                       
+Chrysler  |=|Cirrus    |=|Red       |=|white                                                                                      
+Chrysler  |=|Cirrus    |=|Red       |=|white                                                                                      
+Chrysler  |=|Cirrus    |=|White     |=|black                                                                                      
+Chrysler  |=|Cirrus    |=|White     |=|red                                                                                        
+Ford      |=|Mustang   |=|Blue      |=|white                                                                                      
+Ford      |=|Mustang   |=|Blue      |=|yellow                                                                                     
+Ford      |=|Mustang   |=|Green     |=|brown                                                                                      
+Ford      |=|Mustang   |=|Green     |=|white                                                                                      
+Ford      |=|Mustang   |=|Red       |=|black                                                                                      
+Ford      |=|Mustang   |=|Red       |=|blue                                                                                       
+Ford      |=|Mustang   |=|Red       |=|white                                                                                      
+Ford      |=|Mustang   |=|Red       |=|white                                                                                      
+Ford      |=|Mustang   |=|White     |=|black                                                                                      
+Ford      |=|Mustang   |=|White     |=|red                                                                                        
+
+20 rows selected.
+
+SQL> REM --------------------------
+> 
+SQL> REM DEBEMOS INCLUIR UNA CONDICION DE IGUALDAD
+SQL> REM DEL ATRIBUTO COMUN EN AMBAS ENTIDADES
+SQL> select marca, mm.modelo, color, adornos
+  2  from modelo_marca mm, modelo_color_adornos mca
+  3  where mm.modelo = mca.modelo
+  4  order by 1,2,3,4;
+
+MARCA     |=|MODELO    |=|COLOR     |=|ADORNOS                                                                                    
+==========|=|==========|=|==========|=|==========                                                                                 
+Chrysler  |=|Cirrus    |=|Green     |=|brown                                                                                      
+Chrysler  |=|Cirrus    |=|Green     |=|white                                                                                      
+Chrysler  |=|Cirrus    |=|Red       |=|black                                                                                      
+Chrysler  |=|Cirrus    |=|Red       |=|white                                                                                      
+Ford      |=|Mustang   |=|Blue      |=|white                                                                                      
+Ford      |=|Mustang   |=|Blue      |=|yellow                                                                                     
+Ford      |=|Mustang   |=|Red       |=|blue                                                                                       
+Ford      |=|Mustang   |=|Red       |=|white                                                                                      
+Ford      |=|Mustang   |=|White     |=|black                                                                                      
+Ford      |=|Mustang   |=|White     |=|red                                                                                        
+
+10 rows selected.
+
+SQL> REM COMPARANDOLO CON LA RELACIàN UNIVERSAL  DE ESTE EJEMPLO
+SQL> rem ahora con la relaci¢n universal
+SQL> select DISTINCT marca, modelo, color, adornos
+  2  FROM AUTOS
+  3  ORDER BY 1,2,3,4;
+
+MARCA     |=|MODELO    |=|COLOR     |=|ADORNOS                                                                                    
+==========|=|==========|=|==========|=|==========                                                                                 
+Chrysler  |=|Cirrus    |=|Green     |=|brown                                                                                      
+Chrysler  |=|Cirrus    |=|Green     |=|white                                                                                      
+Chrysler  |=|Cirrus    |=|Red       |=|black                                                                                      
+Chrysler  |=|Cirrus    |=|Red       |=|white                                                                                      
+Ford      |=|Mustang   |=|Blue      |=|white                                                                                      
+Ford      |=|Mustang   |=|Blue      |=|yellow                                                                                     
+Ford      |=|Mustang   |=|Red       |=|blue                                                                                       
+Ford      |=|Mustang   |=|Red       |=|white                                                                                      
+Ford      |=|Mustang   |=|White     |=|black                                                                                      
+Ford      |=|Mustang   |=|White     |=|red                                                                                        
+
+10 rows selected.
+
+SQL> ----
+SQL> REM DESPLEGAR QUE MODELOS DE VEHICULOS TENEMOS
+SQL> REM DE ACUERDO A LA MARCA Y EL MOTOR
+SQL> select marca, MMA.modelo, MOTOR
+  2  FROM MODELO_MARCA MMA, MODELO_MOTOR MMO
+  3  WHERE MMA.MODELO = MMO.MODELO;
+
+MARCA     |=|MODELO    |=|MOTOR                                                                                                   
+==========|=|==========|=|==========                                                                                              
+Chrysler  |=|Cirrus    |=|C2.1L                                                                                                   
+Chrysler  |=|Cirrus    |=|C3.0L                                                                                                   
+Ford      |=|Mustang   |=|F3.2L                                                                                                   
+Ford      |=|Mustang   |=|F4.5L                                                                                                   
+
+4 rows selected.
+
+SQL> ----
+SQL> REM COMPARANDOLO CON LA RELACIàN UNIVERSAL  DE ESTE EJEMPLO
+SQL> select DISTINCT marca, modelo, MOTOR
+  2  FROM AUTOS
+  3  ORDER BY 1,2,3;
+
+MARCA     |=|MODELO    |=|MOTOR                                                                                                   
+==========|=|==========|=|==========                                                                                              
+Chrysler  |=|Cirrus    |=|C2.1L                                                                                                   
+Chrysler  |=|Cirrus    |=|C3.0L                                                                                                   
+Ford      |=|Mustang   |=|F3.2L                                                                                                   
+Ford      |=|Mustang   |=|F4.5L                                                                                                   
+
+4 rows selected.
+
+SQL> -----
+SQL> ---
+SQL> REM
+SQL> rem desplegar TOLDOS de vehiculos tenemos de
+SQL> rem acuerdo a la marca, modelo y color
+SQL> select marca, mm.modelo, color, toldo
+  2  from modelo_marca mm, modelo_color_TOLDO mct
+  3  where mm.modelo = mct.modelo
+  4  order by 1,2,3,4;
+
+MARCA     |=|MODELO    |=|COLOR     |=|TOLDO                                                                                      
+==========|=|==========|=|==========|=|==========                                                                                 
+Chrysler  |=|Cirrus    |=|Green     |=|brown                                                                                      
+Chrysler  |=|Cirrus    |=|Green     |=|white                                                                                      
+Chrysler  |=|Cirrus    |=|Red       |=|black                                                                                      
+Chrysler  |=|Cirrus    |=|Red       |=|blue                                                                                       
+Ford      |=|Mustang   |=|Blue      |=|black                                                                                      
+Ford      |=|Mustang   |=|Blue      |=|white                                                                                      
+Ford      |=|Mustang   |=|Red       |=|black                                                                                      
+Ford      |=|Mustang   |=|Red       |=|white                                                                                      
+Ford      |=|Mustang   |=|White     |=|red                                                                                        
+Ford      |=|Mustang   |=|White     |=|white                                                                                      
+
+10 rows selected.
+
+SQL> 
+SQL> ----
+SQL> REM COMPARANDOLO CON LA RELACIàN UNIVERSAL  DE ESTE EJEMPLO
+SQL> rem ahora con la relaci¢n universal
+SQL> select DISTINCT marca, modelo, color, toldo
+  2  FROM AUTOS
+  3  ORDER BY 1,2,3,4;
+
+MARCA     |=|MODELO    |=|COLOR     |=|TOLDO                                                                                      
+==========|=|==========|=|==========|=|==========                                                                                 
+Chrysler  |=|Cirrus    |=|Green     |=|brown                                                                                      
+Chrysler  |=|Cirrus    |=|Green     |=|white                                                                                      
+Chrysler  |=|Cirrus    |=|Red       |=|black                                                                                      
+Chrysler  |=|Cirrus    |=|Red       |=|blue                                                                                       
+Ford      |=|Mustang   |=|Blue      |=|black                                                                                      
+Ford      |=|Mustang   |=|Blue      |=|white                                                                                      
+Ford      |=|Mustang   |=|Red       |=|black                                                                                      
+Ford      |=|Mustang   |=|Red       |=|white                                                                                      
+Ford      |=|Mustang   |=|White     |=|red                                                                                        
+Ford      |=|Mustang   |=|White     |=|white                                                                                      
+
+10 rows selected.
+
+SQL> 
+SQL> 
+SQL> select count (*) from modelo_marca;
+
+  COUNT(*)                                                                                                                        
+==========                                                                                                                        
+         2                                                                                                                        
+
+1 row selected.
+
+SQL> select count (*) from modelo_color;
+
+  COUNT(*)                                                                                                                        
+==========                                                                                                                        
+         5                                                                                                                        
+
+1 row selected.
+
+SQL> select count (*) from modelo_color_adornos;
+
+  COUNT(*)                                                                                                                        
+==========                                                                                                                        
+        10                                                                                                                        
+
+1 row selected.
+
+SQL> select count (*) from modelo_color_toldo;
+
+  COUNT(*)                                                                                                                        
+==========                                                                                                                        
+        10                                                                                                                        
+
+1 row selected.
+
+SQL> select count (*) from modelo_motor;
+
+  COUNT(*)                                                                                                                        
+==========                                                                                                                        
+         4                                                                                                                        
+
+1 row selected.
+
+SQL> 
+SQL> spool off

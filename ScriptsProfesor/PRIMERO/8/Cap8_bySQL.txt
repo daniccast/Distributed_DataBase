@@ -1,0 +1,247 @@
+SQL> --spool C:\Users\ORA_bases\2021_02_24_clase_2\salida\PL_SQL_cap_7.txt
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,84]
+SQL> rem  uso de   IF  THEN   ELSE
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set colsep '|=|'
+SQL> set underline =
+SQL> set null s/Datos
+SQL> set feedback on
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> rem ERRORES
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,147]
+SQL> DECLARE
+  2  v_num1 INTEGER := &sv_num1;
+  3  v_num2 INTEGER := &sv_num2;
+  4  v_result NUMBER;
+  5  BEGIN
+  6  v_result := v_num1 / v_num2;
+  7  DBMS_OUTPUT.PUT_LINE ('v_result: '||v_result);
+  8  EXCEPTION
+  9  WHEN ZERO_DIVIDE THEN
+ 10  DBMS_OUTPUT.PUT_LINE ('A number cannot be divided by zero.');
+ 11  END;
+ 12  /
+Enter value for sv_num1: -- ------------------------------------
+old   2: v_num1 INTEGER := &sv_num1;
+new   2: v_num1 INTEGER := -- ------------------------------------;
+Enter value for sv_num2: /*
+old   3: v_num2 INTEGER := &sv_num2;
+new   3: v_num2 INTEGER := /*;
+END;
+   *
+ERROR at line 11:
+ORA-06550: line 11, column 4: 
+PLS-00111: end-of-file in comment 
+ORA-06550: line 3, column 8: 
+PLS-00103: Encountered the symbol "INTEGER" when expecting one of the following: 
+. ( * @ % & = - + ; < / > at in is mod remainder not rem 
+<an exponent (**)> <> or != or ~= >= <= <> and or like like2 
+like4 likec between || multise 
+
+
+SQL> 
+SQL> REM WARNING.!!! NO EJECUTARLO DE ESTA FORMA
+SQL> REM POR QUE PRODUCE UN ERROR EN EL MICROPROCESADOR
+SQL> DECLARE
+  2  v_num1 INTEGER := &sv_num1;
+  3  v_num2 INTEGER := &sv_num2;
+  4  v_result NUMBER;
+  5  BEGIN
+  6  v_result := v_num1 / v_num2;
+  7  DBMS_OUTPUT.PUT_LINE ('v_result: '||v_result);
+  8  END;
+  9  /
+Enter value for sv_num1: */
+old   2: v_num1 INTEGER := &sv_num1;
+new   2: v_num1 INTEGER := */;
+Enter value for sv_num2: 
+old   3: v_num2 INTEGER := &sv_num2;
+new   3: v_num2 INTEGER := ;
+v_num1 INTEGER := */;
+                  *
+ERROR at line 2:
+ORA-06550: line 2, column 19: 
+PLS-00103: Encountered the symbol "*" when expecting one of the following: 
+( - + case mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue avg count current exists max min prior sql stddev 
+sum variance execute forall merge time timestamp interval 
+date <a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+<an alternatively 
+
+
+SQL> -- ch08_1a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON;
+SQL> DECLARE
+  2  v_num NUMBER := &sv_num;
+  3  BEGIN
+  4  DBMS_OUTPUT.PUT_LINE ('Square root of '||v_num||
+  5  ' is '||SQRT(v_num));
+  6  EXCEPTION
+  7  WHEN VALUE_ERROR THEN
+  8  DBMS_OUTPUT.PUT_LINE ('An error has occurred');
+  9  END;
+ 10  /
+old   2: v_num NUMBER := &sv_num;
+new   2: v_num NUMBER := rem [ROSENZWEIG &  RAKHIMOV,2009,17];
+SP2-0552: Bind variable "RAKHIMOV" not declared.
+SQL> -- ch08_1b.sql, version 2.0
+SQL> SET SERVEROUTPUT ON;
+SQL> DECLARE
+  2  v_num NUMBER := &sv_num;
+  3  BEGIN
+  4  IF v_num >= 0 THEN
+  5  DBMS_OUTPUT.PUT_LINE ('Square root of '||v_num||
+  6  ' is '||SQRT(v_num));
+  7  ELSE
+  8  DBMS_OUTPUT.PUT_LINE ('A number cannot be negative');
+  9  END IF;
+ 10  END;
+ 11  /
+old   2: v_num NUMBER := &sv_num;
+new   2: v_num NUMBER := rem [ROSENZWEIG &  RAKHIMOV,2009,17];
+SP2-0552: Bind variable "RAKHIMOV" not declared.
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,171]
+SQL> DECLARE
+  2  v_student_id NUMBER := &sv_student_id;
+  3  v_enrolled VARCHAR2(3) := 'NO';
+  4  BEGIN
+  5  DBMS_OUTPUT.PUT_LINE ('Check if the student is enrolled');
+  6  SELECT 'YES'
+  7  INTO v_enrolled
+  8  FROM enrollment
+  9  WHERE student_id = v_student_id;
+ 10  DBMS_OUTPUT.PUT_LINE ('The student is enrolled into one course');
+ 11  EXCEPTION
+ 12  WHEN NO_DATA_FOUND THEN
+ 13  DBMS_OUTPUT.PUT_LINE ('The student is not enrolled');
+ 14  WHEN TOO_MANY_ROWS THEN
+ 15  DBMS_OUTPUT.PUT_LINE
+ 16  ('The student is enrolled in too many courses');
+ 17  END;
+ 18  /
+Enter value for sv_student_id: DECLARE
+old   2: v_student_id NUMBER := &sv_student_id;
+new   2: v_student_id NUMBER := DECLARE;
+v_student_id NUMBER := DECLARE;
+                       *
+ERROR at line 2:
+ORA-06550: line 2, column 24: 
+PLS-00103: Encountered the symbol "DECLARE" when expecting one of the following: 
+( - + case mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue avg count current exists max min prior sql stddev 
+sum variance execute forall merge time timestamp interval 
+date <a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+<an alterna 
+
+
+SQL> v_instructor_id NUMBER := &sv_instructor_id;
+SP2-0734: unknown command beginning "v_instruct..." - rest of line ignored.
+SQL> v_instructor_name VARCHAR2(50);
+SP2-0734: unknown command beginning "v_instruct..." - rest of line ignored.
+SQL> BEGIN
+  2  SELECT first_name||' '||last_name
+  3  INTO v_instructor_name
+  4  FROM instructor
+  5  WHERE instructor_id = v_instructor_id;
+  6  DBMS_OUTPUT.PUT_LINE ('Instructor name is '||v_instructor_name);
+  7  EXCEPTION
+  8  WHEN OTHERS THEN
+  9  DBMS_OUTPUT.PUT_LINE ('An error has occurred');
+ 10  END;
+ 11  /
+WHERE instructor_id = v_instructor_id;
+                      *
+ERROR at line 5:
+ORA-06550: line 5, column 23: 
+PL/SQL: ORA-00904: "V_INSTRUCTOR_ID": invalid identifier 
+ORA-06550: line 2, column 1: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 6, column 46: 
+PLS-00201: identifier 'V_INSTRUCTOR_NAME' must be declared 
+ORA-06550: line 6, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,175]
+SQL> -- ch08_2a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_exists NUMBER(1);
+  3  v_total_students NUMBER(1);
+  4  v_zip CHAR(5):= '&sv_zip';
+  5  BEGIN
+  6  SELECT count(*)
+  7  INTO v_exists
+  8  FROM zipcode
+  9  WHERE zip = v_zip;
+ 10  IF v_exists != 0 THEN
+ 11  SELECT COUNT(*)
+ 12  INTO v_total_students
+ 13  FROM student
+ 14  WHERE zip = v_zip;
+ 15  DBMS_OUTPUT.PUT_LINE
+ 16  ('There are '||v_total_students||' students');
+ 17  ELSE
+ 18  DBMS_OUTPUT.PUT_LINE (v_zip||' is not a valid zip');
+ 19  END IF;
+ 20  EXCEPTION
+ 21  WHEN VALUE_ERROR OR INVALID_NUMBER THEN
+ 22  DBMS_OUTPUT.PUT_LINE ('An error has occurred');
+ 23  END;
+ 24  /
+Enter value for sv_zip: 
+old   4: v_zip CHAR(5):= '&sv_zip';
+new   4: v_zip CHAR(5):= '';
+is not a valid zip                                                                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> -- ch08_2b.sql, version 2.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_exists NUMBER(1);
+  3  v_student_name VARCHAR2(30);
+  4  v_zip CHAR(5):= '&sv_zip';
+  5  BEGIN
+  6  SELECT count(*)
+  7  INTO v_exists
+  8  FROM zipcode
+  9  WHERE zip = v_zip;
+ 10  IF v_exists != 0 THEN
+ 11  SELECT first_name||' '||last_name
+ 12  INTO v_student_name
+ 13  FROM student
+ 14  WHERE zip = v_zip
+ 15  AND rownum = 1;
+ 16  DBMS_OUTPUT.PUT_LINE ('Student name is '||v_student_name);
+ 17  ELSE
+ 18  DBMS_OUTPUT.PUT_LINE (v_zip||' is not a valid zip');
+ 19  END IF;
+ 20  EXCEPTION
+ 21  WHEN VALUE_ERROR OR INVALID_NUMBER THEN
+ 22  DBMS_OUTPUT.PUT_LINE ('An error has occurred');
+ 23  WHEN NO_DATA_FOUND THEN
+ 24  DBMS_OUTPUT.PUT_LINE
+ 25  ('There are no students for this value of zip code');
+ 26  END;
+ 27  /
+Enter value for sv_zip: SPOOL OFF
+old   4: v_zip CHAR(5):= '&sv_zip';
+new   4: v_zip CHAR(5):= 'SPOOL OFF';
+DECLARE
+*
+ERROR at line 1:
+ORA-06502: PL/SQL: numeric or value error: character string buffer too small 
+ORA-06512: at line 4 
+
+
+SQL> spool F:\DATABASEDISTRIBUIDET\ejercicios\clase8\TABLE_SPACES.txt

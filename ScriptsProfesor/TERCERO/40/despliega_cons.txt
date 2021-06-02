@@ -1,0 +1,224 @@
+SQL> set pagesize 88
+SQL> set linesize 130
+SQL> set colsep '|=|';
+SQL> set underline =
+SQL> set sqln on
+SQL> set flush on
+SQL> set echo on
+SQL> 
+SQL> rem despliega las restricciones y la columnas asociadas a las restricciones
+SQL> rem
+SQL> COL TABLE_NAME FORMAT A30
+SQL> SELECT TABLE_NAME FROM DICT
+  2  WHERE TABLE_NAME LIKE '%CONSTRAINT%';
+
+TABLE_NAME                                                                                                                        
+==============================                                                                                                    
+ALL_CONSTRAINTS                                                                                                                   
+USER_CONSTRAINTS                                                                                                                  
+
+2 rows selected.
+
+SQL> REM
+SQL> 
+SQL> COL OWNER FORMAT A10
+SQL> COL NOMBRE FORMAT A22
+SQL> COL TABLE_NAME      FORMAT A15
+SQL> COL TIPO            FORMAT A4
+SQL> COL STATUS          FORMAT A8
+SQL> COL DEFERRABLE      FORMAT A15
+SQL> COL DEFERRED        FORMAT A10
+SQL> 
+SQL> select owner
+  2  , constraint_name NOMBRE
+  3  , constraint_type TIPO
+  4  , table_name
+  5  , status
+  6  , deferrable
+  7  , deferred
+  8  from user_constraints
+  9  where owner = 'SERGIONAVA'
+ 10  ORDER BY 3,2;
+
+OWNER     |=|NOMBRE                |=|TIPO|=|TABLE_NAME     |=|STATUS  |=|DEFERRABLE     |=|DEFERRED                              
+==========|=|======================|=|====|=|===============|=|========|=|===============|=|==========                            
+SERGIONAVA|=|BIN$+cZwravdTpq5eVU3P7|=|C   |=|BIN$wSLdqU13R0y|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|99pg==$0              |=|    |=|6UKqiXvJ++Q==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$ApuImiwcRryDJCaM+M|=|C   |=|BIN$rj75eJAHQgW|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|xSYA==$0              |=|    |=|rdtom8a4DrQ==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$CdmZlaPtTeelD1g4Jk|=|C   |=|BIN$SYyUqCqXQX2|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|i5ww==$0              |=|    |=|12yt2penjPg==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$Ch3W5UF0SZacV6q4kF|=|C   |=|BIN$SYyUqCqXQX2|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|ordA==$0              |=|    |=|12yt2penjPg==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$EInVmh3zQvSxHH2rA6|=|C   |=|BIN$+nXfz5WHS7u|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|D7zQ==$0              |=|    |=|MIq+3faacmw==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$OKCT+VMhSeyEgFGPm3|=|C   |=|BIN$rj75eJAHQgW|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|/yuQ==$0              |=|    |=|rdtom8a4DrQ==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$RiED/5tMSKa/orNcTn|=|C   |=|BIN$rj75eJAHQgW|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|PEOg==$0              |=|    |=|rdtom8a4DrQ==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$TVjdI18vTd+4oNBZc5|=|C   |=|BIN$SYyUqCqXQX2|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|46TA==$0              |=|    |=|12yt2penjPg==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$WfuoVGFLTnWFysLhKa|=|C   |=|BIN$G7ebrXxgT5u|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|DScw==$0              |=|    |=|5Hoh8wavnRQ==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$YxPjgR/STquH0ePCE3|=|C   |=|BIN$wSLdqU13R0y|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|ndlg==$0              |=|    |=|6UKqiXvJ++Q==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$ecAI+uDaQIabOcWePH|=|C   |=|BIN$SYyUqCqXQX2|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|m+nw==$0              |=|    |=|12yt2penjPg==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$gj/2LjK8THOESBJQaF|=|C   |=|BIN$+nXfz5WHS7u|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|CcFw==$0              |=|    |=|MIq+3faacmw==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$kSPl/zQ0R/WqdjqEgG|=|C   |=|BIN$+nXfz5WHS7u|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|klUw==$0              |=|    |=|MIq+3faacmw==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$qnrvBvMCTMi6M8HiJC|=|C   |=|BIN$wSLdqU13R0y|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|F9ww==$0              |=|    |=|6UKqiXvJ++Q==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$yCoO2rdyTZCLRsoVad|=|C   |=|BIN$SYyUqCqXQX2|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|fljw==$0              |=|    |=|12yt2penjPg==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$zE0pPo8yTi2KQjyGUt|=|C   |=|BIN$G7ebrXxgT5u|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|Yrfg==$0              |=|    |=|5Hoh8wavnRQ==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|CK_PROFESSORS_TENURE  |=|C   |=|PROFESSORS     |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|DEPENDENT_DEP_NAME_NN |=|C   |=|DEPENDENT      |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|DEPENDENT_ESSN_NN     |=|C   |=|DEPENDENT      |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|DEPENDENT_RELAT_CHECK |=|C   |=|DEPENDENT      |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|DEPENDENT_SEX_CHECK   |=|C   |=|DEPENDENT      |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|DEP_DNAME_NN          |=|C   |=|DEPARTMENT     |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|DEP_DNUMBER_NN        |=|C   |=|DEPARTMENT     |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|DEP_MGR_SSN_NN        |=|C   |=|DEPARTMENT     |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|D_LOCATION_DLOCAT_NN  |=|C   |=|DEPT_LOCATIONS |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|D_LOCATION_DNUMBER_NN |=|C   |=|DEPT_LOCATIONS |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|SYS_C007830           |=|C   |=|EMPLOYEE       |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|SYS_C007831           |=|C   |=|EMPLOYEE       |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|BIN$7fBx5JeQQLydOHDINs|=|P   |=|BIN$SYyUqCqXQX2|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|ZWsA==$0              |=|    |=|12yt2penjPg==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$L6I3CGXlRuaBwbC3oK|=|P   |=|BIN$G7ebrXxgT5u|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|1RMA==$0              |=|    |=|5Hoh8wavnRQ==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|BIN$hwJSo5cISWeFAh7MtZ|=|P   |=|BIN$wSLdqU13R0y|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|xwYA==$0              |=|    |=|6UKqiXvJ++Q==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|DEPARTMENT_PK         |=|P   |=|DEPARTMENT     |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|DEPENDENT_PK          |=|P   |=|DEPENDENT      |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|DEPT_LOCATIONS_PK     |=|P   |=|DEPT_LOCATIONS |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|EMPLOYEE_PK           |=|P   |=|EMPLOYEE       |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|DEPT_LOCATIONS_DEPT_FK|=|R   |=|DEPT_LOCATIONS |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+SERGIONAVA|=|BIN$XXPmh9k6QLmOesP9tM|=|U   |=|BIN$wSLdqU13R0y|=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+          |=|iVDA==$0              |=|    |=|6UKqiXvJ++Q==$0|=|        |=|               |=|                                      
+                                                                                                                                  
+SERGIONAVA|=|DEPARTMENT_UNIQUE     |=|U   |=|DEPARTMENT     |=|ENABLED |=|NOT DEFERRABLE |=|IMMEDIATE                             
+
+38 rows selected.
+
+SQL> 
+SQL> COL COLUMN_NAME FORMAT A19
+SQL> SELECT OWNER
+  2  , CONSTRAINT_NAME
+  3  , TABLE_NAME
+  4  , COLUMN_NAME
+  5  FROM USER_CONS_COLUMNS;
+
+OWNER     |=|CONSTRAINT_NAME               |=|TABLE_NAME     |=|COLUMN_NAME                                                       
+==========|=|==============================|=|===============|=|===================                                               
+SERGIONAVA|=|BIN$CdmZlaPtTeelD1g4Jki5ww==$0|=|BIN$SYyUqCqXQX2|=|FNAME                                                             
+          |=|                              |=|12yt2penjPg==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$TVjdI18vTd+4oNBZc546TA==$0|=|BIN$SYyUqCqXQX2|=|LNAME                                                             
+          |=|                              |=|12yt2penjPg==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$yCoO2rdyTZCLRsoVadfljw==$0|=|BIN$SYyUqCqXQX2|=|SSN                                                               
+          |=|                              |=|12yt2penjPg==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$7fBx5JeQQLydOHDINsZWsA==$0|=|BIN$SYyUqCqXQX2|=|SSN                                                               
+          |=|                              |=|12yt2penjPg==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$Ch3W5UF0SZacV6q4kFordA==$0|=|BIN$SYyUqCqXQX2|=|SEX                                                               
+          |=|                              |=|12yt2penjPg==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$ecAI+uDaQIabOcWePHm+nw==$0|=|BIN$SYyUqCqXQX2|=|DNO                                                               
+          |=|                              |=|12yt2penjPg==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|DEP_DNAME_NN                  |=|DEPARTMENT     |=|DNAME                                                             
+SERGIONAVA|=|DEPARTMENT_UNIQUE             |=|DEPARTMENT     |=|DNAME                                                             
+SERGIONAVA|=|DEP_DNUMBER_NN                |=|DEPARTMENT     |=|DNUMBER                                                           
+SERGIONAVA|=|DEPARTMENT_PK                 |=|DEPARTMENT     |=|DNUMBER                                                           
+SERGIONAVA|=|DEP_MGR_SSN_NN                |=|DEPARTMENT     |=|MGR_SSN                                                           
+SERGIONAVA|=|D_LOCATION_DNUMBER_NN         |=|DEPT_LOCATIONS |=|DNUMBER                                                           
+SERGIONAVA|=|DEPT_LOCATIONS_PK             |=|DEPT_LOCATIONS |=|DNUMBER                                                           
+SERGIONAVA|=|DEPT_LOCATIONS_DEPT_FK        |=|DEPT_LOCATIONS |=|DNUMBER                                                           
+SERGIONAVA|=|D_LOCATION_DLOCAT_NN          |=|DEPT_LOCATIONS |=|DLOCATION                                                         
+SERGIONAVA|=|DEPT_LOCATIONS_PK             |=|DEPT_LOCATIONS |=|DLOCATION                                                         
+SERGIONAVA|=|BIN$XXPmh9k6QLmOesP9tMiVDA==$0|=|BIN$wSLdqU13R0y|=|PNAME                                                             
+          |=|                              |=|6UKqiXvJ++Q==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$qnrvBvMCTMi6M8HiJCF9ww==$0|=|BIN$wSLdqU13R0y|=|PNAME                                                             
+          |=|                              |=|6UKqiXvJ++Q==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$hwJSo5cISWeFAh7MtZxwYA==$0|=|BIN$wSLdqU13R0y|=|PNUMBER                                                           
+          |=|                              |=|6UKqiXvJ++Q==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$+cZwravdTpq5eVU3P799pg==$0|=|BIN$wSLdqU13R0y|=|PNUMBER                                                           
+          |=|                              |=|6UKqiXvJ++Q==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$YxPjgR/STquH0ePCE3ndlg==$0|=|BIN$wSLdqU13R0y|=|DNUM                                                              
+          |=|                              |=|6UKqiXvJ++Q==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$WfuoVGFLTnWFysLhKaDScw==$0|=|BIN$G7ebrXxgT5u|=|ESSN                                                              
+          |=|                              |=|5Hoh8wavnRQ==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$L6I3CGXlRuaBwbC3oK1RMA==$0|=|BIN$G7ebrXxgT5u|=|ESSN                                                              
+          |=|                              |=|5Hoh8wavnRQ==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$zE0pPo8yTi2KQjyGUtYrfg==$0|=|BIN$G7ebrXxgT5u|=|PNO                                                               
+          |=|                              |=|5Hoh8wavnRQ==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$L6I3CGXlRuaBwbC3oK1RMA==$0|=|BIN$G7ebrXxgT5u|=|PNO                                                               
+          |=|                              |=|5Hoh8wavnRQ==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|DEPENDENT_ESSN_NN             |=|DEPENDENT      |=|ESSN                                                              
+SERGIONAVA|=|DEPENDENT_PK                  |=|DEPENDENT      |=|ESSN                                                              
+SERGIONAVA|=|DEPENDENT_DEP_NAME_NN         |=|DEPENDENT      |=|DEPENDENT_NAME                                                    
+SERGIONAVA|=|DEPENDENT_PK                  |=|DEPENDENT      |=|DEPENDENT_NAME                                                    
+SERGIONAVA|=|DEPENDENT_SEX_CHECK           |=|DEPENDENT      |=|SEX                                                               
+SERGIONAVA|=|DEPENDENT_RELAT_CHECK         |=|DEPENDENT      |=|RELATIONSHIP                                                      
+SERGIONAVA|=|SYS_C007830                   |=|EMPLOYEE       |=|EMP_ID                                                            
+SERGIONAVA|=|EMPLOYEE_PK                   |=|EMPLOYEE       |=|EMP_ID                                                            
+SERGIONAVA|=|SYS_C007831                   |=|EMPLOYEE       |=|DEPT_ID                                                           
+SERGIONAVA|=|BIN$kSPl/zQ0R/WqdjqEgGklUw==$0|=|BIN$+nXfz5WHS7u|=|SALARY                                                            
+          |=|                              |=|MIq+3faacmw==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$EInVmh3zQvSxHH2rA6D7zQ==$0|=|BIN$+nXfz5WHS7u|=|TENURE                                                            
+          |=|                              |=|MIq+3faacmw==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$gj/2LjK8THOESBJQaFCcFw==$0|=|BIN$+nXfz5WHS7u|=|DEPARTMENT                                                        
+          |=|                              |=|MIq+3faacmw==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$OKCT+VMhSeyEgFGPm3/yuQ==$0|=|BIN$rj75eJAHQgW|=|SALARY                                                            
+          |=|                              |=|rdtom8a4DrQ==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$RiED/5tMSKa/orNcTnPEOg==$0|=|BIN$rj75eJAHQgW|=|TENURE                                                            
+          |=|                              |=|rdtom8a4DrQ==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|BIN$ApuImiwcRryDJCaM+MxSYA==$0|=|BIN$rj75eJAHQgW|=|DEPARTMENT                                                        
+          |=|                              |=|rdtom8a4DrQ==$0|=|                                                                  
+                                                                                                                                  
+SERGIONAVA|=|CK_PROFESSORS_TENURE          |=|PROFESSORS     |=|TENURE                                                            
+
+41 rows selected.
+
+SQL> 
+SQL> 
+SQL> spool off;

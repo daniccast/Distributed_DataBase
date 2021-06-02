@@ -1,0 +1,55 @@
+SQL> 
+SQL> rem ROSENZWEIG,B &  RAKHIMOV,E (2009).Oracle© PL/SQLTby Example,Boston,MA,USA:Perarson.
+SQL> rem ejercicios cap PL/SQL CONCEPTS
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set colsep '|=|'
+SQL> set underline =
+SQL> set null s/Datos
+SQL> set feedback on
+SQL> 
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,118]
+SQL> 
+SQL> rem PARTES DE UN PROCESO ITERATIVO O LOOP, ESQUEMA1:
+SQL> rem valor inicial
+SQL> rem incremento
+SQL> rem proceso
+SQL> rem limite
+SQL> 
+SQL> rem PARTES DE UN PROCESO ITERATIVO O LOOP, ESQUEMA2:
+SQL> rem valor inicial
+SQL> rem limite
+SQL> rem proceso
+SQL> rem incremento
+SQL> 
+SQL> -- ch06_1a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_counter BINARY_INTEGER := 0;
+  3  BEGIN
+  4  LOOP
+  5  -- increment loop counter by one
+  6  v_counter := v_counter + 1;
+  7  DBMS_OUTPUT.PUT_LINE ('v_counter = '||v_counter);
+  8  -- if EXIT condition yields TRUE exit the loop
+  9  IF v_counter = 5 THEN
+ 10  EXIT;
+ 11  END IF;
+ 12  END LOOP;
+ 13  -- control resumes here
+ 14  DBMS_OUTPUT.PUT_LINE ('Done...');
+ 15  END;
+ 16  /
+v_counter = 1                                                                                                                     
+v_counter = 2                                                                                                                     
+v_counter = 3                                                                                                                     
+v_counter = 4                                                                                                                     
+v_counter = 5                                                                                                                     
+Done...                                                                                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> 
+SQL> spool off

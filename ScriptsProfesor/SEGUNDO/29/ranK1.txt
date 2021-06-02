@@ -1,0 +1,365 @@
+SQL> 
+SQL> SET PAGESIZE 99
+SQL> SET LINESIZE 130
+SQL> SET COLSEP '|=|'
+SQL> SET NULL S/Data
+SQL> rem  ejecutado en sergionava
+SQL> DROP TABLE emp PURGE;
+
+Table dropped.
+
+SQL> 
+SQL> CREATE TABLE emp (
+  2    empno    NUMBER(4) ,
+  3    ename    VARCHAR2(10),
+  4    job      VARCHAR2(9),
+  5    mgr      NUMBER(4),
+  6    hiredate DATE,
+  7    sal      NUMBER(7,2),
+  8    comm     NUMBER(7,2),
+  9    deptno   NUMBER(2)
+ 10  );
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO emp VALUES (7369,'SMITH','CLERK',7902,to_date('17-12-1980','dd-mm-yyyy'),800,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7499,'ALLEN','SALESMAN',7698,to_date('20-2-1981','dd-mm-yyyy'),1600,300,30);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7521,'WARD','SALESMAN',7698,to_date('22-2-1981','dd-mm-yyyy'),1250,500,30);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7566,'JONES','MANAGER',7839,to_date('2-4-1981','dd-mm-yyyy'),2975,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7654,'MARTIN','SALESMAN',7698,to_date('28-9-1981','dd-mm-yyyy'),1250,1400,30);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7698,'BLAKE','MANAGER',7839,to_date('1-5-1981','dd-mm-yyyy'),2850,NULL,30);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7782,'CLARK','MANAGER',7839,to_date('9-6-1981','dd-mm-yyyy'),2450,NULL,10);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7788,'SCOTT','ANALYST',7566,to_date('13-JUL-87','dd-mm-rr')-85,3000,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7839,'KING','PRESIDENT',NULL,to_date('17-11-1981','dd-mm-yyyy'),5000,NULL,10);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7844,'TURNER','SALESMAN',7698,to_date('8-9-1981','dd-mm-yyyy'),1500,0,30);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7876,'ADAMS','CLERK',7788,to_date('13-JUL-87', 'dd-mm-rr')-51,1100,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7900,'JAMES','CLERK',7698,to_date('3-12-1981','dd-mm-yyyy'),950,NULL,30);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7902,'FORD','ANALYST',7566,to_date('3-12-1981','dd-mm-yyyy'),3000,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES (7934,'MILLER','CLERK',7782,to_date('23-1-1982','dd-mm-yyyy'),1300,NULL,10);
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> select * from emp;
+
+     EMPNO|=|ENAME     |=|JOB      |=|       MGR|=|HIREDATE |=|       SAL|=|      COMM|=|    DEPTNO                               
+==========|=|==========|=|=========|=|==========|=|=========|=|==========|=|==========|=|==========                               
+      7369|=|SMITH     |=|CLERK    |=|      7902|=|17-DEC-80|=|       800|=|S/Data    |=|        20                               
+      7499|=|ALLEN     |=|SALESMAN |=|      7698|=|20-FEB-81|=|      1600|=|       300|=|        30                               
+      7521|=|WARD      |=|SALESMAN |=|      7698|=|22-FEB-81|=|      1250|=|       500|=|        30                               
+      7566|=|JONES     |=|MANAGER  |=|      7839|=|02-APR-81|=|      2975|=|S/Data    |=|        20                               
+      7654|=|MARTIN    |=|SALESMAN |=|      7698|=|28-SEP-81|=|      1250|=|      1400|=|        30                               
+      7698|=|BLAKE     |=|MANAGER  |=|      7839|=|01-MAY-81|=|      2850|=|S/Data    |=|        30                               
+      7782|=|CLARK     |=|MANAGER  |=|      7839|=|09-JUN-81|=|      2450|=|S/Data    |=|        10                               
+      7788|=|SCOTT     |=|ANALYST  |=|      7566|=|19-APR-87|=|      3000|=|S/Data    |=|        20                               
+      7839|=|KING      |=|PRESIDENT|=|S/Data    |=|17-NOV-81|=|      5000|=|S/Data    |=|        10                               
+      7844|=|TURNER    |=|SALESMAN |=|      7698|=|08-SEP-81|=|      1500|=|         0|=|        30                               
+      7876|=|ADAMS     |=|CLERK    |=|      7788|=|23-MAY-87|=|      1100|=|S/Data    |=|        20                               
+      7900|=|JAMES     |=|CLERK    |=|      7698|=|03-DEC-81|=|       950|=|S/Data    |=|        30                               
+      7902|=|FORD      |=|ANALYST  |=|      7566|=|03-DEC-81|=|      3000|=|S/Data    |=|        20                               
+      7934|=|MILLER    |=|CLERK    |=|      7782|=|23-JAN-82|=|      1300|=|S/Data    |=|        10                               
+
+14 rows selected.
+
+SQL> 
+SQL> -- -----------------------------
+SQL> 
+SQL> rem gebera rangas a partir de no de depto
+SQL> rem le va asignando un numero dentro del rango
+SQL> rem  si encuentra dos valores iguales les asigna el mismo numero
+SQL> rem  se aprecia en  la columna   myrank
+SQL> SELECT empno,
+  2         deptno,
+  3         sal,
+  4         RANK() OVER (PARTITION BY deptno ORDER BY sal) AS myrank
+  5  FROM   emp;
+
+     EMPNO|=|    DEPTNO|=|       SAL|=|    MYRANK                                                                                 
+==========|=|==========|=|==========|=|==========                                                                                 
+      7934|=|        10|=|      1300|=|         1                                                                                 
+      7782|=|        10|=|      2450|=|         2                                                                                 
+      7839|=|        10|=|      5000|=|         3                                                                                 
+      7369|=|        20|=|       800|=|         1                                                                                 
+      7876|=|        20|=|      1100|=|         2                                                                                 
+      7566|=|        20|=|      2975|=|         3                                                                                 
+      7788|=|        20|=|      3000|=|         4                                                                                 
+      7902|=|        20|=|      3000|=|         4                                                                                 
+      7900|=|        30|=|       950|=|         1                                                                                 
+      7654|=|        30|=|      1250|=|         2                                                                                 
+      7521|=|        30|=|      1250|=|         2                                                                                 
+      7844|=|        30|=|      1500|=|         4                                                                                 
+      7499|=|        30|=|      1600|=|         5                                                                                 
+      7698|=|        30|=|      2850|=|         6                                                                                 
+
+14 rows selected.
+
+SQL> 
+SQL> rem el query le asigna una jerarquia dentro del orden de las columnas
+SQL> rem      en este ejemplo se incluye una clausula order by que es el mismo
+SQL> rem      al asignado por la propia consulta
+SQL> SELECT empno,
+  2         deptno,
+  3         sal,
+  4         RANK() OVER (PARTITION BY deptno ORDER BY sal) AS myrank
+  5  FROM   emp order by 2,4;
+
+     EMPNO|=|    DEPTNO|=|       SAL|=|    MYRANK                                                                                 
+==========|=|==========|=|==========|=|==========                                                                                 
+      7934|=|        10|=|      1300|=|         1                                                                                 
+      7782|=|        10|=|      2450|=|         2                                                                                 
+      7839|=|        10|=|      5000|=|         3                                                                                 
+      7369|=|        20|=|       800|=|         1                                                                                 
+      7876|=|        20|=|      1100|=|         2                                                                                 
+      7566|=|        20|=|      2975|=|         3                                                                                 
+      7788|=|        20|=|      3000|=|         4                                                                                 
+      7902|=|        20|=|      3000|=|         4                                                                                 
+      7900|=|        30|=|       950|=|         1                                                                                 
+      7654|=|        30|=|      1250|=|         2                                                                                 
+      7521|=|        30|=|      1250|=|         2                                                                                 
+      7844|=|        30|=|      1500|=|         4                                                                                 
+      7499|=|        30|=|      1600|=|         5                                                                                 
+      7698|=|        30|=|      2850|=|         6                                                                                 
+
+14 rows selected.
+
+SQL> 
+SQL> -- --------------------------------------
+SQL> rem el resultado de la consulta ahora lo declaramos
+SQL> rem   como un subquery y filtramos esas tuplas
+SQL> rem cuando el rango fue mayor de dos
+SQL> rem es decir mas de dos valores al generar cada particion
+SQL> 
+SQL> SELECT *
+  2  FROM   (SELECT empno,
+  3                 deptno,
+  4                 sal,
+  5                 RANK() OVER (PARTITION BY deptno ORDER BY sal) AS myrank
+  6          FROM   emp)
+  7  WHERE  myrank <= 2;
+
+     EMPNO|=|    DEPTNO|=|       SAL|=|    MYRANK                                                                                 
+==========|=|==========|=|==========|=|==========                                                                                 
+      7934|=|        10|=|      1300|=|         1                                                                                 
+      7782|=|        10|=|      2450|=|         2                                                                                 
+      7369|=|        20|=|       800|=|         1                                                                                 
+      7876|=|        20|=|      1100|=|         2                                                                                 
+      7900|=|        30|=|       950|=|         1                                                                                 
+      7521|=|        30|=|      1250|=|         2                                                                                 
+      7654|=|        30|=|      1250|=|         2                                                                                 
+
+7 rows selected.
+
+SQL> 
+SQL> ---------------------------------------
+SQL> rem   The DENSE_RANK function acts like the RANK function
+SQL> rem   except that it assigns consecutive ranks
+SQL> SELECT empno,
+  2         deptno,
+  3         sal,
+  4         DENSE_RANK() OVER (PARTITION BY deptno ORDER BY sal) AS myrank
+  5  FROM   emp;
+
+     EMPNO|=|    DEPTNO|=|       SAL|=|    MYRANK                                                                                 
+==========|=|==========|=|==========|=|==========                                                                                 
+      7934|=|        10|=|      1300|=|         1                                                                                 
+      7782|=|        10|=|      2450|=|         2                                                                                 
+      7839|=|        10|=|      5000|=|         3                                                                                 
+      7369|=|        20|=|       800|=|         1                                                                                 
+      7876|=|        20|=|      1100|=|         2                                                                                 
+      7566|=|        20|=|      2975|=|         3                                                                                 
+      7788|=|        20|=|      3000|=|         4                                                                                 
+      7902|=|        20|=|      3000|=|         4                                                                                 
+      7900|=|        30|=|       950|=|         1                                                                                 
+      7654|=|        30|=|      1250|=|         2                                                                                 
+      7521|=|        30|=|      1250|=|         2                                                                                 
+      7844|=|        30|=|      1500|=|         3                                                                                 
+      7499|=|        30|=|      1600|=|         4                                                                                 
+      7698|=|        30|=|      2850|=|         5                                                                                 
+
+14 rows selected.
+
+SQL> 
+SQL> rem  despleguemos solo el departamento 30 con "DENSE_RANK"
+SQL> 
+SQL> SELECT empno,
+  2         deptno,
+  3         sal,
+  4         DENSE_RANK() OVER (PARTITION BY deptno ORDER BY sal) AS myrank
+  5  FROM   emp
+  6  where deptno = 30;
+
+     EMPNO|=|    DEPTNO|=|       SAL|=|    MYRANK                                                                                 
+==========|=|==========|=|==========|=|==========                                                                                 
+      7900|=|        30|=|       950|=|         1                                                                                 
+      7521|=|        30|=|      1250|=|         2                                                                                 
+      7654|=|        30|=|      1250|=|         2                                                                                 
+      7844|=|        30|=|      1500|=|         3                                                                                 
+      7499|=|        30|=|      1600|=|         4                                                                                 
+      7698|=|        30|=|      2850|=|         5                                                                                 
+
+6 rows selected.
+
+SQL> 
+SQL> --------------------------------------------
+SQL> rem  despleguemos solo el departamento 30 con "RANK"
+SQL> 
+SQL> SELECT empno,
+  2         deptno,
+  3         sal,
+  4         RANK() OVER (PARTITION BY deptno ORDER BY sal) AS myrank
+  5  FROM   emp
+  6  where deptno = 30;
+
+     EMPNO|=|    DEPTNO|=|       SAL|=|    MYRANK                                                                                 
+==========|=|==========|=|==========|=|==========                                                                                 
+      7900|=|        30|=|       950|=|         1                                                                                 
+      7521|=|        30|=|      1250|=|         2                                                                                 
+      7654|=|        30|=|      1250|=|         2                                                                                 
+      7844|=|        30|=|      1500|=|         4                                                                                 
+      7499|=|        30|=|      1600|=|         5                                                                                 
+      7698|=|        30|=|      2850|=|         6                                                                                 
+
+6 rows selected.
+
+SQL> 
+SQL> ------------------------
+SQL> rem   As with the RANK analytic function,
+SQL> rem  we can do a Top-N query on a per-department basis.
+SQL> rem         ejecutandolo en un subquery y
+SQL> rem        ordenarlo de forma descendente
+SQL> rem     posteriormente filtrando tuplas con rango menor o igual a 2
+SQL> SELECT *
+  2  FROM   (SELECT empno,
+  3                 deptno,
+  4                 sal,
+  5                 DENSE_RANK() OVER (PARTITION BY deptno ORDER BY sal DESC) AS myrank
+  6          FROM   emp)
+  7  WHERE  myrank <= 2;
+
+     EMPNO|=|    DEPTNO|=|       SAL|=|    MYRANK                                                                                 
+==========|=|==========|=|==========|=|==========                                                                                 
+      7839|=|        10|=|      5000|=|         1                                                                                 
+      7782|=|        10|=|      2450|=|         2                                                                                 
+      7788|=|        20|=|      3000|=|         1                                                                                 
+      7902|=|        20|=|      3000|=|         1                                                                                 
+      7566|=|        20|=|      2975|=|         2                                                                                 
+      7698|=|        30|=|      2850|=|         1                                                                                 
+      7499|=|        30|=|      1600|=|         2                                                                                 
+
+7 rows selected.
+
+SQL> 
+SQL> 
+SQL> rem The FIRST and LAST functions can be used to return the first or last value from
+SQL> rem an ordered sequence. Say we want to display the salary of each employee,
+SQL> rem  along with the lowest and highest
+SQL> rem within their department we may use something like
+SQL> 
+SQL> SELECT empno,
+  2         deptno,
+  3         sal,
+  4         MIN(sal) KEEP (DENSE_RANK FIRST ORDER BY sal)
+  5  OVER (PARTITION BY deptno) AS lowest,
+  6         MAX(sal) KEEP (DENSE_RANK LAST ORDER BY sal)
+  7  OVER (PARTITION BY deptno) AS highest
+  8  FROM   emp
+  9  ORDER BY deptno, sal;
+
+     EMPNO|=|    DEPTNO|=|       SAL|=|    LOWEST|=|   HIGHEST                                                                    
+==========|=|==========|=|==========|=|==========|=|==========                                                                    
+      7934|=|        10|=|      1300|=|      1300|=|      5000                                                                    
+      7782|=|        10|=|      2450|=|      1300|=|      5000                                                                    
+      7839|=|        10|=|      5000|=|      1300|=|      5000                                                                    
+      7369|=|        20|=|       800|=|       800|=|      3000                                                                    
+      7876|=|        20|=|      1100|=|       800|=|      3000                                                                    
+      7566|=|        20|=|      2975|=|       800|=|      3000                                                                    
+      7788|=|        20|=|      3000|=|       800|=|      3000                                                                    
+      7902|=|        20|=|      3000|=|       800|=|      3000                                                                    
+      7900|=|        30|=|       950|=|       950|=|      2850                                                                    
+      7654|=|        30|=|      1250|=|       950|=|      2850                                                                    
+      7521|=|        30|=|      1250|=|       950|=|      2850                                                                    
+      7844|=|        30|=|      1500|=|       950|=|      2850                                                                    
+      7499|=|        30|=|      1600|=|       950|=|      2850                                                                    
+      7698|=|        30|=|      2850|=|       950|=|      2850                                                                    
+
+14 rows selected.
+
+SQL> 
+SQL> rem  despleguemos solo los del deptno 30
+SQL> -- --------------------------------------------
+SQL> /*
+SQL> The KEEP keyword is for semantic clarity. It qualifies aggregate_function,
+SQL> indicating that only the FIRST or LAST values of aggregate_function will be
+SQL> returned.
+SQL> */
+SQL> 
+SQL> SELECT empno,
+  2         deptno,
+  3         sal,
+  4         MIN(sal) KEEP (DENSE_RANK FIRST ORDER BY sal)
+  5  OVER (PARTITION BY deptno) AS lowest,
+  6         MAX(sal) KEEP (DENSE_RANK LAST ORDER BY sal)
+  7  OVER (PARTITION BY deptno) AS highest
+  8  FROM   emp
+  9  where deptno = 30
+ 10  ORDER BY deptno, sal;
+
+     EMPNO|=|    DEPTNO|=|       SAL|=|    LOWEST|=|   HIGHEST                                                                    
+==========|=|==========|=|==========|=|==========|=|==========                                                                    
+      7900|=|        30|=|       950|=|       950|=|      2850                                                                    
+      7521|=|        30|=|      1250|=|       950|=|      2850                                                                    
+      7654|=|        30|=|      1250|=|       950|=|      2850                                                                    
+      7844|=|        30|=|      1500|=|       950|=|      2850                                                                    
+      7499|=|        30|=|      1600|=|       950|=|      2850                                                                    
+      7698|=|        30|=|      2850|=|       950|=|      2850                                                                    
+
+6 rows selected.
+
+SQL> 
+SQL> rem
+SQL> SPOOL OFF;

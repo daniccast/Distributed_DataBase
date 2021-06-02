@@ -1,0 +1,533 @@
+SQL> 
+SQL> 
+SQL> rem ||ø|configura la pantalla
+SQL> set linesize 150
+SQL> set pagesize 99
+SQL> set colsep '||'
+SQL> 
+SQL> REM DESPLEGAR LOS ATRIBUTOS DE LA SESSION
+SQL> col parameter format a25
+SQL> col value     format a25
+SQL> rem desplegar los atributos de nls_session_parameters]
+SQL> select parameter, value
+  2  from nls_session_parameters;
+
+PARAMETER                ||VALUE                                                                                                                      
+=========================||=========================                                                                                                  
+NLS_LANGUAGE             ||AMERICAN                                                                                                                   
+NLS_TERRITORY            ||AMERICA                                                                                                                    
+NLS_CURRENCY             ||$                                                                                                                          
+NLS_ISO_CURRENCY         ||AMERICA                                                                                                                    
+NLS_NUMERIC_CHARACTERS   ||.,                                                                                                                         
+NLS_CALENDAR             ||GREGORIAN                                                                                                                  
+NLS_DATE_FORMAT          ||DD-MON-RR                                                                                                                  
+NLS_DATE_LANGUAGE        ||AMERICAN                                                                                                                   
+NLS_SORT                 ||BINARY                                                                                                                     
+NLS_TIME_FORMAT          ||HH.MI.SSXFF AM                                                                                                             
+NLS_TIMESTAMP_FORMAT     ||DD-MON-RR HH.MI.SSXFF AM                                                                                                   
+NLS_TIME_TZ_FORMAT       ||HH.MI.SSXFF AM TZR                                                                                                         
+NLS_TIMESTAMP_TZ_FORMAT  ||DD-MON-RR HH.MI.SSXFF AM                                                                                                   
+                         ||TZR                                                                                                                        
+                                                                                                                                                      
+NLS_DUAL_CURRENCY        ||$                                                                                                                          
+NLS_COMP                 ||BINARY                                                                                                                     
+NLS_LENGTH_SEMANTICS     ||BYTE                                                                                                                       
+NLS_NCHAR_CONV_EXCP      ||FALSE                                                                                                                      
+
+17 rows selected.
+
+SQL> 
+SQL> drop table works_on;
+
+Table dropped.
+
+SQL> CREATE TABLE works_on (
+  2      ESSN NUMBER,
+  3  PNO  NUMBER,
+  4  HOURS NUMBER);
+
+Table created.
+
+SQL> 
+SQL> insert into works_on values(123456789,1,32.5);
+
+1 row created.
+
+SQL> insert into works_on values(123456789,2,7.5);
+
+1 row created.
+
+SQL> insert into works_on values(666884444,3,40);
+
+1 row created.
+
+SQL> insert into works_on values(453453453,1,20.0);
+
+1 row created.
+
+SQL> insert into works_on values(453453453,2,20.0);
+
+1 row created.
+
+SQL> insert into works_on values(333445555,2,10.0);
+
+1 row created.
+
+SQL> insert into works_on values(333445555,3,10.0);
+
+1 row created.
+
+SQL> insert into works_on values(333445555,10,10.0);
+
+1 row created.
+
+SQL> insert into works_on values(333445555,20,10.0);
+
+1 row created.
+
+SQL> insert into works_on values(999887777,30,30.0);
+
+1 row created.
+
+SQL> insert into works_on values(999887777,10,30.0);
+
+1 row created.
+
+SQL> insert into works_on values(987987987,10,35.0);
+
+1 row created.
+
+SQL> insert into works_on values(987987987,30,5.0);
+
+1 row created.
+
+SQL> insert into works_on values(987654321,30,20.0);
+
+1 row created.
+
+SQL> insert into works_on values(987654321,20,15.0);
+
+1 row created.
+
+SQL> insert into works_on values(888665555,20,NULL);
+
+1 row created.
+
+SQL> 
+SQL> drop table PROJECT;
+
+Table dropped.
+
+SQL> CREATE TABLE PROJECT (
+  2      PNAME VARCHAR2(15),
+  3      PNUMBER NUMBER ,
+  4  PLOCATION VARCHAR2(15),
+  5  DNUM NUMBER);
+
+Table created.
+
+SQL> ---
+SQL> insert into project values('ProductX',1,'Bellaire',5);
+
+1 row created.
+
+SQL> insert into project values('ProductY',2,'Sugarland',5);
+
+1 row created.
+
+SQL> insert into project values('ProductZ',3,'Houston',5);
+
+1 row created.
+
+SQL> insert into project values('Computerization',10,'Stafford',5);
+
+1 row created.
+
+SQL> insert into project values('Reorganization',20,'Houston',5);
+
+1 row created.
+
+SQL> insert into project values('Newbenefits',1,'Stafford',5);--
+> 
+  2  drop table EMPLOYEE;
+insert into project values('Newbenefits',1,'Stafford',5);-
+                                                        *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> CREATE TABLE EMPLOYEE (
+  2      FNAME VARCHAR2(15),
+  3  MINIT VARCHAR2(2),
+  4  LNAME VARCHAR2(15),
+  5    SSN      NUMBER,
+  6  BDATE DATE,
+  7  ADDRESS VARCHAR2(25),
+  8  SEX VARCHAR2(15),
+  9  SALARY NUMBER,
+ 10  SUPERSSN NUMBER,
+ 11  DNO NUMBER);
+CREATE TABLE EMPLOYEE (
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> INSERT INTO EMPLOYEE VALUES
+  2     ('John','B','Smith',123456789,TO_DATE('1965-01-09','YYYY-MM-DD'),'731 Fondren, Houston, TX','M',30000,333445555,5);
+INSERT INTO EMPLOYEE VALUES
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO EMPLOYEE VALUES
+  2     ('Franklin','T','Wong',333445555,TO_DATE('1955-12-08','YYYY-MM-DD'),'638 Voss, Houston, TX','M',40000,888665555,4);
+INSERT INTO EMPLOYEE VALUES
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO EMPLOYEE VALUES
+  2     ('Jennifer','J','Zelaya',999887777,TO_DATE('1968-01-19','YYYY-MM-DD'),'3321 Castle, Spring, TX','F',25000,987654321,4);
+INSERT INTO EMPLOYEE VALUES
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO EMPLOYEE VALUES
+  2     ('Alicia','S','Wallane',987654321,TO_DATE('1941-06-19','YYYY-MM-DD'),'291 Berry, Bellaire, TX','F',43000,888665555,4);
+INSERT INTO EMPLOYEE VALUES
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO EMPLOYEE VALUES
+  2     ('Ramesh','K','Narayan',666884444,TO_DATE('1962-09-15','YYYY-MM-DD'),'975 Fire Oak, Humble, TX','M',38000,333445555,5);
+INSERT INTO EMPLOYEE VALUES
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO EMPLOYEE VALUES
+  2     ('Joyce','A','English',453453453,TO_DATE('1972-07-31','YYYY-MM-DD'),'5631 Rice, Houston, TX','F',25000,333445555,5);
+INSERT INTO EMPLOYEE VALUES
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO EMPLOYEE VALUES
+  2     ('Ahmad','V','Jabbar',987987987,TO_DATE('1969-03-29','YYYY-MM-DD'),'980 Dallas, Houston, TX','M',25000,987654321,4);
+INSERT INTO EMPLOYEE VALUES
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO EMPLOYEE VALUES
+  2     ('James','E','Borg',888665555,TO_DATE('1937-11-10','YYYY-MM-DD'),'450 Stone, Houston, TX','M',55000,NULL,1);
+INSERT INTO EMPLOYEE VALUES
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> 
+SQL> select count (*) from employee;
+
+  COUNT(*)                                                                                                                                            
+==========                                                                                                                                            
+        14                                                                                                                                            
+
+SQL> select count (*) from works_on;
+
+  COUNT(*)                                                                                                                                            
+==========                                                                                                                                            
+        16                                                                                                                                            
+
+SQL> select count (*) from project;
+
+  COUNT(*)                                                                                                                                            
+==========                                                                                                                                            
+         5                                                                                                                                            
+
+SQL> 
+SQL> select * from employee;
+
+    EMP_ID||FNAME     ||LNAME     ||   DEPT_ID||MANAGER_EMP_ID||     SALARY||HIRE_DATE||    JOB_ID                                                    
+==========||==========||==========||==========||==============||===========||=========||==========                                                    
+      7369||JOHN      ||SMITH     ||        20||          7902||     800.00||17-DEC-80||       667                                                    
+      7499||KEVIN     ||ALLEN     ||        30||          7698||   1,600.00||20-FEB-81||       670                                                    
+      7521||CYNTHIA   ||WARD      ||        30||          7698||   1,250.00||22-FEB-81||s/Dato                                                        
+      7566||TERRY     ||JONES     ||        20||          7839||   2,000.00||02-APR-81||       671                                                    
+      7654||KENNETH   ||MARTIN    ||        30||          7698||   1,250.00||28-SEP-81||       670                                                    
+      7698||MARION    ||BLAKE     ||        30||          7839||   2,850.00||01-MAY-80||       671                                                    
+      7782||CAROL     ||CLARK     ||        10||          7839||   2,450.00||09-JUN-81||       671                                                    
+      7788||DONALD    ||SCOTT     ||        20||          7566||   3,000.00||19-APR-87||       669                                                    
+      7839||FRANCIS   ||KING      ||        10||s/Dato        ||   5,000.00||17-NOV-81||       672                                                    
+      7844||MARY      ||TURNER    ||        30||          7698||   1,500.00||08-SEP-81||       670                                                    
+      7876||DIANE     ||ADAMS     ||        20||          7788||   1,100.00||23-MAY-87||s/Dato                                                        
+      7900||FRED      ||JAMES     ||        30||          7698||     950.00||03-DEC-81||       667                                                    
+      7902||JENNIFER  ||FORD      ||        20||          7566||   3,000.00||03-DEC-81||       669                                                    
+      7934||BARBARA   ||MILLER    ||        10||          7782||   1,300.00||23-JAN-82||       667                                                    
+
+14 rows selected.
+
+SQL> select * from works_on;
+
+      ESSN||       PNO||     HOURS                                                                                                                    
+==========||==========||==========                                                                                                                    
+ 123456789||         1||      32.5                                                                                                                    
+ 123456789||         2||       7.5                                                                                                                    
+ 666884444||         3||        40                                                                                                                    
+ 453453453||         1||        20                                                                                                                    
+ 453453453||         2||        20                                                                                                                    
+ 333445555||         2||        10                                                                                                                    
+ 333445555||         3||        10                                                                                                                    
+ 333445555||        10||        10                                                                                                                    
+ 333445555||        20||        10                                                                                                                    
+ 999887777||        30||        30                                                                                                                    
+ 999887777||        10||        30                                                                                                                    
+ 987987987||        10||        35                                                                                                                    
+ 987987987||        30||         5                                                                                                                    
+ 987654321||        30||        20                                                                                                                    
+ 987654321||        20||        15                                                                                                                    
+ 888665555||        20||s/Dato                                                                                                                        
+
+16 rows selected.
+
+SQL> select * from project;
+
+PNAME          ||   PNUMBER||PLOCATION      ||      DNUM                                                                                              
+===============||==========||===============||==========                                                                                              
+ProductX       ||         1||Bellaire       ||         5                                                                                              
+ProductY       ||         2||Sugarland      ||         5                                                                                              
+ProductZ       ||         3||Houston        ||         5                                                                                              
+Computerization||        10||Stafford       ||         5                                                                                              
+Reorganization ||        20||Houston        ||         5                                                                                              
+
+SQL> 
+SQL> 
+SQL> col FNAME    format a10;
+SQL> col MINIT    format  a1;
+SQL> col LNAME    format  a10;
+SQL> col SSN      format  a10;
+SQL> col BDATE    format  a13;
+SQL> col ADDRESS  format  a30;
+SQL> col SEX      format  a1;
+SQL> col SALARY   format  999,999.99;
+SQL> col SUPERSSN format  999999999999;
+SQL> col DNO      format  99;
+SQL> col ssn      format 99999999999
+SQL> rem desplegar los atributos deproducto cartesiano de employee y trabaja en
+SQL> select essn, ssn
+  2  from employee, works_on
+  3  where bdate > '31/12/1957';
+where bdate > '31/12/1957'
+      *
+ERROR at line 3:
+ORA-00904: "BDATE": invalid identifier 
+
+
+SQL> 
+SQL> REM contar el numero de tuplas a partrir de un subquery
+SQL> select count(*) from (select essn, ssn
+  2  from employee, works_on
+  3  where bdate > '31/12/1957');
+where bdate > '31/12/1957')
+      *
+ERROR at line 3:
+ORA-00904: "BDATE": invalid identifier 
+
+
+SQL> 
+SQL> REM contar el numero de tuplas que se repiten al formar grupos por
+SQL> rem       ESSN y  SSN
+SQL> select essn, ssn, count (*)
+  2  from employee, works_on
+  3  where bdate > '31/12/1957'
+  4  group by essn,ssn
+  5  order by 3 desc ,1,2;
+group by essn,ssn
+              *
+ERROR at line 4:
+ORA-00904: "SSN": invalid identifier 
+
+
+SQL> REM contar el numero de tuplas que se repiten al formar grupos por
+SQL> rem       ESSN
+SQL> select essn, count (*)
+  2  from employee, works_on
+  3  where bdate > '31/12/1957'
+  4  group by essn
+  5  order by 2 desc ,1;
+where bdate > '31/12/1957'
+      *
+ERROR at line 3:
+ORA-00904: "BDATE": invalid identifier 
+
+
+SQL> REM contar el numero de tuplas que se repiten al formar grupos por
+SQL> rem       SSN
+SQL> select ssn, count (*)
+  2  from employee, works_on
+  3  where bdate > '31/12/1957'
+  4  group by ssn
+  5  order by 2 desc ,1;
+group by ssn
+         *
+ERROR at line 4:
+ORA-00904: "SSN": invalid identifier 
+
+
+SQL> REM CREAR UNA VISTA DE LA CONSULTA
+SQL> REM contar el numero de tuplas que se repiten al formar grupos por
+SQL> rem       SSN
+SQL> DROP VIEW B0;
+DROP VIEW B0
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE VIEW VISTAB0 AS
+  2  SELECT * FROM EMPLOYEE
+  3  where bdate > '31/12/1957';
+where bdate > '31/12/1957'
+      *
+ERROR at line 3:
+ORA-00904: "BDATE": invalid identifier 
+
+
+SQL> SELECT * FROM VISTAB0;
+SELECT * FROM VISTAB0
+              *
+ERROR at line 1:
+ORA-04063: view "SERGIONAVA.VISTAB0" has errors 
+
+
+SQL> DROP VISTA VISTAB1;
+DROP VISTA VISTAB1
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> CREATE VIEW VISTAB1 AS
+  2  (select ssn, count (*) CUENTA
+  3  from employee, works_on
+  4  where bdate > '31/12/1957'
+  5  group by ssn);
+group by ssn)
+         *
+ERROR at line 5:
+ORA-00904: "SSN": invalid identifier 
+
+
+SQL> REM PESPLEGAR LOS ATRIBUTOS DE LA VISTA VISTA1B
+SQL> SELECT * FROM VISTAB1
+  2  order by 2 desc ,1;
+SELECT * FROM VISTAB1
+              *
+ERROR at line 1:
+ORA-04063: view "SERGIONAVA.VISTAB1" has errors 
+
+
+SQL> 
+SQL> REM CREAR UNA VISTA VISTA2B CON EL CON EL ATRIBUTO PNAME
+SQL> REM EN  PARTICULAR SOLO DEL PROYECTO ProductY
+SQL> SELECT PNAME
+  2  FROM PROJECT
+  3  WHERE PNAME = 'ProductY';
+
+PNAME                                                                                                                                                 
+===============                                                                                                                                       
+ProductY                                                                                                                                              
+
+SQL> 
+SQL> DROP VIEW VISTAB2;
+
+View dropped.
+
+SQL> CREATE VIEW VISTAB2 AS
+  2  SELECT PNAME
+  3  FROM PROJECT
+  4  WHERE PNAME = 'ProductY';
+
+View created.
+
+SQL> REM DESPLEGAR LOS ATRIBUTOS DE LA VISTA VISTA1B;
+SQL> SELECT * FROM VISTAB2;
+
+PNAME                                                                                                                                                 
+===============                                                                                                                                       
+ProductY                                                                                                                                              
+
+SQL> 
+SQL> REM GENERAR EL  PRODUCTO CARTESIANO DE VISTA1A Y VISTA1B
+SQL> SELECT * FROM VISTAB1, VISTAB2;
+SELECT * FROM VISTAB1, VISTAB2
+              *
+ERROR at line 1:
+ORA-04063: view "SERGIONAVA.VISTAB1" has errors 
+
+
+SQL> DROP VISTAB3;
+DROP VISTAB3
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> CREATE VIEW VISTAB3 AS
+  2  SELECT * FROM VISTAB1, VISTAB2;
+SELECT * FROM VISTAB1, VISTAB2
+              *
+ERROR at line 2:
+ORA-04063: view "SERGIONAVA.VISTAB1" has errors 
+
+
+SQL> SELECT * FROM VISTAB3
+  2  ORDER BY 1 ;
+SELECT * FROM VISTAB3
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> REM CREAR UNA VISTA DE ATRIBUTO LNAME A PARTIR DE LA VISTAB3
+SQL> SELECT LANME FROM VISTAB3;
+SELECT LANME FROM VISTAB3
+                  *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> 
+SQL> SELECT FNAME
+  2  ,MINIT
+  3  ,LNAME
+  4  ,SSN
+  5  ,BDATE
+  6  ,ADDRESS
+  7  ,SEX
+  8  ,SALARY
+  9  ,SUPERSSN
+ 10  ,DNO
+ 11  ,ssn
+ 12  FROM EMPLOYEE;
+,ssn
+ *
+ERROR at line 11:
+ORA-00904: "SSN": invalid identifier 
+
+
+SQL> 
+SQL> 
+SQL> SPOOL OFF;

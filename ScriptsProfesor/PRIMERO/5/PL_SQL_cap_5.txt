@@ -1,0 +1,476 @@
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,84]
+SQL> rem  uso de   IF  THEN   ELSE
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set colsep '|=|'
+SQL> set underline =
+SQL> set null s/Datos
+SQL> set feedback on
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_num NUMBER := &sv_user_num;
+  3  v_num_flag NUMBER;
+  4  BEGIN
+  5  v_num_flag := MOD(v_num,2);
+  6  -- test if the number provided by the user is even
+  7  CASE v_num_flag
+  8  WHEN 0 THEN
+  9  DBMS_OUTPUT.PUT_LINE ( chr(10)||chr(9)||
+ 10  v_num||' is even number'||'ES UN NUMERO PAR');
+ 11  ELSE
+ 12  DBMS_OUTPUT.PUT_LINE ( chr(10)||chr(9)||
+ 13  v_num||' is odd number'||'ES UN NUMERO IMPAR');
+ 14  END CASE;
+ 15  DBMS_OUTPUT.PUT_LINE ('Done');
+ 16  END;
+ 17  /
+Enter value for sv_user_num: rem [ROSENZWEIG &  RAKHIMOV,2009,89]
+old   2: v_num NUMBER := &sv_user_num;
+new   2: v_num NUMBER := rem [ROSENZWEIG &  RAKHIMOV,2009,89];
+SP2-0552: Bind variable "RAKHIMOV" not declared.
+SQL> rem    uso de la sentencia CASE
+SQL> -- ch05_1a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_date DATE := TO_DATE('&sv_user_date', 'DD/MM/YYYY');
+  3  v_day VARCHAR2(1);
+  4  BEGIN
+  5  v_day := TO_CHAR(v_date, 'D');
+  6  DBMS_OUTPUT.PUT_LINE (chr(10)||chr(9)||'Hola ESCOM');
+  7  CASE v_day
+  8  WHEN '1' THEN
+  9  DBMS_OUTPUT.PUT_LINE (chr(9)||'Today is Sunday');
+ 10  WHEN '2' THEN
+ 11  DBMS_OUTPUT.PUT_LINE (chr(9)||'Today is Monday');
+ 12  WHEN '3' THEN
+ 13  DBMS_OUTPUT.PUT_LINE (chr(9)||'Today is Tuesday');
+ 14  WHEN '4' THEN
+ 15  DBMS_OUTPUT.PUT_LINE (chr(9)||'Today is Wednesday');
+ 16  WHEN '5' THEN
+ 17  DBMS_OUTPUT.PUT_LINE (chr(9)||'Today is Thursday');
+ 18  WHEN '6' THEN
+ 19  DBMS_OUTPUT.PUT_LINE (chr(9)||'Today is Friday');
+ 20  WHEN '7' THEN
+ 21  DBMS_OUTPUT.PUT_LINE (chr(9)||'Today is Saturday');
+ 22  END CASE;
+ 23  END;
+ 24  /
+Enter value for sv_user_date: rem [ROSENZWEIG &  RAKHIMOV,2009,89]
+old   2: v_date DATE := TO_DATE('&sv_user_date', 'DD/MM/YYYY');
+new   2: v_date DATE := TO_DATE('rem [ROSENZWEIG &  RAKHIMOV,2009,89]', 'DD/MM/YYYY');
+DECLARE
+*
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected 
+ORA-06512: at line 2 
+
+
+SQL> rem    uso de la sentencia CASE sin declarar variable
+SQL> 
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_date DATE := TO_DATE('&sv_user_date', 'DD-MON-YYYY');
+  3  BEGIN
+  4  DBMS_OUTPUT.PUT_LINE (chr(10)||chr(9)||'Hola ESCOM'||chr(10)||chr(10));
+  5  CASE
+  6  WHEN TO_CHAR(v_date, 'D') = '1' THEN
+  7  DBMS_OUTPUT.PUT_LINE (CHR(9)||'Today is Sunday');
+  8  WHEN TO_CHAR(v_date, 'D') = '2' THEN
+  9  DBMS_OUTPUT.PUT_LINE (CHR(9)||'Today is Monday');
+ 10  WHEN TO_CHAR(v_date, 'D') = '3' THEN
+ 11  DBMS_OUTPUT.PUT_LINE (CHR(9)||'Today is Tuesday');
+ 12  WHEN TO_CHAR(v_date, 'D') = '4' THEN
+ 13  DBMS_OUTPUT.PUT_LINE (CHR(9)||'Today is Wednesday');
+ 14  WHEN TO_CHAR(v_date, 'D') = '5' THEN
+ 15  DBMS_OUTPUT.PUT_LINE (CHR(9)||'Today is Thursday');
+ 16  WHEN TO_CHAR(v_date, 'D') = '6' THEN
+ 17  DBMS_OUTPUT.PUT_LINE (CHR(9)||'Today is Friday');
+ 18  WHEN TO_CHAR(v_date, 'D') = '7' THEN
+ 19  DBMS_OUTPUT.PUT_LINE (CHR(9)||'Today is Saturday');
+ 20  END CASE;
+ 21  END;
+ 22  /
+Enter value for sv_user_date: 
+old   2: v_date DATE := TO_DATE('&sv_user_date', 'DD-MON-YYYY');
+new   2: v_date DATE := TO_DATE('', 'DD-MON-YYYY');
+
+	Hola ESCOM
+
+                                                                                                                    
+DECLARE
+*
+ERROR at line 1:
+ORA-06592: CASE not found while executing CASE statement 
+ORA-06512: at line 5 
+
+
+SQL> 
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,91]
+SQL> REM USO DE LA SENTENCIA CASE
+SQL> -- ch05_2a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_student_id NUMBER := 102;
+  3  v_section_id NUMBER := 89;
+  4  v_final_grade NUMBER;
+  5  v_letter_grade CHAR(1);
+  6  BEGIN
+  7  SELECT final_grade
+  8  INTO v_final_grade
+  9  FROM enrollment
+ 10  WHERE student_id = v_student_id
+ 11  AND section_id = v_section_id;
+ 12  CASE
+ 13  WHEN v_final_grade >= 90 THEN v_letter_grade := 'A';
+ 14  WHEN v_final_grade >= 80 THEN v_letter_grade := 'B';
+ 15  WHEN v_final_grade >= 70 THEN v_letter_grade := 'C';
+ 16  WHEN v_final_grade >= 60 THEN v_letter_grade := 'D';
+ 17  ELSE v_letter_grade := 'F';
+ 18  END CASE;
+ 19  -- control resumes here
+ 20  DBMS_OUTPUT.PUT_LINE ('Letter grade is: '||v_letter_grade);
+ 21  END;
+ 22  /
+Letter grade is: A                                                                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,93]
+SQL> REM USO DE LA SENTENCIA CASE
+SQL> REM SE INCLUYE EL CODIGO PARA EL NULL VALUE
+SQL> -- ch05_2b.sql, version 2.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_student_id NUMBER := &sv_student_id;
+  3  v_section_id NUMBER := 89;
+  4  v_final_grade NUMBER;
+  5  v_letter_grade CHAR(1);
+  6  BEGIN
+  7  SELECT final_grade
+  8  INTO v_final_grade
+  9  FROM enrollment
+ 10  WHERE student_id = v_student_id
+ 11  AND section_id = v_section_id;
+ 12  CASE -- outer CASE
+ 13  WHEN v_final_grade IS NULL THEN
+ 14  DBMS_OUTPUT.PUT_LINE ('There is no final grade.');
+ 15  DBMS_OUTPUT.PUT_LINE ('NO HAY CALIFICACION DSIPONIBLE');
+ 16  ELSE
+ 17  CASE -- inner CASE
+ 18  WHEN v_final_grade >= 90 THEN v_letter_grade := 'A';
+ 19  WHEN v_final_grade >= 80 THEN v_letter_grade := 'B';
+ 20  WHEN v_final_grade >= 70 THEN v_letter_grade := 'C';
+ 21  WHEN v_final_grade >= 60 THEN v_letter_grade := 'D';
+ 22  ELSE v_letter_grade := 'F';
+ 23  END CASE;
+ 24  -- control resumes here after inner CASE terminates
+ 25  --DBMS_OUTPUT.PUT_LINE ('Letter grade is: '||v_letter_grade);
+ 26  -- control resumes here after OUTER CASE terminates
+ 27  END CASE;
+ 28  END;
+ 29  /
+Enter value for sv_student_id: 
+old   2: v_student_id NUMBER := &sv_student_id;
+new   2: v_student_id NUMBER := ;
+v_student_id NUMBER := ;
+                       *
+ERROR at line 2:
+ORA-06550: line 2, column 24: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+( - + case mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue avg count current exists max min prior sql stddev 
+sum variance execute forall merge time timestamp interval 
+date <a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+<an alternatively 
+
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,94]
+SQL> 
+SQL> -- ch05_2c.sql, version 3.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_student_id NUMBER := 102;
+  3  v_section_id NUMBER := 89;
+  4  v_final_grade NUMBER;
+  5  v_letter_grade CHAR(1);
+  6  BEGIN
+  7  SELECT final_grade
+  8  INTO v_final_grade
+  9  FROM enrollment
+ 10  WHERE student_id = v_student_id
+ 11  AND section_id = v_section_id;
+ 12  CASE
+ 13  WHEN v_final_grade >= 60 THEN v_letter_grade := 'D';
+ 14  WHEN v_final_grade >= 70 THEN v_letter_grade := 'C';
+ 15  WHEN v_final_grade >= 80 THEN v_letter_grade := 'B';
+ 16  WHEN v_final_grade >= 90 THEN v_letter_grade := 'A';
+ 17  ELSE v_letter_grade := 'F';
+ 18  END CASE;
+ 19  -- control resumes here
+ 20  DBMS_OUTPUT.PUT_LINE ('Letter grade is: '||v_letter_grade);
+ 21  END;
+ 22  /
+Letter grade is: D                                                                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,97]
+SQL> DECLARE
+  2  v_course_no NUMBER;
+  3  v_description VARCHAR2(50);
+  4  v_prereq VARCHAR2(35);
+  5  BEGIN
+  6  SELECT course_no, description,
+  7  CASE
+  8  WHEN prerequisite IS NULL THEN
+  9  'No prerequisite course required'
+ 10  ELSE TO_CHAR(prerequisite)
+ 11  END prerequisite
+ 12  INTO v_course_no, v_description, v_prereq
+ 13  FROM course
+ 14  WHERE course_no = 20;
+ 15  DBMS_OUTPUT.PUT_LINE ('Course: '||v_course_no);
+ 16  DBMS_OUTPUT.PUT_LINE ('Description: '||v_description);
+ 17  DBMS_OUTPUT.PUT_LINE ('Prerequisite: '||v_prereq);
+ 18  END;
+ 19  /
+Course: 20                                                                                                                        
+Description: Intro to Computers                                                                                                   
+Prerequisite: No prerequisite course required                                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,100]
+SQL> -- ch05_3a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_student_id NUMBER := 102;
+  3  v_section_id NUMBER := 89;
+  4  v_final_grade NUMBER;
+  5  v_letter_grade CHAR(1);
+  6  BEGIN
+  7  SELECT final_grade
+  8  INTO v_final_grade
+  9  FROM enrollment
+ 10  WHERE student_id = v_student_id
+ 11  AND section_id = v_section_id;
+ 12  v_letter_grade :=
+ 13  CASE
+ 14  WHEN v_final_grade >= 90 THEN 'A'
+ 15  WHEN v_final_grade >= 80 THEN 'B'
+ 16  WHEN v_final_grade >= 70 THEN 'C'
+ 17  WHEN v_final_grade >= 60 THEN 'D'
+ 18  ELSE 'F'
+ 19  END;
+ 20  -- control resumes here
+ 21  DBMS_OUTPUT.PUT_LINE ('Letter grade is: '||v_letter_grade);
+ 22  END;
+ 23  /
+Letter grade is: A                                                                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,101]
+SQL> REM REESCRIBIR UTILIZANDO UNA VARIABLE PARA LA CALIFICACION
+SQL> -- ch05_3b.sql, version 2.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_student_id NUMBER := 102;
+  3  v_section_id NUMBER := 89;
+  4  v_letter_grade CHAR(1);
+  5  BEGIN
+  6  SELECT CASE
+  7  WHEN final_grade >= 90 THEN 'A'
+  8  WHEN final_grade >= 80 THEN 'B'
+  9  WHEN final_grade >= 70 THEN 'C'
+ 10  WHEN final_grade >= 60 THEN 'D'
+ 11  ELSE 'F'
+ 12  END
+ 13  INTO v_letter_grade
+ 14  FROM enrollment
+ 15  WHERE student_id = v_student_id
+ 16  AND section_id = v_section_id;
+ 17  -- control resumes here
+ 18  DBMS_OUTPUT.PUT_LINE ('Letter grade is: '||v_letter_grade);
+ 19  END;
+ 20  /
+Letter grade is: A                                                                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> 
+SQL> REM    CASE    EXPRESSIONS
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,107]
+SQL> -- ch05_4a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_final_grade NUMBER;
+  3  BEGIN
+  4  SELECT CASE
+  5  WHEN e.final_grade = g.numeric_grade THEN NULL
+  6  ELSE g.numeric_grade
+  7  END
+  8  INTO v_final_grade
+  9  FROM enrollment e
+ 10  JOIN grade g
+ 11  ON (e.student_id = g.student_id
+ 12  AND e.section_id = g.section_id)
+ 13  WHERE e.student_id = 102
+ 14  AND e.section_id = 86
+ 15  AND g.grade_type_code = 'FI';
+ 16  DBMS_OUTPUT.PUT_LINE ('Final grade: '||v_final_grade);
+ 17  END;
+ 18  /
+Final grade: 85                                                                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,108]
+SQL> 
+SQL> -- ch05_4b.sql, version 2.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_final_grade NUMBER;
+  3  BEGIN
+  4  SELECT NULLIF(g.numeric_grade, e.final_grade)
+  5  INTO v_final_grade
+  6  FROM enrollment e
+  7  JOIN grade g
+  8  ON (e.student_id = g.student_id
+  9  AND e.section_id = g.section_id)
+ 10  WHERE e.student_id = 102
+ 11  AND e.section_id = 86
+ 12  AND g.grade_type_code = 'FI';
+ 13  DBMS_OUTPUT.PUT_LINE ('Final grade: '||v_final_grade);
+ 14  END;
+ 15  /
+Final grade: 85                                                                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,109]
+SQL> -- ch05_5a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_num1 NUMBER := &sv_num1;
+  3  v_num2 NUMBER := &sv_num2;
+  4  v_num3 NUMBER := &sv_num3;
+  5  v_result NUMBER;
+  6  BEGIN
+  7  v_result := CASE
+  8  WHEN v_num1 IS NOT NULL THEN v_num1
+  9  ELSE
+ 10  CASE
+ 11  WHEN v_num2 IS NOT NULL THEN v_num2
+ 12  ELSE v_num3
+ 13  END
+ 14  END;
+ 15  DBMS_OUTPUT.PUT_LINE ('Result: '||v_result);
+ 16  END;
+ 17  /
+Enter value for sv_num1: rem [ROSENZWEIG &  RAKHIMOV,2009,109]
+old   2: v_num1 NUMBER := &sv_num1;
+new   2: v_num1 NUMBER := rem [ROSENZWEIG &  RAKHIMOV,2009,109];
+Enter value for sv_num2: -- ch05_4b.sql, version 2.0
+old   3: v_num2 NUMBER := &sv_num2;
+new   3: v_num2 NUMBER := -- ch05_4b.sql, version 2.0;
+Enter value for sv_num3: SET SERVEROUTPUT ON
+old   4: v_num3 NUMBER := &sv_num3;
+new   4: v_num3 NUMBER := SET SERVEROUTPUT ON;
+SP2-0552: Bind variable "RAKHIMOV" not declared.
+SQL> DECLARE
+  2  v_final_grade NUMBER;
+  3  BEGIN
+  4  SELECT NULLIF(g.numeric_grade, e.final_grade)
+  5  INTO v_final_grade
+  6  FROM enrollment e
+  7  JOIN grade g
+  8  ON (e.student_id = g.student_id
+  9  AND e.section_id = g.section_id)
+ 10  WHERE e.student_id = 102
+ 11  AND e.section_id = 86
+ 12  AND g.grade_type_code = 'FI';
+ 13  DBMS_OUTPUT.PUT_LINE ('Final grade: '||v_final_grade);
+ 14  END;
+ 15  /
+Final grade: 85                                                                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,109]
+SQL> -- ch05_4c.sql, version 3.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_final_grade NUMBER;
+  3  BEGIN
+  4  SELECT NULLIF(e.final_grade, g.numeric_grade)
+  5  INTO v_final_grade
+  6  FROM enrollment e
+  7  JOIN grade g
+  8  ON (e.student_id = g.student_id
+  9  AND e.section_id = g.section_id)
+ 10  WHERE e.student_id = 102
+ 11  AND e.section_id = 86
+ 12  AND g.grade_type_code = 'FI';
+ 13  DBMS_OUTPUT.PUT_LINE ('Final grade: '||v_final_grade);
+ 14  END;
+ 15  /
+Final grade:                                                                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,110]
+SQL> -- ch05_5a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_num1 NUMBER := &sv_num1;
+  3  v_num2 NUMBER := &sv_num2;
+  4  v_num3 NUMBER := &sv_num3;
+  5  v_result NUMBER;
+  6  BEGIN
+  7  v_result := CASE
+  8  WHEN v_num1 IS NOT NULL THEN v_num1
+  9  ELSE
+ 10  CASE
+ 11  WHEN v_num2 IS NOT NULL THEN v_num2
+ 12  ELSE v_num3
+ 13  END
+ 14  END;
+ 15  DBMS_OUTPUT.PUT_LINE ('Result: '||v_result);
+ 16  END;
+ 17  /
+Enter value for sv_num1: SPOOL OFF
+old   2: v_num1 NUMBER := &sv_num1;
+new   2: v_num1 NUMBER := SPOOL OFF;
+Enter value for sv_num2: 
+old   3: v_num2 NUMBER := &sv_num2;
+new   3: v_num2 NUMBER := ;
+Enter value for sv_num3: 12
+old   4: v_num3 NUMBER := &sv_num3;
+new   4: v_num3 NUMBER := 12;
+v_num1 NUMBER := SPOOL OFF;
+                       *
+ERROR at line 2:
+ORA-06550: line 2, column 24: 
+PLS-00103: Encountered the symbol "OFF" when expecting one of the following: 
+. ( * @ % & = - + ; < / > at in is mod remainder not rem 
+<an exponent (**)> <> or != or ~= >= <= <> and or like like2 
+like4 likec between || multiset member submultiset 
+The symbol "." was substituted for "OFF" to continue. 
+ORA-06550: line 3, column 18: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+( - + case mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue avg count current exists max min prior sql  
+
+
+SQL> spool F:\DATABASEDISTRIBUIDET\ejercicios\clase5\cap_3_a.txt

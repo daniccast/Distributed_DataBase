@@ -1,0 +1,41 @@
+﻿spool C:\Users\lolol_000\Documents\Distributed_DataBase\ScriptsProfesor\PRIMERO\10\basessql.txt
+
+rem desplegar las columnas de la entidad employee
+rem a partir de la tabla del diccionario de datos COL
+COL TNAME FORMAT A8
+COL CNAME FORMAT A9
+COL COLNO FORMAT 999
+select TNAME,COLNO,CNAME,WIDTH
+FROM COL
+WHERE TNAME = 'EMPLOYEE';
+
+COL ENTIDAD FORMAT A11			
+SELECT TNAME ENTIDAD
+		, COUNT(*) ATRIBUTOS
+			FROM COL
+			GROUP BY TNAME
+			ORDER BY 1 ;	
+REM DESPLEGAR LOS ATRIBUTOS DE CADA ENTIDAD DE ESTE ESQUEMA
+select TNAME,COLNO,CNAME,WIDTH
+	FROM COL;
+REM DESPLEGAR LOS ATRIBUTOS DE CADA ENTIDAD POR SEPARADO
+select TNAME,COLNO,CNAME,WIDTH
+	FROM COL
+   WHERE TNAME = 'EMPLOYEE';
+select TNAME,COLNO,CNAME,WIDTH
+	FROM COL
+   WHERE TNAME = 'WORKS_ON';
+select TNAME,COLNO,CNAME,WIDTH
+	FROM COL
+   WHERE TNAME = 'PROJECT';
+   
+reM  DESPLEGAR EL TAMAÑO TOTAL DE CADA TUPLA POR TABLA
+
+SELECT TNAME "Entidad"
+		, COUNT(WIDTH) atributos
+		, sum(width)   "Long Tupla"
+	from col
+	group by tname
+	order by 1;   
+	
+SPOOL OFF;

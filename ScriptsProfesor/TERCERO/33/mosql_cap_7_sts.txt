@@ -1,0 +1,268 @@
+SQL> rem Mastering Oracle SQL
+SQL> rem  [Mishra &  Beaulieu,2002,145]
+SQL> rem The first
+SQL> rem query retrieves all the customers in region 5
+SQL> SELECT CUST_NBR, NAME
+  2  FROM CUSTOMER
+  3  WHERE REGION_ID = 5;
+
+  CUST_NBR|=|NAME                                                                                                                 
+----------|=|------------------------------                                                                                       
+         1|=|Cooper Industries                                                                                                    
+         2|=|Emblazon Corp.                                                                                                       
+         3|=|Ditech Corp.                                                                                                         
+         4|=|Flowtech Inc.                                                                                                        
+         5|=|Gentech Industries                                                                                                   
+
+5 rows selected.
+
+SQL> 
+SQL> rem  [Mishra &  Beaulieu,2002,145]
+SQL> 
+SQL> rem The second query retrieves all the customers with the
+SQL> rem sales representative is 'MARTIN'.
+SQL> SELECT C.CUST_NBR, C.NAME
+  2  FROM CUSTOMER C
+  3  WHERE C.CUST_NBR IN (SELECT O.CUST_NBR
+  4   FROM CUST_ORDER O, EMPLOYEE E
+  5   WHERE O.SALES_EMP_ID = E.EMP_ID
+  6   AND E.LNAME = 'MARTIN');
+
+  CUST_NBR|=|NAME                                                                                                                 
+----------|=|------------------------------                                                                                       
+         4|=|Flowtech Inc.                                                                                                        
+         8|=|Zantech Inc.                                                                                                         
+
+2 rows selected.
+
+SQL> 
+SQL>  rem  [Mishra &  Beaulieu,2002,145]
+SQL>  rem UNION ALL
+SQL> rem The UNION ALL operator merges the result sets of two component queries
+SQL> sELECT CUST_NBR, NAME
+  2  FROM CUSTOMER
+  3  WHERE REGION_ID = 5
+  4  UNION ALL
+  5  SELECT C.CUST_NBR, C.NAME
+  6  FROM CUSTOMER C
+  7  WHERE C.CUST_NBR IN (SELECT O.CUST_NBR
+  8   FROM CUST_ORDER O, EMPLOYEE E
+  9   WHERE O.SALES_EMP_ID = E.EMP_ID
+ 10   AND E.LNAME = 'MARTIN');
+
+  CUST_NBR|=|NAME                                                                                                                 
+----------|=|------------------------------                                                                                       
+         1|=|Cooper Industries                                                                                                    
+         2|=|Emblazon Corp.                                                                                                       
+         3|=|Ditech Corp.                                                                                                         
+         4|=|Flowtech Inc.                                                                                                        
+         5|=|Gentech Industries                                                                                                   
+         4|=|Flowtech Inc.                                                                                                        
+         8|=|Zantech Inc.                                                                                                         
+
+7 rows selected.
+
+SQL> 
+SQL>  rem The UNION operation eliminates duplicates
+SQL>   rem  [Mishra &  Beaulieu,2002,146]
+SQL>   SELECT CUST_NBR, NAME
+  2  FROM CUSTOMER
+  3  WHERE REGION_ID = 5
+  4  UNION
+  5  SELECT C.CUST_NBR, C.NAME
+  6  FROM CUSTOMER C
+  7  WHERE C.CUST_NBR IN (SELECT O.CUST_NBR
+  8   FROM CUST_ORDER O, EMPLOYEE E
+  9   WHERE O.SALES_EMP_ID = E.EMP_ID
+ 10   AND E.LNAME = 'MARTIN');
+
+  CUST_NBR|=|NAME                                                                                                                 
+----------|=|------------------------------                                                                                       
+         1|=|Cooper Industries                                                                                                    
+         2|=|Emblazon Corp.                                                                                                       
+         3|=|Ditech Corp.                                                                                                         
+         4|=|Flowtech Inc.                                                                                                        
+         5|=|Gentech Industries                                                                                                   
+         8|=|Zantech Inc.                                                                                                         
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> rem  [Mishra &  Beaulieu,2002,146]
+SQL> rem INTERSECT returns only the rows retrieved by both component queries
+SQL> SELECT CUST_NBR, NAME
+  2  FROM CUSTOMER
+  3  WHERE REGION_ID = 5
+  4  INTERSECT
+  5  SELECT C.CUST_NBR, C.NAME
+  6  FROM CUSTOMER C
+  7  WHERE C.CUST_NBR IN (SELECT O.CUST_NBR
+  8   FROM CUST_ORDER O, EMPLOYEE E
+  9   WHERE O.SALES_EMP_ID = E.EMP_ID
+ 10   AND E.LNAME = 'MARTIN');
+
+  CUST_NBR|=|NAME                                                                                                                 
+----------|=|------------------------------                                                                                       
+         4|=|Flowtech Inc.                                                                                                        
+
+1 row selected.
+
+SQL> 
+SQL>  rem  [Mishra &  Beaulieu,2002,148]
+SQL>  rem INUS returns all rows from the
+SQL>  rem first SELECT that are not also returned by the second SELECT
+SQL>  SELECT CUST_NBR, NAME
+  2  FROM CUSTOMER
+  3  WHERE REGION_ID = 5
+  4  MINUS
+  5  SELECT C.CUST_NBR, C.NAME
+  6  FROM CUSTOMER C
+  7  WHERE C.CUST_NBR IN (SELECT O.CUST_NBR
+  8   FROM CUST_ORDER O, EMPLOYEE E
+  9   WHERE O.SALES_EMP_ID = E.EMP_ID
+ 10   AND E.LNAME = 'MARTIN');
+
+  CUST_NBR|=|NAME                                                                                                                 
+----------|=|------------------------------                                                                                       
+         1|=|Cooper Industries                                                                                                    
+         2|=|Emblazon Corp.                                                                                                       
+         3|=|Ditech Corp.                                                                                                         
+         5|=|Gentech Industries                                                                                                   
+
+4 rows selected.
+
+SQL> 
+SQL> rem  [Mishra &  Beaulieu,2002,148]
+SQL> rem  However, the result of
+SQL> rem MINUS will be different if we alter the order of the component queries
+SQL>  SELECT C.CUST_NBR, C.NAME
+  2  FROM CUSTOMER C
+  3  WHERE C.CUST_NBR IN (SELECT O.CUST_NBR
+  4   FROM CUST_ORDER O, EMPLOYEE E
+  5   WHERE O.SALES_EMP_ID = E.EMP_ID
+  6   AND E.LNAME = 'MARTIN')
+  7  MINUS
+  8  SELECT CUST_NBR, NAME
+  9  FROM CUSTOMER
+ 10  WHERE REGION_ID = 5;
+
+  CUST_NBR|=|NAME                                                                                                                 
+----------|=|------------------------------                                                                                       
+         8|=|Zantech Inc.                                                                                                         
+
+1 row selected.
+
+SQL> 
+SQL> rem  [Mishra &  Beaulieu,2002,153]
+SQL> 
+SQL> 
+SQL>  SELECT CUST_NBR "Customer ID", NAME "Customer Name"
+  2  FROM CUSTOMER
+  3  WHERE REGION_ID = 5
+  4  UNION
+  5  SELECT C.CUST_NBR, C.NAME
+  6  FROM CUSTOMER C
+  7  WHERE C.CUST_NBR IN (SELECT O.CUST_NBR
+  8   FROM CUST_ORDER O, EMPLOYEE E
+  9   WHERE O.SALES_EMP_ID = E.EMP_ID
+ 10   AND E.LNAME = 'MARTIN');
+
+Customer ID|=|Customer Name                                                                                                       
+-----------|=|------------------------------                                                                                      
+          1|=|Cooper Industries                                                                                                   
+          2|=|Emblazon Corp.                                                                                                      
+          3|=|Ditech Corp.                                                                                                        
+          4|=|Flowtech Inc.                                                                                                       
+          5|=|Gentech Industries                                                                                                  
+          8|=|Zantech Inc.                                                                                                        
+
+6 rows selected.
+
+SQL> 
+SQL>  rem  [Mishra &  Beaulieu,2002,153]
+SQL> rem  he same thing happens when we create a view based on a
+SQL> rem set operation.
+SQL> rem The column names in the view are taken from the first SELECT:
+SQL> drop view V_TEST_CUST;
+
+View dropped.
+
+SQL> CREATE VIEW V_TEST_CUST AS
+  2  SELECT CUST_NBR "Customer ID", NAME "Customer Name"
+  3  FROM CUSTOMER
+  4  WHERE REGION_ID = 5
+  5  UNION
+  6  SELECT C.CUST_NBR, C.NAME
+  7  FROM CUSTOMER C
+  8  WHERE C.CUST_NBR IN (SELECT O.CUST_NBR
+  9   FROM CUST_ORDER O, EMPLOYEE E
+ 10   WHERE O.SALES_EMP_ID = E.EMP_ID
+ 11   AND E.LNAME = 'MARTIN');
+I believe you have created a VIEW called V_TEST_CUST                                                                              
+
+View created.
+
+SQL>  rem
+SQL>  DESC V_TEST_CUST
+ Name                                                                    Null?    Type
+ ----------------------------------------------------------------------- -------- ------------------------------------------------
+ Customer ID                                                                      NUMBER(5)
+ Customer Name                                                                    VARCHAR2(30)
+
+SQL>  rem
+SQL> 
+SQL>  /*
+SQL>  If we want to use ORDER BY in a query involving set operations, we must place the
+SQL> ORDER BY at the end of the entire statement. The ORDER BY clause can appear
+SQL> only once at the end of the compound query. The component queries can't have
+SQL> individual ORDER BY clauses. For example:
+SQL>  */
+SQL> 
+SQL>  SELECT CUST_NBR, NAME
+  2  FROM CUSTOMER
+  3  WHERE REGION_ID = 5
+  4  UNION
+  5  SELECT EMP_ID, LNAME
+  6  FROM EMPLOYEE
+  7  WHERE LNAME = 'MARTIN'
+  8  ORDER BY CUST_NBR;
+
+  CUST_NBR|=|NAME                                                                                                                 
+----------|=|------------------------------                                                                                       
+         1|=|Cooper Industries                                                                                                    
+         2|=|Emblazon Corp.                                                                                                       
+         3|=|Ditech Corp.                                                                                                         
+         4|=|Flowtech Inc.                                                                                                        
+         5|=|Gentech Industries                                                                                                   
+      7654|=|MARTIN                                                                                                               
+
+6 rows selected.
+
+SQL> 
+SQL>  rem  [Mishra &  Beaulieu,2002,155]
+SQL> rem The ORDER BY clause doesn't recognize the column names of the second SELECT
+SQL> SELECT CUST_NBR, NAME
+  2  FROM CUSTOMER
+  3  WHERE REGION_ID = 5
+  4  UNION
+  5  SELECT EMP_ID, LNAME
+  6  FROM EMPLOYEE
+  7  WHERE LNAME = 'MARTIN'
+  8  ORDER BY 1;
+
+  CUST_NBR|=|NAME                                                                                                                 
+----------|=|------------------------------                                                                                       
+         1|=|Cooper Industries                                                                                                    
+         2|=|Emblazon Corp.                                                                                                       
+         3|=|Ditech Corp.                                                                                                         
+         4|=|Flowtech Inc.                                                                                                        
+         5|=|Gentech Industries                                                                                                   
+      7654|=|MARTIN                                                                                                               
+
+6 rows selected.
+
+SQL> 
+SQL> rem Component queries are executed from top to bottom. If we want to alter the
+SQL> rem sequence of execution, use parentheses appropriately.
+SQL> spool off

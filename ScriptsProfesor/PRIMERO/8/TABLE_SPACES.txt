@@ -1,0 +1,123 @@
+SQL> rem script de utilidad y cortesia
+SQL> set pagesize 88
+SQL> set linesize 130
+SQL> set colsep '|=|';
+SQL> set underline =
+SQL> set sqln on
+SQL> set flush on
+SQL> set echo on
+SQL> SET NULL S/Datos
+SQL> REM SCRIPT PARA CREAR UN USUARIO
+SQL> REM CONSIDERANDO QUE EL TABLESPACE TENGA UNA ASIGNACIàN ORIGINAL DE CERO
+SQL> REM
+SQL> /*
+SQL> create user student identified by learn
+SQL> default tablespace users
+SQL> temporary tablespace temp
+SQL> quota unlimited on users;
+SQL> 
+SQL> REM SI NO PERMITE GENERAR SCRIPT
+SQL> 
+SQL> alter session set "_ORACLE_SCRIPT"=true;
+SQL> 
+SQL> alter system set "_ORACLE_SCRIPT"=true SCOPE=SPFILE;
+SQL> */
+SQL> REM CONSULTAR LAS TABLAS DEL DICTIONARY QUE SE REFIERAN AS TABLESPACES
+SQL> 
+SQL> select table_name from dict
+  2  where table_name like '%TABLESPACE%'
+  3  ORDER BY 1;
+
+TABLE_NAME                                                                                                                        
+==============================                                                                                                    
+ALL_FILE_GROUP_TABLESPACES                                                                                                        
+DBA_FILE_GROUP_TABLESPACES                                                                                                        
+DBA_HIST_TABLESPACE                                                                                                               
+DBA_HIST_TABLESPACE_STAT                                                                                                          
+DBA_TABLESPACES                                                                                                                   
+DBA_TABLESPACE_GROUPS                                                                                                             
+DBA_TABLESPACE_THRESHOLDS                                                                                                         
+DBA_TABLESPACE_USAGE_METRICS                                                                                                      
+GV$ENCRYPTED_TABLESPACES                                                                                                          
+GV$TABLESPACE                                                                                                                     
+USER_FILE_GROUP_TABLESPACES                                                                                                       
+USER_TABLESPACES                                                                                                                  
+V$ENCRYPTED_TABLESPACES                                                                                                           
+V$TABLESPACE                                                                                                                      
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM SCRIPTS TOMADOS DE
+SQL> REM   ORACLE COMMUNITIES
+SQL> 
+SQL> col "Tablespace" for a22
+SQL> col "Used MB" for 99,999,999
+SQL> col "Free MB" for 99,999,999
+SQL> col "Total MB" for 99,999,999
+SQL> 
+SQL> select df.tablespace_name "Tablespace",
+  2  totalusedspace "Used MB",
+  3  (df.totalspace - tu.totalusedspace) "Free MB",
+  4  df.totalspace "Total MB",
+  5  round(100 * ( (df.totalspace - tu.totalusedspace)/ df.totalspace))
+  6  "Pct. Free"
+  7  from
+  8  (select tablespace_name,
+  9  round(sum(bytes) / 1048576) TotalSpace
+ 10  from dba_data_files
+ 11  group by tablespace_name) df,
+ 12  (select round(sum(bytes)/(1024*1024)) totalusedspace, tablespace_name
+ 13  from dba_segments
+ 14  group by tablespace_name) tu
+ 15  where df.tablespace_name = tu.tablespace_name
+ 16  ORDER BY 1;
+
+Tablespace            |=|    Used MB|=|    Free MB|=|   Total MB|=| Pct. Free                                                     
+======================|=|===========|=|===========|=|===========|=|==========                                                     
+SYSAUX                |=|        649|=|         41|=|        690|=|         6                                                     
+SYSTEM                |=|        354|=|          6|=|        360|=|         2                                                     
+UNDOTBS1              |=|         17|=|          8|=|         25|=|        32                                                     
+USERS                 |=|         15|=|         85|=|        100|=|        85                                                     
+
+4 rows selected.
+
+SQL> -- -------------------------------
+SQL> REM   ORACLE COMMUNITIES
+SQL> REM DESPIEGA EL ESPACIO LIBRE Y EL ASIGNADO A LOS TABLESPACES
+SQL> select b.tablespace_name, tbs_size SizeMb, a.free_space FreeMb
+  2  from  (select tablespace_name, round(sum(bytes)/1024/1024 ,2) as free_space
+  3  from dba_free_space
+  4  group by tablespace_name) a,
+  5  (select tablespace_name, sum(bytes)/1024/1024 as tbs_size
+  6  from dba_data_files
+  7  group by tablespace_name) b
+  8  where a.tablespace_name(+)=b.tablespace_name
+  9  ORDER BY 1;
+
+TABLESPACE_NAME               |=|    SIZEMB|=|    FREEMB                                                                          
+==============================|=|==========|=|==========                                                                          
+SYSAUX                        |=|       690|=|     39.69                                                                          
+SYSTEM                        |=|       360|=|      4.56                                                                          
+UNDOTBS1                      |=|        25|=|      7.06                                                                          
+USERS                         |=|       100|=|     89.56                                                                          
+
+4 rows selected.
+
+SQL> -- -----------------------------------------
+SQL> REM   ORACLE COMMUNITIES
+SQL> REM DESPLIEGA EL ESPACIO ASIGNADO AL TABLESPACE TEMP
+SQL> select sum(bytes)/1024 kbytes_alloc, tablespace_name
+  2  from sys.dba_temp_files
+  3  group by tablespace_name;
+
+KBYTES_ALLOC|=|TABLESPACE_NAME                                                                                                    
+============|=|==============================                                                                                     
+       20480|=|TEMP                                                                                                               
+
+1 row selected.
+
+SQL> spool off

@@ -1,0 +1,1342 @@
+SQL> 
+SQL> rem desplegar las columnas de la entidad employee
+SQL> rem a partir de la tabla del diccionario de datos COL
+SQL> COL TNAME FORMAT A8
+SQL> COL CNAME FORMAT A9
+SQL> COL COLNO FORMAT 999
+SQL> select TNAME,COLNO,CNAME,WIDTH
+  2  FROM COL
+  3  WHERE TNAME = 'EMPLOYEE';
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+EMPLOYEE     1 EMP_ID            22                                             
+EMPLOYEE     2 FNAME             20                                             
+EMPLOYEE     3 LNAME             20                                             
+EMPLOYEE     4 DEPT_ID           22                                             
+EMPLOYEE     5 MANAGER_E         22                                             
+               MP_ID                                                            
+                                                                                
+EMPLOYEE     6 SALARY            22                                             
+EMPLOYEE     7 HIRE_DATE          7                                             
+EMPLOYEE     8 JOB_ID            22                                             
+
+8 rows selected.
+
+SQL> 
+SQL> COL ENTIDAD FORMAT A11
+SQL> SELECT TNAME ENTIDAD
+  2  , COUNT(*) ATRIBUTOS
+  3  FROM COL
+  4  GROUP BY TNAME
+  5  ORDER BY 1 ;
+
+ENTIDAD      ATRIBUTOS                                                          
+----------- ----------                                                          
+ALL_ORDERS           7                                                          
+ASG                  4                                                          
+ASSEMBLY             5                                                          
+A_TABLE              1                                                          
+BIN$+YvuLS1          3                                                          
+ZSuuiAwX1lT                                                                     
+jy7w==$0                                                                        
+                                                                                
+BIN$/jNoabx          1                                                          
+HTv2oeCWEKw                                                                     
+jR4g==$0                                                                        
+
+ENTIDAD      ATRIBUTOS                                                          
+----------- ----------                                                          
+                                                                                
+BIN$1i2gSIW          4                                                          
+cS4qqz9WOma                                                                     
+6RTQ==$0                                                                        
+                                                                                
+BIN$1reW81r          8                                                          
+9QmmBuQLYTN                                                                     
+gmsg==$0                                                                        
+                                                                                
+BIN$2nyu+Iv          4                                                          
+xRxmrMIDKl3                                                                     
+
+ENTIDAD      ATRIBUTOS                                                          
+----------- ----------                                                          
+WQ2Q==$0                                                                        
+                                                                                
+BIN$G5sApJg          3                                                          
+uQji1rS4m2V                                                                     
+xfbQ==$0                                                                        
+                                                                                
+BIN$HxDgbFt          2                                                          
+jT/O0TTdsI3                                                                     
+h/dA==$0                                                                        
+                                                                                
+BIN$IEO38Kt          3                                                          
+
+ENTIDAD      ATRIBUTOS                                                          
+----------- ----------                                                          
+wS2e76xASs3                                                                     
+8y6g==$0                                                                        
+                                                                                
+BIN$IUusEop          3                                                          
+ARL+eDKkaEb                                                                     
+zBqg==$0                                                                        
+                                                                                
+BIN$LHy62pd          3                                                          
+oSEScP/6HLr                                                                     
+RvBQ==$0                                                                        
+                                                                                
+
+ENTIDAD      ATRIBUTOS                                                          
+----------- ----------                                                          
+BIN$TpojeNb          2                                                          
+JQg68EfxGmA                                                                     
+2C6Q==$0                                                                        
+                                                                                
+BIN$UfihFdC          3                                                          
+RSI+ZmsEyiC                                                                     
+S9SA==$0                                                                        
+                                                                                
+BIN$d192lXc          6                                                          
+aR4Kdg4LOvg                                                                     
+05rw==$0                                                                        
+
+ENTIDAD      ATRIBUTOS                                                          
+----------- ----------                                                          
+                                                                                
+BIN$hdO9OJV          4                                                          
+WQniJN/nvQ6                                                                     
+jBOw==$0                                                                        
+                                                                                
+BIN$l9M5+PL          4                                                          
+USeS16+yyfL                                                                     
+Wdyg==$0                                                                        
+                                                                                
+BIN$y7ofbRG          6                                                          
+OS7O0pWRjO1                                                                     
+
+ENTIDAD      ATRIBUTOS                                                          
+----------- ----------                                                          
+aUJA==$0                                                                        
+                                                                                
+B_TABLE              1                                                          
+CUSTOMER             7                                                          
+CUST_ORDER           9                                                          
+DEPARTMENT           3                                                          
+DISPUTED_OR          7                                                          
+DERS                                                                            
+                                                                                
+EMP                  8                                                          
+EMPLOYEE             8                                                          
+
+ENTIDAD      ATRIBUTOS                                                          
+----------- ----------                                                          
+EMPLOYEE_CO          2                                                          
+MMENT                                                                           
+                                                                                
+EMPLOYEE_EX          6                                                          
+PENSE                                                                           
+                                                                                
+INVENTORY_C          3                                                          
+LASS                                                                            
+                                                                                
+JOB                  2                                                          
+LINE_ITEM            4                                                          
+
+ENTIDAD      ATRIBUTOS                                                          
+----------- ----------                                                          
+LOCATION             2                                                          
+MONTHLY_SAL          2                                                          
+ES_ADJUSTME                                                                     
+NT                                                                              
+                                                                                
+MONTHS               2                                                          
+MTD_ORDERS           9                                                          
+ORDERS               7                                                          
+PARKING_TIC          4                                                          
+KETS                                                                            
+                                                                                
+
+ENTIDAD      ATRIBUTOS                                                          
+----------- ----------                                                          
+PARKING_TIC          3                                                          
+KETS_G                                                                          
+                                                                                
+PART                 7                                                          
+PAY                  2                                                          
+PROFESSORS           6                                                          
+PROJ                 4                                                          
+PROJ1FH              4                                                          
+PROJ1H               4                                                          
+PROJ1V               2                                                          
+PROJ2FH              4                                                          
+
+ENTIDAD      ATRIBUTOS                                                          
+----------- ----------                                                          
+PROJ2H               4                                                          
+PROJ2V               4                                                          
+PROJ3FH              4                                                          
+PROJ4V               4                                                          
+PROJM1FH             4                                                          
+PROJM2FH             4                                                          
+PROJM3FH             4                                                          
+PROJM4FH             4                                                          
+PROJM5FH             4                                                          
+PROJM6FH             4                                                          
+REGION               3                                                          
+
+ENTIDAD      ATRIBUTOS                                                          
+----------- ----------                                                          
+RETAILER            11                                                          
+SALESPERSON          3                                                          
+SALES_HISTO          4                                                          
+RY                                                                              
+                                                                                
+SUPPLIER             2                                                          
+TEMP                 2                                                          
+TEMPORAL             2                                                          
+TEMPORAL2            2                                                          
+TEMPORAL5            3                                                          
+V_TEST_CUST          2                                                          
+
+67 rows selected.
+
+SQL> REM DESPLEGAR LOS ATRIBUTOS DE CADA ENTIDAD DE ESTE ESQUEMA
+SQL> select TNAME,COLNO,CNAME,WIDTH
+  2  FROM COL;
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+ALL_ORDE     1 CUST_NBR          22                                             
+RS                                                                              
+                                                                                
+ALL_ORDE     2 REGION_ID         22                                             
+RS                                                                              
+                                                                                
+ALL_ORDE     3 SALESPERS         22                                             
+RS             ON_ID                                                            
+                                                                                
+ALL_ORDE     4 YEAR              22                                             
+RS                                                                              
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+ALL_ORDE     5 MONTH             22                                             
+RS                                                                              
+                                                                                
+ALL_ORDE     6 TOT_ORDER         22                                             
+RS             S                                                                
+                                                                                
+ALL_ORDE     7 TOT_SALES         22                                             
+RS                                                                              
+                                                                                
+ASG          1 ENO                2                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+ASG          2 PNO               10                                             
+ASG          3 RESP              12                                             
+ASG          4 DUR               22                                             
+ASSEMBLY     1 ASSEMBLY_          4                                             
+               TYPE                                                             
+                                                                                
+ASSEMBLY     2 ASSEMBLY_         22                                             
+               ID                                                               
+                                                                                
+ASSEMBLY     3 DESCRIPTI         20                                             
+               ON                                                               
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+ASSEMBLY     4 PARENT_AS          4                                             
+               SEMBLY_TY                                                        
+               PE                                                               
+                                                                                
+ASSEMBLY     5 PARENT_AS         22                                             
+               SEMBLY_ID                                                        
+                                                                                
+A_TABLE      1 COL1              22                                             
+BIN$+Yvu     1 ENO                2                                             
+LS1ZSuui                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+AwX1lTjy                                                                        
+7w==$0                                                                          
+                                                                                
+BIN$+Yvu     2 ENAME             10                                             
+LS1ZSuui                                                                        
+AwX1lTjy                                                                        
+7w==$0                                                                          
+                                                                                
+BIN$+Yvu     3 TITLE             12                                             
+LS1ZSuui                                                                        
+AwX1lTjy                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+7w==$0                                                                          
+                                                                                
+BIN$/jNo     1 N                 22                                             
+abxHTv2o                                                                        
+eCWEKwjR                                                                        
+4g==$0                                                                          
+                                                                                
+BIN$1i2g     1 ENO                2                                             
+SIWcS4qq                                                                        
+z9WOma6R                                                                        
+TQ==$0                                                                          
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+BIN$1i2g     2 PNO               10                                             
+SIWcS4qq                                                                        
+z9WOma6R                                                                        
+TQ==$0                                                                          
+                                                                                
+BIN$1i2g     3 RESP              12                                             
+SIWcS4qq                                                                        
+z9WOma6R                                                                        
+TQ==$0                                                                          
+                                                                                
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+BIN$1i2g     4 DUR               22                                             
+SIWcS4qq                                                                        
+z9WOma6R                                                                        
+TQ==$0                                                                          
+                                                                                
+BIN$1reW     1 EMP_ID            22                                             
+81r9QmmB                                                                        
+uQLYTNgm                                                                        
+sg==$0                                                                          
+                                                                                
+BIN$1reW     2 FNAME             20                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+81r9QmmB                                                                        
+uQLYTNgm                                                                        
+sg==$0                                                                          
+                                                                                
+BIN$1reW     3 LNAME             20                                             
+81r9QmmB                                                                        
+uQLYTNgm                                                                        
+sg==$0                                                                          
+                                                                                
+BIN$1reW     4 DEPT_ID           22                                             
+81r9QmmB                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+uQLYTNgm                                                                        
+sg==$0                                                                          
+                                                                                
+BIN$1reW     5 MANAGER_E         22                                             
+81r9QmmB       MP_ID                                                            
+uQLYTNgm                                                                        
+sg==$0                                                                          
+                                                                                
+BIN$1reW     6 SALARY            22                                             
+81r9QmmB                                                                        
+uQLYTNgm                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+sg==$0                                                                          
+                                                                                
+BIN$1reW     7 HIRE_DATE          7                                             
+81r9QmmB                                                                        
+uQLYTNgm                                                                        
+sg==$0                                                                          
+                                                                                
+BIN$1reW     8 JOB_ID            22                                             
+81r9QmmB                                                                        
+uQLYTNgm                                                                        
+sg==$0                                                                          
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+BIN$2nyu     1 PNO                2                                             
++IvxRxmr                                                                        
+MIDKl3WQ                                                                        
+2Q==$0                                                                          
+                                                                                
+BIN$2nyu     2 PNAME             19                                             
++IvxRxmr                                                                        
+MIDKl3WQ                                                                        
+2Q==$0                                                                          
+                                                                                
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+BIN$2nyu     3 BUDGET            22                                             
++IvxRxmr                                                                        
+MIDKl3WQ                                                                        
+2Q==$0                                                                          
+                                                                                
+BIN$2nyu     4 LOC               12                                             
++IvxRxmr                                                                        
+MIDKl3WQ                                                                        
+2Q==$0                                                                          
+                                                                                
+BIN$G5sA     1 ENO                2                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+pJguQji1                                                                        
+rS4m2Vxf                                                                        
+bQ==$0                                                                          
+                                                                                
+BIN$G5sA     2 ENAME             10                                             
+pJguQji1                                                                        
+rS4m2Vxf                                                                        
+bQ==$0                                                                          
+                                                                                
+BIN$G5sA     3 TITLE             12                                             
+pJguQji1                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+rS4m2Vxf                                                                        
+bQ==$0                                                                          
+                                                                                
+BIN$HxDg     1 TITLE             15                                             
+bFtjT/O0                                                                        
+TTdsI3h/                                                                        
+dA==$0                                                                          
+                                                                                
+BIN$HxDg     2 SAL               22                                             
+bFtjT/O0                                                                        
+TTdsI3h/                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+dA==$0                                                                          
+                                                                                
+BIN$IEO3     1 X                 22                                             
+8KtwS2e7                                                                        
+6xASs38y                                                                        
+6g==$0                                                                          
+                                                                                
+BIN$IEO3     2 Y                 22                                             
+8KtwS2e7                                                                        
+6xASs38y                                                                        
+6g==$0                                                                          
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+BIN$IEO3     3 Z                 22                                             
+8KtwS2e7                                                                        
+6xASs38y                                                                        
+6g==$0                                                                          
+                                                                                
+BIN$IUus     1 X                 22                                             
+EopARL+e                                                                        
+DKkaEbzB                                                                        
+qg==$0                                                                          
+                                                                                
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+BIN$IUus     2 Y                 22                                             
+EopARL+e                                                                        
+DKkaEbzB                                                                        
+qg==$0                                                                          
+                                                                                
+BIN$IUus     3 Z                 22                                             
+EopARL+e                                                                        
+DKkaEbzB                                                                        
+qg==$0                                                                          
+                                                                                
+BIN$LHy6     1 X                 22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+2pdoSESc                                                                        
+P/6HLrRv                                                                        
+BQ==$0                                                                          
+                                                                                
+BIN$LHy6     2 Y                 22                                             
+2pdoSESc                                                                        
+P/6HLrRv                                                                        
+BQ==$0                                                                          
+                                                                                
+BIN$LHy6     3 Z                 22                                             
+2pdoSESc                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+P/6HLrRv                                                                        
+BQ==$0                                                                          
+                                                                                
+BIN$Tpoj     1 TITLE             15                                             
+eNbJQg68                                                                        
+EfxGmA2C                                                                        
+6Q==$0                                                                          
+                                                                                
+BIN$Tpoj     2 SAL               22                                             
+eNbJQg68                                                                        
+EfxGmA2C                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+6Q==$0                                                                          
+                                                                                
+BIN$Ufih     1 X                 22                                             
+FdCRSI+Z                                                                        
+msEyiCS9                                                                        
+SA==$0                                                                          
+                                                                                
+BIN$Ufih     2 Y                 22                                             
+FdCRSI+Z                                                                        
+msEyiCS9                                                                        
+SA==$0                                                                          
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+BIN$Ufih     3 Z                 22                                             
+FdCRSI+Z                                                                        
+msEyiCS9                                                                        
+SA==$0                                                                          
+                                                                                
+BIN$d192     1 PROF_NAME         10                                             
+lXcaR4Kd                                                                        
+g4LOvg05                                                                        
+rw==$0                                                                          
+                                                                                
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+BIN$d192     2 SPECIALTY         20                                             
+lXcaR4Kd                                                                        
+g4LOvg05                                                                        
+rw==$0                                                                          
+                                                                                
+BIN$d192     3 HIRE_DATE          7                                             
+lXcaR4Kd                                                                        
+g4LOvg05                                                                        
+rw==$0                                                                          
+                                                                                
+BIN$d192     4 SALARY            22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+lXcaR4Kd                                                                        
+g4LOvg05                                                                        
+rw==$0                                                                          
+                                                                                
+BIN$d192     5 TENURE             3                                             
+lXcaR4Kd                                                                        
+g4LOvg05                                                                        
+rw==$0                                                                          
+                                                                                
+BIN$d192     6 DEPARTMEN         10                                             
+lXcaR4Kd       T                                                                
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+g4LOvg05                                                                        
+rw==$0                                                                          
+                                                                                
+BIN$hdO9     1 PNO                2                                             
+OJVWQniJ                                                                        
+N/nvQ6jB                                                                        
+Ow==$0                                                                          
+                                                                                
+BIN$hdO9     2 PNAME             19                                             
+OJVWQniJ                                                                        
+N/nvQ6jB                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+Ow==$0                                                                          
+                                                                                
+BIN$hdO9     3 BUDGET            22                                             
+OJVWQniJ                                                                        
+N/nvQ6jB                                                                        
+Ow==$0                                                                          
+                                                                                
+BIN$hdO9     4 LOC               12                                             
+OJVWQniJ                                                                        
+N/nvQ6jB                                                                        
+Ow==$0                                                                          
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+BIN$l9M5     1 ENO                2                                             
++PLUSeS1                                                                        
+6+yyfLWd                                                                        
+yg==$0                                                                          
+                                                                                
+BIN$l9M5     2 PNO               10                                             
++PLUSeS1                                                                        
+6+yyfLWd                                                                        
+yg==$0                                                                          
+                                                                                
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+BIN$l9M5     3 RESP              12                                             
++PLUSeS1                                                                        
+6+yyfLWd                                                                        
+yg==$0                                                                          
+                                                                                
+BIN$l9M5     4 DUR               22                                             
++PLUSeS1                                                                        
+6+yyfLWd                                                                        
+yg==$0                                                                          
+                                                                                
+BIN$y7of     1 PROF_NAME         10                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+bRGOS7O0                                                                        
+pWRjO1aU                                                                        
+JA==$0                                                                          
+                                                                                
+BIN$y7of     2 SPECIALTY         20                                             
+bRGOS7O0                                                                        
+pWRjO1aU                                                                        
+JA==$0                                                                          
+                                                                                
+BIN$y7of     3 HIRE_DATE          7                                             
+bRGOS7O0                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+pWRjO1aU                                                                        
+JA==$0                                                                          
+                                                                                
+BIN$y7of     4 SALARY            22                                             
+bRGOS7O0                                                                        
+pWRjO1aU                                                                        
+JA==$0                                                                          
+                                                                                
+BIN$y7of     5 TENURE             3                                             
+bRGOS7O0                                                                        
+pWRjO1aU                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+JA==$0                                                                          
+                                                                                
+BIN$y7of     6 DEPARTMEN         10                                             
+bRGOS7O0       T                                                                
+pWRjO1aU                                                                        
+JA==$0                                                                          
+                                                                                
+B_TABLE      1 COL1              22                                             
+CUSTOMER     1 CUST_NBR          22                                             
+CUSTOMER     2 NAME              30                                             
+CUSTOMER     3 REGION_ID         22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+CUSTOMER     4 INACTIVE_          7                                             
+               DT                                                               
+                                                                                
+CUSTOMER     5 INACTIVE_          1                                             
+               IND                                                              
+                                                                                
+CUSTOMER     6 TOT_ORDER         22                                             
+               S                                                                
+                                                                                
+CUSTOMER     7 LAST_ORDE          7                                             
+               R_DT                                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+CUST_ORD     1 ORDER_NBR         22                                             
+ER                                                                              
+                                                                                
+CUST_ORD     2 CUST_NBR          22                                             
+ER                                                                              
+                                                                                
+CUST_ORD     3 SALES_EMP         22                                             
+ER             _ID                                                              
+                                                                                
+CUST_ORD     4 SALE_PRIC         22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+ER             E                                                                
+                                                                                
+CUST_ORD     5 ORDER_DT           7                                             
+ER                                                                              
+                                                                                
+CUST_ORD     6 EXPECTED_          7                                             
+ER             SHIP_DT                                                          
+                                                                                
+CUST_ORD     7 CANCELLED          7                                             
+ER             _DT                                                              
+                                                                                
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+CUST_ORD     8 SHIP_DT            7                                             
+ER                                                                              
+                                                                                
+CUST_ORD     9 STATUS            20                                             
+ER                                                                              
+                                                                                
+DEPARTME     1 DEPT_ID           22                                             
+NT                                                                              
+                                                                                
+DEPARTME     2 NAME              20                                             
+NT                                                                              
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+DEPARTME     3 LOCATION_         22                                             
+NT             ID                                                               
+                                                                                
+DISPUTED     1 ORDER_NBR         22                                             
+_ORDERS                                                                         
+                                                                                
+DISPUTED     2 CUST_NBR          22                                             
+_ORDERS                                                                         
+                                                                                
+DISPUTED     3 SALES_EMP         22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+_ORDERS        _ID                                                              
+                                                                                
+DISPUTED     4 SALE_PRIC         22                                             
+_ORDERS        E                                                                
+                                                                                
+DISPUTED     5 ORDER_DT           7                                             
+_ORDERS                                                                         
+                                                                                
+DISPUTED     6 EXPECTED_          7                                             
+_ORDERS        SHIP_DT                                                          
+                                                                                
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+DISPUTED     7 STATUS            20                                             
+_ORDERS                                                                         
+                                                                                
+EMP          1 EMPNO             22                                             
+EMP          2 ENAME             10                                             
+EMP          3 JOB                9                                             
+EMP          4 MGR               22                                             
+EMP          5 HIREDATE           7                                             
+EMP          6 SAL               22                                             
+EMP          7 COMM              22                                             
+EMP          8 DEPTNO            22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+EMPLOYEE     1 EMP_ID            22                                             
+EMPLOYEE     2 FNAME             20                                             
+EMPLOYEE     3 LNAME             20                                             
+EMPLOYEE     4 DEPT_ID           22                                             
+EMPLOYEE     5 MANAGER_E         22                                             
+               MP_ID                                                            
+                                                                                
+EMPLOYEE     6 SALARY            22                                             
+EMPLOYEE     7 HIRE_DATE          7                                             
+EMPLOYEE     8 JOB_ID            22                                             
+EMPLOYEE     1 EMP_ID            22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+_COMMENT                                                                        
+                                                                                
+EMPLOYEE     2 TEXT             500                                             
+_COMMENT                                                                        
+                                                                                
+EMPLOYEE     1 EMP_ID            22                                             
+_EXPENSE                                                                        
+                                                                                
+EMPLOYEE     2 YEAR              22                                             
+_EXPENSE                                                                        
+                                                                                
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+EMPLOYEE     3 MONTH             22                                             
+_EXPENSE                                                                        
+                                                                                
+EMPLOYEE     4 EXPENSE_C         22                                             
+_EXPENSE       LAIM                                                             
+                                                                                
+EMPLOYEE     5 APPROVED_         22                                             
+_EXPENSE       AMT                                                              
+                                                                                
+EMPLOYEE     6 PAID_DATE          7                                             
+_EXPENSE                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+INVENTOR     1 INV_CLASS          3                                             
+Y_CLASS                                                                         
+                                                                                
+INVENTOR     2 LOW_COST          22                                             
+Y_CLASS                                                                         
+                                                                                
+INVENTOR     3 HIGH_COST         22                                             
+Y_CLASS                                                                         
+                                                                                
+JOB          1 JOB_ID            22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+JOB          2 FUNCTION          30                                             
+LINE_ITE     1 ORDER_NBR         22                                             
+M                                                                               
+                                                                                
+LINE_ITE     2 PART_NBR          20                                             
+M                                                                               
+                                                                                
+LINE_ITE     3 QTY               22                                             
+M                                                                               
+                                                                                
+LINE_ITE     4 FILLED_QT         22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+M              Y                                                                
+                                                                                
+LOCATION     1 LOCATION_         22                                             
+               ID                                                               
+                                                                                
+LOCATION     2 REGIONAL_         20                                             
+               GROUP                                                            
+                                                                                
+MONTHLY_     1 MONTH             22                                             
+SALES_AD                                                                        
+JUSTMENT                                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+MONTHLY_     2 FACTOR            22                                             
+SALES_AD                                                                        
+JUSTMENT                                                                        
+                                                                                
+MONTHS       1 YEAR              22                                             
+MONTHS       2 MONTH             22                                             
+MTD_ORDE     1 TOT_ORDER         22                                             
+RS             S                                                                
+                                                                                
+MTD_ORDE     2 TOT_SALE_         22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+RS             PRICE                                                            
+                                                                                
+MTD_ORDE     3 MAX_SALE_         22                                             
+RS             PRICE                                                            
+                                                                                
+MTD_ORDE     4 EUROPE_TO         22                                             
+RS             T_ORDERS                                                         
+                                                                                
+MTD_ORDE     5 EUROPE_TO         22                                             
+RS             T_SALE_PR                                                        
+               ICE                                                              
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+MTD_ORDE     6 EUROPE_MA         22                                             
+RS             X_SALE_PR                                                        
+               ICE                                                              
+                                                                                
+MTD_ORDE     7 NORTHAMER         22                                             
+RS             ICA_TOT_O                                                        
+               RDERS                                                            
+                                                                                
+MTD_ORDE     8 NORTHAMER         22                                             
+RS             ICA_TOT_S                                                        
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+               ALE_PRICE                                                        
+                                                                                
+MTD_ORDE     9 NORTHAMER         22                                             
+RS             ICA_MAX_S                                                        
+               ALE_PRICE                                                        
+                                                                                
+ORDERS       1 CUST_NBR          22                                             
+ORDERS       2 REGION_ID         22                                             
+ORDERS       3 SALESPERS         22                                             
+               ON_ID                                                            
+                                                                                
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+ORDERS       4 YEAR              22                                             
+ORDERS       5 MONTH             22                                             
+ORDERS       6 TOT_ORDER         22                                             
+               S                                                                
+                                                                                
+ORDERS       7 TOT_SALES         22                                             
+PARKING_     1 TICKET_NO         10                                             
+TICKETS                                                                         
+                                                                                
+PARKING_     2 AMOUNT            22                                             
+TICKETS                                                                         
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+PARKING_     3 STATE              2                                             
+TICKETS                                                                         
+                                                                                
+PARKING_     4 TAG_NO            10                                             
+TICKETS                                                                         
+                                                                                
+PARKING_     1 STATE              2                                             
+TICKETS_                                                                        
+G                                                                               
+                                                                                
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+PARKING_     2 TAG_NO            10                                             
+TICKETS_                                                                        
+G                                                                               
+                                                                                
+PARKING_     3 AMOUNT            22                                             
+TICKETS_                                                                        
+G                                                                               
+                                                                                
+PART         1 PART_NBR          20                                             
+PART         2 NAME              30                                             
+PART         3 SUPPLIER_         22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+               ID                                                               
+                                                                                
+PART         4 STATUS            20                                             
+PART         5 INVENTORY         22                                             
+               _QTY                                                             
+                                                                                
+PART         6 UNIT_COST         22                                             
+PART         7 RESUPPLY_          7                                             
+               DATE                                                             
+                                                                                
+PAY          1 TITLE             15                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+PAY          2 SAL               22                                             
+PROFESSO     1 PROF_NAME         10                                             
+RS                                                                              
+                                                                                
+PROFESSO     2 SPECIALTY         20                                             
+RS                                                                              
+                                                                                
+PROFESSO     3 HIRE_DATE          7                                             
+RS                                                                              
+                                                                                
+PROFESSO     4 SALARY            22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+RS                                                                              
+                                                                                
+PROFESSO     5 TENURE             3                                             
+RS                                                                              
+                                                                                
+PROFESSO     6 DEPARTMEN         10                                             
+RS             T                                                                
+                                                                                
+PROJ         1 PNO                2                                             
+PROJ         2 PNAME             19                                             
+PROJ         3 BUDGET            22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+PROJ         4 LOC               12                                             
+PROJ1FH      2 PNAME             19                                             
+PROJ1FH      3 BUDGET            22                                             
+PROJ1FH      4 LOC               12                                             
+PROJ1FH      1 PNO                2                                             
+PROJ1H       2 PNAME             19                                             
+PROJ1H       3 BUDGET            22                                             
+PROJ1H       4 LOC               12                                             
+PROJ1H       1 PNO                2                                             
+PROJ1V       2 BUDGET            22                                             
+PROJ1V       1 PNO                2                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+PROJ2FH      1 PNO                2                                             
+PROJ2FH      2 PNAME             19                                             
+PROJ2FH      3 BUDGET            22                                             
+PROJ2FH      4 LOC               12                                             
+PROJ2H       2 PNAME             19                                             
+PROJ2H       3 BUDGET            22                                             
+PROJ2H       4 LOC               12                                             
+PROJ2H       1 PNO                2                                             
+PROJ2V       2 PNAME             19                                             
+PROJ2V       3 BUDGET            22                                             
+PROJ2V       4 LOC               12                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+PROJ2V       1 PNO                2                                             
+PROJ3FH      2 PNAME             19                                             
+PROJ3FH      1 PNO                2                                             
+PROJ3FH      3 BUDGET            22                                             
+PROJ3FH      4 LOC               12                                             
+PROJ4V       1 PNO                2                                             
+PROJ4V       2 PNAME             19                                             
+PROJ4V       3 BUDGET            22                                             
+PROJ4V       4 LOC               12                                             
+PROJM1FH     2 PNAME             19                                             
+PROJM1FH     3 BUDGET            22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+PROJM1FH     4 LOC               12                                             
+PROJM1FH     1 PNO                2                                             
+PROJM2FH     2 PNAME             19                                             
+PROJM2FH     1 PNO                2                                             
+PROJM2FH     3 BUDGET            22                                             
+PROJM2FH     4 LOC               12                                             
+PROJM3FH     2 PNAME             19                                             
+PROJM3FH     3 BUDGET            22                                             
+PROJM3FH     4 LOC               12                                             
+PROJM3FH     1 PNO                2                                             
+PROJM4FH     1 PNO                2                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+PROJM4FH     2 PNAME             19                                             
+PROJM4FH     3 BUDGET            22                                             
+PROJM4FH     4 LOC               12                                             
+PROJM5FH     1 PNO                2                                             
+PROJM5FH     2 PNAME             19                                             
+PROJM5FH     3 BUDGET            22                                             
+PROJM5FH     4 LOC               12                                             
+PROJM6FH     1 PNO                2                                             
+PROJM6FH     2 PNAME             19                                             
+PROJM6FH     3 BUDGET            22                                             
+PROJM6FH     4 LOC               12                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+REGION       1 REGION_ID         22                                             
+REGION       2 NAME              20                                             
+REGION       3 SUPER_REG         22                                             
+               ION_ID                                                           
+                                                                                
+RETAILER     1 RTLR_NBR          22                                             
+RETAILER     2 NAME              45                                             
+RETAILER     3 ADDRESS           40                                             
+RETAILER     4 CITY              30                                             
+RETAILER     5 STATE              2                                             
+RETAILER     6 ZIP_CODE           9                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+RETAILER     7 AREA_CODE         22                                             
+RETAILER     8 PHONE_NUM         22                                             
+               BER                                                              
+                                                                                
+RETAILER     9 SALESPERS         22                                             
+               ON_ID                                                            
+                                                                                
+RETAILER    10 CREDIT_LI         22                                             
+               MIT                                                              
+                                                                                
+RETAILER    11 COMMENTS           0                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+SALESPER     1 SALESPERS         22                                             
+SON            ON_ID                                                            
+                                                                                
+SALESPER     2 NAME              50                                             
+SON                                                                             
+                                                                                
+SALESPER     3 PRIMARY_R         22                                             
+SON            EGION_ID                                                         
+                                                                                
+SALES_HI     1 REGION_ID         22                                             
+STORY                                                                           
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+                                                                                
+SALES_HI     2 YEAR              22                                             
+STORY                                                                           
+                                                                                
+SALES_HI     3 MONTH             22                                             
+STORY                                                                           
+                                                                                
+SALES_HI     4 SALES             22                                             
+STORY                                                                           
+                                                                                
+SUPPLIER     1 SUPPLIER_         22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+               ID                                                               
+                                                                                
+SUPPLIER     2 NAME              30                                             
+TEMP         1 N                 22                                             
+TEMP         2 M                 22                                             
+TEMPORAL     1 N                 22                                             
+TEMPORAL     2 M                 22                                             
+TEMPORAL     1 N                 22                                             
+2                                                                               
+                                                                                
+TEMPORAL     2 M                 22                                             
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+2                                                                               
+                                                                                
+TEMPORAL     1 X                 22                                             
+5                                                                               
+                                                                                
+TEMPORAL     2 Y                 22                                             
+5                                                                               
+                                                                                
+TEMPORAL     3 Z                 22                                             
+5                                                                               
+                                                                                
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+V_TEST_C     1 Customer          22                                             
+UST            ID                                                               
+                                                                                
+V_TEST_C     2 Customer          30                                             
+UST            Name                                                             
+                                                                                
+
+272 rows selected.
+
+SQL> REM DESPLEGAR LOS ATRIBUTOS DE CADA ENTIDAD POR SEPARADO
+SQL> select TNAME,COLNO,CNAME,WIDTH
+  2  FROM COL
+  3     WHERE TNAME = 'EMPLOYEE';
+
+TNAME    COLNO CNAME          WIDTH                                             
+-------- ----- --------- ----------                                             
+EMPLOYEE     1 EMP_ID            22                                             
+EMPLOYEE     2 FNAME             20                                             
+EMPLOYEE     3 LNAME             20                                             
+EMPLOYEE     4 DEPT_ID           22                                             
+EMPLOYEE     5 MANAGER_E         22                                             
+               MP_ID                                                            
+                                                                                
+EMPLOYEE     6 SALARY            22                                             
+EMPLOYEE     7 HIRE_DATE          7                                             
+EMPLOYEE     8 JOB_ID            22                                             
+
+8 rows selected.
+
+SQL> select TNAME,COLNO,CNAME,WIDTH
+  2  FROM COL
+  3     WHERE TNAME = 'WORKS_ON';
+
+no rows selected
+
+SQL> select TNAME,COLNO,CNAME,WIDTH
+  2  FROM COL
+  3     WHERE TNAME = 'PROJECT';
+
+no rows selected
+
+SQL> 
+SQL> reM  DESPLEGAR EL TAMA¥O TOTAL DE CADA TUPLA POR TABLA
+SQL> 
+SQL> SELECT TNAME "Entidad"
+  2  , COUNT(WIDTH) atributos
+  3  , sum(width)   "Long Tupla"
+  4  from col
+  5  group by tname
+  6  order by 1;
+
+Entidad      ATRIBUTOS Long Tupla                                               
+----------- ---------- ----------                                               
+ALL_ORDERS           7        154                                               
+ASG                  4         46                                               
+ASSEMBLY             5         72                                               
+A_TABLE              1         22                                               
+BIN$+YvuLS1          3         24                                               
+ZSuuiAwX1lT                                                                     
+jy7w==$0                                                                        
+                                                                                
+BIN$/jNoabx          1         22                                               
+HTv2oeCWEKw                                                                     
+jR4g==$0                                                                        
+
+Entidad      ATRIBUTOS Long Tupla                                               
+----------- ---------- ----------                                               
+                                                                                
+BIN$1i2gSIW          4         46                                               
+cS4qqz9WOma                                                                     
+6RTQ==$0                                                                        
+                                                                                
+BIN$1reW81r          8        157                                               
+9QmmBuQLYTN                                                                     
+gmsg==$0                                                                        
+                                                                                
+BIN$2nyu+Iv          4         55                                               
+xRxmrMIDKl3                                                                     
+
+Entidad      ATRIBUTOS Long Tupla                                               
+----------- ---------- ----------                                               
+WQ2Q==$0                                                                        
+                                                                                
+BIN$G5sApJg          3         24                                               
+uQji1rS4m2V                                                                     
+xfbQ==$0                                                                        
+                                                                                
+BIN$HxDgbFt          2         37                                               
+jT/O0TTdsI3                                                                     
+h/dA==$0                                                                        
+                                                                                
+BIN$IEO38Kt          3         66                                               
+
+Entidad      ATRIBUTOS Long Tupla                                               
+----------- ---------- ----------                                               
+wS2e76xASs3                                                                     
+8y6g==$0                                                                        
+                                                                                
+BIN$IUusEop          3         66                                               
+ARL+eDKkaEb                                                                     
+zBqg==$0                                                                        
+                                                                                
+BIN$LHy62pd          3         66                                               
+oSEScP/6HLr                                                                     
+RvBQ==$0                                                                        
+                                                                                
+
+Entidad      ATRIBUTOS Long Tupla                                               
+----------- ---------- ----------                                               
+BIN$TpojeNb          2         37                                               
+JQg68EfxGmA                                                                     
+2C6Q==$0                                                                        
+                                                                                
+BIN$UfihFdC          3         66                                               
+RSI+ZmsEyiC                                                                     
+S9SA==$0                                                                        
+                                                                                
+BIN$d192lXc          6         72                                               
+aR4Kdg4LOvg                                                                     
+05rw==$0                                                                        
+
+Entidad      ATRIBUTOS Long Tupla                                               
+----------- ---------- ----------                                               
+                                                                                
+BIN$hdO9OJV          4         55                                               
+WQniJN/nvQ6                                                                     
+jBOw==$0                                                                        
+                                                                                
+BIN$l9M5+PL          4         46                                               
+USeS16+yyfL                                                                     
+Wdyg==$0                                                                        
+                                                                                
+BIN$y7ofbRG          6         72                                               
+OS7O0pWRjO1                                                                     
+
+Entidad      ATRIBUTOS Long Tupla                                               
+----------- ---------- ----------                                               
+aUJA==$0                                                                        
+                                                                                
+B_TABLE              1         22                                               
+CUSTOMER             7        111                                               
+CUST_ORDER           9        136                                               
+DEPARTMENT           3         64                                               
+DISPUTED_OR          7        122                                               
+DERS                                                                            
+                                                                                
+EMP                  8        136                                               
+EMPLOYEE             8        157                                               
+
+Entidad      ATRIBUTOS Long Tupla                                               
+----------- ---------- ----------                                               
+EMPLOYEE_CO          2        522                                               
+MMENT                                                                           
+                                                                                
+EMPLOYEE_EX          6        117                                               
+PENSE                                                                           
+                                                                                
+INVENTORY_C          3         47                                               
+LASS                                                                            
+                                                                                
+JOB                  2         52                                               
+LINE_ITEM            4         86                                               
+
+Entidad      ATRIBUTOS Long Tupla                                               
+----------- ---------- ----------                                               
+LOCATION             2         42                                               
+MONTHLY_SAL          2         44                                               
+ES_ADJUSTME                                                                     
+NT                                                                              
+                                                                                
+MONTHS               2         44                                               
+MTD_ORDERS           9        198                                               
+ORDERS               7        154                                               
+PARKING_TIC          4         44                                               
+KETS                                                                            
+                                                                                
+
+Entidad      ATRIBUTOS Long Tupla                                               
+----------- ---------- ----------                                               
+PARKING_TIC          3         34                                               
+KETS_G                                                                          
+                                                                                
+PART                 7        143                                               
+PAY                  2         37                                               
+PROFESSORS           6         72                                               
+PROJ                 4         55                                               
+PROJ1FH              4         55                                               
+PROJ1H               4         55                                               
+PROJ1V               2         24                                               
+PROJ2FH              4         55                                               
+
+Entidad      ATRIBUTOS Long Tupla                                               
+----------- ---------- ----------                                               
+PROJ2H               4         55                                               
+PROJ2V               4         55                                               
+PROJ3FH              4         55                                               
+PROJ4V               4         55                                               
+PROJM1FH             4         55                                               
+PROJM2FH             4         55                                               
+PROJM3FH             4         55                                               
+PROJM4FH             4         55                                               
+PROJM5FH             4         55                                               
+PROJM6FH             4         55                                               
+REGION               3         64                                               
+
+Entidad      ATRIBUTOS Long Tupla                                               
+----------- ---------- ----------                                               
+RETAILER            11        236                                               
+SALESPERSON          3         94                                               
+SALES_HISTO          4         88                                               
+RY                                                                              
+                                                                                
+SUPPLIER             2         52                                               
+TEMP                 2         44                                               
+TEMPORAL             2         44                                               
+TEMPORAL2            2         44                                               
+TEMPORAL5            3         66                                               
+V_TEST_CUST          2         52                                               
+
+67 rows selected.
+
+SQL> 
+SQL> SPOOL OFF;

@@ -1,0 +1,200 @@
+SQL> -- ch04_1a.sql, version 1.0
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_date DATE := TO_DATE('&sv_user_date', 'DD-MON-YYYY');
+  3  v_day VARCHAR2(15);
+  4  BEGIN
+  5  v_day := RTRIM(TO_CHAR(v_date, 'DAY'));
+  6  IF v_day IN ('SATURDAY', 'SUNDAY') THEN
+  7  DBMS_OUTPUT.PUT_LINE (v_date||' falls on weekend');
+  8  END IF;
+  9  --- control resumes here
+ 10  DBMS_OUTPUT.PUT_LINE ('Done...');
+ 11  END;
+ 12  
+ 13  REM
+ 14  rem [ROSENZWEIG &  RAKHIMOV,2009,62]
+ 15  -- ch04_2a.sql, version 1.0
+ 16  SET SERVEROUTPUT ON
+ 17  DECLARE
+ 18  v_total NUMBER;
+ 19  BEGIN
+ 20  SELECT COUNT(*)
+ 21  INTO v_total
+ 22  FROM enrollment e
+ 23  JOIN section s USING (section_id)
+ 24  WHERE s.course_no = 25
+ 25  AND s.section_no = 1;
+ 26  -- check if section 1 of course 25 is full
+ 27  IF v_total >= 15 THEN
+ 28  DBMS_OUTPUT.PUT_LINE
+ 29  ('El grupo 1 del curso 25 esta lleno');
+ 30  ELSE
+ 31  DBMS_OUTPUT.PUT_LINE
+ 32  ('El grupo 1 del curso 25 no esta lleno');
+ 33  END IF;
+ 34  -- control resumes here
+ 35  END;
+ 36  rem
+ 37  rem [ROSENZWEIG &  RAKHIMOV,2009,44]
+ 38  
+ 39  DECLARE
+ 40  v_total NUMBER;
+ 41  v_students NUMBER;
+ 42  BEGIN
+ 43  SELECT COUNT(*)
+ 44  INTO v_total
+ 45  FROM enrollment e
+ 46  JOIN section s USING (section_id)
+ 47  WHERE s.course_no = 25
+ 48  AND s.section_no = 1;
+ 49  -- check if section 1 of course 25 is full
+ 50  IF v_total >= 15 THEN
+ 51  DBMS_OUTPUT.PUT_LINE
+ 52  ('Grupo 1 del curso 25 esta lleno');
+ 53  ELSE
+ 54  v_students := 15 - v_total;
+ 55  DBMS_OUTPUT.PUT_LINE (v_students||
+ 56  ' estudiantes pueden inscribirse en el grupo 1'||
+ 57  ' del curso 25');
+ 58  END IF;
+ 59  -- control resumes here
+ 60  END;
+ 61  rem [ROSENZWEIG &  RAKHIMOV,2009,69]
+ 62  -- ch04_3a.sql, version 1.0
+ 63  SET SERVEROUTPUT ON
+ 64  DECLARE
+ 65  v_student_id NUMBER := 102;
+ 66  v_section_id NUMBER := 89;
+ 67  v_final_grade NUMBER;
+ 68  v_letter_grade CHAR(1);
+ 69  BEGIN
+ 70  SELECT final_grade
+ 71  INTO v_final_grade
+ 72  FROM enrollment
+ 73  WHERE student_id = v_student_id
+ 74  AND section_id = v_section_id;
+ 75  IF v_final_grade BETWEEN 90 AND 100 THEN
+ 76  v_letter_grade := 'A';
+ 77  ELSIF v_final_grade BETWEEN 80 AND 89 THEN
+ 78  v_letter_grade := 'B';
+ 79  ELSIF v_final_grade BETWEEN 70 AND 79 THEN
+ 80  v_letter_grade := 'C';
+ 81  ELSIF v_final_grade BETWEEN 60 AND 69 THEN
+ 82  v_letter_grade := 'D';
+ 83  ELSE
+ 84  v_letter_grade := 'F';
+ 85  END IF;
+ 86  -- control resumes here
+ 87  DBMS_OUTPUT.PUT_LINE ('Letter grade is: '||'La calificaci¢n es: '||
+ 88  v_letter_grade);
+ 89  EXCEPTION
+ 90  WHEN NO_DATA_FOUND THEN
+ 91  DBMS_OUTPUT.PUT_LINE ('There is no such student or section');
+ 92  DBMS_OUTPUT.PUT_LINE ('No existe el estudiante o la seccion');
+ 93  END;
+ 94  rem
+ 95  rem [ROSENZWEIG &  RAKHIMOV,2009,72]
+ 96  
+ 97  
+ 98  -- ch04_3c.sql, version 3.0
+ 99  SET SERVEROUTPUT ON
+100  DECLARE
+101  v_student_id NUMBER := &sv_student_id;
+102  v_section_id NUMBER := &sv_section_id;
+103  v_final_grade NUMBER;
+104  v_letter_grade CHAR(1);
+105  BEGIN
+106  SELECT final_grade
+107  INTO v_final_grade
+108  FROM enrollment
+109  WHERE student_id = v_student_id
+110  AND section_id = v_section_id;
+111  IF v_final_grade BETWEEN 90 AND 100 THEN
+112  v_letter_grade := 'A';
+113  ELSIF v_final_grade BETWEEN 80 AND 89 THEN
+114  v_letter_grade := 'B';
+115  ELSIF v_final_grade BETWEEN 70 AND 79 THEN
+116    v_letter_grade := 'C';
+117  ELSIF v_final_grade BETWEEN 60 AND 69 THEN
+118    v_letter_grade := 'D';
+119  ELSE
+120    v_letter_grade := 'F';
+121  END IF;
+122  -- control resumes here
+123  DBMS_OUTPUT.PUT_LINE ('Letter grade is: '||'La calificaci¢n es:'||
+124  v_letter_grade);
+125  EXCEPTION
+126  WHEN NO_DATA_FOUND THEN
+127  DBMS_OUTPUT.PUT_LINE ('There is no such student or section');
+128  DBMS_OUTPUT.PUT_LINE ('No existe tal estudiante o seccion ');
+129  END;
+130  
+131  
+132  rem
+133  rem
+134  rem [ROSENZWEIG &  RAKHIMOV,2009,77]
+135  -- ch04_4a.sql, version 1.0
+136  SET SERVEROUTPUT ON
+137  DECLARE
+138  v_temp_in NUMBER := &sv_temp_in;
+139  v_scale_in CHAR := '&sv_scale_in';
+140  v_temp_out NUMBER;
+141  v_scale_out CHAR;
+142  BEGIN
+143  IF v_scale_in != 'C' AND v_scale_in != 'F' THEN
+144  DBMS_OUTPUT.PUT_LINE ('This is not a valid scale');
+145  ELSE
+146  IF v_scale_in = 'C' THEN
+147  v_temp_out := ( (9 * v_temp_in) / 5 ) + 32;
+148  v_scale_out := 'F';
+149  ELSE
+150  v_temp_out := ( (v_temp_in - 32) * 5 ) / 9;
+151  v_scale_out := 'C';
+152  END IF;
+153  DBMS_OUTPUT.PUT_LINE ('New scale is: '||v_scale_out);
+154  DBMS_OUTPUT.PUT_LINE ('New temperature is: '||v_temp_out);
+155  END IF;
+156  END;
+157  SPOOL OFF
+158  ;
+159  .
+SQL> /
+Enter value for sv_user_date: 21
+old   2: v_date DATE := TO_DATE('&sv_user_date', 'DD-MON-YYYY');
+new   2: v_date DATE := TO_DATE('21', 'DD-MON-YYYY');
+Enter value for rakhimov: 2
+old  14: rem [ROSENZWEIG &  RAKHIMOV,2009,62]
+new  14: rem [ROSENZWEIG 2,2009,62]
+Enter value for rakhimov: 1
+old  37: rem [ROSENZWEIG &  RAKHIMOV,2009,44]
+new  37: rem [ROSENZWEIG 1,2009,44]
+Enter value for rakhimov: 21
+old  61: rem [ROSENZWEIG &  RAKHIMOV,2009,69]
+new  61: rem [ROSENZWEIG 21,2009,69]
+Enter value for rakhimov: 21
+old  95: rem [ROSENZWEIG &  RAKHIMOV,2009,72]
+new  95: rem [ROSENZWEIG 21,2009,72]
+Enter value for sv_student_id: 
+old 101: v_student_id NUMBER := &sv_student_id;
+new 101: v_student_id NUMBER := ;
+Enter value for sv_section_id: 222
+old 102: v_section_id NUMBER := &sv_section_id;
+new 102: v_section_id NUMBER := 222;
+Enter value for rakhimov: 111
+old 134: rem [ROSENZWEIG &  RAKHIMOV,2009,77]
+new 134: rem [ROSENZWEIG 111,2009,77]
+Enter value for sv_temp_in: 2121
+old 138: v_temp_in NUMBER := &sv_temp_in;
+new 138: v_temp_in NUMBER := 2121;
+Enter value for sv_scale_in: 12
+old 139: v_scale_in CHAR := '&sv_scale_in';
+new 139: v_scale_in CHAR := '12';
+REM
+*
+ERROR at line 13:
+ORA-06550: line 13, column 1: 
+PLS-00103: Encountered the symbol "REM"  
+
+
+SQL> spool F:\DATABASEDISTRIBUIDET\ejercicios\clase5\PL_SQL_cap_5.txt

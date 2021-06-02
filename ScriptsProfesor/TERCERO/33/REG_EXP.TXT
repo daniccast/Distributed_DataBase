@@ -1,0 +1,811 @@
+SQL> 
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set colsep '|=|'
+SQL> set feedback on
+SQL> SET SQLN ON
+SQL> 
+SQL> SELECT zip
+  2   FROM zipcode_example
+  3   WHERE REGEXP_LIKE(zip, '[^[:digit:]]');
+ FROM zipcode_example
+      *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> ---
+SQL> 
+SQL>  select 'ab123' from dual
+  2   where REGEXP_LIKE('ab123', '[^[:digit:]]');
+
+'AB12                                                                                                                             
+-----                                                                                                                             
+ab123                                                                                                                             
+
+1 row selected.
+
+SQL> 
+SQL>  rem ejercicio 1.
+SQL> drop table temporal8;
+drop table temporal8
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> create table temporal8(
+  2   cadena varchar2(10));
+I believe you have created a TABLE called TEMPORAL8                                                                               
+
+Table created.
+
+SQL> 
+SQL> insert into temporal8 values ('ab123');
+
+1 row created.
+
+SQL> insert into temporal8 values ('123xy');
+
+1 row created.
+
+SQL> insert into temporal8 values ('007ab');
+
+1 row created.
+
+SQL> insert into temporal8 values ('abcxy');
+
+1 row created.
+
+SQL> 
+SQL> select cadena from temporal8
+  2   where REGEXP_LIKE(cadena, '[^[:digit:]]');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+ab123                                                                                                                             
+123xy                                                                                                                             
+007ab                                                                                                                             
+abcxy                                                                                                                             
+
+4 rows selected.
+
+SQL> 
+SQL> select cadena from temporal8;
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+ab123                                                                                                                             
+123xy                                                                                                                             
+007ab                                                                                                                             
+abcxy                                                                                                                             
+
+4 rows selected.
+
+SQL> 
+SQL> DELETE
+  2  FROM
+  3      temporal8;
+
+4 rows deleted.
+
+SQL> 
+SQL> select cadena from temporal8;
+
+no rows selected
+
+SQL> --- ----------------------------
+SQL> 
+SQL>  rem ejercicio 2.
+SQL> 
+SQL> /*
+SQL> ----
+SQL> rem no funciona
+SQL> 
+SQL> 
+SQL> select cadena,REGEXP_LIKE(cadena, '[^[:digit:]]') from temporal8;
+SQL>  where REGEXP_LIKE(cadena, '[^[:digit:]]');
+SQL> 
+SQL> -----------------
+SQL> */
+SQL> 
+SQL> ---
+SQL>  rem ejercicio 2.
+SQL> 
+SQL> insert into temporal8 values ('at');
+
+1 row created.
+
+SQL> insert into temporal8 values ('bet');
+
+1 row created.
+
+SQL> insert into temporal8 values ('cot');
+
+1 row created.
+
+SQL> insert into temporal8 values ('def');
+
+1 row created.
+
+SQL> 
+SQL> select cadena from temporal8
+  2   where REGEXP_LIKE(cadena, '[abc]');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+at                                                                                                                                
+bet                                                                                                                               
+cot                                                                                                                               
+
+3 rows selected.
+
+SQL>  rem despleguemos los que no cumplen
+SQL> 
+SQL>  select cadena from temporal8
+  2   minus
+  3   select cadena from temporal8
+  4   where REGEXP_LIKE(cadena, '[abc]');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+def                                                                                                                               
+
+1 row selected.
+
+SQL> 
+SQL> DELETE
+  2  FROM
+  3      temporal8;
+
+4 rows deleted.
+
+SQL> 
+SQL> select cadena from temporal8;
+
+no rows selected
+
+SQL> 
+SQL> ---
+SQL>  rem ejercicio 3.
+SQL> 
+SQL> insert into temporal8 values ('abc');
+
+1 row created.
+
+SQL> insert into temporal8 values ('adc');
+
+1 row created.
+
+SQL> insert into temporal8 values ('a1c');
+
+1 row created.
+
+SQL> insert into temporal8 values ('a#c');
+
+1 row created.
+
+SQL> rem el que no cumple
+SQL> insert into temporal8 values ('abb');
+
+1 row created.
+
+SQL> 
+SQL> rem despleguemos los que cumplen
+SQL> 
+SQL> select cadena from temporal8
+  2   where REGEXP_LIKE(cadena, '[a.c]');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+abc                                                                                                                               
+adc                                                                                                                               
+a1c                                                                                                                               
+a#c                                                                                                                               
+abb                                                                                                                               
+
+5 rows selected.
+
+SQL>  rem despleguemos los que no cumplen
+SQL> 
+SQL>  select cadena from temporal8
+  2   minus
+  3   select cadena from temporal8
+  4   where REGEXP_LIKE(cadena, '[a.c]');
+
+no rows selected
+
+SQL> 
+SQL>  DELETE
+  2  FROM
+  3      temporal8;
+
+5 rows deleted.
+
+SQL> 
+SQL>  select cadena from temporal8;
+
+no rows selected
+
+SQL> -- ------------------
+SQL> 
+SQL>  rem ejercicio 4.
+SQL> 
+SQL>  One or More--Plus
+SP2-0734: unknown command beginning "One or Mor..." - rest of line ignored.
+SQL> a+
+  1*  select cadena from temporal8+
+SQL> 
+SQL> insert into temporal8 values ('a');
+
+1 row created.
+
+SQL> insert into temporal8 values ('aa');
+
+1 row created.
+
+SQL> insert into temporal8 values ('aaa');
+
+1 row created.
+
+SQL> rem The expression does not match:
+SQL> insert into temporal8 values ('bbb');
+
+1 row created.
+
+SQL> 
+SQL> select cadena from temporal8
+  2   where REGEXP_LIKE(cadena, '[a+]');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+a                                                                                                                                 
+aa                                                                                                                                
+aaa                                                                                                                               
+
+3 rows selected.
+
+SQL> 
+SQL>  rem despleguemos los que no cumplen
+SQL>   select cadena from temporal8
+  2   minus
+  3   select cadena from temporal8
+  4   where REGEXP_LIKE(cadena, '[a+]');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+bbb                                                                                                                               
+
+1 row selected.
+
+SQL> 
+SQL>   DELETE
+  2  FROM
+  3      temporal8;
+
+4 rows deleted.
+
+SQL> 
+SQL>  select cadena from temporal8;
+
+no rows selected
+
+SQL> 
+SQL>  -- ------------
+SQL>  rem ejercicio 5
+SQL>  rem Zero or One--Question Mark Operator
+SQL> rem  ab?c
+SQL> /*
+SQL> This expression matches:
+SQL> abc
+SQL> ac
+SQL> rem The expression does not match:
+SQL> adc
+SQL> abbc
+SQL> */
+SQL> 
+SQL>  insert into temporal8 values ('abc');
+
+1 row created.
+
+SQL> insert into temporal8 values ('ac');
+
+1 row created.
+
+SQL> insert into temporal8 values ('aaa');
+
+1 row created.
+
+SQL> rem The expression does not match:
+SQL> insert into temporal8 values ('bdc');
+
+1 row created.
+
+SQL> insert into temporal8 values ('abbc');
+
+1 row created.
+
+SQL> 
+SQL> rem despleguemos todas las tuplas
+SQL> select cadena from temporal8;
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+abc                                                                                                                               
+ac                                                                                                                                
+aaa                                                                                                                               
+bdc                                                                                                                               
+abbc                                                                                                                              
+
+5 rows selected.
+
+SQL> 
+SQL> rem  las tuplas que cumplen el patron
+SQL> select cadena from temporal8
+  2   where REGEXP_LIKE(cadena, 'ab?c');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+abc                                                                                                                               
+ac                                                                                                                                
+
+2 rows selected.
+
+SQL> 
+SQL> rem solo las que no cumplen
+SQL>   select cadena from temporal8
+  2   minus
+  3   select cadena from temporal8
+  4   where REGEXP_LIKE(cadena, 'ab?c');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+aaa                                                                                                                               
+abbc                                                                                                                              
+bdc                                                                                                                               
+
+3 rows selected.
+
+SQL> 
+SQL>  rem borramos la tabla
+SQL> 
+SQL>   DELETE
+  2  FROM
+  3      temporal8;
+
+5 rows deleted.
+
+SQL> 
+SQL>  select cadena from temporal8;
+
+no rows selected
+
+SQL> 
+SQL>  -----------
+SQL> rem ejercicio 6
+SQL> 
+SQL> rem Zero or More--Star
+SQL> rem ab*c
+SQL> 
+SQL> ac
+SP2-0042: unknown command "ac" - rest of line ignored.
+SQL> abc
+SP2-0042: unknown command "abc" - rest of line ignored.
+SQL> abbc
+SP2-0042: unknown command "abbc" - rest of line ignored.
+SQL> abbbbc
+SP2-0042: unknown command "abbbbc" - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> 
+SQL> 
+SQL> insert into temporal8 values ('ac');
+
+1 row created.
+
+SQL> insert into temporal8 values ('abc');
+
+1 row created.
+
+SQL> insert into temporal8 values ('abbc');
+
+1 row created.
+
+SQL> insert into temporal8 values ('abbbc');
+
+1 row created.
+
+SQL> insert into temporal8 values ('abbbbc');
+
+1 row created.
+
+SQL> 
+SQL> rem rem The expression does not match:
+SQL> 
+SQL> insert into temporal8 values ('adc');
+
+1 row created.
+
+SQL> insert into temporal8 values ('aec');
+
+1 row created.
+
+SQL> 
+SQL> rem despleguemos todas las tuplas
+SQL> select cadena from temporal8;
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+ac                                                                                                                                
+abc                                                                                                                               
+abbc                                                                                                                              
+abbbc                                                                                                                             
+abbbbc                                                                                                                            
+adc                                                                                                                               
+aec                                                                                                                               
+
+7 rows selected.
+
+SQL> 
+SQL> rem  las tuplas que cumplen el patron
+SQL> select cadena from temporal8
+  2   where REGEXP_LIKE(cadena, 'ab*c');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+ac                                                                                                                                
+abc                                                                                                                               
+abbc                                                                                                                              
+abbbc                                                                                                                             
+abbbbc                                                                                                                            
+
+5 rows selected.
+
+SQL> 
+SQL> rem solo las que no cumplen
+SQL>   select cadena from temporal8
+  2   minus
+  3   select cadena from temporal8
+  4   where REGEXP_LIKE(cadena, 'ab*c');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+adc                                                                                                                               
+aec                                                                                                                               
+
+2 rows selected.
+
+SQL> 
+SQL>    DELETE
+  2  FROM
+  3      temporal8;
+
+7 rows deleted.
+
+SQL> 
+SQL>  select cadena from temporal8;
+
+no rows selected
+
+SQL> 
+SQL>  ---
+SQL>  rem ejercicio 7
+SQL> 
+SQL>  rem Interval--Exact Count
+SQL> rem The exact-count interval
+SQL> rem  operator is specified
+SQL> rem  with a single digit enclosed in braces
+SQL> rem  a{5}
+SQL> insert into temporal8 values ('aaaaa');
+
+1 row created.
+
+SQL> insert into temporal8 values ('aaaaab');
+
+1 row created.
+
+SQL> insert into temporal8 values ('caaaaa');
+
+1 row created.
+
+SQL> insert into temporal8 values ('deaaaaabbbc');
+insert into temporal8 values ('deaaaaabbbc')
+                              *
+ERROR at line 1:
+ORA-12899: value too large for column "EZEQUIEL"."TEMPORAL8"."CADENA" (actual: 11, maximum: 10) 
+
+
+SQL> insert into temporal8 values ('aaaaaggg');
+
+1 row created.
+
+SQL> rem  The expression does not match:
+SQL> 
+SQL> insert into temporal8 values ('aaaa');
+
+1 row created.
+
+SQL> insert into temporal8 values ('aaaggg');
+
+1 row created.
+
+SQL> insert into temporal8 values ('aaa');
+
+1 row created.
+
+SQL> 
+SQL> rem despleguemos todas las tuplas
+SQL> select cadena from temporal8;
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+aaaaa                                                                                                                             
+aaaaab                                                                                                                            
+caaaaa                                                                                                                            
+aaaaaggg                                                                                                                          
+aaaa                                                                                                                              
+aaaggg                                                                                                                            
+aaa                                                                                                                               
+
+7 rows selected.
+
+SQL> 
+SQL> rem  las tuplas que cumplen el patron
+SQL> select cadena from temporal8
+  2   where REGEXP_LIKE(cadena, 'a{5}');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+aaaaa                                                                                                                             
+aaaaab                                                                                                                            
+caaaaa                                                                                                                            
+aaaaaggg                                                                                                                          
+
+4 rows selected.
+
+SQL> 
+SQL> rem solo las que no cumplen
+SQL>   select cadena from temporal8
+  2   minus
+  3   select cadena from temporal8
+  4   where REGEXP_LIKE(cadena, 'a{5}');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+aaa                                                                                                                               
+aaaa                                                                                                                              
+aaaggg                                                                                                                            
+
+3 rows selected.
+
+SQL> 
+SQL>    DELETE
+  2  FROM
+  3      temporal8;
+
+7 rows deleted.
+
+SQL> 
+SQL>  select cadena from temporal8;
+
+no rows selected
+
+SQL> 
+SQL>   ---
+SQL>  rem ejercicio 8
+SQL>  rem Interval--At Least Count
+SQL> rem   a{3,}
+SQL> 
+SQL> insert into temporal8 values ('aaaaa');
+
+1 row created.
+
+SQL> insert into temporal8 values ('aaaaab');
+
+1 row created.
+
+SQL> insert into temporal8 values ('caaa');
+
+1 row created.
+
+SQL> insert into temporal8 values ('deaaaaabbbc');
+insert into temporal8 values ('deaaaaabbbc')
+                              *
+ERROR at line 1:
+ORA-12899: value too large for column "EZEQUIEL"."TEMPORAL8"."CADENA" (actual: 11, maximum: 10) 
+
+
+SQL> insert into temporal8 values ('aaaaaggg');
+
+1 row created.
+
+SQL> rem  The expression does not match:
+SQL> 
+SQL> insert into temporal8 values ('aa');
+
+1 row created.
+
+SQL> insert into temporal8 values ('ddaggg');
+
+1 row created.
+
+SQL> insert into temporal8 values ('daa');
+
+1 row created.
+
+SQL> 
+SQL> rem despleguemos todas las tuplas
+SQL> select cadena from temporal8;
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+aaaaa                                                                                                                             
+aaaaab                                                                                                                            
+caaa                                                                                                                              
+aaaaaggg                                                                                                                          
+aa                                                                                                                                
+ddaggg                                                                                                                            
+daa                                                                                                                               
+
+7 rows selected.
+
+SQL> 
+SQL> rem  las tuplas que cumplen el patron
+SQL> select cadena from temporal8
+  2   where REGEXP_LIKE(cadena, 'a{3,}');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+aaaaa                                                                                                                             
+aaaaab                                                                                                                            
+caaa                                                                                                                              
+aaaaaggg                                                                                                                          
+
+4 rows selected.
+
+SQL> 
+SQL> rem solo las que no cumplen
+SQL>   select cadena from temporal8
+  2   minus
+  3   select cadena from temporal8
+  4   where REGEXP_LIKE(cadena, 'a{3,}');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+aa                                                                                                                                
+daa                                                                                                                               
+ddaggg                                                                                                                            
+
+3 rows selected.
+
+SQL> 
+SQL>    DELETE
+  2  FROM
+  3      temporal8;
+
+7 rows deleted.
+
+SQL> 
+SQL>  select cadena from temporal8;
+
+no rows selected
+
+SQL> 
+SQL> ---
+SQL> rem ejercicio 9
+SQL> 
+SQL> rem Interval--Between Count
+SQL> rem a{3,5}
+SQL> 
+SQL> insert into temporal8 values ('aaaaa');
+
+1 row created.
+
+SQL> insert into temporal8 values ('aaaaab');
+
+1 row created.
+
+SQL> insert into temporal8 values ('caaa');
+
+1 row created.
+
+SQL> insert into temporal8 values ('deaaaaabbbc');
+insert into temporal8 values ('deaaaaabbbc')
+                              *
+ERROR at line 1:
+ORA-12899: value too large for column "EZEQUIEL"."TEMPORAL8"."CADENA" (actual: 11, maximum: 10) 
+
+
+SQL> insert into temporal8 values ('aaaaaggg');
+
+1 row created.
+
+SQL> rem  The expression does not match:
+SQL> 
+SQL> insert into temporal8 values ('aa');
+
+1 row created.
+
+SQL> insert into temporal8 values ('ddaggg');
+
+1 row created.
+
+SQL> insert into temporal8 values ('daa');
+
+1 row created.
+
+SQL> 
+SQL> rem despleguemos todas las tuplas
+SQL> select cadena from temporal8;
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+aaaaa                                                                                                                             
+aaaaab                                                                                                                            
+caaa                                                                                                                              
+aaaaaggg                                                                                                                          
+aa                                                                                                                                
+ddaggg                                                                                                                            
+daa                                                                                                                               
+
+7 rows selected.
+
+SQL> 
+SQL> rem  las tuplas que cumplen el patron
+SQL> select cadena from temporal8
+  2   where REGEXP_LIKE(cadena, 'a{3,5}');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+aaaaa                                                                                                                             
+aaaaab                                                                                                                            
+caaa                                                                                                                              
+aaaaaggg                                                                                                                          
+
+4 rows selected.
+
+SQL> 
+SQL> rem solo las que no cumplen
+SQL>   select cadena from temporal8
+  2   minus
+  3   select cadena from temporal8
+  4   where REGEXP_LIKE(cadena, 'a{3,5}');
+
+CADENA                                                                                                                            
+----------                                                                                                                        
+aa                                                                                                                                
+daa                                                                                                                               
+ddaggg                                                                                                                            
+
+3 rows selected.
+
+SQL> 
+SQL>    DELETE
+  2  FROM
+  3      temporal8;
+
+7 rows deleted.
+
+SQL> 
+SQL>  select cadena from temporal8;
+
+no rows selected
+
+SQL> 
+SQL>  ---
+SQL>  /*
+SQL> The following regular expression operators are allowed within the character list, any other metacharacters included in a character list lose their special meaning (are treated as literals):
+SQL> 
+SQL> Range operator '-'
+SQL> POSIX character class [::]
+SQL> POSIX collating sequence [. .]
+SQL> POSIX character equivalence class [= =]
+SQL> 
+SQL> 
+SQL> 
+SQL> */
+SQL> ----
+SQL> rem ejercicio 10
+SQL> 
+SQL> 
+SQL> SPOOL OFF;

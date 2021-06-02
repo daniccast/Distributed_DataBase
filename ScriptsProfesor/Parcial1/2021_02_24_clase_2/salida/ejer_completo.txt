@@ -1,7 +1,0 @@
-SQL> rem crea la base student
-SQL> rem pausa
-SQL> set flush off
-SQL> set termout off
-SQL> rem @@C:\Users\ORA_bases\2021_02_24_clase_2\crea_usuario.sql
-SQL> @@C:\Users\ORA_bases\2021_02_24_clase_2\desp_par_session.sql
-SQL> spool C:\Users\ORA_bases\2021_02_24_clase_2\salida\desp_par_session.txt

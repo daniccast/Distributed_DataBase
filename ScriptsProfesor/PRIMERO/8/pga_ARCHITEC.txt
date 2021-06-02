@@ -1,0 +1,380 @@
+SQL> rem consultas sobre los procesos
+SQL> set colsep '|=|'
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set feedback on
+SQL> set underline =
+SQL> -- set null s/Datos
+SQL> set null Null
+SQL> set numwidth 7
+SQL> REM DESPLEGAR LAS TABLAS DEL DICTIONARY QUE SE REFIEREN A USERS
+SQL> 
+SQL> 
+SQL> -- desc v$porcess
+SQL> col pid format 999
+SQL> col username format a8
+SQL> col pga_used     format  9,999.9
+SQL> col pga_alloc    format 99,999.9
+SQL> col pga_freeab   format  9,999.9
+SQL> col pga_max      format 99,999.9
+SQL> col bg           format a4
+SQL> prompt memoria en KBytes
+memoria en KBytes
+SQL> select addr,pid,pname,username,
+  2  background            BG,
+  3  pga_used_mem/1024     pga_used,
+  4  pga_alloc_mem/1024    pga_alloc,
+  5  pga_freeable_mem/1024 pga_freeab,
+  6  pga_max_mem/1024      pga_max
+  7  from v$process;
+
+ADDR    |=| PID|=|PNAME|=|USERNAME|=|BG  |=|PGA_USED|=|PGA_ALLOC|=|PGA_FREEAB|=|  PGA_MAX                                         
+========|=|====|=|=====|=|========|=|====|=|========|=|=========|=|==========|=|=========                                         
+BF73CB4C|=|   1|=|Null |=|Null    |=|Null|=|      .0|=|       .0|=|        .0|=|       .0                                         
+BF73D684|=|   2|=|PMON |=|SYSTEM  |=|1   |=|   484.5|=|    567.6|=|        .0|=|    567.6                                         
+BF73E1BC|=|   3|=|PSP0 |=|SYSTEM  |=|1   |=|   483.4|=|    567.6|=|        .0|=|    567.6                                         
+BF73ECF4|=|   4|=|VKTM |=|SYSTEM  |=|1   |=|   480.2|=|    567.6|=|        .0|=|    567.6                                         
+BF73F82C|=|   5|=|GEN0 |=|SYSTEM  |=|1   |=|   487.2|=|    631.6|=|        .0|=|    631.6                                         
+BF740364|=|   6|=|DIAG |=|SYSTEM  |=|1   |=|   480.2|=|    631.6|=|        .0|=|    631.6                                         
+BF740E9C|=|   7|=|DBRM |=|SYSTEM  |=|1   |=|   556.8|=|    759.6|=|        .0|=|    759.6                                         
+BF7419D4|=|   8|=|DIA0 |=|SYSTEM  |=|1   |=|   789.2|=|    935.0|=|        .0|=|    999.0                                         
+BF74250C|=|   9|=|MMAN |=|SYSTEM  |=|1   |=|   483.4|=|    567.6|=|        .0|=|    567.6                                         
+BF743044|=|  10|=|DBW0 |=|SYSTEM  |=|1   |=| 4,048.9|=|  4,711.0|=|        .0|=|  4,711.0                                         
+BF743B7C|=|  11|=|LGWR |=|SYSTEM  |=|1   |=| 4,648.6|=|  4,983.6|=|        .0|=|  5,367.6                                         
+BF7446B4|=|  12|=|CKPT |=|SYSTEM  |=|1   |=|   527.5|=|    784.9|=|        .0|=|    784.9                                         
+BF7451EC|=|  13|=|SMON |=|SYSTEM  |=|1   |=|   766.3|=|  1,399.6|=|        .0|=|  3,191.6                                         
+BF745D24|=|  14|=|RECO |=|SYSTEM  |=|1   |=|   620.8|=|    823.6|=|        .0|=|    823.6                                         
+BF74685C|=|  15|=|MMON |=|SYSTEM  |=|1   |=| 1,547.9|=|  1,775.1|=|        .0|=|  3,631.1                                         
+BF747394|=|  16|=|MMNL |=|SYSTEM  |=|1   |=|   552.5|=|    631.6|=|        .0|=|    631.6                                         
+BF747ECC|=|  17|=|D000 |=|SYSTEM  |=|Null|=|   736.0|=|  1,015.6|=|        .0|=|  1,015.6                                         
+BF748A04|=|  18|=|S000 |=|SYSTEM  |=|Null|=|   296.1|=|    503.6|=|        .0|=|    503.6                                         
+BF74953C|=|  19|=|S001 |=|SYSTEM  |=|Null|=|   296.1|=|    503.6|=|        .0|=|    503.6                                         
+BF74A074|=|  20|=|S002 |=|SYSTEM  |=|Null|=|   296.1|=|    503.6|=|        .0|=|    503.6                                         
+BF74ABAC|=|  21|=|S003 |=|SYSTEM  |=|Null|=|   296.1|=|    503.6|=|        .0|=|    503.6                                         
+BF74B6E4|=|  22|=|SMCO |=|SYSTEM  |=|1   |=|   480.2|=|    567.6|=|        .0|=|    567.6                                         
+BF74C21C|=|  23|=|VKRM |=|SYSTEM  |=|1   |=|   480.2|=|    567.6|=|        .0|=|    567.6                                         
+BF74CD54|=|  24|=|QMNC |=|SYSTEM  |=|1   |=|   484.3|=|    631.6|=|        .0|=|    631.6                                         
+BF74D88C|=|  25|=|Q000 |=|SYSTEM  |=|1   |=|   954.1|=|  1,399.6|=|        .0|=|  1,399.6                                         
+BF74E3C4|=|  26|=|Q001 |=|SYSTEM  |=|1   |=|   643.5|=|    695.6|=|        .0|=|    695.6                                         
+BF74EEFC|=|  27|=|CJQ0 |=|SYSTEM  |=|1   |=| 1,083.1|=|  1,279.7|=|        .0|=|  5,439.7                                         
+BF74FA34|=|  28|=|W000 |=|SYSTEM  |=|1   |=|   581.0|=|    695.6|=|        .0|=|    695.6                                         
+BF75056C|=|  29|=|Null |=|SYSTEM  |=|Null|=| 1,042.8|=|  1,519.1|=|        .0|=|  3,311.1                                         
+BF7510A4|=|  30|=|Null |=|SYSTEM  |=|Null|=|   595.4|=|    751.1|=|        .0|=|    751.1                                         
+BF751BDC|=|  31|=|Null |=|SYSTEM  |=|Null|=| 1,189.7|=|  2,223.1|=|        .0|=| 10,607.1                                         
+
+31 rows selected.
+
+SQL> -- ---------------------------------------
+SQL> REM [KYTE T,2005,170]
+SQL> REM CONSULTAR LOS PROCESOS DE LA TABLE vg$PROCESS
+SQL> COL DESCRIPTION FORMAT A49
+SQL> COL PSER        FORMAT 9999
+SQL> COL ERROR       FORMAT 999
+SQL> SELECT PADDR,PSERIAL#,NAME,DESCRIPTION,ERROR
+  2  FROM V$BGPROCESS
+  3  WHERE ROWNUM <= 105
+  4  ORDER BY 1 DESC,3,4;
+
+PADDR   |=|PSERIAL#|=|NAME         |=|DESCRIPTION                                      |=|ERROR                                   
+========|=|========|=|=============|=|=================================================|=|=====                                   
+BF74C21C|=|       3|=|VKRM         |=|Virtual sKeduler for Resource Manager            |=| 0                                      
+BF743044|=|       1|=|DBW0         |=|db writer process 0                              |=| 0                                      
+BF74250C|=|       1|=|MMAN         |=|Memory Manager                                   |=| 0                                      
+BF7419D4|=|       1|=|DIA0         |=|diagnosibility process 0                         |=| 0                                      
+BF740E9C|=|       1|=|DBRM         |=|DataBase Resource Manager                        |=| 0                                      
+BF740364|=|       1|=|DIAG         |=|diagnosibility process                           |=| 0                                      
+BF73F82C|=|       1|=|GEN0         |=|generic0                                         |=| 0                                      
+BF73ECF4|=|       1|=|VKTM         |=|Virtual Keeper of TiMe process                   |=| 0                                      
+BF73E1BC|=|       1|=|PSP0         |=|process spawner 0                                |=| 0                                      
+BF73D684|=|       1|=|PMON         |=|process cleanup                                  |=| 0                                      
+00      |=|       0|=|ACMS         |=|Atomic Controlfile to Memory Server              |=| 0                                      
+00      |=|       0|=|ARC0         |=|Archival Process 0                               |=| 0                                      
+00      |=|       0|=|ARC1         |=|Archival Process 1                               |=| 0                                      
+00      |=|       0|=|ARC2         |=|Archival Process 2                               |=| 0                                      
+00      |=|       0|=|ARC3         |=|Archival Process 3                               |=| 0                                      
+00      |=|       0|=|ARC4         |=|Archival Process 4                               |=| 0                                      
+00      |=|       0|=|ARC5         |=|Archival Process 5                               |=| 0                                      
+00      |=|       0|=|DBW1         |=|db writer process 1                              |=| 0                                      
+00      |=|       0|=|DBW2         |=|db writer process 2                              |=| 0                                      
+00      |=|       0|=|DBW3         |=|db writer process 3                              |=| 0                                      
+00      |=|       0|=|DBW4         |=|db writer process 4                              |=| 0                                      
+00      |=|       0|=|DBW5         |=|db writer process 5                              |=| 0                                      
+00      |=|       0|=|DBW6         |=|db writer process 6                              |=| 0                                      
+00      |=|       0|=|DBW7         |=|db writer process 7                              |=| 0                                      
+00      |=|       0|=|DBW8         |=|db writer process 8                              |=| 0                                      
+00      |=|       0|=|DBW9         |=|db writer process 9                              |=| 0                                      
+00      |=|       0|=|DBWa         |=|db writer process 10 (a)                         |=| 0                                      
+00      |=|       0|=|DBWb         |=|db writer process 11 (b)                         |=| 0                                      
+00      |=|       0|=|DBWc         |=|db writer process 12 (c)                         |=| 0                                      
+00      |=|       0|=|DBWd         |=|db writer process 13 (d)                         |=| 0                                      
+00      |=|       0|=|DBWe         |=|db writer process 14 (e)                         |=| 0                                      
+00      |=|       0|=|DBWf         |=|db writer process 15 (f)                         |=| 0                                      
+00      |=|       0|=|DBWg         |=|db writer process 16 (g)                         |=| 0                                      
+00      |=|       0|=|DBWh         |=|db writer process 17 (h)                         |=| 0                                      
+00      |=|       0|=|DBWi         |=|db writer process 18 (i)                         |=| 0                                      
+00      |=|       0|=|DBWj         |=|db writer process 19 (j)                         |=| 0                                      
+00      |=|       0|=|DBWk         |=|db writer process 20 (k)                         |=| 0                                      
+00      |=|       0|=|DBWl         |=|db writer process 21 (l)                         |=| 0                                      
+00      |=|       0|=|DBWm         |=|db writer process 22 (m)                         |=| 0                                      
+00      |=|       0|=|DBWn         |=|db writer process 23 (n)                         |=| 0                                      
+00      |=|       0|=|DBWo         |=|db writer process 24 (o)                         |=| 0                                      
+00      |=|       0|=|DBWp         |=|db writer process 25 (p)                         |=| 0                                      
+00      |=|       0|=|DBWq         |=|db writer process 26 (q)                         |=| 0                                      
+00      |=|       0|=|DBWr         |=|db writer process 27 (r)                         |=| 0                                      
+00      |=|       0|=|DBWs         |=|db writer process 28 (s)                         |=| 0                                      
+00      |=|       0|=|DBWt         |=|db writer process 29 (t)                         |=| 0                                      
+00      |=|       0|=|DBWu         |=|db writer process 30 (u)                         |=| 0                                      
+00      |=|       0|=|DBWv         |=|db writer process 31 (v)                         |=| 0                                      
+00      |=|       0|=|DBWw         |=|db writer process 32 (s)                         |=| 0                                      
+00      |=|       0|=|DBWx         |=|db writer process 33 (t)                         |=| 0                                      
+00      |=|       0|=|DBWy         |=|db writer process 34 (u)                         |=| 0                                      
+00      |=|       0|=|DBWz         |=|db writer process 35 (v)                         |=| 0                                      
+00      |=|       0|=|DIA1         |=|diagnosibility process 1                         |=| 0                                      
+00      |=|       0|=|DIA2         |=|diagnosibility process 2                         |=| 0                                      
+00      |=|       0|=|DIA3         |=|diagnosibility process 3                         |=| 0                                      
+00      |=|       0|=|DIA4         |=|diagnosibility process 4                         |=| 0                                      
+00      |=|       0|=|DIA5         |=|diagnosibility process 5                         |=| 0                                      
+00      |=|       0|=|DIA6         |=|diagnosibility process 6                         |=| 0                                      
+00      |=|       0|=|DIA7         |=|diagnosibility process 7                         |=| 0                                      
+00      |=|       0|=|DIA8         |=|diagnosibility process 8                         |=| 0                                      
+00      |=|       0|=|DIA9         |=|diagnosibility process 9                         |=| 0                                      
+00      |=|       0|=|DSKM         |=|slave DiSKMon process                            |=| 0                                      
+00      |=|       0|=|FMON         |=|File Mapping Monitor Process                     |=| 0                                      
+00      |=|       0|=|LMD0         |=|global enqueue service daemon 0                  |=| 0                                      
+00      |=|       0|=|LMHB         |=|lm heartbeat monitor                             |=| 0                                      
+00      |=|       0|=|LMON         |=|global enqueue service monitor                   |=| 0                                      
+00      |=|       0|=|LMS0         |=|global cache service process 0                   |=| 0                                      
+00      |=|       0|=|LMS1         |=|global cache service process 1                   |=| 0                                      
+00      |=|       0|=|LMS2         |=|global cache service process 2                   |=| 0                                      
+00      |=|       0|=|LMS3         |=|global cache service process 3                   |=| 0                                      
+00      |=|       0|=|LMS4         |=|global cache service process 4                   |=| 0                                      
+00      |=|       0|=|LMS5         |=|global cache service process 5                   |=| 0                                      
+00      |=|       0|=|LMS6         |=|global cache service process 6                   |=| 0                                      
+00      |=|       0|=|LMS7         |=|global cache service process 7                   |=| 0                                      
+00      |=|       0|=|LMS8         |=|global cache service process 8                   |=| 0                                      
+00      |=|       0|=|LMS9         |=|global cache service process 9                   |=| 0                                      
+00      |=|       0|=|LMSa         |=|global cache service process 10                  |=| 0                                      
+00      |=|       0|=|LMSb         |=|global cache service process 11                  |=| 0                                      
+00      |=|       0|=|LMSc         |=|global cache service process 12                  |=| 0                                      
+00      |=|       0|=|LMSd         |=|global cache service process 13                  |=| 0                                      
+00      |=|       0|=|LMSe         |=|global cache service process 14                  |=| 0                                      
+00      |=|       0|=|LMSf         |=|global cache service process 15                  |=| 0                                      
+00      |=|       0|=|LMSg         |=|global cache service process 16                  |=| 0                                      
+00      |=|       0|=|LMSh         |=|global cache service process 17                  |=| 0                                      
+00      |=|       0|=|LMSi         |=|global cache service process 18                  |=| 0                                      
+00      |=|       0|=|LMSj         |=|global cache service process 19                  |=| 0                                      
+00      |=|       0|=|LMSk         |=|global cache service process 20                  |=| 0                                      
+00      |=|       0|=|LMSl         |=|global cache service process 21                  |=| 0                                      
+00      |=|       0|=|LMSm         |=|global cache service process 22                  |=| 0                                      
+00      |=|       0|=|LMSn         |=|global cache service process 23                  |=| 0                                      
+00      |=|       0|=|LMSo         |=|global cache service process 24                  |=| 0                                      
+00      |=|       0|=|LMSp         |=|global cache service process 25                  |=| 0                                      
+00      |=|       0|=|LMSq         |=|global cache service process 26                  |=| 0                                      
+00      |=|       0|=|LMSr         |=|global cache service process 27                  |=| 0                                      
+00      |=|       0|=|LMSs         |=|global cache service process 28                  |=| 0                                      
+00      |=|       0|=|LMSt         |=|global cache service process 29                  |=| 0                                      
+
+PADDR   |=|PSERIAL#|=|NAME         |=|DESCRIPTION                                      |=|ERROR                                   
+========|=|========|=|=============|=|=================================================|=|=====                                   
+00      |=|       0|=|LMSu         |=|global cache service process 30                  |=| 0                                      
+00      |=|       0|=|LMSv         |=|global cache service process 31                  |=| 0                                      
+00      |=|       0|=|LMSw         |=|global cache service process 32                  |=| 0                                      
+00      |=|       0|=|LMSx         |=|global cache service process 33                  |=| 0                                      
+00      |=|       0|=|LMSy         |=|global cache service process 34                  |=| 0                                      
+00      |=|       0|=|MRP0         |=|Managed Standby Recovery                         |=| 0                                      
+00      |=|       0|=|PING         |=|interconnect latency measurement                 |=| 0                                      
+00      |=|       0|=|RMS0         |=|rac management server                            |=| 0                                      
+00      |=|       0|=|RSMN         |=|Remote Slave Monitor                             |=| 0                                      
+
+105 rows selected.
+
+SQL> 
+SQL> ---- -------------------------
+SQL> REM [KYTE T,2005,160]
+SQL> rem consultar la tabla de la session
+SQL> 
+SQL> SELECT SID,SERIAL#,USER#,USERNAME,STATUS,PROGRAM
+  2  FROM V$SESSION
+  3  ORDER BY 4,6;
+
+    SID|=|SERIAL#|=|  USER#|=|USERNAME|=|STATUS|=|PROGRAM                                                                         
+=======|=|=======|=|=======|=|========|=|======|=|================================================================                
+     95|=|    245|=|     50|=|EZEQUIEL|=|INACTI|=|sqlplus.exe                                                                     
+       |=|       |=|       |=|        |=|VE    |=|                                                                                
+                                                                                                                                  
+     49|=|    157|=|     51|=|STUDENT |=|INACTI|=|sqlplus.exe                                                                     
+       |=|       |=|       |=|        |=|VE    |=|                                                                                
+                                                                                                                                  
+    139|=|    103|=|      0|=|SYS     |=|ACTIVE|=|sqlplus.exe                                                                     
+    137|=|      3|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (CJQ0)                                                               
+      3|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (CKPT)                                                               
+    132|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (DBRM)                                                               
+     89|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (DBW0)                                                               
+      2|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (DIA0)                                                               
+     88|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (DIAG)                                                               
+     44|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (GEN0)                                                               
+    133|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (LGWR)                                                               
+     45|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (MMAN)                                                               
+      4|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (MMNL)                                                               
+    134|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (MMON)                                                               
+     87|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (PMON)                                                               
+    131|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (PSP0)                                                               
+     47|=|      9|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (Q000)                                                               
+     93|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (Q001)                                                               
+      5|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (QMNC)                                                               
+     90|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (RECO)                                                               
+     94|=|     15|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (SMCO)                                                               
+     46|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (SMON)                                                               
+    136|=|      3|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (VKRM)                                                               
+      1|=|      1|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (VKTM)                                                               
+      8|=|     45|=|      0|=|Null    |=|ACTIVE|=|ORACLE.EXE (W000)                                                               
+
+25 rows selected.
+
+SQL> 
+SQL> SELECT SID, SERIAL#, PADDR
+  2  FROM V$SESSION WHERE USERNAME = USER;
+
+    SID|=|SERIAL#|=|PADDR                                                                                                         
+=======|=|=======|=|========                                                                                                      
+    139|=|    103|=|BF751BDC                                                                                                      
+
+1 row selected.
+
+SQL> 
+SQL> -- -------------------------
+SQL> REM DATABASECONCEPTS
+SQL> REM REM [Ashdown, L & Kyte,T,2015,15_7]
+SQL> rem   consultar la tabla de  los procesos
+SQL> COL PROGRAM A40
+SP2-0158: unknown COLUMN option "A40"
+SQL> SELECT PNAME,PROGRAM,USERNAME
+  2  FROM V$PROCESS
+  3  WHERE PNAME IS NOT NULL
+  4  ORDER BY PNAME;
+
+PNAME|=|PROGRAM                                                         |=|USERNAME                                               
+=====|=|================================================================|=|========                                               
+CJQ0 |=|ORACLE.EXE (CJQ0)                                               |=|SYSTEM                                                 
+CKPT |=|ORACLE.EXE (CKPT)                                               |=|SYSTEM                                                 
+D000 |=|ORACLE.EXE (D000)                                               |=|SYSTEM                                                 
+DBRM |=|ORACLE.EXE (DBRM)                                               |=|SYSTEM                                                 
+DBW0 |=|ORACLE.EXE (DBW0)                                               |=|SYSTEM                                                 
+DIA0 |=|ORACLE.EXE (DIA0)                                               |=|SYSTEM                                                 
+DIAG |=|ORACLE.EXE (DIAG)                                               |=|SYSTEM                                                 
+GEN0 |=|ORACLE.EXE (GEN0)                                               |=|SYSTEM                                                 
+LGWR |=|ORACLE.EXE (LGWR)                                               |=|SYSTEM                                                 
+MMAN |=|ORACLE.EXE (MMAN)                                               |=|SYSTEM                                                 
+MMNL |=|ORACLE.EXE (MMNL)                                               |=|SYSTEM                                                 
+MMON |=|ORACLE.EXE (MMON)                                               |=|SYSTEM                                                 
+PMON |=|ORACLE.EXE (PMON)                                               |=|SYSTEM                                                 
+PSP0 |=|ORACLE.EXE (PSP0)                                               |=|SYSTEM                                                 
+Q000 |=|ORACLE.EXE (Q000)                                               |=|SYSTEM                                                 
+Q001 |=|ORACLE.EXE (Q001)                                               |=|SYSTEM                                                 
+QMNC |=|ORACLE.EXE (QMNC)                                               |=|SYSTEM                                                 
+RECO |=|ORACLE.EXE (RECO)                                               |=|SYSTEM                                                 
+S000 |=|ORACLE.EXE (S000)                                               |=|SYSTEM                                                 
+S001 |=|ORACLE.EXE (S001)                                               |=|SYSTEM                                                 
+S002 |=|ORACLE.EXE (S002)                                               |=|SYSTEM                                                 
+S003 |=|ORACLE.EXE (S003)                                               |=|SYSTEM                                                 
+SMCO |=|ORACLE.EXE (SMCO)                                               |=|SYSTEM                                                 
+SMON |=|ORACLE.EXE (SMON)                                               |=|SYSTEM                                                 
+VKRM |=|ORACLE.EXE (VKRM)                                               |=|SYSTEM                                                 
+VKTM |=|ORACLE.EXE (VKTM)                                               |=|SYSTEM                                                 
+W000 |=|ORACLE.EXE (W000)                                               |=|SYSTEM                                                 
+
+27 rows selected.
+
+SQL> -------------------------------------
+SQL> rem  consultas de cortesia
+SQL> rem estudienlas !!!!
+SQL> REM DESPLEGAR LAS TABLAS DEL DICTIONARY QUE SE REFIEREN A USERS
+SQL> select table_name from dict
+  2  where table_name like '%USER_USERS%';
+
+TABLE_NAME                                                                                                                        
+==============================                                                                                                    
+USER_USERS                                                                                                                        
+
+1 row selected.
+
+SQL> 
+SQL> select username,user_id,account_status,expiry_date from user_users;
+
+USERNAME|=|USER_ID|=|ACCOUNT_STATUS                  |=|EXPIRY_DA                                                                 
+========|=|=======|=|================================|=|=========                                                                 
+SYS     |=|      0|=|OPEN                            |=|23-AUG-21                                                                 
+
+1 row selected.
+
+SQL> 
+SQL> -- alter user sergio identified by sergio;
+SQL> 
+SQL> REM DESPLEGAR LAS TABLAS DEL DICTIONARY QUE SE REFIEREN A PERFILES
+SQL> select table_name from dict
+  2  where table_name like '%PROFIL%';
+
+TABLE_NAME                                                                                                                        
+==============================                                                                                                    
+DBA_PROFILES                                                                                                                      
+DBA_SQL_PROFILES                                                                                                                  
+
+2 rows selected.
+
+SQL> rem consultar la tabla de los usuarios
+SQL> 
+SQL> DESC DBA_PROFILES
+ Name                                                                    Null?    Type
+ ----------------------------------------------------------------------- -------- ------------------------------------------------
+ PROFILE                                                                 NOT NULL VARCHAR2(30)
+ RESOURCE_NAME                                                           NOT NULL VARCHAR2(32)
+ RESOURCE_TYPE                                                                    VARCHAR2(8)
+ LIMIT                                                                            VARCHAR2(40)
+
+SQL> 
+SQL> REM DESPLEGAR LOS PERFILES
+SQL> SELECT PROFILE,
+  2  RESOURCE_NAME,
+  3  RESOURCE_TYPE,
+  4  LIMIT
+  5  FROM DBA_PROFILES;
+
+PROFILE                       |=|RESOURCE_NAME                   |=|RESOURCE|=|LIMIT                                              
+==============================|=|================================|=|========|=|========================================           
+DEFAULT                       |=|FAILED_LOGIN_ATTEMPTS           |=|PASSWORD|=|10                                                 
+DEFAULT                       |=|PASSWORD_GRACE_TIME             |=|PASSWORD|=|7                                                  
+DEFAULT                       |=|PASSWORD_LOCK_TIME              |=|PASSWORD|=|1                                                  
+MONITORING_PROFILE            |=|FAILED_LOGIN_ATTEMPTS           |=|PASSWORD|=|UNLIMITED                                          
+DEFAULT                       |=|PASSWORD_VERIFY_FUNCTION        |=|PASSWORD|=|NULL                                               
+DEFAULT                       |=|PASSWORD_REUSE_MAX              |=|PASSWORD|=|UNLIMITED                                          
+DEFAULT                       |=|PASSWORD_REUSE_TIME             |=|PASSWORD|=|UNLIMITED                                          
+DEFAULT                       |=|PRIVATE_SGA                     |=|KERNEL  |=|UNLIMITED                                          
+DEFAULT                       |=|CONNECT_TIME                    |=|KERNEL  |=|UNLIMITED                                          
+DEFAULT                       |=|IDLE_TIME                       |=|KERNEL  |=|UNLIMITED                                          
+DEFAULT                       |=|LOGICAL_READS_PER_CALL          |=|KERNEL  |=|UNLIMITED                                          
+DEFAULT                       |=|LOGICAL_READS_PER_SESSION       |=|KERNEL  |=|UNLIMITED                                          
+DEFAULT                       |=|CPU_PER_CALL                    |=|KERNEL  |=|UNLIMITED                                          
+DEFAULT                       |=|CPU_PER_SESSION                 |=|KERNEL  |=|UNLIMITED                                          
+DEFAULT                       |=|SESSIONS_PER_USER               |=|KERNEL  |=|UNLIMITED                                          
+DEFAULT                       |=|COMPOSITE_LIMIT                 |=|KERNEL  |=|UNLIMITED                                          
+DEFAULT                       |=|PASSWORD_LIFE_TIME              |=|PASSWORD|=|180                                                
+MONITORING_PROFILE            |=|PASSWORD_GRACE_TIME             |=|PASSWORD|=|DEFAULT                                            
+MONITORING_PROFILE            |=|PASSWORD_LOCK_TIME              |=|PASSWORD|=|DEFAULT                                            
+MONITORING_PROFILE            |=|PASSWORD_VERIFY_FUNCTION        |=|PASSWORD|=|DEFAULT                                            
+MONITORING_PROFILE            |=|PASSWORD_REUSE_MAX              |=|PASSWORD|=|DEFAULT                                            
+MONITORING_PROFILE            |=|PASSWORD_REUSE_TIME             |=|PASSWORD|=|DEFAULT                                            
+MONITORING_PROFILE            |=|PASSWORD_LIFE_TIME              |=|PASSWORD|=|DEFAULT                                            
+MONITORING_PROFILE            |=|PRIVATE_SGA                     |=|KERNEL  |=|DEFAULT                                            
+MONITORING_PROFILE            |=|CONNECT_TIME                    |=|KERNEL  |=|DEFAULT                                            
+MONITORING_PROFILE            |=|IDLE_TIME                       |=|KERNEL  |=|DEFAULT                                            
+MONITORING_PROFILE            |=|LOGICAL_READS_PER_CALL          |=|KERNEL  |=|DEFAULT                                            
+MONITORING_PROFILE            |=|LOGICAL_READS_PER_SESSION       |=|KERNEL  |=|DEFAULT                                            
+MONITORING_PROFILE            |=|CPU_PER_CALL                    |=|KERNEL  |=|DEFAULT                                            
+MONITORING_PROFILE            |=|CPU_PER_SESSION                 |=|KERNEL  |=|DEFAULT                                            
+MONITORING_PROFILE            |=|SESSIONS_PER_USER               |=|KERNEL  |=|DEFAULT                                            
+MONITORING_PROFILE            |=|COMPOSITE_LIMIT                 |=|KERNEL  |=|DEFAULT                                            
+
+32 rows selected.
+
+SQL> ---------------------------------
+SQL> spool off

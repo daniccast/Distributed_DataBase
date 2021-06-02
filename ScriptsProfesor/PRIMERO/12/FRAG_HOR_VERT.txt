@@ -1,0 +1,490 @@
+SQL> set linesize 150
+SQL> set pagesize 99
+SQL> set colsep '||'
+SQL> set colsep '|=|'
+SQL> set underline =
+SQL> set null s/Dato
+SQL> 
+SQL> drop table emp;
+drop table emp
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> create table emp(
+  2  eno varchar2(2),
+  3  ename varchar2(10),
+  4  title varchar2(12));
+
+Table created.
+
+SQL> 
+SQL> insert into EMP values('E1','J. Doe',     'Elect. Eng');
+
+1 row created.
+
+SQL> insert into EMP values('E2','M. Smith',   'Syst. Anal.');
+
+1 row created.
+
+SQL> insert into EMP values('E3','A. Lee,',    'Mech. Eng.');
+
+1 row created.
+
+SQL> insert into EMP values('E4','J. Miller',  'Programmer');
+
+1 row created.
+
+SQL> insert into EMP values('E5','B. Casey',   'Syst. Anal.');
+
+1 row created.
+
+SQL> insert into EMP values('E6','L. Chu',     'Elect. Eng.');
+
+1 row created.
+
+SQL> insert into EMP values('E7','R. Davis',   'Mech. Eng.');
+
+1 row created.
+
+SQL> insert into EMP values('E8','J. Jones',   'Syst. Anal');
+
+1 row created.
+
+SQL> 
+SQL> drop table asg;
+drop table asg
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> create table asg(
+  2  eno varchar2(2),
+  3  pno varchar2(10),
+  4  resp varchar2(12),
+  5  dur number(3));
+
+Table created.
+
+SQL> 
+SQL> insert into asg values('E1','P1','Manager',12);
+
+1 row created.
+
+SQL> insert into asg values('E2','P1','Analyst', 24);
+
+1 row created.
+
+SQL> insert into asg values('E2','P2','Analyst', 6);
+
+1 row created.
+
+SQL> insert into asg values('E3','P3','Consultant', 10);
+
+1 row created.
+
+SQL> insert into asg values('E3','P4','Engineer', 48);
+
+1 row created.
+
+SQL> insert into asg values('E4','P2','Programmer', 18);
+
+1 row created.
+
+SQL> insert into asg values('E5','P2','Manager', 24);
+
+1 row created.
+
+SQL> insert into asg values('E6','P4','Manager', 48);
+
+1 row created.
+
+SQL> insert into asg values('E7','P3','Engineer', 36);
+
+1 row created.
+
+SQL> insert into asg values('E8','P3','Manager', 40);
+
+1 row created.
+
+SQL> 
+SQL> drop table proj;
+drop table proj
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> create table proj(
+  2  pno varchar2(2),
+  3  pname varchar2(19),
+  4  budget number(7),
+  5  loc varchar2(12));
+
+Table created.
+
+SQL> 
+SQL> insert into proj values('P1','Instrumentation',   150000,'Montreal');
+
+1 row created.
+
+SQL> insert into proj values('P2','Database Develop.', 135000,'New York');
+
+1 row created.
+
+SQL> insert into proj values('P3','CAD/CAM',           250000,'New York');
+
+1 row created.
+
+SQL> insert into proj values('P4','Maintenance',       310000, 'Paris');
+
+1 row created.
+
+SQL> 
+SQL> drop table pay;
+drop table pay
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> create table pay(
+  2  title varchar2(15),
+  3  sal number(6));
+
+Table created.
+
+SQL> 
+SQL> insert into pay values('Elect. Eng.', 40000);
+
+1 row created.
+
+SQL> insert into pay values('Syst. Anal.', 34000);
+
+1 row created.
+
+SQL> insert into pay values('Mech. Eng.',  27000);
+
+1 row created.
+
+SQL> insert into pay values('Programmer',  24000);
+
+1 row created.
+
+SQL> 
+SQL> select count(*) from emp;
+
+  COUNT(*)                                                                                                                                            
+==========                                                                                                                                            
+         8                                                                                                                                            
+
+SQL> select count(*) from asg;
+
+  COUNT(*)                                                                                                                                            
+==========                                                                                                                                            
+        10                                                                                                                                            
+
+SQL> select count(*) from proj;
+
+  COUNT(*)                                                                                                                                            
+==========                                                                                                                                            
+         4                                                                                                                                            
+
+SQL> select count(*) from pay;
+
+  COUNT(*)                                                                                                                                            
+==========                                                                                                                                            
+         4                                                                                                                                            
+
+SQL> 
+SQL> select * from emp;
+
+EN|=|ENAME     |=|TITLE                                                                                                                               
+==|=|==========|=|============                                                                                                                        
+E1|=|J. Doe    |=|Elect. Eng                                                                                                                          
+E2|=|M. Smith  |=|Syst. Anal.                                                                                                                         
+E3|=|A. Lee,   |=|Mech. Eng.                                                                                                                          
+E4|=|J. Miller |=|Programmer                                                                                                                          
+E5|=|B. Casey  |=|Syst. Anal.                                                                                                                         
+E6|=|L. Chu    |=|Elect. Eng.                                                                                                                         
+E7|=|R. Davis  |=|Mech. Eng.                                                                                                                          
+E8|=|J. Jones  |=|Syst. Anal                                                                                                                          
+
+8 rows selected.
+
+SQL> select * from asg;
+
+EN|=|PNO       |=|RESP        |=|       DUR                                                                                                           
+==|=|==========|=|============|=|==========                                                                                                           
+E1|=|P1        |=|Manager     |=|        12                                                                                                           
+E2|=|P1        |=|Analyst     |=|        24                                                                                                           
+E2|=|P2        |=|Analyst     |=|         6                                                                                                           
+E3|=|P3        |=|Consultant  |=|        10                                                                                                           
+E3|=|P4        |=|Engineer    |=|        48                                                                                                           
+E4|=|P2        |=|Programmer  |=|        18                                                                                                           
+E5|=|P2        |=|Manager     |=|        24                                                                                                           
+E6|=|P4        |=|Manager     |=|        48                                                                                                           
+E7|=|P3        |=|Engineer    |=|        36                                                                                                           
+E8|=|P3        |=|Manager     |=|        40                                                                                                           
+
+10 rows selected.
+
+SQL> select * from proj;
+
+PN|=|PNAME              |=|    BUDGET|=|LOC                                                                                                           
+==|=|===================|=|==========|=|============                                                                                                  
+P1|=|Instrumentation    |=|    150000|=|Montreal                                                                                                      
+P2|=|Database Develop.  |=|    135000|=|New York                                                                                                      
+P3|=|CAD/CAM            |=|    250000|=|New York                                                                                                      
+P4|=|Maintenance        |=|    310000|=|Paris                                                                                                         
+
+SQL> select * from pay;
+
+TITLE          |=|       SAL                                                                                                                          
+===============|=|==========                                                                                                                          
+Elect. Eng.    |=|     40000                                                                                                                          
+Syst. Anal.    |=|     34000                                                                                                                          
+Mech. Eng.     |=|     27000                                                                                                                          
+Programmer     |=|     24000                                                                                                                          
+
+SQL> 
+SQL> 
+SQL> 
+SQL> rem  [Ozsu,2011,p 48]
+SQL> rem    ejem 2.4
+SQL> 
+SQL> select eno,ename,title
+  2  FROM EMP
+  3  WHERE TITLE = 'Elect. Eng.';
+
+EN|=|ENAME     |=|TITLE                                                                                                                               
+==|=|==========|=|============                                                                                                                        
+E6|=|L. Chu    |=|Elect. Eng.                                                                                                                         
+
+SQL> 
+SQL> rem  [Ozsu,2011,p 48]
+SQL> rem    ejem 2.5
+SQL> select pno,budget
+  2  from proj;
+
+PN|=|    BUDGET                                                                                                                                       
+==|=|==========                                                                                                                                       
+P1|=|    150000                                                                                                                                       
+P2|=|    135000                                                                                                                                       
+P3|=|    250000                                                                                                                                       
+P4|=|    310000                                                                                                                                       
+
+SQL> 
+SQL> rem  [Ozsu,2011,p 49]
+SQL> rem    ejem 2.5
+SQL> 
+SQL> select * from emp,proj;
+
+EN|=|ENAME     |=|TITLE       |=|PN|=|PNAME              |=|    BUDGET|=|LOC                                                                          
+==|=|==========|=|============|=|==|=|===================|=|==========|=|============                                                                 
+E1|=|J. Doe    |=|Elect. Eng  |=|P1|=|Instrumentation    |=|    150000|=|Montreal                                                                     
+E2|=|M. Smith  |=|Syst. Anal. |=|P1|=|Instrumentation    |=|    150000|=|Montreal                                                                     
+E3|=|A. Lee,   |=|Mech. Eng.  |=|P1|=|Instrumentation    |=|    150000|=|Montreal                                                                     
+E4|=|J. Miller |=|Programmer  |=|P1|=|Instrumentation    |=|    150000|=|Montreal                                                                     
+E5|=|B. Casey  |=|Syst. Anal. |=|P1|=|Instrumentation    |=|    150000|=|Montreal                                                                     
+E6|=|L. Chu    |=|Elect. Eng. |=|P1|=|Instrumentation    |=|    150000|=|Montreal                                                                     
+E7|=|R. Davis  |=|Mech. Eng.  |=|P1|=|Instrumentation    |=|    150000|=|Montreal                                                                     
+E8|=|J. Jones  |=|Syst. Anal  |=|P1|=|Instrumentation    |=|    150000|=|Montreal                                                                     
+E1|=|J. Doe    |=|Elect. Eng  |=|P2|=|Database Develop.  |=|    135000|=|New York                                                                     
+E2|=|M. Smith  |=|Syst. Anal. |=|P2|=|Database Develop.  |=|    135000|=|New York                                                                     
+E3|=|A. Lee,   |=|Mech. Eng.  |=|P2|=|Database Develop.  |=|    135000|=|New York                                                                     
+E4|=|J. Miller |=|Programmer  |=|P2|=|Database Develop.  |=|    135000|=|New York                                                                     
+E5|=|B. Casey  |=|Syst. Anal. |=|P2|=|Database Develop.  |=|    135000|=|New York                                                                     
+E6|=|L. Chu    |=|Elect. Eng. |=|P2|=|Database Develop.  |=|    135000|=|New York                                                                     
+E7|=|R. Davis  |=|Mech. Eng.  |=|P2|=|Database Develop.  |=|    135000|=|New York                                                                     
+E8|=|J. Jones  |=|Syst. Anal  |=|P2|=|Database Develop.  |=|    135000|=|New York                                                                     
+E1|=|J. Doe    |=|Elect. Eng  |=|P3|=|CAD/CAM            |=|    250000|=|New York                                                                     
+E2|=|M. Smith  |=|Syst. Anal. |=|P3|=|CAD/CAM            |=|    250000|=|New York                                                                     
+E3|=|A. Lee,   |=|Mech. Eng.  |=|P3|=|CAD/CAM            |=|    250000|=|New York                                                                     
+E4|=|J. Miller |=|Programmer  |=|P3|=|CAD/CAM            |=|    250000|=|New York                                                                     
+E5|=|B. Casey  |=|Syst. Anal. |=|P3|=|CAD/CAM            |=|    250000|=|New York                                                                     
+E6|=|L. Chu    |=|Elect. Eng. |=|P3|=|CAD/CAM            |=|    250000|=|New York                                                                     
+E7|=|R. Davis  |=|Mech. Eng.  |=|P3|=|CAD/CAM            |=|    250000|=|New York                                                                     
+E8|=|J. Jones  |=|Syst. Anal  |=|P3|=|CAD/CAM            |=|    250000|=|New York                                                                     
+E1|=|J. Doe    |=|Elect. Eng  |=|P4|=|Maintenance        |=|    310000|=|Paris                                                                        
+E2|=|M. Smith  |=|Syst. Anal. |=|P4|=|Maintenance        |=|    310000|=|Paris                                                                        
+E3|=|A. Lee,   |=|Mech. Eng.  |=|P4|=|Maintenance        |=|    310000|=|Paris                                                                        
+E4|=|J. Miller |=|Programmer  |=|P4|=|Maintenance        |=|    310000|=|Paris                                                                        
+E5|=|B. Casey  |=|Syst. Anal. |=|P4|=|Maintenance        |=|    310000|=|Paris                                                                        
+E6|=|L. Chu    |=|Elect. Eng. |=|P4|=|Maintenance        |=|    310000|=|Paris                                                                        
+E7|=|R. Davis  |=|Mech. Eng.  |=|P4|=|Maintenance        |=|    310000|=|Paris                                                                        
+E8|=|J. Jones  |=|Syst. Anal  |=|P4|=|Maintenance        |=|    310000|=|Paris                                                                        
+
+32 rows selected.
+
+SQL> 
+SQL> rem  [Ozsu,2011,p 53]
+SQL> rem    ejem 2.5
+SQL> rem semijoin
+SQL> select eno,ename,emp.title
+  2  from emp,pay
+  3  where emp.title = pay.title;
+
+EN|=|ENAME     |=|TITLE                                                                                                                               
+==|=|==========|=|============                                                                                                                        
+E2|=|M. Smith  |=|Syst. Anal.                                                                                                                         
+E3|=|A. Lee,   |=|Mech. Eng.                                                                                                                          
+E4|=|J. Miller |=|Programmer                                                                                                                          
+E5|=|B. Casey  |=|Syst. Anal.                                                                                                                         
+E6|=|L. Chu    |=|Elect. Eng.                                                                                                                         
+E7|=|R. Davis  |=|Mech. Eng.                                                                                                                          
+
+6 rows selected.
+
+SQL> 
+SQL> rem  [Ozsu,2011,p 75]
+SQL> rem ejem de particionamiento HORIZONAL
+SQL> 
+SQL> SELECT PNO,PNAME,BUDGET,LOC
+  2  FROM PROJ
+  3  WHERE PNO = 'P1'
+  4  OR PNO = 'P2';
+
+PN|=|PNAME              |=|    BUDGET|=|LOC                                                                                                           
+==|=|===================|=|==========|=|============                                                                                                  
+P1|=|Instrumentation    |=|    150000|=|Montreal                                                                                                      
+P2|=|Database Develop.  |=|    135000|=|New York                                                                                                      
+
+SQL> 
+SQL> SELECT PNO,PNAME,BUDGET,LOC
+  2  FROM PROJ
+  3  WHERE PNO = 'P3'
+  4  OR PNO = 'P4';
+
+PN|=|PNAME              |=|    BUDGET|=|LOC                                                                                                           
+==|=|===================|=|==========|=|============                                                                                                  
+P3|=|CAD/CAM            |=|    250000|=|New York                                                                                                      
+P4|=|Maintenance        |=|    310000|=|Paris                                                                                                         
+
+SQL> 
+SQL> rem  [Ozsu,2011,p 78]
+SQL> rem ejem de particionamiento VERTICAL
+SQL> 
+SQL> SELECT PNO,BUDGET
+  2  FROM PROJ;
+
+PN|=|    BUDGET                                                                                                                                       
+==|=|==========                                                                                                                                       
+P1|=|    150000                                                                                                                                       
+P2|=|    135000                                                                                                                                       
+P3|=|    250000                                                                                                                                       
+P4|=|    310000                                                                                                                                       
+
+SQL> 
+SQL> SELECT PNO,PNAME,LOC
+  2  FROM PROJ;
+
+PN|=|PNAME              |=|LOC                                                                                                                        
+==|=|===================|=|============                                                                                                               
+P1|=|Instrumentation    |=|Montreal                                                                                                                   
+P2|=|Database Develop.  |=|New York                                                                                                                   
+P3|=|CAD/CAM            |=|New York                                                                                                                   
+P4|=|Maintenance        |=|Paris                                                                                                                      
+
+SQL> 
+SQL> 
+SQL> PROMPT CREAREMOS VISTAS PARA CADA FRAGMENTACIàN
+CREAREMOS VISTAS PARA CADA FRAGMENTACIàN
+SQL> PROMPT  PRIMERO LAS FRAGMENTACIONES HORIZONTALES
+PRIMERO LAS FRAGMENTACIONES HORIZONTALES
+SQL> DROP VIEW PROJ1H;
+DROP VIEW PROJ1H
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE VIEW PROJ1H AS
+  2  SELECT PNO,PNAME,BUDGET,LOC
+  3  FROM PROJ
+  4  WHERE PNO = 'P1'
+  5  OR PNO = 'P2';
+
+View created.
+
+SQL> SELECT * FROM PROJ1H;
+
+PN|=|PNAME              |=|    BUDGET|=|LOC                                                                                                           
+==|=|===================|=|==========|=|============                                                                                                  
+P1|=|Instrumentation    |=|    150000|=|Montreal                                                                                                      
+P2|=|Database Develop.  |=|    135000|=|New York                                                                                                      
+
+SQL> 
+SQL> DROP VIEW PROJ2H;
+DROP VIEW PROJ2H
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE VIEW PROJ2H AS
+  2  SELECT PNO,PNAME,BUDGET,LOC
+  3  FROM PROJ
+  4  WHERE PNO = 'P3'
+  5  OR PNO = 'P4';
+
+View created.
+
+SQL> SELECT * FROM PROJ2H;
+
+PN|=|PNAME              |=|    BUDGET|=|LOC                                                                                                           
+==|=|===================|=|==========|=|============                                                                                                  
+P3|=|CAD/CAM            |=|    250000|=|New York                                                                                                      
+P4|=|Maintenance        |=|    310000|=|Paris                                                                                                         
+
+SQL> 
+SQL> PROMPT  LUEGO LAS FRAGMENTACIONES VERTICALES
+LUEGO LAS FRAGMENTACIONES VERTICALES
+SQL> DROP VIEW PROJ1V;
+DROP VIEW PROJ1V
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE VIEW PROJ1V AS
+  2  SELECT PNO,BUDGET
+  3  FROM PROJ;
+
+View created.
+
+SQL> SELECT * FROM PROJ1V;
+
+PN|=|    BUDGET                                                                                                                                       
+==|=|==========                                                                                                                                       
+P1|=|    150000                                                                                                                                       
+P2|=|    135000                                                                                                                                       
+P3|=|    250000                                                                                                                                       
+P4|=|    310000                                                                                                                                       
+
+SQL> 
+SQL> DROP VIEW PROJ2V;
+DROP VIEW PROJ2V
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE VIEW PROJ2V AS
+  2  SELECT PNO,PNAME,LOC
+  3  FROM PROJ;
+
+View created.
+
+SQL> SELECT * FROM PROJ2V;
+
+PN|=|PNAME              |=|LOC                                                                                                                        
+==|=|===================|=|============                                                                                                               
+P1|=|Instrumentation    |=|Montreal                                                                                                                   
+P2|=|Database Develop.  |=|New York                                                                                                                   
+P3|=|CAD/CAM            |=|New York                                                                                                                   
+P4|=|Maintenance        |=|Paris                                                                                                                      
+
+SQL> SPOOL OFF

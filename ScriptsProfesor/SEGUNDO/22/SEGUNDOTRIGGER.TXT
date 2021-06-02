@@ -1,0 +1,435 @@
+SQL> 
+SQL> rem
+SQL> 
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set colsep '|=|'
+SQL> set underline =
+SQL> set feedback on
+SQL> set serveroutput on
+SQL> 
+SQL> REM
+SQL> REM Owens, Kevin.
+SQL> REM  Programming Oracle triggers and stored procedures / Kevin Owens
+SQL> 
+SQL> REM [Owens,2003,section 6.4]
+SQL> 
+SQL> rem trigger que se dispara en inserci¢n y en actualizaci¢n
+SQL> DROP TABLE TEMP;
+
+Table dropped.
+
+SQL> CREATE TABLE TEMP(X NUMBER, Y NUMBER, Z NUMBER DEFAULT 5);
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO TEMP (M) VALUES (3);
+INSERT INTO TEMP (M) VALUES (3)
+                  *
+ERROR at line 1:
+ORA-00904: "M": invalid identifier 
+
+
+SQL> INSERT INTO TEMP (N) VALUES (10);
+INSERT INTO TEMP (N) VALUES (10)
+                  *
+ERROR at line 1:
+ORA-00904: "N": invalid identifier 
+
+
+SQL> 
+SQL> INSERT INTO TEMP (n) VALUES (1);
+INSERT INTO TEMP (n) VALUES (1)
+                  *
+ERROR at line 1:
+ORA-00904: "N": invalid identifier 
+
+
+SQL> UPDATE TEMP SET n=n+1 WHERE n>=1;
+UPDATE TEMP SET n=n+1 WHERE n>=1
+                            *
+ERROR at line 1:
+ORA-00904: "N": invalid identifier 
+
+
+SQL> 
+SQL> 
+SQL> DROP TABLE TEMP;
+
+Table dropped.
+
+SQL> CREATE TABLE TEMP(N NUMBER, M NUMBER DEFAULT 5);
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> rem
+SQL> 
+SQL> CREATE OR REPLACE TRIGGER temp_aiur
+  2  AFTER INSERT OR UPDATE OF Y ON TEMP
+  3  FOR EACH ROW
+  4  WHEN (OLD.Y IS NULL and NEW.Y IS NOT NULL
+  5        OR NEW.X BETWEEN 1 AND 10)
+  6  BEGIN
+  7      CASE
+  8      WHEN inserting THEN
+  9          dbms_output.put_line('X := '||:new.x);
+ 10      WHEN updating THEN
+ 11         dbms_output.put_line
+ 12            ('Y is reset from NULL');
+ 13      END CASE;
+ 14  END;
+ 15  
+ 16  
+ 17  REM
+ 18  CREATE OR REPLACE TRIGGER temp_aiur
+ 19  AFTER INSERT OR UPDATE OF N ON TEMP
+ 20  FOR EACH ROW
+ 21  WHEN (OLD.N IS NULL and NEW.N IS NOT NULL
+ 22        OR NEW.X BETWEEN 1 AND 10)
+ 23  BEGIN
+ 24      CASE
+ 25      WHEN inserting THEN
+ 26          dbms_output.put_line('X := '||:new.x);
+ 27      WHEN updating THEN
+ 28         dbms_output.put_line
+ 29            ('Y is reset from NULL');
+ 30      END CASE;
+ 31  END;
+ 32  
+ 33  
+ 34  
+ 35  rem
+ 36  
+ 37  CREATE OR REPLACE TRIGGER temp_adr
+ 38  AFTER DELETE ON TEMP
+ 39  FOR EACH ROW
+ 40  BEGIN
+ 41      dbms_output.put_line
+ 42         (:old.x||' '||:old.y||' '||:old.z);
+ 43  END;
+ 44  
+ 45  
+ 46  rem Write two triggers that accomplish the same as the prior six triggers.
+ 47  rem
+ 48  
+ 49  CREATE OR REPLACE TRIGGER temp_biudr
+ 50  BEFORE INSERT OR UPDATE OR DELETE ON TEMP
+ 51  FOR EACH ROW
+ 52  BEGIN
+ 53      CASE
+ 54      WHEN inserting THEN
+ 55          dbms_output.put_line('inserting before');
+ 56      WHEN updating THEN
+ 57          dbms_output.put_line('updating before');
+ 58      WHEN deleting THEN
+ 59          dbms_output.put_line('deleting before');
+ 60      END CASE;
+ 61  END;
+ 62  .
+SQL> /
+AFTER INSERT OR UPDATE OF Y ON TEMP
+                          *
+ERROR at line 2:
+ORA-00904: "Y": invalid identifier 
+
+
+SQL> rem
+SQL> 
+SQL> CREATE OR REPLACE TRIGGER temp_aiudr
+  2  AFTER INSERT OR UPDATE OR DELETE ON TEMP
+  3  FOR EACH ROW
+  4  BEGIN
+  5      CASE
+  6      WHEN inserting THEN
+  7          dbms_output.put_line('inserting after');
+  8      WHEN updating THEN
+  9          dbms_output.put_line('updating after');
+ 10      WHEN deleting THEN
+ 11          dbms_output.put_line('deleting after');
+ 12      END CASE;
+ 13  END;
+ 14  .
+SQL> /
+
+Trigger created.
+
+SQL> 
+SQL> /*
+SQL> > desc professors
+SQL>  Name                           Null?    Type
+SQL>  ------------------------------ -------- ------------
+SQL>  PROF_NAME                      NOT NULL VARCHAR2(10)
+SQL>  SPECIALTY                      NOT NULL VARCHAR2(20)
+SQL>  HIRE_DATE                      NOT NULL DATE
+SQL>  SALARY                         NOT NULL NUMBER(7,2)
+SQL>  TENURE                         NOT NULL VARCHAR2(3)
+SQL>  DEPARTMENT                     NOT NULL VARCHAR2(10)
+SQL> 
+SQL> */
+SQL> 
+SQL> REM DECLARACION DE LA TABLA PROFESSORS, SUS DATOS Y SUS RESTRICCIONES.
+SQL> 
+SQL> drop table professors;
+
+Table dropped.
+
+SQL> create table professors (
+  2   PROF_NAME    VARCHAR2(10),
+  3   SPECIALTY    VARCHAR2(20),
+  4   HIRE_DATE    DATE,
+  5   SALARY       NUMBER(7,2),
+  6   TENURE       VARCHAR2(3),
+  7   DEPARTMENT   VARCHAR2(10));
+
+Table created.
+
+SQL> 
+SQL>  INSERT INTO PROFESSORS values ('Blake', 'Mathematics',to_date('07-07-03','DD-MM-YY'),1000,'YES','MATH');
+
+1 row created.
+
+SQL>  INSERT INTO PROFESSORS values ('Milton', 'Am History',to_date('07-07-02','DD-MM-YY'),1000,'YES','HIST');
+
+1 row created.
+
+SQL>  INSERT INTO PROFESSORS values ('Wilson', 'English',to_date('08-07-01','DD-MM-YY'),1000,'YES','ENGL');
+
+1 row created.
+
+SQL>  INSERT INTO PROFESSORS values ('Jones', 'Euro Hist',to_date('05-08-00','DD-MM-YY'),1000,'YES','MATH');
+
+1 row created.
+
+SQL>  INSERT INTO PROFESSORS values ('Crump', 'Ancient Hist',to_date('04-08-99','DD-MM-YY'),1000,'YES','MATH');
+
+1 row created.
+
+SQL> 
+SQL> ALTER TABLE professors
+  2      ADD CONSTRAINT ck_professors_department
+  3      CHECK (department IN
+  4  ('MATH','HIST','ENGL','SCIE'));
+
+Table altered.
+
+SQL> 
+SQL> ALTER TABLE professors
+  2      ADD CONSTRAINT ck_professors_tenure
+  3      CHECK (tenure IN ('YES','NO'));
+
+Table altered.
+
+SQL> 
+SQL> ALTER TABLE professors
+  2      ADD CONSTRAINT ck_professors_salary
+  3      CHECK (salary < 30000);
+
+Table altered.
+
+SQL> 
+SQL> CREATE OR REPLACE TRIGGER professors_bir
+  2  BEFORE INSERT ON professors
+  3  FOR EACH ROW
+  4  DECLARE
+  5      msg VARCHAR2(100) :=
+  6          'The salary exceeds the ENGL maximum of $10,000.00';
+  7  BEGIN
+  8      -- --------------------------------------
+  9      -- OVERRIDE COLUMN RULES
+ 10      -- --------------------------------------
+ 11  
+ 12      -- truncate hours, minutes, seconds of hire date
+ 13      :NEW.hire_date := TRUNC(:NEW.hire_date);
+ 14  
+ 15      -- round salary
+ 16      :NEW.salary := ROUND(:NEW.salary);
+ 17  
+ 18      -- convert department to upper case
+ 19      :NEW.department := UPPER(:NEW.department);
+ 20      -- --------------------------------------
+ 21      -- REJECT TRANSACTION RULES
+ 22      -- --------------------------------------
+ 23      IF :NEW.department='ENGL' AND :NEW.salary > 10000 THEN
+ 24          RAISE_APPLICATION_ERROR(-20000,msg);
+ 25      END IF;
+ 26  
+ 27      -- --------------------------------------
+ 28      -- TAKE ACTION RULES
+ 29      -- --------------------------------------
+ 30      dbms_output.put_line
+ 31         ('Before Insert Row Trigger Action');
+ 32  END;
+ 33  .
+SQL> /
+
+Trigger created.
+
+SQL> 
+SQL> rem 6.6.3 Before versus After
+SQL> 
+SQL> CREATE OR REPLACE TRIGGER professors_bir
+  2  BEFORE INSERT ON professors
+  3  FOR EACH ROW
+  4  BEGIN
+  5      :NEW.hire_date := TRUNC(:NEW.hire_date);
+  6      :NEW.salary := ROUND(:NEW.salary);
+  7      :NEW.department := UPPER(:NEW.department);
+  8  END;
+  9  .
+SQL> /
+
+Trigger created.
+
+SQL> 
+SQL> 
+SQL> CREATE OR REPLACE TRIGGER professors_bir
+  2  BEFORE INSERT ON professors
+  3  FOR EACH ROW
+  4  BEGIN
+  5      :NEW.hire_date := TRUNC(:NEW.hire_date);
+  6      :NEW.salary := ROUND(:NEW.salary);
+  7      :NEW.department := UPPER(:NEW.department);
+  8  END;
+  9  .
+SQL> /
+
+Trigger created.
+
+SQL> 
+SQL> 
+SQL> CREATE OR REPLACE TRIGGER professors_air
+  2  AFTER INSERT ON professors
+  3  FOR EACH ROW
+  4  DECLARE
+  5      msg VARCHAR2(100) :=
+  6          'The salary exceeds the ENGL maximum of'|| $10,000.00';
+  7  BEGIN
+  8      IF :NEW.department='ENGL' AND :NEW.salary > 10000 THEN
+  9          RAISE_APPLICATION_ERROR(-20000,msg);
+ 10      END IF;
+ 11      dbms_output.put_line
+ 12         ('Before Insert Row Trigger Action');
+ 13  END;
+ 14  .
+SQL> /
+
+Warning: Trigger created with compilation errors.
+
+SQL> 
+SQL> REM 6.6.4 Using Packages for Procedural Constraints
+SQL> CREATE OR REPLACE PACKAGE professors_cons IS
+  2  
+  3      FUNCTION salary(sal professors.salary%TYPE)
+  4          RETURN professors.salary%TYPE;
+  5  
+  6      FUNCTION hire_date(hd professors.hire_date%TYPE)
+  7          RETURN professors.hire_date%TYPE;
+  8  
+  9      FUNCTION department(dept professors.department%TYPE)
+ 10          RETURN professors.department%TYPE;
+ 11  
+ 12      PROCEDURE validate_salary
+ 13          (dept professors.department%TYPE,
+ 14           sal professors.salary%TYPE);
+ 15  
+ 16      PROCEDURE print_action;
+ 17  
+ 18  END professors_cons;
+ 19  .
+SQL> /
+
+Package created.
+
+SQL> 
+SQL> CREATE OR REPLACE TRIGGER professors_bir
+  2  BEFORE INSERT ON professors
+  3  FOR EACH ROW
+  4  BEGIN
+  5      :NEW.hire_date :=
+  6              professors_cons.hire_date(:NEW.hire_date);
+  7      :NEW.salary :=
+  8              professors_cons.salary(:NEW.salary);
+  9      :NEW.department :=
+ 10              professors_cons.department(:NEW.department);
+ 11  END;
+ 12  .
+SQL> /
+
+Trigger created.
+
+SQL> 
+SQL> REM   The AFTER-INSERT trigger is two procedure calls.
+SQL> 
+SQL> 
+SQL> 
+SQL> CREATE OR REPLACE TRIGGER professors_air
+  2  AFTER INSERT ON professors
+  3  FOR EACH ROW
+  4  BEGIN
+  5      professors_cons.validate_salary
+  6              (:NEW.department, :NEW.salary);
+  7      professors_cons.print_action;
+  8  END;
+  9  .
+SQL> /
+
+Trigger created.
+
+SQL> 
+SQL> REM
+SQL> REM
+SQL> CREATE OR REPLACE PACKAGE BODY professors_cons IS
+  2  
+  3      FUNCTION salary(sal professors.salary%TYPE)
+  4          RETURN professors.salary%TYPE IS
+  5      BEGIN
+  6          RETURN ROUND(sal);
+  7      END salary;
+  8  
+  9      FUNCTION hire_date(hd professors.hire_date%TYPE)
+ 10          RETURN professors.hire_date%TYPE IS
+ 11      BEGIN
+ 12          RETURN TRUNC(hd);
+ 13      END hire_date;
+ 14  
+ 15      FUNCTION department(dept professors.department%TYPE)
+ 16          RETURN professors.department%TYPE IS
+ 17      BEGIN
+ 18          RETURN UPPER(dept);
+ 19      END department;
+ 20  
+ 21      PROCEDURE validate_salary
+ 22          (dept professors.department%TYPE,
+ 23           sal professors.salary%TYPE)
+ 24      IS
+ 25          msg VARCHAR2(100) :=
+ 26           'The salary exceeds the ENGL maximum of $10,000.00';
+ 27      BEGIN
+ 28          IF dept ='ENGL' AND sal  > 10000 THEN
+ 29              RAISE_APPLICATION_ERROR(-20000,msg);
+ 30          END IF;
+ 31      END validate_salary;
+ 32  
+ 33      PROCEDURE print_action IS
+ 34      BEGIN
+ 35          dbms_output.put_line
+ 36              ('Before Insert Row Trigger Action');
+ 37      END print_action;
+ 38  END professors_cons;
+ 39  .
+SQL> /
+
+Package body created.
+
+SQL> 
+SQL> REM
+SQL> 
+SQL> 
+SQL> REM
+SQL> 
+SQL> SPOOL OFF;

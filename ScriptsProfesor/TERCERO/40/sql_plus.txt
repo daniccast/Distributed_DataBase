@@ -1,0 +1,1014 @@
+SQL> SELECT table_name, tablespace_name,status
+  2   FROM user_tables;
+
+TABLE_NAME     |=|TABLESPACE|=|STATUS                                                                                             
+===============|=|==========|=|========                                                                                           
+DEPARTMENT     |=|USERS     |=|VALID                                                                                              
+DEPT_LOCATIONS |=|USERS     |=|VALID                                                                                              
+DEPENDENT      |=|USERS     |=|VALID                                                                                              
+TEMP           |=|USERS     |=|VALID                                                                                              
+TEMPORAL5      |=|USERS     |=|VALID                                                                                              
+PROFESSORS     |=|USERS     |=|VALID                                                                                              
+EMP            |=|USERS     |=|VALID                                                                                              
+AUTOS          |=|USERS     |=|VALID                                                                                              
+MODELO_MARCA   |=|USERS     |=|VALID                                                                                              
+MODELO_MOTOR   |=|USERS     |=|VALID                                                                                              
+MODELO_COLOR   |=|USERS     |=|VALID                                                                                              
+MODELO_COLOR_AD|=|USERS     |=|VALID                                                                                              
+ORNOS_TOLDO    |=|          |=|                                                                                                   
+                                                                                                                                  
+MODELO_COLOR_AD|=|USERS     |=|VALID                                                                                              
+ORNOS          |=|          |=|                                                                                                   
+                                                                                                                                  
+MODELO_COLOR_TO|=|USERS     |=|VALID                                                                                              
+LDO            |=|          |=|                                                                                                   
+                                                                                                                                  
+EMPLOYEE       |=|USERS     |=|VALID                                                                                              
+WORKS_ON       |=|USERS     |=|VALID                                                                                              
+PROJECT        |=|USERS     |=|VALID                                                                                              
+ASG            |=|USERS     |=|VALID                                                                                              
+PROJ           |=|USERS     |=|VALID                                                                                              
+PAY            |=|USERS     |=|VALID                                                                                              
+
+20 rows selected.
+
+SQL>  rem
+SQL>  set colsep '| =|'
+SQL>  set pagesize 99
+SQL>  set linesize 130
+SQL>  set sqlnumber  on
+SQL> 
+SQL>  col object_name format a28
+SQL>  col object_type format a29
+SQL> SELECT object_name, object_type
+  2  FROM user_objects
+  3  WHERE status = 'INVALID'
+  4  ORDER BY object_type, object_name;
+
+OBJECT_NAME                 | =|OBJECT_TYPE                                                                                       
+============================| =|=============================                                                                     
+VISTAB0                     | =|VIEW                                                                                              
+VISTAB1                     | =|VIEW                                                                                              
+VISTAD1                     | =|VIEW                                                                                              
+VISTAE1                     | =|VIEW                                                                                              
+
+4 rows selected.
+
+SQL> 
+SQL> rem
+SQL> COL DATA_TYPE FORMAT A15
+SQL> col table_name format a30
+SQL> col column_name format a24
+SQL> col data_scale   format 99999
+SQL> col data_length  format 9999
+SQL> SELECT table_name, column_name,data_scale
+  2  ,DATA_TYPE,DATA_LENGTH
+  3  FROM user_tab_columns
+  4  WHERE data_type = 'NUMBER'
+  5  AND data_scale <> 2
+  6  order by 1,2;
+
+TABLE_NAME                    | =|COLUMN_NAME             | =|DATA_SCALE| =|DATA_TYPE      | =|DATA_LENGTH                        
+==============================| =|========================| =|==========| =|===============| =|===========                        
+ASG                           | =|DUR                     | =|         0| =|NUMBER         | =|         22                        
+DEPARTMENT                    | =|DNUMBER                 | =|         0| =|NUMBER         | =|         22                        
+DEPT_LOCATIONS                | =|DNUMBER                 | =|         0| =|NUMBER         | =|         22                        
+EMP                           | =|DEPTNO                  | =|         0| =|NUMBER         | =|         22                        
+EMP                           | =|EMPNO                   | =|         0| =|NUMBER         | =|         22                        
+EMP                           | =|MGR                     | =|         0| =|NUMBER         | =|         22                        
+EMPLOYEE                      | =|DEPT_ID                 | =|         0| =|NUMBER         | =|         22                        
+EMPLOYEE                      | =|EMP_ID                  | =|         0| =|NUMBER         | =|         22                        
+EMPLOYEE                      | =|JOB_ID                  | =|         0| =|NUMBER         | =|         22                        
+EMPLOYEE                      | =|MANAGER_EMP_ID          | =|         0| =|NUMBER         | =|         22                        
+EMPLOYEE                      | =|SALARY                  | =|         0| =|NUMBER         | =|         22                        
+PAY                           | =|SAL                     | =|         0| =|NUMBER         | =|         22                        
+PROJ                          | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+PROJ1FH                       | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+PROJ1H                        | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+PROJ1V                        | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+PROJ2FH                       | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+PROJ2H                        | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+PROJ3FH                       | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+PROJM1FH                      | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+PROJM2FH                      | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+PROJM3FH                      | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+PROJM4FH                      | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+PROJM5FH                      | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+PROJM6FH                      | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                        
+
+25 rows selected.
+
+SQL> rem
+SQL> rem
+SQL> col table_name format a25
+SQL> 
+SQL> SELECT table_name, column_name,data_scale
+  2  ,DATA_TYPE,DATA_LENGTH
+  3  FROM user_tab_columns
+  4  WHERE data_type = 'NUMBER'
+  5  AND (data_scale <> 2
+  6  OR data_scale IS NULL)
+  7  order by 1,2;
+
+TABLE_NAME               | =|COLUMN_NAME             | =|DATA_SCALE| =|DATA_TYPE      | =|DATA_LENGTH                             
+=========================| =|========================| =|==========| =|===============| =|===========                             
+ASG                      | =|DUR                     | =|         0| =|NUMBER         | =|         22                             
+DEPARTMENT               | =|DNUMBER                 | =|         0| =|NUMBER         | =|         22                             
+DEPT_LOCATIONS           | =|DNUMBER                 | =|         0| =|NUMBER         | =|         22                             
+EMP                      | =|DEPTNO                  | =|         0| =|NUMBER         | =|         22                             
+EMP                      | =|EMPNO                   | =|         0| =|NUMBER         | =|         22                             
+EMP                      | =|MGR                     | =|         0| =|NUMBER         | =|         22                             
+EMPLOYEE                 | =|DEPT_ID                 | =|         0| =|NUMBER         | =|         22                             
+EMPLOYEE                 | =|EMP_ID                  | =|         0| =|NUMBER         | =|         22                             
+EMPLOYEE                 | =|JOB_ID                  | =|         0| =|NUMBER         | =|         22                             
+EMPLOYEE                 | =|MANAGER_EMP_ID          | =|         0| =|NUMBER         | =|         22                             
+EMPLOYEE                 | =|SALARY                  | =|         0| =|NUMBER         | =|         22                             
+PAY                      | =|SAL                     | =|         0| =|NUMBER         | =|         22                             
+PROJ                     | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+PROJ1FH                  | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+PROJ1H                   | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+PROJ1V                   | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+PROJ2FH                  | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+PROJ2H                   | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+PROJ3FH                  | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+PROJECT                  | =|DNUM                    | =|NADA      | =|NUMBER         | =|         22                             
+PROJECT                  | =|PNUMBER                 | =|NADA      | =|NUMBER         | =|         22                             
+PROJM1FH                 | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+PROJM2FH                 | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+PROJM3FH                 | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+PROJM4FH                 | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+PROJM5FH                 | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+PROJM6FH                 | =|BUDGET                  | =|         0| =|NUMBER         | =|         22                             
+TEMP                     | =|M                       | =|NADA      | =|NUMBER         | =|         22                             
+TEMP                     | =|N                       | =|NADA      | =|NUMBER         | =|         22                             
+TEMPORAL5                | =|X                       | =|NADA      | =|NUMBER         | =|         22                             
+TEMPORAL5                | =|Y                       | =|NADA      | =|NUMBER         | =|         22                             
+TEMPORAL5                | =|Z                       | =|NADA      | =|NUMBER         | =|         22                             
+VISTAD1                  | =|DNUM                    | =|NADA      | =|NUMBER         | =|         22                             
+VISTAD1                  | =|ESSN                    | =|NADA      | =|NUMBER         | =|         22                             
+VISTAD1                  | =|HOURS                   | =|NADA      | =|NUMBER         | =|         22                             
+VISTAD1                  | =|PNO                     | =|NADA      | =|NUMBER         | =|         22                             
+VISTAD1                  | =|PNUMBER                 | =|NADA      | =|NUMBER         | =|         22                             
+VISTAE1                  | =|ESSN                    | =|NADA      | =|NUMBER         | =|         22                             
+WORKS_ON                 | =|ESSN                    | =|NADA      | =|NUMBER         | =|         22                             
+WORKS_ON                 | =|HOURS                   | =|NADA      | =|NUMBER         | =|         22                             
+WORKS_ON                 | =|PNO                     | =|NADA      | =|NUMBER         | =|         22                             
+
+41 rows selected.
+
+SQL> 
+SQL> col data_type format a20
+SQL> SELECT table_name, column_name,data_scale
+  2  ,DATA_TYPE,DATA_LENGTH
+  3  FROM user_tab_columns
+  4  order by 1,2;
+
+TABLE_NAME               | =|COLUMN_NAME             | =|DATA_SCALE| =|DATA_TYPE           | =|DATA_LENGTH                        
+=========================| =|========================| =|==========| =|====================| =|===========                        
+ASG                      | =|DUR                     | =|         0| =|NUMBER              | =|         22                        
+ASG                      | =|ENO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+ASG                      | =|PNO                     | =|NADA      | =|VARCHAR2            | =|         10                        
+ASG                      | =|RESP                    | =|NADA      | =|VARCHAR2            | =|         12                        
+AUTOS                    | =|ADORNOS                 | =|NADA      | =|VARCHAR2            | =|         10                        
+AUTOS                    | =|COLOR                   | =|NADA      | =|VARCHAR2            | =|         10                        
+AUTOS                    | =|MARCA                   | =|NADA      | =|VARCHAR2            | =|         10                        
+AUTOS                    | =|MODELO                  | =|NADA      | =|VARCHAR2            | =|         10                        
+AUTOS                    | =|MOTOR                   | =|NADA      | =|VARCHAR2            | =|         10                        
+AUTOS                    | =|TOLDO                   | =|NADA      | =|VARCHAR2            | =|         10                        
+DEPARTMENT               | =|DNAME                   | =|NADA      | =|VARCHAR2            | =|         15                        
+DEPARTMENT               | =|DNUMBER                 | =|         0| =|NUMBER              | =|         22                        
+DEPARTMENT               | =|MGR_SSN                 | =|NADA      | =|VARCHAR2            | =|          9                        
+DEPARTMENT               | =|MGR_START_DATE          | =|NADA      | =|DATE                | =|          7                        
+DEPENDENT                | =|BDATE                   | =|NADA      | =|DATE                | =|          7                        
+DEPENDENT                | =|DEPENDENT_NAME          | =|NADA      | =|VARCHAR2            | =|         15                        
+DEPENDENT                | =|ESSN                    | =|NADA      | =|VARCHAR2            | =|          9                        
+DEPENDENT                | =|RELATIONSHIP            | =|NADA      | =|VARCHAR2            | =|          8                        
+DEPENDENT                | =|SEX                     | =|NADA      | =|VARCHAR2            | =|          1                        
+DEPT_LOCATIONS           | =|DLOCATION               | =|NADA      | =|VARCHAR2            | =|         15                        
+DEPT_LOCATIONS           | =|DNUMBER                 | =|         0| =|NUMBER              | =|         22                        
+EMP                      | =|COMM                    | =|         2| =|NUMBER              | =|         22                        
+EMP                      | =|DEPTNO                  | =|         0| =|NUMBER              | =|         22                        
+EMP                      | =|EMPNO                   | =|         0| =|NUMBER              | =|         22                        
+EMP                      | =|ENAME                   | =|NADA      | =|VARCHAR2            | =|         10                        
+EMP                      | =|HIREDATE                | =|NADA      | =|DATE                | =|          7                        
+EMP                      | =|JOB                     | =|NADA      | =|VARCHAR2            | =|          9                        
+EMP                      | =|MGR                     | =|         0| =|NUMBER              | =|         22                        
+EMP                      | =|SAL                     | =|         2| =|NUMBER              | =|         22                        
+EMPLOYEE                 | =|DEPT_ID                 | =|         0| =|NUMBER              | =|         22                        
+EMPLOYEE                 | =|EMP_ID                  | =|         0| =|NUMBER              | =|         22                        
+EMPLOYEE                 | =|FNAME                   | =|NADA      | =|VARCHAR2            | =|         20                        
+EMPLOYEE                 | =|HIRE_DATE               | =|NADA      | =|DATE                | =|          7                        
+EMPLOYEE                 | =|JOB_ID                  | =|         0| =|NUMBER              | =|         22                        
+EMPLOYEE                 | =|LNAME                   | =|NADA      | =|VARCHAR2            | =|         20                        
+EMPLOYEE                 | =|MANAGER_EMP_ID          | =|         0| =|NUMBER              | =|         22                        
+EMPLOYEE                 | =|SALARY                  | =|         0| =|NUMBER              | =|         22                        
+MODELO_COLOR             | =|COLOR                   | =|NADA      | =|VARCHAR2            | =|         10                        
+MODELO_COLOR             | =|MODELO                  | =|NADA      | =|VARCHAR2            | =|         10                        
+MODELO_COLOR_ADORNOS     | =|ADORNOS                 | =|NADA      | =|VARCHAR2            | =|         10                        
+MODELO_COLOR_ADORNOS     | =|COLOR                   | =|NADA      | =|VARCHAR2            | =|         10                        
+MODELO_COLOR_ADORNOS     | =|MODELO                  | =|NADA      | =|VARCHAR2            | =|         10                        
+MODELO_COLOR_ADORNOS_TOLD| =|ADORNOS                 | =|NADA      | =|VARCHAR2            | =|         10                        
+O                        | =|                        | =|          | =|                    | =|                                   
+                                                                                                                                  
+MODELO_COLOR_ADORNOS_TOLD| =|COLOR                   | =|NADA      | =|VARCHAR2            | =|         10                        
+O                        | =|                        | =|          | =|                    | =|                                   
+                                                                                                                                  
+MODELO_COLOR_ADORNOS_TOLD| =|MODELO                  | =|NADA      | =|VARCHAR2            | =|         10                        
+O                        | =|                        | =|          | =|                    | =|                                   
+                                                                                                                                  
+MODELO_COLOR_ADORNOS_TOLD| =|TOLDO                   | =|NADA      | =|VARCHAR2            | =|         10                        
+O                        | =|                        | =|          | =|                    | =|                                   
+                                                                                                                                  
+MODELO_COLOR_TOLDO       | =|COLOR                   | =|NADA      | =|VARCHAR2            | =|         10                        
+MODELO_COLOR_TOLDO       | =|MODELO                  | =|NADA      | =|VARCHAR2            | =|         10                        
+MODELO_COLOR_TOLDO       | =|TOLDO                   | =|NADA      | =|VARCHAR2            | =|         10                        
+MODELO_MARCA             | =|MARCA                   | =|NADA      | =|VARCHAR2            | =|         10                        
+MODELO_MARCA             | =|MODELO                  | =|NADA      | =|VARCHAR2            | =|         10                        
+MODELO_MOTOR             | =|MODELO                  | =|NADA      | =|VARCHAR2            | =|         10                        
+MODELO_MOTOR             | =|MOTOR                   | =|NADA      | =|VARCHAR2            | =|         10                        
+PAY                      | =|SAL                     | =|         0| =|NUMBER              | =|         22                        
+PAY                      | =|TITLE                   | =|NADA      | =|VARCHAR2            | =|         15                        
+PROFESSORS               | =|DEPARTMENT              | =|NADA      | =|VARCHAR2            | =|         10                        
+PROFESSORS               | =|HIRE_DATE               | =|NADA      | =|DATE                | =|          7                        
+PROFESSORS               | =|PROF_NAME               | =|NADA      | =|VARCHAR2            | =|         10                        
+PROFESSORS               | =|SALARY                  | =|         2| =|NUMBER              | =|         22                        
+PROFESSORS               | =|SPECIALTY               | =|NADA      | =|VARCHAR2            | =|         20                        
+PROFESSORS               | =|TENURE                  | =|NADA      | =|VARCHAR2            | =|          3                        
+PROJ                     | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJ                     | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+PROJ                     | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJ                     | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJ1FH                  | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJ1FH                  | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+PROJ1FH                  | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJ1FH                  | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJ1H                   | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJ1H                   | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+PROJ1H                   | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJ1H                   | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJ1V                   | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJ1V                   | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJ2FH                  | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJ2FH                  | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+PROJ2FH                  | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJ2FH                  | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJ2H                   | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJ2H                   | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+PROJ2H                   | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJ2H                   | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJ2V                   | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+PROJ2V                   | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJ2V                   | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJ3FH                  | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJ3FH                  | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+
+TABLE_NAME               | =|COLUMN_NAME             | =|DATA_SCALE| =|DATA_TYPE           | =|DATA_LENGTH                        
+=========================| =|========================| =|==========| =|====================| =|===========                        
+PROJ3FH                  | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJ3FH                  | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJECT                  | =|DNUM                    | =|NADA      | =|NUMBER              | =|         22                        
+PROJECT                  | =|PLOCATION               | =|NADA      | =|VARCHAR2            | =|         15                        
+PROJECT                  | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         15                        
+PROJECT                  | =|PNUMBER                 | =|NADA      | =|NUMBER              | =|         22                        
+PROJM1FH                 | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJM1FH                 | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+PROJM1FH                 | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJM1FH                 | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJM2FH                 | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJM2FH                 | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+PROJM2FH                 | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJM2FH                 | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJM3FH                 | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJM3FH                 | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+PROJM3FH                 | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJM3FH                 | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJM4FH                 | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJM4FH                 | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+PROJM4FH                 | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJM4FH                 | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJM5FH                 | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJM5FH                 | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+PROJM5FH                 | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJM5FH                 | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+PROJM6FH                 | =|BUDGET                  | =|         0| =|NUMBER              | =|         22                        
+PROJM6FH                 | =|LOC                     | =|NADA      | =|VARCHAR2            | =|         12                        
+PROJM6FH                 | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         19                        
+PROJM6FH                 | =|PNO                     | =|NADA      | =|VARCHAR2            | =|          2                        
+TEMP                     | =|M                       | =|NADA      | =|NUMBER              | =|         22                        
+TEMP                     | =|N                       | =|NADA      | =|NUMBER              | =|         22                        
+TEMPORAL5                | =|X                       | =|NADA      | =|NUMBER              | =|         22                        
+TEMPORAL5                | =|Y                       | =|NADA      | =|NUMBER              | =|         22                        
+TEMPORAL5                | =|Z                       | =|NADA      | =|NUMBER              | =|         22                        
+VISTAB0                  | =|ADDRESS                 | =|NADA      | =|UNDEFINED           | =|          0                        
+VISTAB0                  | =|BDATE                   | =|NADA      | =|UNDEFINED           | =|          0                        
+VISTAB0                  | =|DNO                     | =|NADA      | =|UNDEFINED           | =|          0                        
+VISTAB0                  | =|FNAME                   | =|NADA      | =|UNDEFINED           | =|          0                        
+VISTAB0                  | =|LNAME                   | =|NADA      | =|UNDEFINED           | =|          0                        
+VISTAB0                  | =|MINIT                   | =|NADA      | =|UNDEFINED           | =|          0                        
+VISTAB0                  | =|SALARY                  | =|NADA      | =|UNDEFINED           | =|          0                        
+VISTAB0                  | =|SEX                     | =|NADA      | =|UNDEFINED           | =|          0                        
+VISTAB0                  | =|SSN                     | =|NADA      | =|UNDEFINED           | =|          0                        
+VISTAB0                  | =|SUPERSSN                | =|NADA      | =|UNDEFINED           | =|          0                        
+VISTAB1                  | =|CUENTA                  | =|NADA      | =|UNDEFINED           | =|          0                        
+VISTAB1                  | =|SSN                     | =|NADA      | =|UNDEFINED           | =|          0                        
+VISTAB2                  | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         15                        
+VISTAD1                  | =|DNUM                    | =|NADA      | =|NUMBER              | =|         22                        
+VISTAD1                  | =|ESSN                    | =|NADA      | =|NUMBER              | =|         22                        
+VISTAD1                  | =|HOURS                   | =|NADA      | =|NUMBER              | =|         22                        
+VISTAD1                  | =|PLOCATION               | =|NADA      | =|VARCHAR2            | =|         15                        
+VISTAD1                  | =|PNAME                   | =|NADA      | =|VARCHAR2            | =|         15                        
+VISTAD1                  | =|PNO                     | =|NADA      | =|NUMBER              | =|         22                        
+VISTAD1                  | =|PNUMBER                 | =|NADA      | =|NUMBER              | =|         22                        
+VISTAE1                  | =|ESSN                    | =|NADA      | =|NUMBER              | =|         22                        
+WORKS_ON                 | =|ESSN                    | =|NADA      | =|NUMBER              | =|         22                        
+WORKS_ON                 | =|HOURS                   | =|NADA      | =|NUMBER              | =|         22                        
+WORKS_ON                 | =|PNO                     | =|NADA      | =|NUMBER              | =|         22                        
+
+147 rows selected.
+
+SQL> 
+SQL> /*
+SQL> WHERE data_type = 'NUMBER'
+SQL> AND (data_scale <> 2
+SQL> OR data_scale IS NULL)
+SQL> order by 1,2;
+SQL> */
+SQL> 
+SQL> SELECT table_name, NVL(num_rows,0) filas
+  2  FROM user_tables
+  3  ORDER BY NVL(num_rows,0);
+
+TABLE_NAME               | =|     FILAS                                                                                           
+=========================| =|==========                                                                                           
+MODELO_MOTOR             | =|         0                                                                                           
+PROJ                     | =|         0                                                                                           
+ASG                      | =|         0                                                                                           
+PROJECT                  | =|         0                                                                                           
+TEMP                     | =|         0                                                                                           
+TEMPORAL5                | =|         0                                                                                           
+PROFESSORS               | =|         0                                                                                           
+EMP                      | =|         0                                                                                           
+AUTOS                    | =|         0                                                                                           
+MODELO_MARCA             | =|         0                                                                                           
+PAY                      | =|         0                                                                                           
+MODELO_COLOR             | =|         0                                                                                           
+MODELO_COLOR_ADORNOS_TOLD| =|         0                                                                                           
+O                        | =|                                                                                                     
+                                                                                                                                  
+MODELO_COLOR_ADORNOS     | =|         0                                                                                           
+MODELO_COLOR_TOLDO       | =|         0                                                                                           
+WORKS_ON                 | =|         0                                                                                           
+DEPARTMENT               | =|         3                                                                                           
+DEPT_LOCATIONS           | =|         5                                                                                           
+DEPENDENT                | =|         7                                                                                           
+EMPLOYEE                 | =|        14                                                                                           
+
+20 rows selected.
+
+SQL> 
+SQL> SELECT table_name, num_rows
+  2  FROM user_tables
+  3  ORDER BY 2,1;
+
+TABLE_NAME               | =|  NUM_ROWS                                                                                           
+=========================| =|==========                                                                                           
+DEPARTMENT               | =|         3                                                                                           
+DEPT_LOCATIONS           | =|         5                                                                                           
+DEPENDENT                | =|         7                                                                                           
+EMPLOYEE                 | =|        14                                                                                           
+ASG                      | =|NADA                                                                                                 
+AUTOS                    | =|NADA                                                                                                 
+EMP                      | =|NADA                                                                                                 
+MODELO_COLOR             | =|NADA                                                                                                 
+MODELO_COLOR_ADORNOS     | =|NADA                                                                                                 
+MODELO_COLOR_ADORNOS_TOLD| =|NADA                                                                                                 
+O                        | =|                                                                                                     
+                                                                                                                                  
+MODELO_COLOR_TOLDO       | =|NADA                                                                                                 
+MODELO_MARCA             | =|NADA                                                                                                 
+MODELO_MOTOR             | =|NADA                                                                                                 
+PAY                      | =|NADA                                                                                                 
+PROFESSORS               | =|NADA                                                                                                 
+PROJ                     | =|NADA                                                                                                 
+PROJECT                  | =|NADA                                                                                                 
+TEMP                     | =|NADA                                                                                                 
+TEMPORAL5                | =|NADA                                                                                                 
+WORKS_ON                 | =|NADA                                                                                                 
+
+20 rows selected.
+
+SQL> 
+SQL> SELECT table_name
+  2  FROM user_tables
+  3  MINUS
+  4  SELECT DISTINCT table_name
+  5  FROM user_indexes
+  6  WHERE table_owner = USER
+  7  ORDER BY table_name;
+
+TABLE_NAME                                                                                                                        
+=========================                                                                                                         
+ASG                                                                                                                               
+AUTOS                                                                                                                             
+EMP                                                                                                                               
+MODELO_COLOR                                                                                                                      
+MODELO_COLOR_ADORNOS                                                                                                              
+MODELO_COLOR_ADORNOS_TOLD                                                                                                         
+O                                                                                                                                 
+                                                                                                                                  
+MODELO_COLOR_TOLDO                                                                                                                
+MODELO_MARCA                                                                                                                      
+MODELO_MOTOR                                                                                                                      
+PAY                                                                                                                               
+PROFESSORS                                                                                                                        
+PROJ                                                                                                                              
+PROJECT                                                                                                                           
+TEMP                                                                                                                              
+TEMPORAL5                                                                                                                         
+WORKS_ON                                                                                                                          
+
+16 rows selected.
+
+SQL> 
+SQL> rem analicemos la consulta
+SQL> SELECT DISTINCT table_name
+  2  FROM user_indexes
+  3  WHERE table_owner = USER
+  4  ORDER BY table_name;
+
+TABLE_NAME                                                                                                                        
+=========================                                                                                                         
+DEPARTMENT                                                                                                                        
+DEPENDENT                                                                                                                         
+DEPT_LOCATIONS                                                                                                                    
+EMPLOYEE                                                                                                                          
+
+4 rows selected.
+
+SQL> 
+SQL> col index_name fromat a14
+SP2-0158: unknown COLUMN option "fromat"
+SQL> col index_type format a9
+SQL> col table_owner format a10
+SQL> col table_name format a27
+SQL> col table_type format a10
+SQL> col b_level format a5
+SQL> col num_rows format 9,999
+SQL> select index_name,index_type,table_owner,
+  2  table_name,table_type
+  3  b_level,num_rows
+  4  from user_indexes
+  5  order by 4,1;
+
+INDEX_NAME                    | =|INDEX_TYP| =|TABLE_OWNE| =|TABLE_NAME                 | =|B_LEV| =|NUM_ROWS                     
+==============================| =|=========| =|==========| =|===========================| =|=====| =|========                     
+DEPARTMENT_PK                 | =|NORMAL   | =|SERGIONAVA| =|DEPARTMENT                 | =|TABLE| =|       3                     
+DEPARTMENT_UNIQUE             | =|NORMAL   | =|SERGIONAVA| =|DEPARTMENT                 | =|TABLE| =|       3                     
+DEPENDENT_PK                  | =|NORMAL   | =|SERGIONAVA| =|DEPENDENT                  | =|TABLE| =|       7                     
+DEPT_LOCATIONS_PK             | =|NORMAL   | =|SERGIONAVA| =|DEPT_LOCATIONS             | =|TABLE| =|       5                     
+EMPLOYEE_PK                   | =|NORMAL   | =|SERGIONAVA| =|EMPLOYEE                   | =|TABLE| =|      14                     
+
+5 rows selected.
+
+SQL> 
+SQL> rem
+SQL> 
+SQL> TTITLE LEFT "IPN EsCom " CENTER "Bases de Datos" -
+> RIGHT "Page" FORMAT 999 SQL.PNO SKIP 1 -
+> CENTER "Listado de Öndices" SKIP 4
+SQL> 
+SQL> SET TERMOUT OFF
+SQL> COLUMN curdate NEW_VALUE report_date
+SQL> SELECT TO_CHAR(SYSDATE,'dd-Mon-yyyy') curdate
+  2   FROM DUAL;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+CURDATE                                                                                                                           
+====================                                                                                                              
+11-Jun-2021                                                                                                                       
+
+1 row selected.
+
+SQL> SET TERMOUT ON
+SQL> col table_name format a50
+SQL> 
+SQL> SELECT owner, table_name
+  2    FROM all_tables
+  3    ORDER BY owner, table_name;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+OWNER     | =|TABLE_NAME                                                                                                          
+==========| =|==================================================                                                                  
+APEX_04000| =|WWV_FLOW_DUAL100                                                                                                    
+0         | =|                                                                                                                    
+                                                                                                                                  
+APEX_04000| =|WWV_FLOW_LOV_TEMP                                                                                                   
+0         | =|                                                                                                                    
+                                                                                                                                  
+APEX_04000| =|WWV_FLOW_TEMP_TABLE                                                                                                 
+0         | =|                                                                                                                    
+                                                                                                                                  
+CTXSYS    | =|DR$NUMBER_SEQUENCE                                                                                                  
+CTXSYS    | =|DR$OBJECT_ATTRIBUTE                                                                                                 
+CTXSYS    | =|DR$POLICY_TAB                                                                                                       
+CTXSYS    | =|DR$THS                                                                                                              
+CTXSYS    | =|DR$THS_PHRASE                                                                                                       
+MDSYS     | =|NTV2_XML_DATA                                                                                                       
+MDSYS     | =|OGIS_GEOMETRY_COLUMNS                                                                                               
+MDSYS     | =|OGIS_SPATIAL_REFERENCE_SYSTEMS                                                                                      
+MDSYS     | =|SDO_COORD_AXES                                                                                                      
+MDSYS     | =|SDO_COORD_AXIS_NAMES                                                                                                
+MDSYS     | =|SDO_COORD_OPS                                                                                                       
+MDSYS     | =|SDO_COORD_OP_METHODS                                                                                                
+MDSYS     | =|SDO_COORD_OP_PARAMS                                                                                                 
+MDSYS     | =|SDO_COORD_OP_PARAM_USE                                                                                              
+MDSYS     | =|SDO_COORD_OP_PARAM_VALS                                                                                             
+MDSYS     | =|SDO_COORD_OP_PATHS                                                                                                  
+MDSYS     | =|SDO_COORD_REF_SYS                                                                                                   
+MDSYS     | =|SDO_COORD_SYS                                                                                                       
+MDSYS     | =|SDO_CRS_GEOGRAPHIC_PLUS_HEIGHT                                                                                      
+MDSYS     | =|SDO_CS_CONTEXT_INFORMATION                                                                                          
+MDSYS     | =|SDO_CS_SRS                                                                                                          
+MDSYS     | =|SDO_DATUMS                                                                                                          
+MDSYS     | =|SDO_DATUMS_OLD_SNAPSHOT                                                                                             
+MDSYS     | =|SDO_ELLIPSOIDS                                                                                                      
+MDSYS     | =|SDO_ELLIPSOIDS_OLD_SNAPSHOT                                                                                         
+MDSYS     | =|SDO_PREFERRED_OPS_SYSTEM                                                                                            
+MDSYS     | =|SDO_PREFERRED_OPS_USER                                                                                              
+MDSYS     | =|SDO_PRIME_MERIDIANS                                                                                                 
+MDSYS     | =|SDO_PROJECTIONS_OLD_SNAPSHOT                                                                                        
+MDSYS     | =|SDO_ST_TOLERANCE                                                                                                    
+MDSYS     | =|SDO_TOPO_DATA$                                                                                                      
+MDSYS     | =|SDO_TOPO_RELATION_DATA                                                                                              
+MDSYS     | =|SDO_TOPO_TRANSACT_DATA                                                                                              
+MDSYS     | =|SDO_TXN_IDX_DELETES                                                                                                 
+MDSYS     | =|SDO_TXN_IDX_EXP_UPD_RGN                                                                                             
+MDSYS     | =|SDO_TXN_IDX_INSERTS                                                                                                 
+MDSYS     | =|SDO_UNITS_OF_MEASURE                                                                                                
+MDSYS     | =|SDO_XML_SCHEMAS                                                                                                     
+MDSYS     | =|SRSNAMESPACE_TABLE                                                                                                  
+SERGIONAVA| =|ASG                                                                                                                 
+SERGIONAVA| =|AUTOS                                                                                                               
+SERGIONAVA| =|DEPARTMENT                                                                                                          
+SERGIONAVA| =|DEPENDENT                                                                                                           
+SERGIONAVA| =|DEPT_LOCATIONS                                                                                                      
+SERGIONAVA| =|EMP                                                                                                                 
+SERGIONAVA| =|EMPLOYEE                                                                                                            
+SERGIONAVA| =|MODELO_COLOR                                                                                                        
+SERGIONAVA| =|MODELO_COLOR_ADORNOS                                                                                                
+SERGIONAVA| =|MODELO_COLOR_ADORNOS_TOLDO                                                                                          
+SERGIONAVA| =|MODELO_COLOR_TOLDO                                                                                                  
+SERGIONAVA| =|MODELO_MARCA                                                                                                        
+SERGIONAVA| =|MODELO_MOTOR                                                                                                        
+SERGIONAVA| =|PAY                                                                                                                 
+SERGIONAVA| =|PROFESSORS                                                                                                          
+SERGIONAVA| =|PROJ                                                                                                                
+SERGIONAVA| =|PROJECT                                                                                                             
+SERGIONAVA| =|TEMP                                                                                                                
+SERGIONAVA| =|TEMPORAL5                                                                                                           
+SERGIONAVA| =|WORKS_ON                                                                                                            
+SYS       | =|AUDIT_ACTIONS                                                                                                       
+SYS       | =|DUAL                                                                                                                
+SYS       | =|HS$_PARALLEL_METADATA                                                                                               
+SYS       | =|HS_BULKLOAD_VIEW_OBJ                                                                                                
+SYS       | =|HS_PARTITION_COL_NAME                                                                                               
+SYS       | =|HS_PARTITION_COL_TYPE                                                                                               
+SYS       | =|IMPDP_STATS                                                                                                         
+SYS       | =|KU$NOEXP_TAB                                                                                                        
+SYS       | =|KU$_DATAPUMP_MASTER_10_1                                                                                            
+SYS       | =|KU$_DATAPUMP_MASTER_11_1                                                                                            
+SYS       | =|KU$_DATAPUMP_MASTER_11_1_0_7                                                                                        
+SYS       | =|KU$_DATAPUMP_MASTER_11_2                                                                                            
+SYS       | =|KU$_LIST_FILTER_TEMP                                                                                                
+SYS       | =|KU$_LIST_FILTER_TEMP_2                                                                                              
+SYS       | =|ODCI_PMO_ROWIDS$                                                                                                    
+SYS       | =|ODCI_SECOBJ$                                                                                                        
+SYS       | =|ODCI_WARNINGS$                                                                                                      
+SYS       | =|PLAN_TABLE$                                                                                                         
+SYS       | =|PSTUBTBL                                                                                                            
+SYS       | =|STMT_AUDIT_OPTION_MAP                                                                                               
+SYS       | =|SYSTEM_PRIVILEGE_MAP                                                                                                
+SYS       | =|TABLE_PRIVILEGE_MAP                                                                                                 
+SYS       | =|WRI$_ADV_ASA_RECO_DATA                                                                                              
+
+IPN EsCom                                                 Bases de Datos                                                  Page   2
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+OWNER     | =|TABLE_NAME                                                                                                          
+==========| =|==================================================                                                                  
+SYS       | =|WRR$_REPLAY_CALL_FILTER                                                                                             
+SYSTEM    | =|HELP                                                                                                                
+SYSTEM    | =|OL$                                                                                                                 
+SYSTEM    | =|OL$HINTS                                                                                                            
+SYSTEM    | =|OL$NODES                                                                                                            
+XDB       | =|XDB$XIDX_IMP_T                                                                                                      
+
+91 rows selected.
+
+SQL> 
+SQL> rem
+SQL> ----------------------
+SQL> 
+SQL> BREAK ON owner SKIP PAGE ON object_type SKIP 1
+SQL> SELECT  owner,object_type, object_name
+  2   FROM all_objects
+  3   where rownum <= 200
+  4  ORDER BY owner, object_type, object_name;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+OWNER     | =|OBJECT_TYPE                  | =|OBJECT_NAME                                                                        
+==========| =|=============================| =|============================                                                       
+PUBLIC    | =|SYNONYM                      | =|DBMS_STANDARD                                                                      
+                                           | =|DUAL                                                                               
+                                           | =|GV$DLM_TRAFFIC_CONTROLLER                                                          
+                                           | =|GV$DYNAMIC_REMASTER_STATS                                                          
+                                           | =|GV$GOLDENGATE_CAPTURE                                                              
+                                           | =|GV$GOLDENGATE_MESSAGE_TRACKI                                                       
+                                           | =|NG                                                                                 
+                                                                                                                                  
+                                           | =|GV$GOLDENGATE_TRANSACTION                                                          
+                                           | =|GV$XSTREAM_CAPTURE                                                                 
+                                           | =|GV$XSTREAM_MESSAGE_TRACKING                                                        
+                                           | =|GV$XSTREAM_TRANSACTION                                                             
+                                           | =|MAP_OBJECT                                                                         
+                                           | =|STMT_AUDIT_OPTION_MAP                                                              
+                                           | =|SYSTEM_PRIVILEGE_MAP                                                               
+                                           | =|TABLE_PRIVILEGE_MAP                                                                
+                                           | =|V$ACCESS                                                                           
+                                           | =|V$ADVISOR_CURRENT_SQLPLAN                                                          
+                                           | =|V$ARCHIVE                                                                          
+                                           | =|V$BACKUP                                                                           
+                                           | =|V$BACKUP_CORRUPTION                                                                
+                                           | =|V$BACKUP_DATAFILE                                                                  
+                                           | =|V$BACKUP_PIECE                                                                     
+                                           | =|V$BACKUP_REDOLOG                                                                   
+                                           | =|V$BACKUP_SET                                                                       
+                                           | =|V$BACKUP_SPFILE                                                                    
+                                           | =|V$BGPROCESS                                                                        
+                                           | =|V$BH                                                                               
+                                           | =|V$BSP                                                                              
+                                           | =|V$BUFFER_POOL                                                                      
+                                           | =|V$BUFFER_POOL_STATISTICS                                                           
+                                           | =|V$CIRCUIT                                                                          
+                                           | =|V$CLASS_CACHE_TRANSFER                                                             
+                                           | =|V$CLASS_PING                                                                       
+                                           | =|V$CLUSTER_INTERCONNECTS                                                            
+                                           | =|V$CONFIGURED_INTERCONNECTS                                                         
+                                           | =|V$CONTROLFILE                                                                      
+                                           | =|V$CR_BLOCK_SERVER                                                                  
+                                           | =|V$CURRENT_BLOCK_SERVER                                                             
+                                           | =|V$DATABASE                                                                         
+                                           | =|V$DATAGUARD_STATUS                                                                 
+                                           | =|V$DBFILE                                                                           
+                                           | =|V$DBLINK                                                                           
+                                           | =|V$DB_OBJECT_CACHE                                                                  
+                                           | =|V$DB_PIPES                                                                         
+                                           | =|V$DISPATCHER                                                                       
+                                           | =|V$DISPATCHER_CONFIG                                                                
+                                           | =|V$DISPATCHER_RATE                                                                  
+                                           | =|V$DLM_ALL_LOCKS                                                                    
+                                           | =|V$DLM_CONVERT_LOCAL                                                                
+                                           | =|V$DLM_CONVERT_REMOTE                                                               
+                                           | =|V$DLM_LATCH                                                                        
+                                           | =|V$DLM_LOCKS                                                                        
+                                           | =|V$DLM_MISC                                                                         
+                                           | =|V$DLM_RESS                                                                         
+                                           | =|V$DLM_TRAFFIC_CONTROLLER                                                           
+                                           | =|V$DYNAMIC_REMASTER_STATS                                                           
+                                           | =|V$ENABLEDPRIVS                                                                     
+                                           | =|V$FAST_START_SERVERS                                                               
+                                           | =|V$FAST_START_TRANSACTIONS                                                          
+                                           | =|V$FILESTAT                                                                         
+                                           | =|V$FILE_CACHE_TRANSFER                                                              
+                                           | =|V$FILE_PING                                                                        
+                                           | =|V$FLASHBACK_DATABASE_LOG                                                           
+                                           | =|V$FLASHBACK_DATABASE_LOGFILE                                                       
+                                           | =|V$FLASHBACK_DATABASE_STAT                                                          
+                                           | =|V$GCSHVMASTER_INFO                                                                 
+                                           | =|V$GCSPFMASTER_INFO                                                                 
+                                           | =|V$GC_ELEMENT                                                                       
+                                           | =|V$GC_ELEMENTS_WITH_COLLISION                                                       
+                                           | =|S                                                                                  
+                                                                                                                                  
+                                           | =|V$GES_BLOCKING_ENQUEUE                                                             
+                                           | =|V$GES_ENQUEUE                                                                      
+                                           | =|V$GOLDENGATE_CAPTURE                                                               
+                                           | =|V$GOLDENGATE_MESSAGE_TRACKIN                                                       
+                                           | =|G                                                                                  
+                                                                                                                                  
+                                           | =|V$GOLDENGATE_TRANSACTION                                                           
+                                           | =|V$HVMASTER_INFO                                                                    
+                                           | =|V$INSTANCE                                                                         
+                                           | =|V$INSTANCE_CACHE_TRANSFER                                                          
+                                           | =|V$INSTANCE_RECOVERY                                                                
+                                           | =|V$LATCH                                                                            
+                                           | =|V$LATCHHOLDER                                                                      
+                                           | =|V$LATCHNAME                                                                        
+                                           | =|V$LATCH_CHILDREN                                                                   
+                                           | =|V$LATCH_MISSES                                                                     
+                                           | =|V$LATCH_PARENT                                                                     
+                                           | =|V$LIBCACHE_LOCKS                                                                   
+                                           | =|V$LIBRARYCACHE                                                                     
+
+IPN EsCom                                                 Bases de Datos                                                  Page   2
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+OWNER     | =|OBJECT_TYPE                  | =|OBJECT_NAME                                                                        
+==========| =|=============================| =|============================                                                       
+PUBLIC    | =|SYNONYM                      | =|V$LICENSE                                                                          
+                                           | =|V$LOCK                                                                             
+                                           | =|V$LOCKED_OBJECT                                                                    
+                                           | =|V$LOCKS_WITH_COLLISIONS                                                            
+                                           | =|V$LOCK_ELEMENT                                                                     
+                                           | =|V$LOG                                                                              
+                                           | =|V$LOGFILE                                                                          
+                                           | =|V$LOGHIST                                                                          
+                                           | =|V$MAP_COMP_LIST                                                                    
+                                           | =|V$MAP_ELEMENT                                                                      
+                                           | =|V$MAP_EXT_ELEMENT                                                                  
+                                           | =|V$MAP_FILE                                                                         
+                                           | =|V$MAP_FILE_EXTENT                                                                  
+                                           | =|V$MAP_FILE_IO_STACK                                                                
+                                           | =|V$MAP_LIBRARY                                                                      
+                                           | =|V$MAP_SUBELEMENT                                                                   
+                                           | =|V$MYSTAT                                                                           
+                                           | =|V$NLS_PARAMETERS                                                                   
+                                           | =|V$NLS_VALID_VALUES                                                                 
+                                           | =|V$OBJECT_DEPENDENCY                                                                
+                                           | =|V$OBSOLETE_PARAMETER                                                               
+                                           | =|V$OPEN_CURSOR                                                                      
+                                           | =|V$OPTION                                                                           
+                                           | =|V$OSSTAT                                                                           
+                                           | =|V$PARAMETER                                                                        
+                                           | =|V$PARAMETER2                                                                       
+                                           | =|V$PARAMETER_VALID_VALUES                                                           
+                                           | =|V$PGASTAT                                                                          
+                                           | =|V$PGA_TARGET_ADVICE                                                                
+                                           | =|V$PGA_TARGET_ADVICE_HISTOGRA                                                       
+                                           | =|M                                                                                  
+                                                                                                                                  
+                                           | =|V$POLICY_HISTORY                                                                   
+                                           | =|V$PQ_SESSTAT                                                                       
+                                           | =|V$PQ_SLAVE                                                                         
+                                           | =|V$PQ_SYSSTAT                                                                       
+                                           | =|V$PROCESS                                                                          
+                                           | =|V$PWFILE_USERS                                                                     
+                                           | =|V$QUEUE                                                                            
+                                           | =|V$RECOVER_FILE                                                                     
+                                           | =|V$REQDIST                                                                          
+                                           | =|V$RESOURCE                                                                         
+                                           | =|V$RESTORE_POINT                                                                    
+                                           | =|V$ROLLNAME                                                                         
+                                           | =|V$ROLLSTAT                                                                         
+                                           | =|V$ROWCACHE                                                                         
+                                           | =|V$ROWCACHE_PARENT                                                                  
+                                           | =|V$ROWCACHE_SUBORDINATE                                                             
+                                           | =|V$SESSION                                                                          
+                                           | =|V$SESSION_LONGOPS                                                                  
+                                           | =|V$SESSTAT                                                                          
+                                           | =|V$SES_OPTIMIZER_ENV                                                                
+                                           | =|V$SGA                                                                              
+                                           | =|V$SGAINFO                                                                          
+                                           | =|V$SGASTAT                                                                          
+                                           | =|V$SHARED_SERVER                                                                    
+                                           | =|V$SHARED_SERVER_MONITOR                                                            
+                                           | =|V$SPPARAMETER                                                                      
+                                           | =|V$SQL                                                                              
+                                           | =|V$SQLAREA                                                                          
+                                           | =|V$SQLAREA_PLAN_HASH                                                                
+                                           | =|V$SQLFN_ARG_METADATA                                                               
+                                           | =|V$SQLFN_METADATA                                                                   
+                                           | =|V$SQLTEXT                                                                          
+                                           | =|V$SQLTEXT_WITH_NEWLINES                                                            
+                                           | =|V$SQL_OPTIMIZER_ENV                                                                
+                                           | =|V$SQL_PLAN                                                                         
+                                           | =|V$SQL_PLAN_STATISTICS                                                              
+                                           | =|V$SQL_PLAN_STATISTICS_ALL                                                          
+                                           | =|V$SQL_REDIRECTION                                                                  
+                                           | =|V$SQL_SHARED_CURSOR                                                                
+                                           | =|V$SQL_WORKAREA                                                                     
+                                           | =|V$SQL_WORKAREA_ACTIVE                                                              
+                                           | =|V$SQL_WORKAREA_HISTOGRAM                                                           
+                                           | =|V$STANDBY_LOG                                                                      
+                                           | =|V$STATNAME                                                                         
+                                           | =|V$SUBCACHE                                                                         
+                                           | =|V$SYSSTAT                                                                          
+                                           | =|V$SYSTEM_PARAMETER                                                                 
+                                           | =|V$SYSTEM_PARAMETER2                                                                
+                                           | =|V$SYS_OPTIMIZER_ENV                                                                
+                                           | =|V$TEMPSTAT                                                                         
+                                           | =|V$TEMP_CACHE_TRANSFER                                                              
+                                           | =|V$TEMP_PING                                                                        
+                                           | =|V$THREAD                                                                           
+                                           | =|V$TIMER                                                                            
+                                           | =|V$TRANSACTION                                                                      
+                                           | =|V$TYPE_SIZE                                                                        
+                                           | =|V$UNDOSTAT                                                                         
+                                           | =|V$VERSION                                                                          
+                                           | =|V$WAITSTAT                                                                         
+
+IPN EsCom                                                 Bases de Datos                                                  Page   3
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+OWNER     | =|OBJECT_TYPE                  | =|OBJECT_NAME                                                                        
+==========| =|=============================| =|============================                                                       
+PUBLIC    | =|SYNONYM                      | =|V$XSTREAM_CAPTURE                                                                  
+                                           | =|V$XSTREAM_MESSAGE_TRACKING                                                         
+                                           | =|V$XSTREAM_TRANSACTION                                                              
+                                           | =|V$_LOCK                                                                            
+                                                                                                                                  
+
+IPN EsCom                                                 Bases de Datos                                                  Page   4
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+OWNER     | =|OBJECT_TYPE                  | =|OBJECT_NAME                                                                        
+==========| =|=============================| =|============================                                                       
+SYS       | =|EDITION                      | =|ORA$BASE                                                                           
+                                                                                                                                  
+          | =|PACKAGE                      | =|DBMS_STANDARD                                                                      
+                                           | =|STANDARD                                                                           
+                                           | =|UTL_RAW                                                                            
+                                                                                                                                  
+          | =|SEQUENCE                     | =|DM$EXPIMP_ID_SEQ                                                                   
+                                                                                                                                  
+          | =|TABLE                        | =|DUAL                                                                               
+                                           | =|STMT_AUDIT_OPTION_MAP                                                              
+                                           | =|SYSTEM_PRIVILEGE_MAP                                                               
+                                           | =|TABLE_PRIVILEGE_MAP                                                                
+                                                                                                                                  
+          | =|VIEW                         | =|ALL_XML_SCHEMAS                                                                    
+                                           | =|ALL_XML_SCHEMAS2                                                                   
+                                           | =|V_$ADVISOR_CURRENT_SQLPLAN                                                         
+                                           | =|V_$BH                                                                              
+                                           | =|V_$NLS_PARAMETERS                                                                  
+                                           | =|V_$NLS_VALID_VALUES                                                                
+                                           | =|V_$OPTION                                                                          
+                                           | =|V_$PQ_SESSTAT                                                                      
+                                           | =|V_$RESTORE_POINT                                                                   
+                                           | =|V_$SESSION_LONGOPS                                                                 
+                                           | =|V_$SQLFN_ARG_METADATA                                                              
+                                           | =|V_$SQLFN_METADATA                                                                  
+                                           | =|V_$VERSION                                                                         
+                                                                                                                                  
+
+200 rows selected.
+
+SQL> 
+SQL> col segment_name format a25
+SQL>  COMPUTE SUM OF bytes ON segment_name
+SQL> COMPUTE COUNT OF segment_name ON segment_type
+SQL> BREAK ON segment_type ON segment_name
+SQL> SELECT segment_name, segment_type, bytes
+  2   FROM user_extents
+  3  ORDER BY segment_type, segment_name;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+SEGMENT_NAME             | =|SEGMENT_TYPE      | =|     BYTES                                                                     
+=========================| =|==================| =|==========                                                                     
+DEPARTMENT_PK            | =|INDEX             | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+DEPARTMENT_UNIQUE                              | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+DEPENDENT_PK                                   | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+DEPT_LOCATIONS_PK                              | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+EMPLOYEE_PK                                    | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+-------------------------| =|******************| =|                                                                               
+                        5| =|count             | =|                                                                               
+ASG                      | =|TABLE             | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+AUTOS                                          | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+DEPARTMENT                                     | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+DEPENDENT                                      | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+DEPT_LOCATIONS                                 | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+EMP                                            | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+EMPLOYEE                                       | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+MODELO_COLOR                                   | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+MODELO_COLOR_ADORNOS                           | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+MODELO_COLOR_ADORNOS_TOLD                      | =|     65536                                                                     
+O                                              | =|                                                                               
+                                                                                                                                  
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+MODELO_COLOR_TOLDO                             | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+MODELO_MARCA                                   | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+MODELO_MOTOR                                   | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+PAY                                            | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+PROFESSORS                                     | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+PROJ                                           | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+PROJECT                                        | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+TEMP                                           | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+TEMPORAL5                                      | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+WORKS_ON                                       | =|     65536                                                                     
+*************************                      | =|----------                                                                     
+sum                                            | =|     65536                                                                     
+-------------------------| =|******************| =|                                                                               
+                       20| =|count             | =|                                                                               
+
+25 rows selected.
+
+SQL> 
+SQL> 
+SQL>  SELECT TO_CHAR(SYSDATE,
+  2    'dd-Mon-yyyy hh:mi:ss PM') FECHA
+  3    FROM dual;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+FECHA                                                                                                                             
+================================                                                                                                  
+11-Jun-2021 04:00:23 AM                                                                                                           
+
+1 row selected.
+
+SQL> 
+SQL>  SELECT TO_CHAR(SYSDATE,
+  2    'dd-FMMonth-yyyy hh:mi:ss PM') FECHA
+  3    FROM dual;
+
+IPN EsCom                                                 Bases de Datos                                                  Page   1
+                                                        Listado de Öndices                                                        
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+FECHA                                                                                                                             
+========================================================                                                                          
+11-June-2021 4:0:23 AM                                                                                                            
+
+1 row selected.
+
+SQL> 
+SQL> CLEAR BREAKS
+breaks cleared
+SQL> 
+SQL> 
+SQL> spool off;

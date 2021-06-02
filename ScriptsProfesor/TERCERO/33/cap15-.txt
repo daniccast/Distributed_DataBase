@@ -1,0 +1,361 @@
+SQL> 
+SQL> 
+SQL> /*
+SQL> The REGEXP_SUBSTR Function
+SQL> 
+SQL> REGEXP_SUBSTR(source_string, pattern
+SQL>  [, position [, occurrence
+SQL>  [, match_parameter]]])
+SQL> */
+SQL> 
+SQL>  SELECT REGEXP_SUBSTR('Joe Smith, 12345 Berry Lane, Orta, CA 91234',
+  2                        '[[:digit:]]{5}$')
+  3   AS substr
+  4   FROM dual;
+
+SUBST                                                                                                                             
+-----                                                                                                                             
+91234                                                                                                                             
+
+1 row selected.
+
+SQL> 
+SQL>   SELECT REGEXP_SUBSTR('Joe Smith, 123456 Berry Lane, Orta, CA 9123456',
+  2                        '[[:digit:]]{5}$')
+  3   AS substr
+  4   FROM dual;
+
+SUBST                                                                                                                             
+-----                                                                                                                             
+23456                                                                                                                             
+
+1 row selected.
+
+SQL> 
+SQL>    SELECT REGEXP_SUBSTR('Joe Smith, 12345678 Berry Lane, Orta, CA 912345',
+  2                        '[[:digit:]]{5}$')
+  3   AS substr
+  4   FROM dual;
+
+SUBST                                                                                                                             
+-----                                                                                                                             
+12345                                                                                                                             
+
+1 row selected.
+
+SQL> 
+SQL>     SELECT REGEXP_SUBSTR('Joe Smith, 125678 Berry Lane, Orta, CA 912345',
+  2                        '[[:digit:]]{5}')
+  3   AS substr
+  4   FROM dual;
+
+SUBST                                                                                                                             
+-----                                                                                                                             
+12567                                                                                                                             
+
+1 row selected.
+
+SQL> 
+SQL>      SELECT REGEXP_SUBSTR('Joe Smith, 125678 Berry Lane, Orta, CA 912345',
+  2                        '[[:digit:]]{3,5}')
+  3   AS substr
+  4   FROM dual;
+
+SUBST                                                                                                                             
+-----                                                                                                                             
+12567                                                                                                                             
+
+1 row selected.
+
+SQL> 
+SQL> 
+SQL>  rem The REGEXP_INSTR Function
+SQL> 
+SQL>  SELECT REGEXP_INSTR('NY 10032 USA',
+  2                       '[[:digit:]]{5}')
+  3               AS rx_instr
+  4   FROM dual;
+
+  RX_INSTR                                                                                                                        
+----------                                                                                                                        
+         4                                                                                                                        
+
+1 row selected.
+
+SQL> 
+SQL>   SELECT REGEXP_INSTR('NY        10032 USA',
+  2                       '[[:digit:]]{5}')
+  3               AS rx_instr
+  4   FROM dual;
+
+  RX_INSTR                                                                                                                        
+----------                                                                                                                        
+        11                                                                                                                        
+
+1 row selected.
+
+SQL> 
+SQL>    SELECT REGEXP_INSTR('    NY        10032 USA',
+  2                       '[[:digit:]]{5}')
+  3               AS rx_instr
+  4   FROM dual;
+
+  RX_INSTR                                                                                                                        
+----------                                                                                                                        
+        15                                                                                                                        
+
+1 row selected.
+
+SQL> 
+SQL> 
+SQL>  rem The REGEXP_REPLACE Function
+SQL> SELECT REPLACE('Joe Smith',' ', ' ')
+  2  AS replace
+  3  FROM dual;
+
+REPLACE                                                                                                                           
+------------------------------------------------------------------------------------------------------------------------          
+Joe Smith                                                                                                                         
+
+1 row selected.
+
+SQL> 
+SQL> SELECT REPLACE('Joe Smith',' ', '------ ')
+  2  AS replace
+  3  FROM dual;
+
+REPLACE                                                                                                                           
+------------------------------------------------------------------------------------------------------------------------          
+Joe------ Smith                                                                                                                   
+
+1 row selected.
+
+SQL> col replace format a80
+SQL> SELECT REPLACE('Joe Smith',' ', '----------->')
+  2  AS replace
+  3  FROM dual;
+
+REPLACE                                                                                                                           
+--------------------------------------------------------------------------------                                                  
+Joe----------->Smith                                                                                                              
+
+1 row selected.
+
+SQL> 
+SQL> col replace format a120
+SQL> SELECT REPLACE('Joe Smith',' ', '----------->')
+  2  AS replace
+  3  FROM dual;
+
+REPLACE                                                                                                                           
+------------------------------------------------------------------------------------------------------------------------          
+Joe----------->Smith                                                                                                              
+
+1 row selected.
+
+SQL> 
+SQL> SELECT REGEXP_REPLACE('Joe Smith',
+  2                        '( ){2,}', ' ')
+  3                 AS RX_REPLACE
+  4               FROM dual;
+
+RX_REPLAC                                                                                                                         
+---------                                                                                                                         
+Joe Smith                                                                                                                         
+
+1 row selected.
+
+SQL> 
+SQL> 
+SQL> SELECT REGEXP_REPLACE('Joe Smith',
+  2                        '( ){2,}', '            ')
+  3                 AS RX_REPLACE
+  4               FROM dual;
+
+RX_REPLAC                                                                                                                         
+---------                                                                                                                         
+Joe Smith                                                                                                                         
+
+1 row selected.
+
+SQL> 
+SQL> SELECT first_name
+  2   FROM student
+  3   WHERE REGEXP_LIKE(first_name, 'ta', 'i');
+ FROM student
+      *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> 
+SQL> rem Matching A Pattern That Crosses Multiple Lines
+SQL> Treating A String As A Multiline Source
+SP2-0734: unknown command beginning "Treating A..." - rest of line ignored.
+SQL> 
+SQL> 
+SQL> SELECT REGEXP_INSTR('My cat
+  2  followed the dog who followed another
+  3  cat.',
+  4  '^cat', 1,1,1,'m') AS cat_search
+  5   FROM dual ;
+
+CAT_SEARCH                                                                                                                        
+----------                                                                                                                        
+        49                                                                                                                        
+
+1 row selected.
+
+SQL> 
+SQL> 
+SQL>  /*
+SQL> 
+SQL> 
+SQL>  */
+SQL>  col cadenas format  a25
+SQL>   SELECT REGEXP_REPLACE(
+  2                         'Ellen Hildi Smith',
+  3                         '(.*) (.*) (.*)', '\3, \1 \2') cadenas
+  4   FROM dual;
+
+CADENAS                                                                                                                           
+-------------------------                                                                                                         
+Smith, Ellen Hildi                                                                                                                
+
+1 row selected.
+
+SQL> 
+SQL> 
+SQL>  SELECT REGEXP_SUBSTR(
+  2                         'There is is a speed limit!',
+  3                         '([[:alnum:]]+)([[:space:]]+)\1') AS substr
+  4   FROM dual;
+
+SUBST                                                                                                                             
+-----                                                                                                                             
+is is                                                                                                                             
+
+1 row selected.
+
+SQL> 
+SQL> rem  Word Boundaries
+SQL> rem At times you may want to match entire words,
+SQL> rem   not just individual characters within a word or string.
+SQL> 
+SQL> SELECT REGEXP_REPLACE('The cat sat on the roof',
+  2                        '(^|[^[:alpha:]])cat($|[^[:alpha:]])', ' mouse ') cadenas
+  3         FROM dual;
+
+CADENAS                                                                                                                           
+-------------------------                                                                                                         
+The mouse sat on the roof                                                                                                         
+
+1 row selected.
+
+SQL> 
+SQL> rem  Applying Regular Expressions In Data
+SQL> rem    Validation
+SQL> ALTER TABLE student
+  2   ADD CONSTRAINT stud_last_name_ck CHECK
+  3   (REGEXP_LIKE(last_name, '^[-[:alpha:] .,()'']*$'));
+ALTER TABLE student
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> rem     Understanding Matching Mechanics
+SQL> 
+SQL> SELECT REGEXP_INSTR('This is an isolated issue',
+  2                        'is', 1, 1, 0) AS start_pos,
+  3                       REGEXP_INSTR('This is an isolated issue',
+  4                         'is', 1, 1, 1) AS after_end
+  5   FROM dual;
+
+ START_POS|=| AFTER_END                                                                                                           
+----------|=|----------                                                                                                           
+         3|=|         5                                                                                                           
+
+1 row selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  SELECT REGEXP_SUBSTR('This is an isolated issue',
+  2                        '[[:space:]]*is.*') cadenas
+  3                        FROM dual;
+
+CADENAS                                                                                                                           
+-------------------------                                                                                                         
+is is an isolated issue                                                                                                           
+
+1 row selected.
+
+SQL> 
+SQL> SELECT zip,
+  2          REGEXP_INSTR(zip, '[[:digit:]]{5}') exp1,
+  3          REGEXP_INSTR(zip, '[[:digit:]{5}]') exp2
+  4   FROM zipcode_example;
+ FROM zipcode_example
+      *
+ERROR at line 4:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  SELECT REGEXP_SUBSTR('first field, second field , third field',
+  2                        ', [^,]*,')  cadenas
+  3                      FROM dual;
+
+CADENAS                                                                                                                           
+-------------------------                                                                                                         
+, second field ,                                                                                                                  
+
+1 row selected.
+
+SQL> 
+SQL> 
+SQL> SELECT zip,
+  2  REGEXP_INSTR(zip, '[[:digit:]]{5}') exp1,
+  3  REGEXP_INSTR(zip, '[[:digit:]{5}]') exp2
+  4   FROM zipcode_example;
+ FROM zipcode_example
+      *
+ERROR at line 4:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL>  SELECT REGEXP_SUBSTR('first field, second field , third field',
+  2                        ', [^,]*,') cadenas
+  3           FROM dual;
+
+CADENAS                                                                                                                           
+-------------------------                                                                                                         
+, second field ,                                                                                                                  
+
+1 row selected.
+
+SQL> 
+SQL> SELECT REGEXP_INSTR('Hello', '(xy)?', 1, 1, 0)
+  2   AS start_pos,
+  3   REGEXP_INSTR('Hello', '(xy)?', 1, 1, 1)
+  4   AS after_end
+  5   FROM dual;
+
+ START_POS|=| AFTER_END                                                                                                           
+----------|=|----------                                                                                                           
+         1|=|         1                                                                                                           
+
+1 row selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL>  spool off;

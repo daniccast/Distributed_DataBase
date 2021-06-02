@@ -1,0 +1,148 @@
+SQL> set linesize 130
+SQL> set pagesize 90
+SQL> set feddback on
+SP2-0158: unknown SET option "feddback"
+SQL> set colsep '|=|'
+SQL> set underline =
+SQL> 
+SQL> select Lname
+  2  FROM EMPLOYEE,WORKS_ON,PROJECT
+  3  WHERE PNAME='ProductY'
+  4  and pnumber=pno
+  5  and Essn=Ssn
+  6  and bdate > to_date('1957-12-31','YYYY-MM-DD')
+  7  ORDER BY 1;
+and bdate > to_date('1957-12-31','YYYY-MM-DD')
+    *
+ERROR at line 6:
+ORA-00904: "BDATE": invalid identifier 
+
+
+SQL> 
+SQL> REM OBTENER EL NUMERO DE TUPLAS
+SQL> REM AL CONBINAR LAS TRES ENTIDADES
+SQL> REM EMPLOYEE,WORKS_ON & PROJECT
+SQL> REM AL GENERAR EL PRODUCTO CARTESIANO DE LAS TRES
+SQL> 
+SQL> SELECT COUNT(*)
+  2  FROM EMPLOYEE,WORKS_ON,PROJECT;
+
+  COUNT(*)                                                                                                                        
+==========                                                                                                                        
+      1120                                                                                                                        
+
+SQL> 
+SQL> REM CALCULAR LA SELECTIVIDAD DEL RESULTADOO De
+SQL> rem la consulta con respecto al producto cartesiano
+SQL> select 3/ 768 from dual;
+
+     3/768                                                                                                                        
+==========                                                                                                                        
+ .00390625                                                                                                                        
+
+SQL> rem en procentaje
+SQL> select (3/ 768)*100 ||' % ' porcentaje from dual;
+
+PORCENTAJE                                                                                                                        
+==========                                                                                                                        
+.390625 %                                                                                                                         
+
+SQL> 
+SQL> rem calculemos el numero de tuplas
+SQL> rem  de otros productos cartesiano
+SQL> SELECT COUNT(*)
+  2  FROM EMPLOYEE,WORKS_ON;
+
+  COUNT(*)                                                                                                                        
+==========                                                                                                                        
+       224                                                                                                                        
+
+SQL> 
+SQL> rem
+SQL> SELECT COUNT(*)
+  2  FROM PROJECT,WORKS_ON;
+
+  COUNT(*)                                                                                                                        
+==========                                                                                                                        
+        80                                                                                                                        
+
+SQL> 
+SQL> 
+SQL> select *
+  2  from employee
+  3  where bdate > to_date('1957-12-31','YYYY-MM-DD');
+where bdate > to_date('1957-12-31','YYYY-MM-DD')
+      *
+ERROR at line 3:
+ORA-00904: "BDATE": invalid identifier 
+
+
+SQL> 
+SQL> select count(*) total
+  2  from (
+  3  select *
+  4  from employee
+  5  where bdate > to_date('1957-12-31','YYYY-MM-DD'));
+where bdate > to_date('1957-12-31','YYYY-MM-DD'))
+      *
+ERROR at line 5:
+ORA-00904: "BDATE": invalid identifier 
+
+
+SQL> 
+SQL> 
+SQL> select count(*) total
+  2  from (
+  3  select pname,pnumber,plocation,dnum
+  4  from project
+  5  WHERE PNAME='ProductY');
+
+     TOTAL                                                                                                                        
+==========                                                                                                                        
+         1                                                                                                                        
+
+SQL> 
+SQL> select pname,pnumber,plocation,dnum
+  2  from project
+  3  WHERE PNAME='ProductY';
+
+PNAME          |=|   PNUMBER|=|PLOCATION      |=|      DNUM                                                                       
+===============|=|==========|=|===============|=|==========                                                                       
+ProductY       |=|         2|=|Sugarland      |=|         5                                                                       
+
+SQL> 
+SQL> select essn,pno
+  2  from works_on;
+
+      ESSN|=|       PNO                                                                                                           
+==========|=|==========                                                                                                           
+ 123456789|=|         1                                                                                                           
+ 123456789|=|         2                                                                                                           
+ 666884444|=|         3                                                                                                           
+ 453453453|=|         1                                                                                                           
+ 453453453|=|         2                                                                                                           
+ 333445555|=|         2                                                                                                           
+ 333445555|=|         3                                                                                                           
+ 333445555|=|        10                                                                                                           
+ 333445555|=|        20                                                                                                           
+ 999887777|=|        30                                                                                                           
+ 999887777|=|        10                                                                                                           
+ 987987987|=|        10                                                                                                           
+ 987987987|=|        30                                                                                                           
+ 987654321|=|        30                                                                                                           
+ 987654321|=|        20                                                                                                           
+ 888665555|=|        20                                                                                                           
+
+16 rows selected.
+
+SQL> 
+SQL> select count(*) total
+  2  from (
+  3  select essn,pno
+  4  from works_on);
+
+     TOTAL                                                                                                                        
+==========                                                                                                                        
+        16                                                                                                                        
+
+SQL> spool off

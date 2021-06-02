@@ -1,0 +1,165 @@
+SQL> rem ROSENZWEIG,B &  RAKHIMOV,E (2009).Oracle© PL/SQLTby Example,Boston,MA,USA:Perarson.
+SQL> rem ejercicios cap PL/SQL CONCEPTS
+SQL> set pagesize 99
+SQL> set linesize 130
+SQL> set colsep '|=|'
+SQL> set underline =
+SQL> set null s/Datos
+SQL> set feedback on
+SQL> 
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,27]
+SQL> SET SERVEROUTPUT ON;
+SQL> DECLARE
+  2  v_var1 VARCHAR2(20);
+  3  v_var2 VARCHAR2(6);
+  4  v_var3 NUMBER(5,3);
+  5  BEGIN
+  6  v_var1 := 'string literal';
+  7  v_var2 := '12.345';
+  8  v_var3 := 12.345;
+  9  DBMS_OUTPUT.PUT_LINE('v_var1: '||v_var1);
+ 10  DBMS_OUTPUT.PUT_LINE('v_var2: '||v_var2);
+ 11  DBMS_OUTPUT.PUT_LINE('v_var3: '||v_var3);
+ 12  END;
+ 13  /
+v_var1: string literal                                                                                                            
+v_var2: 12.345                                                                                                                    
+v_var3: 12.345                                                                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,28]
+SQL> SET SERVEROUTPUT ON;
+SQL> DECLARE
+  2  v_var1 NUMBER(2) := 123;
+  3  v_var2 NUMBER(3) := 123;
+  4  v_var3 NUMBER(5,3) := 123456.123;
+  5  BEGIN
+  6  DBMS_OUTPUT.PUT_LINE('v_var1: '||v_var1);
+  7  DBMS_OUTPUT.PUT_LINE('v_var2: '||v_var2);
+  8  DBMS_OUTPUT.PUT_LINE('v_var3: '||v_var3);
+  9  END;
+ 10  /
+DECLARE
+*
+ERROR at line 1:
+ORA-06502: PL/SQL: numeric or value error: number precision too large 
+ORA-06512: at line 2 
+
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,31]
+SQL> -- ch02_3a.sql
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_cookies_amt NUMBER := 2;
+  3  v_calories_per_cookie CONSTANT NUMBER := 300;
+  4  BEGIN
+  5  DBMS_OUTPUT.PUT_LINE('I ate ' || v_cookies_amt ||
+  6  ' cookies with ' || v_cookies_amt *
+  7  v_calories_per_cookie || ' calories.');
+  8  v_cookies_amt := 3;
+  9  DBMS_OUTPUT.PUT_LINE('I really ate ' ||
+ 10  v_cookies_amt
+ 11  || ' cookies with ' || v_cookies_amt *
+ 12  v_calories_per_cookie || ' calories.');
+ 13  v_cookies_amt := v_cookies_amt + 5;
+ 14  DBMS_OUTPUT.PUT_LINE('The truth is, I actually ate '
+ 15  || v_cookies_amt || ' cookies with ' ||
+ 16  v_cookies_amt * v_calories_per_cookie
+ 17  || ' calories.');
+ 18  END;
+ 19  /
+I ate 2 cookies with 600 calories.                                                                                                
+I really ate 3 cookies with 900 calories.                                                                                         
+The truth is, I actually ate 8 cookies with 2400 calories.                                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,33]
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  v_lname VARCHAR2(30);
+  3  v_regdate DATE;
+  4  v_pctincr CONSTANT NUMBER(4,2) := 1.50;
+  5  v_counter NUMBER := 0;
+  6  v_new_cost course.cost%TYPE;
+  7  v_YorN BOOLEAN := TRUE;
+  8  BEGIN
+  9  v_counter := NVL(v_counter, 0) + 1;
+ 10  v_new_cost := 800 * v_pctincr;
+ 11  DBMS_OUTPUT.PUT_LINE(v_counter);
+ 12  DBMS_OUTPUT.PUT_LINE(v_new_cost);
+ 13  v_counter := ((v_counter + 5)*2) / 2;
+ 14  v_new_cost := (v_new_cost * v_counter)/4;
+ 15  DBMS_OUTPUT.PUT_LINE(v_counter);
+ 16  DBMS_OUTPUT.PUT_LINE(v_new_cost);
+ 17  END;
+ 18  /
+1                                                                                                                                 
+1200                                                                                                                              
+6                                                                                                                                 
+1800                                                                                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,35]
+SQL> -- ch02_4b.sql
+SQL> SET SERVEROUTPUT ON
+SQL> << outer_block >>
+  2  DECLARE
+  3  v_test NUMBER := 123;
+  4  BEGIN
+  5  DBMS_OUTPUT.PUT_LINE
+  6  ('Outer Block, v_test: '||v_test);
+  7  << inner_block >>
+  8  DECLARE
+  9  v_test NUMBER := 456;
+ 10  BEGIN
+ 11  DBMS_OUTPUT.PUT_LINE
+ 12  ('Inner Block, v_test: '||v_test);
+ 13  DBMS_OUTPUT.PUT_LINE
+ 14  ('Inner Block, outer_block.v_test: '||
+ 15  Outer_block.v_test);
+ 16  END inner_block;
+ 17  END outer_block;
+ 18  /
+Outer Block, v_test: 123                                                                                                          
+Inner Block, v_test: 456                                                                                                          
+Inner Block, outer_block.v_test: 123                                                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> rem [ROSENZWEIG &  RAKHIMOV,2009,36]
+SQL> -- ch02_5a.sql
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  e_show_exception_scope EXCEPTION;
+  3  v_student_id NUMBER := 123;
+  4  BEGIN
+  5  DBMS_OUTPUT.PUT_LINE('outer student id is '
+  6  ||v_student_id);
+  7  DECLARE
+  8  v_student_id VARCHAR2(8) := 125;
+  9  BEGIN
+ 10  DBMS_OUTPUT.PUT_LINE('inner student id is '
+ 11  ||v_student_id);
+ 12  RAISE e_show_exception_scope;
+ 13  END;
+ 14  EXCEPTION
+ 15  WHEN e_show_exception_scope
+ 16  THEN
+ 17  DBMS_OUTPUT.PUT_LINE('When am I displayed?');
+ 18  DBMS_OUTPUT.PUT_LINE('outer student id is '
+ 19  ||v_student_id);
+ 20  END;
+ 21  /
+outer student id is 123                                                                                                           
+inner student id is 125                                                                                                           
+When am I displayed?                                                                                                              
+outer student id is 123                                                                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> SPOOL OFF
