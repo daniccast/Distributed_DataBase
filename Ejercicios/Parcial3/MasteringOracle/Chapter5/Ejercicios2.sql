@@ -5,10 +5,10 @@ rem * Distributed DataBase, ESCOM. Ciclo 2021-2         *
 rem * Elaborado por:                                    *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar Oscar  *
 rem * Realizado el 7 de Junio de 2021                   *
-rem *Mishra S., Beaulieu A. (2002). 			  *
-rem *Chapter 5. Subqueries				  *
-rem * SQL (pp. 157-174).Gravenstein Highway North,	  *
-rem * Sebastopol, CA 95472. 				  *
+rem *Mishra S., Beaulieu A. (2002). 			*
+rem *Chapter 5. Subqueries				*
+rem * SQL (pp. 157-174).Gravenstein Highway North,	*
+rem * Sebastopol, CA 95472. 				*
 rem *****************************************************
 
 rem Establecer formato para las tablas
@@ -48,7 +48,7 @@ FROM department d,
 	(SELECT dept_id, COUNT(*) tot
 	FROM employee
 	GROUP BY dept_id) emp_cnt
-	WHERE d.dept_id = emp_cnt.dept_id);
+	WHERE d.dept_id = emp_cnt.dept_id;
 
 
 
@@ -61,18 +61,14 @@ FROM
 		(SELECT sales_emp_id, SUM(sale_price) tot_sales,
 		RANK( ) OVER (ORDER BY SUM(sale_price) DESC) sales_rank
 		FROM cust_order
-		WHERE order_dt >= TO_DATE('01-JAN-2001','DD-MON-YYYY')
-		AND order_dt < TO_DATE('01-JAN-2002','DD-MON-YYYY')
-		AND ship_dt IS NOT NULL AND cancelled_dt IS NULL
+		WHERE order_dt >= TO_DATE('01-JUL-2001','DD-MON-YYYY')
+		AND order_dt < TO_DATE('01-JUL-2002','DD-MON-YYYY')
 		GROUP BY sales_emp_id
 		) all_emp_orders
 	WHERE all_emp_orders.sales_rank <= 5
 	) top5_emp_orders, employee e
 WHERE top5_emp_orders.emp_id = e.emp_id
 ORDER BY 2 DESC;
-
-
-
 
 
 spool OFF;
