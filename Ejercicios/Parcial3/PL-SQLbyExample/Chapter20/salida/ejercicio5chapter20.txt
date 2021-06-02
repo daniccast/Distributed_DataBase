@@ -1,0 +1,53 @@
+SQL> CREATE OR REPLACE FUNCTION zip_is_good
+  2  	(i_zip IN VARCHAR)
+  3  RETURN BOOLEAN
+  4  AS
+  5  	v_zip INTEGER;
+  6  BEGIN
+  7  	SELECT COUNT(*)
+  8  	INTO v_zip
+  9  	FROM zipcode
+ 10  	WHERE zip = i_zip;
+ 11  	RETURN 1 = v_zip;
+ 12  EXCEPTION
+ 13  	WHEN OTHERS
+ 14  	THEN
+ 15  		RETURN FALSE;
+ 16  END zip_is_good;
+ 17  .
+SQL> /
+
+Función creada.
+
+SQL> DECLARE
+  2  	v_zip VARCHAR(5);
+  3  BEGIN
+  4  	v_zip := &id;
+  5  	IF zip_is_good(v_zip)
+  6  	THEN
+  7  		DBMS_OUTPUT.PUT_LINE
+  8  		('Zip '||v_zip||' is a valid.');
+  9  	ELSE
+ 10  		DBMS_OUTPUT.PUT_LINE
+ 11  		('Zip '||v_zip||' is not valid.');
+ 12  	END IF;
+ 13  END;
+ 14  .
+SQL> /
+Introduzca un valor para id: 55051
+antiguo   4: 	v_zip := &id;
+nuevo   4: 	v_zip := 55051;
+Zip 55051 is not valid.                                                                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> /
+Introduzca un valor para id: 50071
+antiguo   4: 	v_zip := &id;
+nuevo   4: 	v_zip := 50071;
+Zip 50071 is a valid.                                                                                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> 
+SQL> spool OFF;

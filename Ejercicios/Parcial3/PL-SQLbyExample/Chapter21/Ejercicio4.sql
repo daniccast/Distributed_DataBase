@@ -35,6 +35,7 @@ CREATE OR REPLACE PACKAGE course_pkg AS
 		 p_instructor_id NUMBER ,
 		 course_list_cv IN OUT course_cur);
 	END course_pkg;
+.
 /
 
 CREATE OR REPLACE PACKAGE BODY course_pkg AS
@@ -88,12 +89,8 @@ CREATE OR REPLACE PACKAGE BODY course_pkg AS
 	
 END course_pkg;
 
-
-
-
-
-
-
+.
+/
 
 
 -- Siguiendo ejemplo del libro

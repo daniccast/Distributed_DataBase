@@ -1,4 +1,4 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter20\salida\ejercicio3chapter20.txt
+﻿spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter20\salida\ejercicio3chapter20.txt
 /*
 rem **********************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
@@ -39,8 +39,12 @@ EXCEPTION
 		RAISE_APPLICATION_ERROR(-20003, 'Error in instructor_id: '||v_sqlerrm);
 	END;
 END new_instructor_id;
-
+.
+/
 --Genera el nuevo ID del instructor
 
-insert into instructor(instructor_id, created_by, created_date, modified_by, modified_date)values (new_instructor_id(), 'Daniela', SYSDATE, 'Daniela',SYSDATE);
+insert into instructor(instructor_id, zip, created_by, created_date, modified_by, modified_date)
+values (new_instructor_id(), '50071', 'Daniela', SYSDATE, 'Daniela',SYSDATE);
+
+select * from instructor where zip='50071';
 spool OFF;

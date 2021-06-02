@@ -1,0 +1,132 @@
+SQL> CREATE OR REPLACE PACKAGE course_pkg AS
+  2  	TYPE course_rec_typ IS RECORD
+  3  		(first_name 	student.first_name%TYPE,
+  4  		 last_name 	student.last_name%TYPE,
+  5  		 course_no 	course.course_no%TYPE,
+  6  		 description	course.description%TYPE,
+  7  		 section_no	section.section_no%TYPE
+  8  		);
+  9  	TYPE course_cur IS REF CURSOR RETURN course_rec_typ;
+ 10  	PROCEDURE get_course_list
+ 11  		(p_student_id NUMBER ,
+ 12  		 p_instructor_id NUMBER ,
+ 13  		 course_list_cv IN OUT course_cur);
+ 14  	END course_pkg;
+ 15  .
+SQL> /
+
+Paquete creado.
+
+SQL> 
+SQL> CREATE OR REPLACE PACKAGE BODY course_pkg AS
+  2  
+  3  	PROCEDURE get_course_list
+  4  		(p_student_id NUMBER ,
+  5  		p_instructor_id NUMBER ,
+  6  		course_list_cv IN OUT course_cur)
+  7  	IS
+  8  	 BEGIN
+  9  		IF p_student_id IS NULL AND p_instructor_id
+ 10  		IS NULL THEN
+ 11  			OPEN course_list_cv FOR
+ 12  			SELECT 'Please choose a student-' 	First_name,
+ 13  			'instructor combination'		Last_name,
+ 14  			NULL					course_no,
+ 15  			NULL					description,
+ 16  			NULL					section_no
+ 17  				FROM dual;
+ 18  		ELSIF p_student_id IS NULL THEN
+ 19  			OPEN course_list_cv FOR
+ 20  			SELECT s.first_name	first_name,
+ 21  			s.last_name		last_name,
+ 22  			c.course_no		course_no,
+ 23  			c.description		description,
+ 24  			se.section_no		section_no
+ 25  				FROM instructor i, student s, section se, course c, enrollment e
+ 26  				WHERE i.instructor_id = p_instructor_id
+ 27  				AND i.instructor_id 	= se.instructor_id
+ 28  				AND se.course_no 	= c.course_no
+ 29  				AND e.student_id	= s.student_id
+ 30  				AND e.section_id	= se.section_id
+ 31  				ORDER BY c.course_no, se.section_no;
+ 32  
+ 33  		ELSIF p_instructor_id IS NULL THEN
+ 34  			OPEN course_list_cv FOR
+ 35  			SELECT i.first_name 	first_name,
+ 36  				i.last_name	last_name,
+ 37  				c.course_no	course_no,
+ 38  				c.description	description,
+ 39  				se.section_no	section_no
+ 40  				FROM instructor i, student s, section se, course c, enrollment e
+ 41  				WHERE s.student_id = p_student_id
+ 42  				AND i.instructor_id = se.instructor_id
+ 43  				AND se.course_no = c.course_no
+ 44  				AND e.student_id = s.student_id
+ 45  				AND e.section_id = se.section_id
+ 46  				ORDER BY c.course_no, se.section_no;
+ 47  		END IF;
+ 48  	END get_course_list;
+ 49  
+ 50  END course_pkg;
+ 51  
+ 52  .
+SQL> /
+
+Cuerpo del paquete creado.
+
+SQL> VARIABLE course_cv REFCURSOR
+SQL> exec course_pkg.get_course_list(102, NULL, :course_cv);
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> print course_cv
+
+FIRST_NAME               |=LAST_NAME                |=COURSE_NO|=DESCRIPTION                                       |=SECTION_NO                       
+-------------------------|=-------------------------|=---------|=--------------------------------------------------|=----------                       
+Charles                  |=Lowry                    |=       25|=Intro to Programming                              |=         2                       
+Nina                     |=Schorin                  |=       25|=Intro to Programming                              |=         5                       
+
+SQL> exec course_pkg.get_course_list(NULL, 102, :course_cv);
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> print course_cv
+
+FIRST_NAME               |=LAST_NAME                |=COURSE_NO|=DESCRIPTION                                       |=SECTION_NO                       
+-------------------------|=-------------------------|=---------|=--------------------------------------------------|=----------                       
+Jeff                     |=Runyan                   |=       10|=DP Overview                                       |=         2                       
+Dawn                     |=Dennis                   |=       25|=Intro to Programming                              |=         4                       
+Alfred                   |=Hutheesing               |=       25|=Intro to Programming                              |=         4                       
+Arun                     |=Griffen                  |=       25|=Intro to Programming                              |=         4                       
+Jim                      |=Joas                     |=       25|=Intro to Programming                              |=         4                       
+May                      |=Jodoin                   |=       25|=Intro to Programming                              |=         4                       
+Lula                     |=Oates                    |=      100|=Hands-On Windows                                  |=         1                       
+Regina                   |=Bose                     |=      100|=Hands-On Windows                                  |=         1                       
+Roger                    |=Snow                     |=      100|=Hands-On Windows                                  |=         1                       
+Rommel                   |=Frost                    |=      100|=Hands-On Windows                                  |=         1                       
+Jenny                    |=Goldsmith                |=      100|=Hands-On Windows                                  |=         1                       
+Debra                    |=Boyce                    |=      100|=Hands-On Windows                                  |=         1                       
+Janet                    |=Jung                     |=      120|=Intro to Java Programming                         |=         4                       
+Evan                     |=Fielding                 |=      124|=Advanced Java Programming                         |=         1                       
+Ronald                   |=Tangaribuan              |=      124|=Advanced Java Programming                         |=         1                       
+Charles                  |=Caro                     |=      124|=Advanced Java Programming                         |=         1                       
+Sharon                   |=Thompson                 |=      124|=Advanced Java Programming                         |=         1                       
+John                     |=Smith                    |=      124|=Advanced Java Programming                         |=         1                       
+N                        |=Kuehn                    |=      146|=Java for C/C++ Programmers                        |=         2                       
+Derrick                  |=Baltazar                 |=      146|=Java for C/C++ Programmers                        |=         2                       
+Angela                   |=Torres                   |=      240|=Intro to the Basic Language                       |=         2                       
+
+21 filas seleccionadas.
+
+SQL> exec course_pkg.get_course_list(NULL, NULL, :course_cv);
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> print course_cv
+
+FIRST_NAME              |=LAST_NAME             |=C|=D|=S                                                                                             
+------------------------|=----------------------|=-|=-|=-                                                                                             
+Please choose a student-|=instructor combination|= |= |=                                                                                              
+
+SQL> 
+SQL> spool OFF;

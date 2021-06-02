@@ -1,0 +1,44 @@
+SQL> CREATE OR REPLACE FUNCTION new_student_id
+  2  RETURN student.student_id%TYPE
+  3  AS
+  4  	v_new_studentid student.student_id%TYPE;
+  5  BEGIN
+  6  	SELECT student_id_seq.NEXTVAL
+  7  		INTO v_new_studentid
+  8  		FROM dual;
+  9  	RETURN v_new_studentid;
+ 10  EXCEPTION
+ 11  	WHEN OTHERS THEN
+ 12  	DECLARE
+ 13  		v_sqlerrm VARCHAR2(250) := SUBSTR(SQLERRM,1,250);
+ 14  	BEGIN
+ 15  		RAISE_APPLICATION_ERROR(-20003, 'Error in instructor_id: '||v_sqlerrm);
+ 16  	END;
+ 17  END new_student_id;
+ 18  .
+SQL> /
+
+Función creada.
+
+SQL> insert into student (student_id, last_name, zip, registration_date, created_by, created_date,modified_by, modified_date)
+  2  values (new_student_id(),'Castillo', '50075', SYSDATE,'Daneila', SYSDATE,  'Daniela', SYSDATE);
+insert into student (student_id, last_name, zip, registration_date, created_by, created_date,modified_by, modified_date)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (STUDENT.STU_ZIP_FK) violada - clave principal no encontrada 
+
+
+SQL> 
+SQL> insert into student (student_id, last_name, zip, registration_date, created_by, created_date,modified_by, modified_date)
+  2  values (new_student_id(),'Castillo', '50071', SYSDATE,'Daneila', SYSDATE,  'Daniela', SYSDATE);
+
+1 fila creada.
+
+SQL> select student_id, last_name, zip from student where zip='50071';
+
+STUDENT_ID|=LAST_NAME                |=ZIP                                                                                                            
+----------|=-------------------------|=-----                                                                                                          
+       441|=Castillo                 |=50071                                                                                                          
+
+SQL> 
+SQL> spool OFF;

@@ -26,7 +26,7 @@ CREATE OR REPLACE FUNCTION zip_is_good
 	(i_zip IN VARCHAR)
 RETURN BOOLEAN
 AS
-	v_zip VARCHAR;
+	v_zip INTEGER;
 BEGIN
 	SELECT COUNT(*)
 	INTO v_zip
@@ -37,21 +37,24 @@ EXCEPTION
 	WHEN OTHERS
 	THEN
 		RETURN FALSE;
-END id_is_good;
+END zip_is_good;
+.
+/
 
 DECLARE
-	v_zip VARCHAR;
+	v_zip VARCHAR(5);
 BEGIN
 	v_zip := &id;
-	IF zip_is_good(v_id)
+	IF zip_is_good(v_zip)
 	THEN
 		DBMS_OUTPUT.PUT_LINE
-		('Zip '||v_id||' is a valid.');
+		('Zip '||v_zip||' is a valid.');
 	ELSE
 		DBMS_OUTPUT.PUT_LINE
-		('Zip '||v_id||' is not valid.');
+		('Zip '||v_zip||' is not valid.');
 	END IF;
 END;
-
+.
+/
 
 spool OFF;

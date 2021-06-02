@@ -31,7 +31,8 @@ CREATE OR REPLACE PACKAGE school_api as
 	FUNCTION new_instructor_id
 	RETURN instructor.instructor_id%TYPE;
 END school_api;
-
+.
+/
 
 --Create a package body for the package named school_api that you created in the previous
 --exercise. This will contain the procedure discount from Chapter 19 and the function
@@ -58,7 +59,7 @@ CREATE OR REPLACE PACKAGE BODY school_api AS
 				WHERE course_no = r_group_discount.course_no;
 			DBMS_OUTPUT.PUT_LINE ('A 5% discount has been given to' ||r_group_discount.course_no||' '||r_group_discount.description);
 		END LOOP;
-	END discount_cost;
+	END discount;
 
 
  	FUNCTION new_instructor_id
@@ -80,17 +81,20 @@ CREATE OR REPLACE PACKAGE BODY school_api AS
 	END new_instructor_id;
 	
 END school_api;
+.
+/
 
 -- ch21_7a.sql (ROSENZWEIG y RAKHIMOV, 2009, 465).
 
 DECLARE
 	V_instructor_id instructor.instructor_id%TYPE;
 BEGIN
-	School_api.Discount_Cost;
+	School_api.Discount;
 	v_instructor_id := school_api.new_instructor_id;
 	DBMS_OUTPUT.PUT_LINE('The new id is: '||v_instructor_id);
 END;
 
-
+.
+/
 
 spool OFF;

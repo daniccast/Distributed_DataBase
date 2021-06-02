@@ -1,0 +1,101 @@
+SQL> CREATE OR REPLACE FUNCTION show_description
+  2  	(i_course_no course.course_no%TYPE)
+  3  RETURN varchar2
+  4  AS
+  5  	v_description varchar2(50);
+  6  BEGIN
+  7  	SELECT description
+  8  		INTO v_description
+  9  		FROM course
+ 10  		WHERE course_no = i_course_no;
+ 11  	RETURN v_description;
+ 12  
+ 13  EXCEPTION
+ 14  	WHEN NO_DATA_FOUND
+ 15  	THEN
+ 16  		RETURN('The Course is not in the database');
+ 17  	WHEN OTHERS
+ 18  	THEN
+ 19  		RETURN('Error in running show_description');
+ 20  END;
+ 21  .
+SQL> /
+
+Función creada.
+
+SQL> DECLARE
+  2  	v_description VARCHAR2(50);
+  3  BEGIN
+  4  	v_description := show_description(&sv_cnumber);
+  5  	DBMS_OUTPUT.PUT_LINE(v_description);
+  6  END;
+  7  .
+SQL> /
+Introduzca un valor para sv_cnumber: 5
+antiguo   4: 	v_description := show_description(&sv_cnumber);
+nuevo   4: 	v_description := show_description(5);
+The Course is not in the database                                                                                                                     
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> /
+Introduzca un valor para sv_cnumber: 10
+antiguo   4: 	v_description := show_description(&sv_cnumber);
+nuevo   4: 	v_description := show_description(10);
+DP Overview                                                                                                                                           
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> COLUMN course_no FORMAT 999
+SQL> COLUMN Descripcion FORMAT A25
+SQL> 
+SQL> SELECT course_no, show_description(course_no) as Descripcion
+  2  FROM course;
+
+COURSE_NO|=DESCRIPCION                                                                                                                                
+---------|=-------------------------                                                                                                                  
+       10|=DP Overview                                                                                                                                
+       20|=Intro to Computers                                                                                                                         
+       25|=Intro to Programming                                                                                                                       
+       80|=Structured Programming Te                                                                                                                  
+         |=chniques                                                                                                                                   
+                                                                                                                                                      
+      100|=Hands-On Windows                                                                                                                           
+      120|=Intro to Java Programming                                                                                                                  
+      122|=Intermediate Java Program                                                                                                                  
+         |=ming                                                                                                                                       
+                                                                                                                                                      
+      124|=Advanced Java Programming                                                                                                                  
+      125|=JDeveloper                                                                                                                                 
+      130|=Intro to Unix                                                                                                                              
+      132|=Basics of Unix Admin                                                                                                                       
+      134|=Advanced Unix Admin                                                                                                                        
+      135|=Unix Tips and Techniques                                                                                                                   
+      140|=Structured Analysis                                                                                                                        
+      142|=Project Management                                                                                                                         
+      144|=Database Design                                                                                                                            
+      145|=Internet Protocols                                                                                                                         
+      146|=Java for C/C++ Programmer                                                                                                                  
+         |=s                                                                                                                                          
+                                                                                                                                                      
+      147|=GUI Programming                                                                                                                            
+      204|=Intro to SQL                                                                                                                               
+      210|=Oracle Tools                                                                                                                               
+      220|=PL/SQL Programming                                                                                                                         
+      230|=Intro to Internet                                                                                                                          
+      240|=Intro to the Basic Langua                                                                                                                  
+         |=ge                                                                                                                                         
+                                                                                                                                                      
+      310|=Operating Systems                                                                                                                          
+      330|=Network Administration                                                                                                                     
+      350|=JDeveloper Lab                                                                                                                             
+      420|=Database System Principle                                                                                                                  
+         |=s                                                                                                                                          
+                                                                                                                                                      
+      430|=JDeveloper Techniques                                                                                                                      
+      450|=DB Programming in Java                                                                                                                     
+      453|=Test Course                                                                                                                                
+
+31 filas seleccionadas.
+
+SQL> spool off;

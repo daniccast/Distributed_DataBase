@@ -42,9 +42,13 @@ EXCEPTION
 	BEGIN
 		RAISE_APPLICATION_ERROR(-20003, 'Error in instructor_id: '||v_sqlerrm);
 	END;
-END new_instructor_id;
+END new_student_id;
+.
+/
 
+insert into student (student_id, last_name, zip, registration_date, created_by, created_date,modified_by, modified_date) 
+values (new_student_id(),'Castillo', '50071', SYSDATE,'Daneila', SYSDATE,  'Daniela', SYSDATE);
 
-insert into student (student_id, last_name, zip, registration_date, created_by, created_date, modified_date, modified_by, modified_date) into (new_student_id(),'Castillo', '55075', SYSDATE,'Daneila', SYSDATE, 'Daniela', SYSDATE);
+select student_id, last_name, zip from student where zip='50071';
 
 spool OFF;

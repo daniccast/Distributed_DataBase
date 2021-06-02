@@ -1,0 +1,38 @@
+SQL> CREATE OR REPLACE FUNCTION new_instructor_id
+  2  RETURN instructor.instructor_id%TYPE
+  3  AS
+  4  	v_new_instid instructor.instructor_id%TYPE;
+  5  BEGIN
+  6  	SELECT INSTRUCTOR_ID_SEQ.NEXTVAL
+  7  		INTO v_new_instid
+  8  		FROM dual;
+  9  	RETURN v_new_instid;
+ 10  EXCEPTION
+ 11  	WHEN OTHERS THEN
+ 12  	DECLARE
+ 13  		v_sqlerrm VARCHAR2(250) := SUBSTR(SQLERRM,1,250);
+ 14  	BEGIN
+ 15  		RAISE_APPLICATION_ERROR(-20003, 'Error in instructor_id: '||v_sqlerrm);
+ 16  	END;
+ 17  END new_instructor_id;
+ 18  .
+SQL> /
+
+Función creada.
+
+SQL> insert into instructor(instructor_id, zip, created_by, created_date, modified_by, modified_date)
+  2  values (new_instructor_id(), '50071', 'Daniela', SYSDATE, 'Daniela',SYSDATE);
+
+1 fila creada.
+
+SQL> select * from instructor where zip='50071';
+
+INSTRUCTOR_ID|=SALUT|=FIRST_NAME               |=LAST_NAME                |=STREET_ADDRESS                                    |=ZIP  |=PHONE          
+-------------|=-----|=-------------------------|=-------------------------|=--------------------------------------------------|=-----|=---------------
+CREATED_BY                    |=CREATED_DAT|=MODIFIED_BY                   |=MODIFIED_DA                                                              
+------------------------------|=-----------|=------------------------------|=-----------                                                              
+          119|=     |=                         |=                         |=                                                  |=50071|=               
+Daniela                       |=02-JUN-2021|=Daniela                       |=02-JUN-2021                                                              
+                                                                                                                                                      
+
+SQL> spool off;

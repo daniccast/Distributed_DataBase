@@ -1,0 +1,56 @@
+SQL> CREATE OR REPLACE PACKAGE MANAGE_GRADES AS
+  2  	-- Cursor to loop through all grade types for a given section.
+  3  	CURSOR c_grade_type
+  4  		(pc_section_id section.section_id%TYPE,
+  5  		PC_student_ID student.student_id%TYPE)
+  6  	IS
+  7  		SELECT GRADE_TYPE_CODE,NUMBER_PER_SECTION,PERCENT_OF_FINAL_GRADE, DROP_LOWEST
+  8  			FROM grade_Type_weight
+  9  			WHERE section_id = pc_section_id
+ 10  			AND section_id IN (SELECT section_id
+ 11  				FROM grade
+ 12  				WHERE student_id = pc_student_id);
+ 13  END MANAGE_GRADES;
+ 14  .
+SQL> /
+
+Paquete creado.
+
+SQL> CREATE OR REPLACE PACKAGE MANAGE_GRADES AS
+  2  	-- Cursor to loop through all grade types for a given section.
+  3  	CURSOR c_grade_type
+  4  		(pc_section_id section.section_id%TYPE,
+  5  		PC_student_ID student.student_id%TYPE)
+  6  	IS
+  7  		SELECT GRADE_TYPE_CODE,
+  8  			NUMBER_PER_SECTION,
+  9  			PERCENT_OF_FINAL_GRADE,
+ 10  			DROP_LOWEST
+ 11  			FROM grade_Type_weight
+ 12  			WHERE section_id = pc_section_id
+ 13  			AND section_id IN (SELECT section_id
+ 14  						FROM grade
+ 15  						WHERE student_id = pc_student_id);
+ 16  	-- Cursor to loop through all grades for a given student
+ 17  	-- in a given section.
+ 18  	CURSOR c_grades
+ 19  		(p_grade_type_code
+ 20  		grade_Type_weight.grade_type_code%TYPE,
+ 21  		pc_student_id student.student_id%TYPE,
+ 22  		pc_section_id section.section_id%TYPE)
+ 23  	IS
+ 24  		SELECT grade_type_code,grade_code_occurrence,
+ 25  		numeric_grade
+ 26  			FROM grade
+ 27  			WHERE student_id = pc_student_id
+ 28  			AND section_id = pc_section_id
+ 29  			AND grade_type_code = p_grade_type_code;
+ 30  END MANAGE_GRADES;
+ 31  .
+SQL> /
+
+Paquete creado.
+
+SQL> 
+SQL> 
+SQL> spool OFF;

@@ -1,4 +1,4 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter21\salida\ejercicio5chapter21.txt
+﻿spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter21\salida\ejercicio5chapter21.txt
 /*
 rem **********************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
@@ -45,7 +45,8 @@ CREATE OR REPLACE PACKAGE MANAGE_GRADES AS
 				FROM grade
 				WHERE student_id = pc_student_id);
 END MANAGE_GRADES;
-
+.
+/
 
 -- ch21_11b.sql
 CREATE OR REPLACE PACKAGE MANAGE_GRADES AS
@@ -78,9 +79,8 @@ CREATE OR REPLACE PACKAGE MANAGE_GRADES AS
 			AND section_id = pc_section_id
 			AND grade_type_code = p_grade_type_code;
 END MANAGE_GRADES;
-
-
-
+.
+/
 
 
 

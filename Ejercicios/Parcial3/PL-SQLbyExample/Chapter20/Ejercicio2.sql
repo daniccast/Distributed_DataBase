@@ -40,7 +40,8 @@ EXCEPTION
 	THEN
 		RETURN FALSE;
 END id_is_good;
-
+.
+/
 DECLARE
 	v_id number;
 BEGIN
@@ -54,7 +55,8 @@ BEGIN
 		('Student ID: '||v_id||' is not valid.');
 	END IF;
 END;
-
+.
+/
 
 
 spool OFF;

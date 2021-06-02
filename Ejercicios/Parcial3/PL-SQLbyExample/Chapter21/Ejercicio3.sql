@@ -1,4 +1,4 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter21\salida\ejercicio3chapter21.txt
+﻿spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter21\salida\ejercicio3chapter21.txt
 /*
 rem **********************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
@@ -38,6 +38,8 @@ AS
 	 PROCEDURE display_student_count;
 	 
 END manage_students;
+.
+/
 
 CREATE OR REPLACE PACKAGE BODY manage_students
 AS
@@ -102,6 +104,8 @@ AS
 	END display_student_count;
 
 END manage_students;
+.
+/
 
 DECLARE
 	V_count NUMBER;
@@ -109,6 +113,8 @@ BEGIN
 	V_count := Manage_students.student_count_priv;
 	DBMS_OUTPUT.PUT_LINE(v_count);
 END;
+.
+/
 
 -- No se puede porque es privado.
 

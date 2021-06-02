@@ -1,4 +1,4 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter21\salida\ejercicio1chapter21.txt
+﻿spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter21\salida\ejercicio1chapter21.txt
 /*
 rem **********************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
@@ -34,6 +34,9 @@ FUNCTION id_is_good
  RETURN BOOLEAN;
 END manage_students;
 
+.
+/
+
 -- ch21_2a.sql
 DECLARE
 	v_first_name student.first_name%TYPE;
@@ -42,6 +45,8 @@ BEGIN
 	manage_students.find_sname (125, v_first_name, v_last_name);
 	DBMS_OUTPUT.PUT_LINE(v_first_name||' '||v_last_name);
 END;
+.
+/
 
 -- No están las esecificaciones del package en el body. 
 
@@ -84,7 +89,8 @@ AS
 
 
 END manage_students;
-
+.
+/
 
 -- ch21_6a.sql
 
@@ -99,9 +105,10 @@ BEGIN
 		DBMS_OUTPUT.PUT_LINE('Student ID: '||&&v_id||' is not in the database.');
 	END IF;
 END;
+.
+/
 
-
--- Probas para 145
+-- Probar para 145
 
 
 

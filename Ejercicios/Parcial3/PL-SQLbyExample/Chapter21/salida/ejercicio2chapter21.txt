@@ -1,0 +1,278 @@
+SQL> 
+SQL> CREATE OR REPLACE PACKAGE school_api as
+  2  	PROCEDURE discount;
+  3  	FUNCTION new_instructor_id
+  4  	RETURN instructor.instructor_id%TYPE;
+  5  END school_api;
+  6  .
+SQL> /
+
+Paquete creado.
+
+SQL> CREATE OR REPLACE PACKAGE BODY school_api AS
+  2  	PROCEDURE discount
+  3  	IS
+  4  
+  5  	 CURSOR c_group_discount
+  6  	 IS
+  7  		SELECT distinct s.course_no, c.description
+  8  			FROM section s, enrollment e, course c
+  9  			WHERE s.section_id = e.section_id
+ 10  			GROUP BY s.course_no, c.description,
+ 11  			e.section_id, s.section_id
+ 12  			HAVING COUNT(*) >=8;
+ 13  
+ 14  	BEGIN
+ 15  		FOR r_group_discount IN c_group_discount LOOP
+ 16  			UPDATE course
+ 17  				SET cost = cost * .95
+ 18  				WHERE course_no = r_group_discount.course_no;
+ 19  			DBMS_OUTPUT.PUT_LINE ('A 5% discount has been given to' ||r_group_discount.course_no||' '||r_group_discount.description);
+ 20  		END LOOP;
+ 21  	END discount;
+ 22  
+ 23  
+ 24   	FUNCTION new_instructor_id
+ 25  		RETURN instructor.instructor_id%TYPE
+ 26  	IS
+ 27  		v_new_instid instructor.instructor_id%TYPE;
+ 28  	BEGIN
+ 29  		 SELECT INSTRUCTOR_ID_SEQ.NEXTVAL
+ 30  			 INTO v_new_instid
+ 31  			FROM dual;
+ 32  		RETURN v_new_instid;
+ 33  	EXCEPTION
+ 34  		 WHEN OTHERS THEN
+ 35  			DECLARE
+ 36  				v_sqlerrm VARCHAR2(250) := SUBSTR (SQLERRM,1,250);
+ 37  			BEGIN
+ 38  				RAISE_APPLICATION_ERROR(-20003,'Error in instructor_id: '||v_sqlerrm);
+ 39  			END;
+ 40  	END new_instructor_id;
+ 41  
+ 42  END school_api;
+ 43  .
+SQL> /
+
+Cuerpo del paquete creado.
+
+SQL> DECLARE
+  2  	V_instructor_id instructor.instructor_id%TYPE;
+  3  BEGIN
+  4  	School_api.Discount_Cost;
+  5  	v_instructor_id := school_api.new_instructor_id;
+  6  	DBMS_OUTPUT.PUT_LINE('The new id is: '||v_instructor_id);
+  7  END;
+  8  
+  9  .
+SQL> /
+	School_api.Discount_Cost;
+	           *
+ERROR en línea 4:
+ORA-06550: línea 4, columna 13: 
+PLS-00302: el componente 'DISCOUNT_COST' se debe declarar 
+ORA-06550: línea 4, columna 2: 
+PL/SQL: Statement ignored 
+
+
+SQL> DECLARE
+  2  	V_instructor_id instructor.instructor_id%TYPE;
+  3  BEGIN
+  4  	School_api.Discount;
+  5  	v_instructor_id := school_api.new_instructor_id;
+  6  	DBMS_OUTPUT.PUT_LINE('The new id is: '||v_instructor_id);
+  7  END;
+  8  
+  9  .
+SQL> /
+A 5% discount has been given to230 Intro to Programming                                                                                               
+A 5% discount has been given to230 Internet Protocols                                                                                                 
+A 5% discount has been given to230 JDeveloper Techniques                                                                                              
+A 5% discount has been given to120 Intro to Computers                                                                                                 
+A 5% discount has been given to140 Intro to Unix                                                                                                      
+A 5% discount has been given to140 Structured Analysis                                                                                                
+A 5% discount has been given to120 Intro to SQL                                                                                                       
+A 5% discount has been given to240 Intro to Programming                                                                                               
+A 5% discount has been given to120 JDeveloper                                                                                                         
+A 5% discount has been given to122 Intro to Computers                                                                                                 
+A 5% discount has been given to25 Intro to Programming                                                                                                
+A 5% discount has been given to25 Structured Programming Techniques                                                                                   
+A 5% discount has been given to140 Structured Programming Techniques                                                                                  
+A 5% discount has been given to25 JDeveloper                                                                                                          
+A 5% discount has been given to230 Network Administration                                                                                             
+A 5% discount has been given to140 JDeveloper Techniques                                                                                              
+A 5% discount has been given to25 Intro to Computers                                                                                                  
+A 5% discount has been given to240 JDeveloper                                                                                                         
+A 5% discount has been given to122 Database Design                                                                                                    
+A 5% discount has been given to230 Test Course                                                                                                        
+A 5% discount has been given to122 Advanced Java Programming                                                                                          
+A 5% discount has been given to240 Basics of Unix Admin                                                                                               
+A 5% discount has been given to120 GUI Programming                                                                                                    
+A 5% discount has been given to240 Intro to SQL                                                                                                       
+A 5% discount has been given to240 PL/SQL Programming                                                                                                 
+A 5% discount has been given to25 Intro to the Basic Language                                                                                         
+A 5% discount has been given to230 Structured Programming Techniques                                                                                  
+A 5% discount has been given to240 Intermediate Java Programming                                                                                      
+A 5% discount has been given to120 Intermediate Java Programming                                                                                      
+A 5% discount has been given to25 Basics of Unix Admin                                                                                                
+A 5% discount has been given to122 Basics of Unix Admin                                                                                               
+A 5% discount has been given to25 Structured Analysis                                                                                                 
+A 5% discount has been given to240 Internet Protocols                                                                                                 
+A 5% discount has been given to230 Oracle Tools                                                                                                       
+A 5% discount has been given to122 Operating Systems                                                                                                  
+A 5% discount has been given to230 Hands-On Windows                                                                                                   
+A 5% discount has been given to140 Intermediate Java Programming                                                                                      
+A 5% discount has been given to25 Unix Tips and Techniques                                                                                            
+A 5% discount has been given to122 Internet Protocols                                                                                                 
+A 5% discount has been given to120 Intro to Internet                                                                                                  
+A 5% discount has been given to120 JDeveloper Lab                                                                                                     
+A 5% discount has been given to140 DB Programming in Java                                                                                             
+A 5% discount has been given to240 Unix Tips and Techniques                                                                                           
+A 5% discount has been given to140 Project Management                                                                                                 
+A 5% discount has been given to240 JDeveloper Techniques                                                                                              
+A 5% discount has been given to120 DP Overview                                                                                                        
+A 5% discount has been given to25 Project Management                                                                                                  
+A 5% discount has been given to122 Project Management                                                                                                 
+A 5% discount has been given to230 PL/SQL Programming                                                                                                 
+A 5% discount has been given to122 Unix Tips and Techniques                                                                                           
+A 5% discount has been given to122 Intro to Programming                                                                                               
+A 5% discount has been given to120 Database Design                                                                                                    
+A 5% discount has been given to120 Hands-On Windows                                                                                                   
+A 5% discount has been given to240 Intro to the Basic Language                                                                                        
+A 5% discount has been given to120 JDeveloper Techniques                                                                                              
+A 5% discount has been given to25 DP Overview                                                                                                         
+A 5% discount has been given to122 Intro to Java Programming                                                                                          
+A 5% discount has been given to140 Advanced Unix Admin                                                                                                
+A 5% discount has been given to25 Database Design                                                                                                     
+A 5% discount has been given to122 Intro to Internet                                                                                                  
+A 5% discount has been given to140 JDeveloper Lab                                                                                                     
+A 5% discount has been given to25 Database System Principles                                                                                          
+A 5% discount has been given to140 Test Course                                                                                                        
+A 5% discount has been given to140 DP Overview                                                                                                        
+A 5% discount has been given to230 Intro to Java Programming                                                                                          
+A 5% discount has been given to25 Intermediate Java Programming                                                                                       
+A 5% discount has been given to120 Unix Tips and Techniques                                                                                           
+A 5% discount has been given to240 Database Design                                                                                                    
+A 5% discount has been given to230 Basics of Unix Admin                                                                                               
+A 5% discount has been given to140 Intro to Internet                                                                                                  
+A 5% discount has been given to25 Advanced Java Programming                                                                                           
+A 5% discount has been given to240 Database System Principles                                                                                         
+A 5% discount has been given to120 Internet Protocols                                                                                                 
+A 5% discount has been given to230 Intro to Internet                                                                                                  
+A 5% discount has been given to120 Test Course                                                                                                        
+A 5% discount has been given to25 Hands-On Windows                                                                                                    
+A 5% discount has been given to230 Unix Tips and Techniques                                                                                           
+A 5% discount has been given to122 DP Overview                                                                                                        
+A 5% discount has been given to25 Intro to Internet                                                                                                   
+A 5% discount has been given to122 Intro to the Basic Language                                                                                        
+A 5% discount has been given to25 Network Administration                                                                                              
+A 5% discount has been given to122 Test Course                                                                                                        
+A 5% discount has been given to140 Intro to Programming                                                                                               
+A 5% discount has been given to240 Advanced Java Programming                                                                                          
+A 5% discount has been given to122 Intro to SQL                                                                                                       
+A 5% discount has been given to25 GUI Programming                                                                                                     
+A 5% discount has been given to25 DB Programming in Java                                                                                              
+A 5% discount has been given to240 Structured Analysis                                                                                                
+A 5% discount has been given to140 Internet Protocols                                                                                                 
+A 5% discount has been given to122 Advanced Unix Admin                                                                                                
+A 5% discount has been given to140 GUI Programming                                                                                                    
+A 5% discount has been given to122 Network Administration                                                                                             
+A 5% discount has been given to140 Intro to Computers                                                                                                 
+A 5% discount has been given to122 Hands-On Windows                                                                                                   
+A 5% discount has been given to230 Intro to Unix                                                                                                      
+A 5% discount has been given to25 Intro to SQL                                                                                                        
+A 5% discount has been given to230 Database System Principles                                                                                         
+A 5% discount has been given to122 JDeveloper Techniques                                                                                              
+A 5% discount has been given to240 Hands-On Windows                                                                                                   
+A 5% discount has been given to230 Project Management                                                                                                 
+A 5% discount has been given to25 Test Course                                                                                                         
+A 5% discount has been given to140 Intro to Java Programming                                                                                          
+A 5% discount has been given to122 Structured Programming Techniques                                                                                  
+A 5% discount has been given to140 Advanced Java Programming                                                                                          
+A 5% discount has been given to120 Intro to Unix                                                                                                      
+A 5% discount has been given to120 Operating Systems                                                                                                  
+A 5% discount has been given to240 Structured Programming Techniques                                                                                  
+A 5% discount has been given to230 JDeveloper Lab                                                                                                     
+A 5% discount has been given to120 Project Management                                                                                                 
+A 5% discount has been given to122 Oracle Tools                                                                                                       
+A 5% discount has been given to240 DP Overview                                                                                                        
+A 5% discount has been given to140 Network Administration                                                                                             
+A 5% discount has been given to140 Unix Tips and Techniques                                                                                           
+A 5% discount has been given to120 Network Administration                                                                                             
+A 5% discount has been given to120 Intro to the Basic Language                                                                                        
+A 5% discount has been given to240 JDeveloper Lab                                                                                                     
+A 5% discount has been given to120 Intro to Programming                                                                                               
+A 5% discount has been given to120 Advanced Java Programming                                                                                          
+A 5% discount has been given to140 Database Design                                                                                                    
+A 5% discount has been given to25 JDeveloper Lab                                                                                                      
+A 5% discount has been given to120 Structured Analysis                                                                                                
+A 5% discount has been given to240 Oracle Tools                                                                                                       
+A 5% discount has been given to140 Hands-On Windows                                                                                                   
+A 5% discount has been given to240 Operating Systems                                                                                                  
+A 5% discount has been given to120 DB Programming in Java                                                                                             
+A 5% discount has been given to122 Database System Principles                                                                                         
+A 5% discount has been given to240 Test Course                                                                                                        
+A 5% discount has been given to120 Basics of Unix Admin                                                                                               
+A 5% discount has been given to240 GUI Programming                                                                                                    
+A 5% discount has been given to25 PL/SQL Programming                                                                                                  
+A 5% discount has been given to120 Intro to Java Programming                                                                                          
+A 5% discount has been given to140 Operating Systems                                                                                                  
+A 5% discount has been given to120 Database System Principles                                                                                         
+A 5% discount has been given to140 JDeveloper                                                                                                         
+A 5% discount has been given to240 Advanced Unix Admin                                                                                                
+A 5% discount has been given to122 Intermediate Java Programming                                                                                      
+A 5% discount has been given to230 JDeveloper                                                                                                         
+A 5% discount has been given to122 Structured Analysis                                                                                                
+A 5% discount has been given to230 Intro to SQL                                                                                                       
+A 5% discount has been given to240 Network Administration                                                                                             
+A 5% discount has been given to230 DP Overview                                                                                                        
+A 5% discount has been given to230 Intro to the Basic Language                                                                                        
+A 5% discount has been given to230 Java for C/C++ Programmers                                                                                         
+A 5% discount has been given to140 Java for C/C++ Programmers                                                                                         
+A 5% discount has been given to230 GUI Programming                                                                                                    
+A 5% discount has been given to120 Oracle Tools                                                                                                       
+A 5% discount has been given to230 DB Programming in Java                                                                                             
+A 5% discount has been given to25 Intro to Unix                                                                                                       
+A 5% discount has been given to140 Basics of Unix Admin                                                                                               
+A 5% discount has been given to25 Oracle Tools                                                                                                        
+A 5% discount has been given to140 PL/SQL Programming                                                                                                 
+A 5% discount has been given to25 Operating Systems                                                                                                   
+A 5% discount has been given to240 Java for C/C++ Programmers                                                                                         
+A 5% discount has been given to122 DB Programming in Java                                                                                             
+A 5% discount has been given to25 Intro to Java Programming                                                                                           
+A 5% discount has been given to122 JDeveloper                                                                                                         
+A 5% discount has been given to240 Intro to Unix                                                                                                      
+A 5% discount has been given to122 Intro to Unix                                                                                                      
+A 5% discount has been given to140 Intro to SQL                                                                                                       
+A 5% discount has been given to230 Operating Systems                                                                                                  
+A 5% discount has been given to140 Database System Principles                                                                                         
+A 5% discount has been given to240 Intro to Java Programming                                                                                          
+A 5% discount has been given to240 Project Management                                                                                                 
+A 5% discount has been given to230 Intro to Computers                                                                                                 
+A 5% discount has been given to120 Advanced Unix Admin                                                                                                
+A 5% discount has been given to122 PL/SQL Programming                                                                                                 
+A 5% discount has been given to25 JDeveloper Techniques                                                                                               
+A 5% discount has been given to140 Oracle Tools                                                                                                       
+A 5% discount has been given to140 Intro to the Basic Language                                                                                        
+A 5% discount has been given to230 Advanced Unix Admin                                                                                                
+A 5% discount has been given to240 DB Programming in Java                                                                                             
+A 5% discount has been given to230 Intermediate Java Programming                                                                                      
+A 5% discount has been given to25 Advanced Unix Admin                                                                                                 
+A 5% discount has been given to25 Java for C/C++ Programmers                                                                                          
+A 5% discount has been given to240 Intro to Internet                                                                                                  
+A 5% discount has been given to120 Structured Programming Techniques                                                                                  
+A 5% discount has been given to122 GUI Programming                                                                                                    
+A 5% discount has been given to122 JDeveloper Lab                                                                                                     
+A 5% discount has been given to230 Structured Analysis                                                                                                
+A 5% discount has been given to122 Java for C/C++ Programmers                                                                                         
+A 5% discount has been given to120 Java for C/C++ Programmers                                                                                         
+A 5% discount has been given to120 PL/SQL Programming                                                                                                 
+A 5% discount has been given to240 Intro to Computers                                                                                                 
+A 5% discount has been given to230 Advanced Java Programming                                                                                          
+A 5% discount has been given to230 Database Design                                                                                                    
+A 5% discount has been given to25 Internet Protocols                                                                                                  
+The new id is: 120                                                                                                                                    
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> spool OFF;

@@ -1,4 +1,4 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter20\salida\ejercicio1chapter20.txt
+﻿spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter20\salida\ejercicio1chapter20.txt
 /*
 rem **********************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
@@ -6,7 +6,7 @@ rem * Elaborado por:                                         *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar José Oscar  *                 
 rem * Realizado el 9 de Junio  de 2021                       *
 rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).                     *
-rem *Oracle® PL/SQLby Example,Boston,MA,USA:Perarson.      *
+rem *Oracle® PL/SQLby Example,Boston,MA,USA:Perarson.        *
 rem **********************************************************
 */
 
@@ -42,18 +42,23 @@ EXCEPTION
 	THEN
 		RETURN(‘Error in running show_description');
 END;
+.
+/
 
-SET SERVEROUTPUT ON
 DECLARE
 	v_description VARCHAR2(50);
 BEGIN
 	v_description := show_description(&sv_cnumber);
 	DBMS_OUTPUT.PUT_LINE(v_description);
 END;
-
+.
+/
 -- Crear la sentencia select con function (ROSENZWEIG y RAKHIMOV, 2009, 453).
 
-SELECT course_no, show_description(course_no)
+COLUMN course_no FORMAT 999
+COLUMN Descripcion FORMAT A25 
+
+SELECT course_no, show_description(course_no) as Descripcion
 FROM course;
 
 
