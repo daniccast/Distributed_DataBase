@@ -1,0 +1,312 @@
+SQL> 
+SQL> 
+SQL>  INSERT INTO frame
+  2  	(BOWLER_ID,GAME_ID,FRAME_NUMBER,STRIKE)
+  3  	VALUES(1,1,1,'Y');
+Before Insert Row                                                               
+Old Bowler ID                                                                   
+New Bowler ID 1                                                                 
+Old ROWID AAAAAAAAAAAAAAAAAA                                                    
+New ROWID AAAAAAAAAAAAAAAAAA                                                    
+After Insert Row                                                                
+Old Bowler ID                                                                   
+New Bowler ID 1                                                                 
+Old ROWID AAASFtAAHAAAAL/AAC                                                    
+New ROWID AAASFtAAHAAAAL/AAC                                                    
+
+1 fila creada.
+
+SQL>  UPDATE frame
+  2    SET strike = 'N',
+  3    spare = 'Y'
+  4    WHERE bowler_id = 1
+  5    AND game_id = 1
+  6    AND frame_number = 1;
+Before Update Row                                                               
+Old Bowler ID 1                                                                 
+New Bowler ID 1                                                                 
+Old ROWID AAASFtAAHAAAAL/AAC                                                    
+New ROWID AAASFtAAHAAAAL/AAC                                                    
+After Update Row                                                                
+Old Bowler ID 1                                                                 
+New Bowler ID 1                                                                 
+Old ROWID AAASFtAAHAAAAL/AAC                                                    
+New ROWID AAASFtAAHAAAAL/AAC                                                    
+
+1 fila actualizada.
+
+SQL> 
+SQL> DELETE frame
+  2     WHERE bowler_id = 1
+  3     AND game_id = 1
+  4     AND frame_number = 1;
+Before Delete Row                                                               
+Old Bowler ID 1                                                                 
+New Bowler ID                                                                   
+Old ROWID AAASFtAAHAAAAL/AAC                                                    
+New ROWID AAASFtAAHAAAAL/AAC                                                    
+After Delete Row                                                                
+Old Bowler ID 1                                                                 
+New Bowler ID                                                                   
+Old ROWID AAASFtAAHAAAAL/AAC                                                    
+New ROWID AAASFtAAHAAAAL/AAC                                                    
+
+1 fila suprimida.
+
+SQL> 
+SQL>    SELECT bowler_id, game_id, frame_number
+  2   , old_strike, new_strike
+  3   , old_spare, new_spare
+  4   , change_date, operation
+  5   FROM frame_audit;
+
+ BOWLER_ID    GAME_ID FRAME_NUMBER O N O N CHANGE_D OPERAT                      
+---------- ---------- ------------ - - - - -------- ------                      
+         2          1                      02/06/21 UPDATE                      
+         2          1                      02/06/21 UPDATE                      
+         1          1                      02/06/21 UPDATE                      
+
+SQL> 
+SQL>  SELECT bowler_id, game_id, frame_number
+  2   , old_strike, new_strike
+  3   , old_spare, new_spare
+  4   , TO_CHAR(change_date,'DD/MON/YYYY HH24:MI:SS') HORA_OPER, operation
+  5   FROM frame_audit;
+
+ BOWLER_ID    GAME_ID FRAME_NUMBER O N O N HORA_OPER                     OPERAT 
+---------- ---------- ------------ - - - - ----------------------------- ------ 
+         2          1                      02/JUN/2021 08:33:17          UPDATE 
+         2          1                      02/JUN/2021 08:34:34          UPDATE 
+         1          1                      02/JUN/2021 08:36:26          UPDATE 
+
+SQL>   UPDATE FRAME
+  2   SET strike = strike;
+
+0 filas actualizadas.
+
+SQL> 
+SQL>  SELECT old_strike,
+  2    new_strike,
+  3    old_spare,
+  4    new_spare,
+  5    old_score,
+  6    new_score
+  7    FROM frame_audit;
+
+O N O N  OLD_SCORE  NEW_SCORE                                                   
+- - - - ---------- ----------                                                   
+                                                                                
+                                                                                
+                                                                                
+
+SQL> UPDATE frame
+  2   SET strike = strike;
+
+0 filas actualizadas.
+
+SQL> 
+SQL>   INSERT INTO frame
+  2  	(BOWLER_ID,GAME_ID,FRAME_NUMBER,STRIKE)
+  3  	VALUES(1,1,1,'Y');
+Before Insert Row                                                               
+Old Bowler ID                                                                   
+New Bowler ID 1                                                                 
+Old ROWID AAAAAAAAAAAAAAAAAA                                                    
+New ROWID AAAAAAAAAAAAAAAAAA                                                    
+After Insert Row                                                                
+Old Bowler ID                                                                   
+New Bowler ID 1                                                                 
+Old ROWID AAASFtAAHAAAAL/AAD                                                    
+New ROWID AAASFtAAHAAAAL/AAD                                                    
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO frame
+  2  	(BOWLER_ID,GAME_ID,FRAME_NUMBER,STRIKE)
+  3  	VALUES(1,1,2,'Y');
+Before Insert Row                                                               
+Old Bowler ID                                                                   
+New Bowler ID 1                                                                 
+Old ROWID AAAAAAAAAAAAAAAAAA                                                    
+New ROWID AAAAAAAAAAAAAAAAAA                                                    
+After Insert Row                                                                
+Old Bowler ID                                                                   
+New Bowler ID 1                                                                 
+Old ROWID AAASFtAAHAAAAL/AAE                                                    
+New ROWID AAASFtAAHAAAAL/AAE                                                    
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO frame
+  2  	(BOWLER_ID,GAME_ID,FRAME_NUMBER,STRIKE)
+  3  	VALUES(1,1,3,'Y');
+Before Insert Row                                                               
+Old Bowler ID                                                                   
+New Bowler ID 1                                                                 
+Old ROWID AAAAAAAAAAAAAAAAAA                                                    
+New ROWID AAAAAAAAAAAAAAAAAA                                                    
+After Insert Row                                                                
+Old Bowler ID                                                                   
+New Bowler ID 1                                                                 
+Old ROWID AAASFtAAHAAAAL/AAF                                                    
+New ROWID AAASFtAAHAAAAL/AAF                                                    
+
+1 fila creada.
+
+SQL> 
+SQL>  SELECT * FROM FRAME;
+
+ BOWLER_ID    GAME_ID FRAME_NUMBER S S      SCORE                               
+---------- ---------- ------------ - - ----------                               
+         1          1            1 Y N                                          
+         1          1            2 Y N                                          
+         1          1            3 Y N                                          
+
+SQL> 
+SQL>   INSERT INTO frame
+  2  	(BOWLER_ID,GAME_ID,FRAME_NUMBER,STRIKE)
+  3  	VALUES(1,1,4,'N');
+Before Insert Row                                                               
+Old Bowler ID                                                                   
+New Bowler ID 1                                                                 
+Old ROWID AAAAAAAAAAAAAAAAAA                                                    
+New ROWID AAAAAAAAAAAAAAAAAA                                                    
+After Insert Row                                                                
+Old Bowler ID                                                                   
+New Bowler ID 1                                                                 
+Old ROWID AAASFtAAHAAAAL/AAG                                                    
+New ROWID AAASFtAAHAAAAL/AAG                                                    
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO frame
+  2  	(BOWLER_ID,GAME_ID,FRAME_NUMBER,STRIKE)
+  3  	VALUES(1,1,5,'N');
+Before Insert Row                                                               
+Old Bowler ID                                                                   
+New Bowler ID 1                                                                 
+Old ROWID AAAAAAAAAAAAAAAAAA                                                    
+New ROWID AAAAAAAAAAAAAAAAAA                                                    
+After Insert Row                                                                
+Old Bowler ID                                                                   
+New Bowler ID 1                                                                 
+Old ROWID AAASFtAAHAAAAL/AAH                                                    
+New ROWID AAASFtAAHAAAAL/AAH                                                    
+
+1 fila creada.
+
+SQL> 
+SQL> COL STRIKE FORMAT A5
+SQL> COL SCORE FORMAT A5
+SQL> COL SPARE FORMAT A5
+SQL> SELECT BOWLER_ID,GAME_ID,FRAME_NUMBER,STRIKE,
+  2  	SPARE,SCORE
+  3  	FROM FRAME ORDER BY 1;
+
+ BOWLER_ID    GAME_ID FRAME_NUMBER STRIK SPARE      SCORE                       
+---------- ---------- ------------ ----- ----- ----------                       
+         1          1            1 Y     N                                      
+         1          1            2 Y     N                                      
+         1          1            5 N     N                                      
+         1          1            4 N     N                                      
+         1          1            3 Y     N                                      
+
+SQL> COL BID FORMAT 99
+SQL> COL GID FORMAT 99
+SQL> COL FRID FORMAT 99
+SQL> COL INSTANTE FORMAt a24
+SQL>  SELECT BOWLER_ID BID ,GAME_ID GID,FRAME_NUMBER FRID,
+  2    old_strike,
+  3    new_strike,
+  4    old_spare,
+  5    new_spare,
+  6    old_score,
+  7    new_score,
+  8    to_char(change_date,'DD/MON/YYYY HH24:MI:SS') INSTANTE,
+  9    operation
+ 10    FROM frame_audit;
+
+BID GID FRID O N O N  OLD_SCORE  NEW_SCORE INSTANTE                 OPERAT      
+--- --- ---- - - - - ---------- ---------- ------------------------ ------      
+  2   1                                    02/JUN/2021 08:33:17     UPDATE      
+  2   1                                    02/JUN/2021 08:34:34     UPDATE      
+  1   1                                    02/JUN/2021 08:36:26     UPDATE      
+
+SQL> alter trigger  validate_score    disable;
+alter trigger  validate_score    disable
+*
+ERROR en línea 1:
+ORA-04080: el disparador 'VALIDATE_SCORE' no existe 
+
+
+SQL> alter trigger  audit_update      disable;
+
+Disparador modificado.
+
+SQL> alter trigger  after_delete_row  disable;
+
+Disparador modificado.
+
+SQL> alter trigger  after_insert_row  disable;
+
+Disparador modificado.
+
+SQL> alter trigger  after_update_row  disable;
+
+Disparador modificado.
+
+SQL> alter trigger  before_delete_row disable;
+
+Disparador modificado.
+
+SQL> alter trigger  before_insert_row disable;
+
+Disparador modificado.
+
+SQL> alter trigger  before_update_row disable;
+
+Disparador modificado.
+
+SQL> 
+SQL> rem borrar los triggers
+SQL> 
+SQL> 
+SQL> drop  trigger  validate_score   ;
+drop  trigger  validate_score   
+*
+ERROR en línea 1:
+ORA-04080: el disparador 'VALIDATE_SCORE' no existe 
+
+
+SQL> drop  trigger  audit_update     ;
+
+Disparador borrado.
+
+SQL> drop  trigger  after_delete_row ;
+
+Disparador borrado.
+
+SQL> drop  trigger  after_insert_row ;
+
+Disparador borrado.
+
+SQL> drop  trigger  after_update_row ;
+
+Disparador borrado.
+
+SQL> drop  trigger  before_delete_row;
+
+Disparador borrado.
+
+SQL> drop  trigger  before_insert_row;
+
+Disparador borrado.
+
+SQL> drop  trigger  before_update_row;
+
+Disparador borrado.
+
+SQL>    spool off;

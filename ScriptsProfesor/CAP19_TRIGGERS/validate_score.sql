@@ -1,3 +1,4 @@
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\ScriptsProfesor\CAP19_TRIGGERS\validate_score.txt
 /*-- validate_score.sql */
 
 CREATE OR REPLACE TRIGGER validate_score
@@ -24,3 +25,4 @@ BEGIN
    );
 END;
 /
+spool off;

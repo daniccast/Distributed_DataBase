@@ -1,3 +1,4 @@
+﻿spool C:\Users\lolol_000\Documents\Distributed_DataBase\ScriptsProfesor\CAP19_TRIGGERS\segundo_trigger.txt
 rem  
 
 set pagesize 99
@@ -14,9 +15,9 @@ REM  Programming Oracle triggers and stored procedures / Kevin Owens
 REM [Owens,2003,section 6.4]
 
 rem trigger que se dispara en inserción y en actualización 
-DROP TABLE TEMP;
-CREATE TABLE TEMP(X NUMBER, Y NUMBER, Z NUMBER DEFAULT 5);
 
+DROP TABLE TEMP;
+CREATE TABLE TEMP(N NUMBER, M NUMBER DEFAULT 5);
 
 INSERT INTO TEMP (M) VALUES (3);
 INSERT INTO TEMP (N) VALUES (10);
@@ -24,10 +25,8 @@ INSERT INTO TEMP (N) VALUES (10);
 INSERT INTO TEMP (n) VALUES (1);
 UPDATE TEMP SET n=n+1 WHERE n>=1;
 
-
 DROP TABLE TEMP;
-CREATE TABLE TEMP(N NUMBER, M NUMBER DEFAULT 5);
-
+CREATE TABLE TEMP(X NUMBER, Y NUMBER, Z NUMBER DEFAULT 5);
 
 
 rem 
@@ -332,7 +331,7 @@ REM
 	
 REM
 
-	
+spool off;
 
 
 

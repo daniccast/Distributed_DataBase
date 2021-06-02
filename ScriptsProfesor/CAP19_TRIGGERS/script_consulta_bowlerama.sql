@@ -1,3 +1,5 @@
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\ScriptsProfesor\CAP19_TRIGGERS\script_consulta_spool.txt
+
 REM 
 REM       REGISTROS DE PAM BOWLERAMA
 REM
@@ -122,4 +124,4 @@ drop  trigger  before_delete_row;
 drop  trigger  before_insert_row;
 drop  trigger  before_update_row;
    
-
+spool off;

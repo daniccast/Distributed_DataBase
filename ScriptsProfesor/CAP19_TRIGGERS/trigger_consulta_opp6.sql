@@ -1,3 +1,4 @@
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\ScriptsProfesor\CAP19_TRIGGERS\trigger_consulta.txt
 rem deplegar   las tablas de usuario hr/hr
 /*
 consultar la tabla del dict referente a  los objetos
@@ -27,7 +28,7 @@ select owner,object_name,
 	object_type,status
 	from all_objects
 	where object_type = 'TABLE'
-	AND OWNER = 'HR';
+	AND OWNER = 'MASTERING';
 
 col table_name format a22
 col tablespace_name format a10
@@ -125,22 +126,22 @@ SELECT EMPLOYEE_ID EMP_ID,
 	COMMISSION_PCT CPCT,
 	MANAGER_ID MAN_ID,
 	DEPARTMENT_ID DEPT_ID
-	FROM EMPLOYEES  
+	FROM EMPLOYEE  
 	WHERE ROWNUM 	<= 10
 	ORDER BY 1;
-INSERT INTO EMPLOYEES  VALUES
+INSERT INTO EMPLOYEE  VALUES
 	(12,'IRMA','Mireles','IMIRELES2','650.124.122',
 	TO_DATE('22/09/06','DD/MM/YY'),'ST_CLERK',2700.00,NULL,120,50);	
 
-INSERT INTO EMPLOYEES  VALUES
+INSERT INTO EMPLOYEE  VALUES
 	(13,'Erendida','Mireles','IMIRELES2','650.124.122',
 	TO_DATE('22/09/06','DD/MM/YY'),'ST_CLERK',2700.00,NULL,120,50);
 REM CORREO DUPLICADO	
-INSERT INTO EMPLOYEES  VALUES
+INSERT INTO EMPLOYEE  VALUES
 	(14,'ERNESTINA','Mireles','IMIRELES2','650.124.122',
 	TO_DATE('22/09/06','DD/MM/YY'),'ST_CLERK',2700.00,NULL,120,50);	
 	
-INSERT INTO EMPLOYEES  VALUES
+INSERT INTO EMPLOYEE  VALUES
 	(14,'ERNESTINA','Mireles','ERNESTINA','650.124.122',
 	TO_DATE('22/09/06','DD/MM/YY'),'ST_CLERK',2700.00,NULL,120,50);	
 
@@ -148,3 +149,4 @@ rem borremos las tuplas de prueba
 delete from employees
 		where EMPLOYEE_ID = 12 OR EMPLOYEE_ID = 13
 		OR EMPLOYEE_ID = 14;
+spool off;

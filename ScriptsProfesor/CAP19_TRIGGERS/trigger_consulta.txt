@@ -1,0 +1,573 @@
+SQL> set colsep '|=|'
+SQL> set linesize 130
+SQL> set pagesize 99
+SQL> set feedback on
+SQL> set null nada
+SQL> select table_name from dict
+  2  	where table_name like '%OBJ%';
+
+TABLE_NAME                                                                                                                        
+================================================================================================================================  
+USER_ADVISOR_OBJECTS                                                                                                              
+USER_AUDIT_OBJECT                                                                                                                 
+USER_AW_OBJ                                                                                                                       
+USER_CONS_OBJ_COLUMNS                                                                                                             
+USER_ILMOBJECTS                                                                                                                   
+USER_OBJECTS                                                                                                                      
+USER_OBJECTS_AE                                                                                                                   
+USER_OBJECT_SIZE                                                                                                                  
+USER_OBJECT_TABLES                                                                                                                
+USER_OBJECT_USAGE                                                                                                                 
+USER_OBJ_AUDIT_OPTS                                                                                                               
+USER_OBJ_COLATTRS                                                                                                                 
+USER_PLSQL_OBJECT_SETTINGS                                                                                                        
+USER_SECONDARY_OBJECTS                                                                                                            
+USER_SR_OBJ                                                                                                                       
+USER_SR_OBJ_ALL                                                                                                                   
+USER_SR_OBJ_STATUS                                                                                                                
+USER_SR_OBJ_STATUS_ALL                                                                                                            
+ALL_APPLY_INSTANTIATED_OBJECTS                                                                                                    
+ALL_AW_OBJ                                                                                                                        
+ALL_CONS_OBJ_COLUMNS                                                                                                              
+ALL_OBJECTS                                                                                                                       
+ALL_OBJECTS_AE                                                                                                                    
+ALL_OBJECT_TABLES                                                                                                                 
+ALL_OBJ_COLATTRS                                                                                                                  
+ALL_PLSQL_OBJECT_SETTINGS                                                                                                         
+ALL_PROBE_OBJECTS                                                                                                                 
+ALL_SECONDARY_OBJECTS                                                                                                             
+ALL_XS_APPLICABLE_OBJECTS                                                                                                         
+DATAPUMP_DIR_OBJS                                                                                                                 
+OBJ                                                                                                                               
+V$OBJECT_USAGE                                                                                                                    
+
+32 filas seleccionadas.
+
+SQL> 
+SQL> desc all_objects
+ Nombre                                                                  ¿Nulo?   Tipo
+ ----------------------------------------------------------------------- -------- ------------------------------------------------
+ OWNER                                                                   NOT NULL VARCHAR2(128)
+ OBJECT_NAME                                                             NOT NULL VARCHAR2(128)
+ SUBOBJECT_NAME                                                                   VARCHAR2(128)
+ OBJECT_ID                                                               NOT NULL NUMBER
+ DATA_OBJECT_ID                                                                   NUMBER
+ OBJECT_TYPE                                                                      VARCHAR2(23)
+ CREATED                                                                 NOT NULL DATE
+ LAST_DDL_TIME                                                           NOT NULL DATE
+ TIMESTAMP                                                                        VARCHAR2(19)
+ STATUS                                                                           VARCHAR2(7)
+ TEMPORARY                                                                        VARCHAR2(1)
+ GENERATED                                                                        VARCHAR2(1)
+ SECONDARY                                                                        VARCHAR2(1)
+ NAMESPACE                                                               NOT NULL NUMBER
+ EDITION_NAME                                                                     VARCHAR2(128)
+ SHARING                                                                          VARCHAR2(18)
+ EDITIONABLE                                                                      VARCHAR2(1)
+ ORACLE_MAINTAINED                                                                VARCHAR2(1)
+ APPLICATION                                                                      VARCHAR2(1)
+ DEFAULT_COLLATION                                                                VARCHAR2(100)
+ DUPLICATED                                                                       VARCHAR2(1)
+ SHARDED                                                                          VARCHAR2(1)
+ CREATED_APPID                                                                    NUMBER
+ CREATED_VSNID                                                                    NUMBER
+ MODIFIED_APPID                                                                   NUMBER
+ MODIFIED_VSNID                                                                   NUMBER
+
+SQL> 
+SQL> desc all_object_tables
+ Nombre                                                                  ¿Nulo?   Tipo
+ ----------------------------------------------------------------------- -------- ------------------------------------------------
+ OWNER                                                                   NOT NULL VARCHAR2(128)
+ TABLE_NAME                                                              NOT NULL VARCHAR2(128)
+ TABLESPACE_NAME                                                                  VARCHAR2(30)
+ CLUSTER_NAME                                                                     VARCHAR2(128)
+ IOT_NAME                                                                         VARCHAR2(128)
+ STATUS                                                                           VARCHAR2(8)
+ PCT_FREE                                                                         NUMBER
+ PCT_USED                                                                         NUMBER
+ INI_TRANS                                                                        NUMBER
+ MAX_TRANS                                                                        NUMBER
+ INITIAL_EXTENT                                                                   NUMBER
+ NEXT_EXTENT                                                                      NUMBER
+ MIN_EXTENTS                                                                      NUMBER
+ MAX_EXTENTS                                                                      NUMBER
+ PCT_INCREASE                                                                     NUMBER
+ FREELISTS                                                                        NUMBER
+ FREELIST_GROUPS                                                                  NUMBER
+ LOGGING                                                                          VARCHAR2(3)
+ BACKED_UP                                                                        VARCHAR2(1)
+ NUM_ROWS                                                                         NUMBER
+ BLOCKS                                                                           NUMBER
+ EMPTY_BLOCKS                                                                     NUMBER
+ AVG_SPACE                                                                        NUMBER
+ CHAIN_CNT                                                                        NUMBER
+ AVG_ROW_LEN                                                                      NUMBER
+ AVG_SPACE_FREELIST_BLOCKS                                                        NUMBER
+ NUM_FREELIST_BLOCKS                                                              NUMBER
+ DEGREE                                                                           VARCHAR2(10)
+ INSTANCES                                                                        VARCHAR2(10)
+ CACHE                                                                            VARCHAR2(5)
+ TABLE_LOCK                                                                       VARCHAR2(8)
+ SAMPLE_SIZE                                                                      NUMBER
+ LAST_ANALYZED                                                                    DATE
+ PARTITIONED                                                                      VARCHAR2(3)
+ IOT_TYPE                                                                         VARCHAR2(12)
+ OBJECT_ID_TYPE                                                                   VARCHAR2(16)
+ TABLE_TYPE_OWNER                                                                 VARCHAR2(128)
+ TABLE_TYPE                                                                       VARCHAR2(128)
+ TEMPORARY                                                                        VARCHAR2(1)
+ SECONDARY                                                                        VARCHAR2(1)
+ NESTED                                                                           VARCHAR2(3)
+ BUFFER_POOL                                                                      VARCHAR2(7)
+ FLASH_CACHE                                                                      VARCHAR2(7)
+ CELL_FLASH_CACHE                                                                 VARCHAR2(7)
+ ROW_MOVEMENT                                                                     VARCHAR2(8)
+ GLOBAL_STATS                                                                     VARCHAR2(3)
+ USER_STATS                                                                       VARCHAR2(3)
+ DURATION                                                                         VARCHAR2(15)
+ SKIP_CORRUPT                                                                     VARCHAR2(8)
+ MONITORING                                                                       VARCHAR2(3)
+ CLUSTER_OWNER                                                                    VARCHAR2(128)
+ DEPENDENCIES                                                                     VARCHAR2(8)
+ COMPRESSION                                                                      VARCHAR2(8)
+ COMPRESS_FOR                                                                     VARCHAR2(30)
+ DROPPED                                                                          VARCHAR2(3)
+ SEGMENT_CREATED                                                                  VARCHAR2(3)
+ INMEMORY                                                                         VARCHAR2(8)
+ INMEMORY_PRIORITY                                                                VARCHAR2(8)
+ INMEMORY_DISTRIBUTE                                                              VARCHAR2(15)
+ INMEMORY_COMPRESSION                                                             VARCHAR2(17)
+ INMEMORY_DUPLICATE                                                               VARCHAR2(13)
+ EXTERNAL                                                                         VARCHAR2(3)
+ CELLMEMORY                                                                       VARCHAR2(24)
+ INMEMORY_SERVICE                                                                 VARCHAR2(12)
+ INMEMORY_SERVICE_NAME                                                            VARCHAR2(1000)
+ MEMOPTIMIZE_READ                                                                 VARCHAR2(8)
+ MEMOPTIMIZE_WRITE                                                                VARCHAR2(8)
+ HAS_SENSITIVE_COLUMN                                                             VARCHAR2(3)
+
+SQL> COL OWNER FORMAT A12
+SQL> COL object_name format a18
+SQL> col status   format  a6
+SQL> col object_type format a10
+SQL> select owner,object_name,
+  2  	object_type,status
+  3  	from all_objects
+  4  	where object_type = 'TABLE'
+  5  	AND OWNER = 'HR';
+
+ninguna fila seleccionada
+
+SQL> select owner,object_name,
+  2  	object_type,status
+  3  	from all_objects
+  4  	where object_type = 'TABLE'
+  5  	AND OWNER = 'MASTERING';
+
+OWNER       |=|OBJECT_NAME       |=|OBJECT_TYP|=|STATUS                                                                           
+============|=|==================|=|==========|=|======                                                                           
+MASTERING   |=|EMPLOYEE_EXPENSE  |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|DEPARTMENT        |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|JOB               |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|LOCATION          |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|CUSTOMER          |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|SUPPLIER          |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|PART              |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|INVENTORY_CLASS   |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|CUST_ORDER        |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|ASSEMBLY          |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|RETAILER          |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|REGION            |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|SALESPERSON       |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|MONTHS            |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|MTD_ORDERS        |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|ORDERS            |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|LINE_ITEM         |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|ALL_ORDERS        |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|DISPUTED_ORDERS   |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|REPORT            |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|MONTHLY_ORDERS    |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|MONTHLY_SALES_ADJU|=|TABLE     |=|VALID                                                                            
+            |=|STMENT            |=|          |=|                                                                                 
+                                                                                                                                  
+MASTERING   |=|EMPLOYEE_COMMENT  |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|SALES_HISTORY     |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|EMPLOYEE          |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|FRAME             |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|FRAME_AUDIT       |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|TEMP              |=|TABLE     |=|VALID                                                                            
+MASTERING   |=|PROFESSORS        |=|TABLE     |=|VALID                                                                            
+
+29 filas seleccionadas.
+
+SQL> col table_name format a22
+SQL> col tablespace_name format a10
+SQL> col iot_name   format a12
+SQL> select owner,table_name,tablespace_name,
+  2  		iot_name,
+  3  		pct_free,
+  4  		pct_used
+  5  		from all_object_tables;
+
+OWNER       |=|TABLE_NAME            |=|TABLESPACE|=|IOT_NAME    |=|  PCT_FREE|=|  PCT_USED                                       
+============|=|======================|=|==========|=|============|=|==========|=|==========                                       
+XDB         |=|XDB$SIMPLE_TYPE       |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$COMPLEX_TYPE      |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$ALL_MODEL         |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$CHOICE_MODEL      |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$SEQUENCE_MODEL    |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$ELEMENT           |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$ATTRIBUTE         |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$ANYATTR           |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$ANY               |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$GROUP_DEF         |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$GROUP_REF         |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$ATTRGROUP_DEF     |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$ATTRGROUP_REF     |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$SCHEMA            |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$ACL               |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+XDB         |=|XDB$RESCONFIG         |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+MDSYS       |=|SDO_GR_RDT_2          |=|nada      |=|nada        |=|        10|=|        40                                       
+MDSYS       |=|SDO_TIN_BLK_TABLE     |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+MDSYS       |=|SDO_PC_BLK_TABLE      |=|SYSAUX    |=|nada        |=|        10|=|nada                                             
+
+19 filas seleccionadas.
+
+SQL> 
+SQL> select table_name from dict
+  2  	where table_name like '%TRIGGERS%';
+
+TABLE_NAME                                                                                                                        
+======================                                                                                                            
+USER_INTERNAL_TRIGGERS                                                                                                            
+USER_TRIGGERS                                                                                                                     
+ALL_INTERNAL_TRIGGERS                                                                                                             
+ALL_TRIGGERS                                                                                                                      
+
+4 filas seleccionadas.
+
+SQL> 
+SQL> SELECT TABLE_NAME, INTERNAL_TRIGGER_TYPE
+  2  	FROM USER_INTERNAL_TRIGGERS;
+
+ninguna fila seleccionada
+
+SQL> COL TABLE_OWNER FORMAT A5
+SQL> COL COLUMN_NAME FORMAT A15
+SQL> COL TRIGGERING_EVENT FORMAT A17
+SQL> COL TABLE_NAME FORMAT A17
+SQL> SELECT TRIGGER_NAME,TRIGGER_TYPE,TRIGGERING_EVENT,
+  2  	TABLE_OWNER,TABLE_NAME,
+  3  	STATUS
+  4  	FROM USER_TRIGGERS order by 2,1;
+
+TRIGGER_NAME                                                                                                                      
+================================================================================================================================  
+TRIGGER_TYPE    |=|TRIGGERING_EVENT |=|TABLE|=|TABLE_NAME       |=|STATUS                                                         
+================|=|=================|=|=====|=|=================|=|======                                                         
+PROFESSORS_AIR                                                                                                                    
+AFTER EACH ROW  |=|INSERT           |=|MASTE|=|PROFESSORS       |=|ENABLE                                                         
+                |=|                 |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+TEMP_ADR                                                                                                                          
+AFTER EACH ROW  |=|DELETE           |=|MASTE|=|TEMP             |=|ENABLE                                                         
+                |=|                 |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+TEMP_AIUDR                                                                                                                        
+AFTER EACH ROW  |=|INSERT OR UPDATE |=|MASTE|=|TEMP             |=|ENABLE                                                         
+                |=|OR DELETE        |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+TEMP_AIUR                                                                                                                         
+AFTER EACH ROW  |=|INSERT OR UPDATE |=|MASTE|=|TEMP             |=|ENABLE                                                         
+                |=|                 |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+PROFESSORS_BIR                                                                                                                    
+BEFORE EACH ROW |=|INSERT           |=|MASTE|=|PROFESSORS       |=|ENABLE                                                         
+                |=|                 |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+TEMP_BIUDR                                                                                                                        
+BEFORE EACH ROW |=|INSERT OR UPDATE |=|MASTE|=|TEMP             |=|ENABLE                                                         
+                |=|OR DELETE        |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+
+6 filas seleccionadas.
+
+SQL> SELECT TRIGGER_NAME,TRIGGER_TYPE,TRIGGERING_EVENT,
+  2  	TABLE_OWNER,TABLE_NAME,
+  3  	STATUS
+  4  	FROM USER_TRIGGERS order by 5,2,1;
+
+TRIGGER_NAME                                                                                                                      
+================================================================================================================================  
+TRIGGER_TYPE    |=|TRIGGERING_EVENT |=|TABLE|=|TABLE_NAME       |=|STATUS                                                         
+================|=|=================|=|=====|=|=================|=|======                                                         
+PROFESSORS_AIR                                                                                                                    
+AFTER EACH ROW  |=|INSERT           |=|MASTE|=|PROFESSORS       |=|ENABLE                                                         
+                |=|                 |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+PROFESSORS_BIR                                                                                                                    
+BEFORE EACH ROW |=|INSERT           |=|MASTE|=|PROFESSORS       |=|ENABLE                                                         
+                |=|                 |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+TEMP_ADR                                                                                                                          
+AFTER EACH ROW  |=|DELETE           |=|MASTE|=|TEMP             |=|ENABLE                                                         
+                |=|                 |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+TEMP_AIUDR                                                                                                                        
+AFTER EACH ROW  |=|INSERT OR UPDATE |=|MASTE|=|TEMP             |=|ENABLE                                                         
+                |=|OR DELETE        |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+TEMP_AIUR                                                                                                                         
+AFTER EACH ROW  |=|INSERT OR UPDATE |=|MASTE|=|TEMP             |=|ENABLE                                                         
+                |=|                 |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+TEMP_BIUDR                                                                                                                        
+BEFORE EACH ROW |=|INSERT OR UPDATE |=|MASTE|=|TEMP             |=|ENABLE                                                         
+                |=|OR DELETE        |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+
+6 filas seleccionadas.
+
+SQL> COL TABLE_OWNER FORMAT A5
+SQL> COL COLUMN_NAME FORMAT A15
+SQL> COL TRIGGERING_EVENT FORMAT A17
+SQL> COL TABLE_NAME FORMAT A17
+SQL> SELECT TRIGGER_NAME,TRIGGER_TYPE,TRIGGERING_EVENT,
+  2  	TABLE_OWNER,TABLE_NAME,
+  3  	STATUS
+  4  	FROM USER_TRIGGERS
+  5  	WHERE TABLE_NAME IN ('FRAME','FRAME_AUDIT')
+  6  	order by 5,2,1;
+
+ninguna fila seleccionada
+
+SQL> SELECT TRIGGER_NAME,TRIGGER_TYPE,TRIGGERING_EVENT,
+  2  	TABLE_OWNER,TABLE_NAME,
+  3  	STATUS
+  4  	FROM USER_TRIGGERS
+  5  	order by 5,2,1;
+
+TRIGGER_NAME                                                                                                                      
+================================================================================================================================  
+TRIGGER_TYPE    |=|TRIGGERING_EVENT |=|TABLE|=|TABLE_NAME       |=|STATUS                                                         
+================|=|=================|=|=====|=|=================|=|======                                                         
+PROFESSORS_AIR                                                                                                                    
+AFTER EACH ROW  |=|INSERT           |=|MASTE|=|PROFESSORS       |=|ENABLE                                                         
+                |=|                 |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+PROFESSORS_BIR                                                                                                                    
+BEFORE EACH ROW |=|INSERT           |=|MASTE|=|PROFESSORS       |=|ENABLE                                                         
+                |=|                 |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+TEMP_ADR                                                                                                                          
+AFTER EACH ROW  |=|DELETE           |=|MASTE|=|TEMP             |=|ENABLE                                                         
+                |=|                 |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+TEMP_AIUDR                                                                                                                        
+AFTER EACH ROW  |=|INSERT OR UPDATE |=|MASTE|=|TEMP             |=|ENABLE                                                         
+                |=|OR DELETE        |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+TEMP_AIUR                                                                                                                         
+AFTER EACH ROW  |=|INSERT OR UPDATE |=|MASTE|=|TEMP             |=|ENABLE                                                         
+                |=|                 |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+TEMP_BIUDR                                                                                                                        
+BEFORE EACH ROW |=|INSERT OR UPDATE |=|MASTE|=|TEMP             |=|ENABLE                                                         
+                |=|OR DELETE        |=|RING |=|                 |=|D                                                              
+                                                                                                                                  
+
+6 filas seleccionadas.
+
+SQL> COL DESCRIPTION FORMAT A25 WRAPPED
+SQL> SELECT TRIGGER_NAME,
+  2      DESCRIPTION,
+  3  	TABLE_OWNER,TABLE_NAME,
+  4  	COLUMN_NAME, STATUS
+  5  	FROM USER_TRIGGERS;
+
+TRIGGER_NAME                                                                                                                      
+================================================================================================================================  
+DESCRIPTION              |=|TABLE|=|TABLE_NAME       |=|COLUMN_NAME    |=|STATUS                                                  
+=========================|=|=====|=|=================|=|===============|=|======                                                  
+TEMP_BIUDR                                                                                                                        
+temp_biudr               |=|MASTE|=|TEMP             |=|nada           |=|ENABLE                                                  
+BEFORE INSERT OR UPDATE O|=|RING |=|                 |=|               |=|D                                                       
+R DELETE ON TEMP         |=|     |=|                 |=|               |=|                                                        
+FOR EACH ROW             |=|     |=|                 |=|               |=|                                                        
+                                                                                                                                  
+TEMP_AIUR                                                                                                                         
+temp_aiur                |=|MASTE|=|TEMP             |=|nada           |=|ENABLE                                                  
+AFTER INSERT OR UPDATE OF|=|RING |=|                 |=|               |=|D                                                       
+ Y ON TEMP               |=|     |=|                 |=|               |=|                                                        
+FOR EACH ROW             |=|     |=|                 |=|               |=|                                                        
+                                                                                                                                  
+TEMP_ADR                                                                                                                          
+temp_adr                 |=|MASTE|=|TEMP             |=|nada           |=|ENABLE                                                  
+AFTER DELETE ON TEMP     |=|RING |=|                 |=|               |=|D                                                       
+FOR EACH ROW             |=|     |=|                 |=|               |=|                                                        
+                                                                                                                                  
+TEMP_AIUDR                                                                                                                        
+temp_aiudr               |=|MASTE|=|TEMP             |=|nada           |=|ENABLE                                                  
+AFTER INSERT OR UPDATE OR|=|RING |=|                 |=|               |=|D                                                       
+ DELETE ON TEMP          |=|     |=|                 |=|               |=|                                                        
+FOR EACH ROW             |=|     |=|                 |=|               |=|                                                        
+                                                                                                                                  
+PROFESSORS_BIR                                                                                                                    
+professors_bir           |=|MASTE|=|PROFESSORS       |=|nada           |=|ENABLE                                                  
+BEFORE INSERT ON professo|=|RING |=|                 |=|               |=|D                                                       
+rs                       |=|     |=|                 |=|               |=|                                                        
+FOR EACH ROW             |=|     |=|                 |=|               |=|                                                        
+                                                                                                                                  
+PROFESSORS_AIR                                                                                                                    
+professors_air           |=|MASTE|=|PROFESSORS       |=|nada           |=|ENABLE                                                  
+AFTER INSERT ON professor|=|RING |=|                 |=|               |=|D                                                       
+s                        |=|     |=|                 |=|               |=|                                                        
+FOR EACH ROW             |=|     |=|                 |=|               |=|                                                        
+                                                                                                                                  
+
+6 filas seleccionadas.
+
+SQL> 
+SQL> COL EMP_ID FORMAT 99999
+SQL> COL FIRST_N FORMAT A19
+SQL> COL LAST_NAME FORMAT A12
+SQL> COL EMAIL     FORMAT A9
+SQL> COL PHONE_NUMBER FORMAT A18
+SQL> COL JOB_ID FORMAT  A10
+SQL> COL SALARY FORMAT 99,999.99
+SQL> COL MAN_ID FORMAT 9999
+SQL> COL CPCT  FORMAT 99.99
+SQL> COL DEPT_ID   FORMAT 9999
+SQL> SELECT EMPLOYEE_ID EMP_ID,
+  2  	FIRST_NAME FIRST_N,
+  3  	LAST_NAME
+  4  	,EMAIL,PHONE_NUMBER,
+  5  	HIRE_DATE,JOB_ID,
+  6  	SALARY,
+  7  	COMMISSION_PCT CPCT,
+  8  	MANAGER_ID MAN_ID,
+  9  	DEPARTMENT_ID DEPT_ID
+ 10  	FROM EMPLOYEES
+ 11  	WHERE ROWNUM 	<= 10
+ 12  	ORDER BY 1;
+	FROM EMPLOYEES
+	     *
+ERROR en línea 10:
+ORA-00942: la tabla o vista no existe 
+
+
+SQL> SELECT EMPLOYEE_ID EMP_ID,
+  2  	FIRST_NAME FIRST_N,
+  3  	LAST_NAME
+  4  	,EMAIL,PHONE_NUMBER,
+  5  	HIRE_DATE,JOB_ID,
+  6  	SALARY,
+  7  	COMMISSION_PCT CPCT,
+  8  	MANAGER_ID MAN_ID,
+  9  	DEPARTMENT_ID DEPT_ID
+ 10  	FROM EMPLOYEE
+ 11  	WHERE ROWNUM 	<= 10
+ 12  	ORDER BY 1;
+	DEPARTMENT_ID DEPT_ID
+	*
+ERROR en línea 9:
+ORA-00904: "DEPARTMENT_ID": identificador no válido 
+
+
+SQL> SELECT EMPLOYEE_ID EMP_ID,
+  2  	FIRST_NAME FIRST_N,
+  3  	LAST_NAME
+  4  	,EMAIL,PHONE_NUMBER,
+  5  	HIRE_DATE,JOB_ID,
+  6  	SALARY,
+  7  	COMMISSION_PCT CPCT,
+  8  	MANAGER_ID MAN_ID,
+  9  	FROM EMPLOYEE
+ 10  	WHERE ROWNUM 	<= 10
+ 11  	ORDER BY 1;
+	FROM EMPLOYEE
+	*
+ERROR en línea 9:
+ORA-00936: falta una expresión 
+
+
+SQL> INSERT INTO EMPLOYEES  VALUES
+  2  	(12,'IRMA','Mireles','IMIRELES2','650.124.122',
+  3  	TO_DATE('22/09/06','DD/MM/YY'),'ST_CLERK',2700.00,NULL,120,50);
+INSERT INTO EMPLOYEES  VALUES
+            *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+SQL> 
+SQL> INSERT INTO EMPLOYEES  VALUES
+  2  	(13,'Erendida','Mireles','IMIRELES2','650.124.122',
+  3  	TO_DATE('22/09/06','DD/MM/YY'),'ST_CLERK',2700.00,NULL,120,50);
+INSERT INTO EMPLOYEES  VALUES
+            *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+SQL> REM CORREO DUPLICADO
+SQL> INSERT INTO EMPLOYEES  VALUES
+  2  	(14,'ERNESTINA','Mireles','IMIRELES2','650.124.122',
+  3  	TO_DATE('22/09/06','DD/MM/YY'),'ST_CLERK',2700.00,NULL,120,50);
+INSERT INTO EMPLOYEES  VALUES
+            *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+SQL> 
+SQL> INSERT INTO EMPLOYEES  VALUES
+  2  	(14,'ERNESTINA','Mireles','ERNESTINA','650.124.122',
+  3  	TO_DATE('22/09/06','DD/MM/YY'),'ST_CLERK',2700.00,NULL,120,50);
+INSERT INTO EMPLOYEES  VALUES
+            *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+SQL> INSERT INTO EMPLOYEE  VALUES
+  2  	(12,'IRMA','Mireles','IMIRELES2','650.124.122',
+  3  	TO_DATE('22/09/06','DD/MM/YY'),'ST_CLERK',2700.00,NULL,120,50);
+INSERT INTO EMPLOYEE  VALUES
+            *
+ERROR en línea 1:
+ORA-00913: demasiados valores 
+
+
+SQL> 
+SQL> INSERT INTO EMPLOYEE  VALUES
+  2  	(13,'Erendida','Mireles','IMIRELES2','650.124.122',
+  3  	TO_DATE('22/09/06','DD/MM/YY'),'ST_CLERK',2700.00,NULL,120,50);
+INSERT INTO EMPLOYEE  VALUES
+            *
+ERROR en línea 1:
+ORA-00913: demasiados valores 
+
+
+SQL> REM CORREO DUPLICADO
+SQL> INSERT INTO EMPLOYEE  VALUES
+  2  	(14,'ERNESTINA','Mireles','IMIRELES2','650.124.122',
+  3  	TO_DATE('22/09/06','DD/MM/YY'),'ST_CLERK',2700.00,NULL,120,50);
+INSERT INTO EMPLOYEE  VALUES
+            *
+ERROR en línea 1:
+ORA-00913: demasiados valores 
+
+
+SQL> 
+SQL> INSERT INTO EMPLOYEE  VALUES
+  2  	(14,'ERNESTINA','Mireles','ERNESTINA','650.124.122',
+  3  	TO_DATE('22/09/06','DD/MM/YY'),'ST_CLERK',2700.00,NULL,120,50);
+INSERT INTO EMPLOYEE  VALUES
+            *
+ERROR en línea 1:
+ORA-00913: demasiados valores 
+
+
+SQL> spool off;

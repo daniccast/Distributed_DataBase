@@ -1,3 +1,4 @@
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\ScriptsProfesor\CAP19_TRIGGERS\final_audit_spool.txt
 /*-- final_audit.sql */
 
 CREATE OR REPLACE TRIGGER audit_update
@@ -45,3 +46,4 @@ END;
 | Associates, Inc. To submit corrections or find more code samples visit
 | http://www.oreilly.com/catalog/oraclep3/
 */
+spool off;

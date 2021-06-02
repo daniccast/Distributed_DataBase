@@ -1,3 +1,5 @@
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\ScriptsProfesor\CAP19_TRIGGERS\full_old_and_new_spool.txt
+
 REM Create the tables
 
 @bowlerama_tables.sql
@@ -124,6 +126,7 @@ BEGIN
 END;
 /
 
+spool off;
 
 /*======================================================================
 | Supplement to the third edition of Oracle PL/SQL Programming by Steven
