@@ -3,10 +3,10 @@ spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial2\PL-S
 rem **********************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
 rem * Elaborado por:                                         *
-rem * Cortés Castilllo Daniela y Mendoza Cuellar José Oscar  *                 
+rem * Cortï¿½s Castilllo Daniela y Mendoza Cuellar Josï¿½ Oscar  *                 
 rem * Realizado el 4 de Abril  de 2021                       *
 rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).                     *
-rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.       *
+rem *Oracleï¿½ PL/SQLï¿½by Example,Boston,MA,USA:Perarson.       *
 rem **********************************************************
 */
 
@@ -45,6 +45,5 @@ END;
 
 select student_id, first_name from student
 where student_id in (500,501);
-
 
 spool OFF;
