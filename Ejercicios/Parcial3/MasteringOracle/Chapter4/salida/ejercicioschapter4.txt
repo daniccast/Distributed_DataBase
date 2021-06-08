@@ -1,0 +1,52 @@
+SQL> set colsep '|=|'
+SQL> set describe linenum on
+SQL> SET PAGESIZE 99;
+SQL> SET LINESIZE 150
+SQL> 
+SQL> alter session set NLS_DATE_FORMAT = 'DD-MON-YYYY';
+
+Sesión modificada.
+
+SQL> alter session set NLS_DATE_LANGUAGE= 'ENGLISH';
+
+Sesión modificada.
+
+SQL> rem para estos ejercicios necesitamos este tipo de formato
+SQL> 
+SQL> 
+SQL> rem USAR GROUP BY con una INLINE VIEW
+SQL> 
+SQL> SELECT ROWNUM, V.*
+  2  FROM (SELECT CUST_NBR, COUNT(ORDER_NBR)
+  3  FROM CUST_ORDER GROUP BY CUST_NBR) V;
+
+    ROWNUM|=|  CUST_NBR|=|COUNT(ORDER_NBR)                                                                                                            
+----------|=|----------|=|----------------                                                                                                            
+         1|=|         1|=|               8                                                                                                            
+         2|=|         8|=|               2                                                                                                            
+         3|=|         5|=|               6                                                                                                            
+         4|=|         4|=|               4                                                                                                            
+
+SQL> 
+SQL> rem GROUP BY Y NULL
+SQL> 
+SQL> SELECT CUST_NBR, ORDER_DT, COUNT(ORDER_NBR)
+  2  FROM CUST_ORDER
+  3  GROUP BY CUST_NBR, ORDER_DT;
+
+  CUST_NBR|=|ORDER_DT   |=|COUNT(ORDER_NBR)                                                                                                           
+----------|=|-----------|=|----------------                                                                                                           
+         1|=|19-JUL-2001|=|               2                                                                                                           
+         5|=|20-JUL-2001|=|               2                                                                                                           
+         8|=|22-JUL-2001|=|               2                                                                                                           
+         5|=|21-JUL-2001|=|               2                                                                                                           
+         1|=|22-JUL-2001|=|               4                                                                                                           
+         1|=|18-JUL-2001|=|               2                                                                                                           
+         5|=|12-JUL-2001|=|               2                                                                                                           
+         4|=|18-JUL-2001|=|               2                                                                                                           
+         4|=|16-JUL-2001|=|               2                                                                                                           
+
+9 filas seleccionadas.
+
+SQL> 
+SQL> spool OFF;

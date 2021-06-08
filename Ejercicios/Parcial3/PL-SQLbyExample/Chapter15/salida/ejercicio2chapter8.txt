@@ -1,0 +1,57 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+Introduzca un valor para sv_zip: 07024
+antiguo   4: 	v_zip            CHAR(5):= '&sv_zip';
+nuevo   4: 	v_zip            CHAR(5):= '07024';
+There are 9 students                                                                                                                                  
+
+Procedimiento PL/SQL terminado correctamente.
+
+Introduzca un valor para sv_zip: 00914
+antiguo   4: 	v_zip            CHAR(5):= '&sv_zip';
+nuevo   4: 	v_zip            CHAR(5):= '00914';
+There are 0 students                                                                                                                                  
+
+Procedimiento PL/SQL terminado correctamente.
+
+Introduzca un valor para sv_zip: 12345
+antiguo   4: 	v_zip            CHAR(5):= '&sv_zip';
+nuevo   4: 	v_zip            CHAR(5):= '12345';
+12345 is not a valid zip                                                                                                                              
+
+Procedimiento PL/SQL terminado correctamente.
+
+
+1 fila creada.
+
+
+Confirmación terminada.
+
+
+Confirmación terminada.
+
+Introduzca un valor para sv_zip: 07024
+antiguo   4: 	v_zip            CHAR(5):= '&sv_zip';
+nuevo   4: 	v_zip            CHAR(5):= '07024';
+An error has occurred                                                                                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+
+Introduzca un valor para sv_zip: 07024
+antiguo   4: 	v_zip            CHAR(5):= '&sv_zip';
+nuevo   4: 	v_zip            CHAR(5):= '07024';
+There are 10 students                                                                                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+
+Introduzca un valor para sv_zip: 07024
+antiguo   4: 	v_zip          CHAR(5):= '&sv_zip';
+nuevo   4: 	v_zip          CHAR(5):= '07024';
+Student name is John Smith                                                                                                                            
+
+Procedimiento PL/SQL terminado correctamente.
+
