@@ -1,9 +1,9 @@
 ﻿# Ejercicios parcial dos
 ## Mastering Oraclee SQL
 
-- [] Capítulo 4 - Group OPerations
+- [x] Capítulo 4 - Group OPerations
 - [] Capítulo 5 - Subqueries
-- [] Capítulo 8 - Hierarchical Queries
+- [x] Capítulo 8 - Hierarchical Queries
 - [] Capítulo 13- Advanced Analytic SQL
 
 
