@@ -23,7 +23,7 @@ In this exercise, you define an exception that allows you to raise an error if a
 Create the following PL/SQL script:
 */
 
--- ch9_2a.sql, version 1.0
+-- ch9_2a.sql, version 1.0 (ROSENZWEIG y RAKHIMOV, 2009, 193).
 
 DECLARE
     v_instructor_id NUMBER := &sv_instructor_id;
