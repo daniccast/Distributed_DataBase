@@ -1,0 +1,51 @@
+SQL> update employee set salary=5001 where emp_id= 7934;
+
+1 fila actualizada.
+
+SQL> SELECT sales_emp_id, COUNT(*)
+  2  FROM cust_order
+  3  GROUP BY sales_emp_id
+  4  HAVING COUNT(*) = (SELECT MAX(COUNT(*))
+  5  FROM cust_order
+  6  GROUP BY sales_emp_id);
+
+SALES_EMP_ID|=|  COUNT(*)                                                                                                                             
+------------|=|----------                                                                                                                             
+        7354|=|         8                                                                                                                             
+
+SQL> SELECT fname, lname
+  2  FROM employee
+  3  WHERE dept_id = 30 AND salary >= ALL
+  4  	(SELECT salary
+  5  	FROM employee
+  6  	WHERE dept_id = 30);
+
+FNAME               |=|LNAME                                                                                                                          
+--------------------|=|--------------------                                                                                                           
+MARION              |=|BLAKE                                                                                                                          
+
+SQL> SELECT fname, lname
+  2  FROM employee
+  3  WHERE dept_id = 30 AND NOT salary < ANY
+  4  	(SELECT salary
+  5  	FROM employee
+  6  	WHERE dept_id = 30);
+
+FNAME               |=|LNAME                                                                                                                          
+--------------------|=|--------------------                                                                                                           
+MARION              |=|BLAKE                                                                                                                          
+
+SQL> SELECT fname, lname
+  2  FROM employee
+  3  WHERE manager_emp_id IS NOT NULL
+  4  AND salary > ANY
+  5  	(SELECT salary
+  6  	FROM employee
+  7  	WHERE manager_emp_id IS NULL);
+
+FNAME               |=|LNAME                                                                                                                          
+--------------------|=|--------------------                                                                                                           
+BARBARA             |=|MILLER                                                                                                                         
+
+SQL> 
+SQL> spool OFF;

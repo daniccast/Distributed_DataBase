@@ -1,4 +1,4 @@
-Resumen cápitulo siete.
+Resumen cápitulo CUATRO.
 Información recuperada de Mishra S., Beaulieu A. (2002). Chapter 4 Group Operations. en Mastering Oracle SQL (pp. 157-174).Gravenstein Highway North, Sebastopol, CA 95472. 		
 
 # Chapter 4. Group Operations

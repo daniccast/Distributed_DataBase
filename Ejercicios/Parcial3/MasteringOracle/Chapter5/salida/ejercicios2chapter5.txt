@@ -1,0 +1,67 @@
+SQL> SELECT E_TOP.LNAME, E_2.LNAME, E_3.LNAME, E_4.LNAME
+  2  FROM EMPLOYEE E_TOP, EMPLOYEE E_2, EMPLOYEE E_3, EMPLOYEE E_4
+  3  WHERE E_TOP.MANAGER_EMP_ID IS NULL
+  4  AND E_TOP.EMP_ID = E_2.MANAGER_EMP_ID (+)
+  5  AND E_2.EMP_ID = E_3.MANAGER_EMP_ID (+)
+  6  AND E_3.EMP_ID = E_4.MANAGER_EMP_ID (+);
+
+LNAME               |=|LNAME               |=|LNAME               |=|LNAME                                                                            
+--------------------|=|--------------------|=|--------------------|=|--------------------                                                             
+KING                |=|JONES               |=|FORD                |=|SMITH                                                                            
+KING                |=|JONES               |=|SCOTT               |=|ADAMS                                                                            
+KING                |=|BLAKE               |=|WARD                |=|                                                                                 
+KING                |=|BLAKE               |=|ALLEN               |=|                                                                                 
+KING                |=|BLAKE               |=|JAMES               |=|                                                                                 
+KING                |=|CLARK               |=|MILLER              |=|                                                                                 
+KING                |=|BLAKE               |=|MARTIN              |=|                                                                                 
+KING                |=|BLAKE               |=|TURNER              |=|                                                                                 
+
+8 filas seleccionadas.
+
+SQL> SELECT p.part_nbr, p.name, p.unit_cost
+  2  FROM part p
+  3  WHERE EXISTS
+  4  	(SELECT 1 FROM line_item li, cust_order co
+  5  	WHERE li.part_nbr = p.part_nbr
+  6  	AND li.order_nbr = co.order_nbr
+  7  	AND co.ship_dt >= TO_DATE('01-JAN-2002','DD-MON-YYYY'));
+
+ninguna fila seleccionada
+
+SQL> SELECT d.dept_id, d.name, emp_cnt.tot
+  2  FROM department d,
+  3  	(SELECT dept_id, COUNT(*) tot
+  4  	FROM employee
+  5  	GROUP BY dept_id) emp_cnt
+  6  	WHERE d.dept_id = emp_cnt.dept_id;
+
+   DEPT_ID|=|NAME                |=|       TOT                                                                                                        
+----------|=|--------------------|=|----------                                                                                                        
+        30|=|SALES               |=|         6                                                                                                        
+        10|=|ACCOUNTING          |=|         3                                                                                                        
+        20|=|RESEARCH            |=|         5                                                                                                        
+
+SQL> SELECT e.lname employee, top5_emp_orders.tot_sales total_sales,
+  2  ROUND(top5_emp_orders.tot_sales * 0.01) bonus
+  3  FROM
+  4  	(SELECT all_emp_orders.sales_emp_id emp_id,
+  5  	all_emp_orders.tot_sales tot_sales
+  6  	FROM
+  7  		(SELECT sales_emp_id, SUM(sale_price) tot_sales,
+  8  		RANK( ) OVER (ORDER BY SUM(sale_price) DESC) sales_rank
+  9  		FROM cust_order
+ 10  		WHERE order_dt >= TO_DATE('01-JUL-2001','DD-MON-YYYY')
+ 11  		AND order_dt < TO_DATE('01-JUL-2002','DD-MON-YYYY')
+ 12  		GROUP BY sales_emp_id
+ 13  		) all_emp_orders
+ 14  	WHERE all_emp_orders.sales_rank <= 5
+ 15  	) top5_emp_orders, employee e
+ 16  WHERE top5_emp_orders.emp_id = e.emp_id
+ 17  ORDER BY 2 DESC;
+
+EMPLOYEE            |=|TOTAL_SALES|=|     BONUS                                                                                                       
+--------------------|=|-----------|=|----------                                                                                                       
+MARTIN              |=|        378|=|         4                                                                                                       
+
+SQL> 
+SQL> spool OFF;
