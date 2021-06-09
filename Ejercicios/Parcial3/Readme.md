@@ -2,9 +2,9 @@
 ## Mastering Oraclee SQL
 
 - [x] Capítulo 4 - Group OPerations
-- [] Capítulo 5 - Subqueries
+- [x] Capítulo 5 - Subqueries
 - [x] Capítulo 8 - Hierarchical Queries
-- [] Capítulo 13- Advanced Analytic SQL
+- [x] Capítulo 13- Advanced Analytic SQL
 
 
 ## PL/SQL by example
