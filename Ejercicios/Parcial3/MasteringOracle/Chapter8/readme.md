@@ -1,4 +1,4 @@
-Resumen cápitulo siete.
+Resumen cápitulo OCHO.
 Información recuperada de Mishra S., Beaulieu A. (2002). Chapter 8 Hierarchical Queries. en Mastering Oracle SQL (pp. 157-174).Gravenstein Highway North, Sebastopol, CA 95472. 		
 
 # Chapter 8 Hierarchical Queries

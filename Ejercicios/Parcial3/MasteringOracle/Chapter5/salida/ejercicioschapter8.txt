@@ -1,0 +1,64 @@
+SQL> 
+SQL> rem Finding the Root Node
+SQL> 
+SQL> SELECT EMP_ID, LNAME, DEPT_ID, MANAGER_EMP_ID, SALARY, HIRE_DATE
+  2  FROM EMPLOYEE
+  3  WHERE MANAGER_EMP_ID IS NULL;
+
+    EMP_ID|=|LNAME               |=|   DEPT_ID|=|MANAGER_EMP_ID|=|    SALARY|=|HIRE_DATE                                                              
+----------|=|--------------------|=|----------|=|--------------|=|----------|=|---------                                                              
+      7839|=|KING                |=|        10|=|              |=|      5000|=|17-NOV-81                                                              
+
+SQL> 
+SQL> 
+SQL> rem FInding a nodes immediate Parent
+SQL> 
+SQL> SELECT E.LNAME "Employee", M.LNAME "Manager"
+  2  FROM EMPLOYEE E, EMPLOYEE M
+  3  WHERE E.MANAGER_EMP_ID = M.EMP_ID;
+
+Employee            |=|Manager                                                                                                                        
+--------------------|=|--------------------                                                                                                           
+SCOTT               |=|JONES                                                                                                                          
+FORD                |=|JONES                                                                                                                          
+ALLEN               |=|BLAKE                                                                                                                          
+WARD                |=|BLAKE                                                                                                                          
+MARTIN              |=|BLAKE                                                                                                                          
+TURNER              |=|BLAKE                                                                                                                          
+JAMES               |=|BLAKE                                                                                                                          
+MILLER              |=|CLARK                                                                                                                          
+ADAMS               |=|SCOTT                                                                                                                          
+JONES               |=|KING                                                                                                                           
+BLAKE               |=|KING                                                                                                                           
+CLARK               |=|KING                                                                                                                           
+SMITH               |=|FORD                                                                                                                           
+
+13 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> rem Finding Leaf Nodes
+SQL> 
+SQL> SELECT EMP_ID, LNAME, DEPT_ID, MANAGER_EMP_ID, SALARY, HIRE_DATE
+  2  FROM EMPLOYEE E
+  3  WHERE EMP_ID NOT IN
+  4  (SELECT MANAGER_EMP_ID FROM EMPLOYEE
+  5  WHERE MANAGER_EMP_ID IS NOT NULL);
+
+    EMP_ID|=|LNAME               |=|   DEPT_ID|=|MANAGER_EMP_ID|=|    SALARY|=|HIRE_DATE                                                              
+----------|=|--------------------|=|----------|=|--------------|=|----------|=|---------                                                              
+      7876|=|ADAMS               |=|        20|=|          7788|=|      1100|=|23-MAY-87                                                              
+      7521|=|WARD                |=|        30|=|          7698|=|      1250|=|22-FEB-81                                                              
+      7499|=|ALLEN               |=|        30|=|          7698|=|      1600|=|20-FEB-81                                                              
+      7900|=|JAMES               |=|        30|=|          7698|=|       950|=|03-DEC-81                                                              
+      7369|=|SMITH               |=|        20|=|          7902|=|       800|=|17-DEC-80                                                              
+      7934|=|MILLER              |=|        10|=|          7782|=|      1300|=|23-JAN-82                                                              
+      7654|=|MARTIN              |=|        30|=|          7698|=|      1250|=|28-SEP-81                                                              
+      7844|=|TURNER              |=|        30|=|          7698|=|      1500|=|08-SEP-81                                                              
+
+8 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> spool OFF;
