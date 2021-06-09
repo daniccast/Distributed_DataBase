@@ -1,0 +1,20 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+Introduzca un valor para sv_instructor_id: 101
+antiguo   2:     v_instructor_id NUMBER := &sv_instructor_id;
+nuevo   2:     v_instructor_id NUMBER := 101;
+Instructor, Fernand Hanks, teaches 9 sections                                                                                                         
+
+Procedimiento PL/SQL terminado correctamente.
+
+Introduzca un valor para sv_instructor_id: 102
+antiguo   2: v_instructor_id NUMBER := &sv_instructor_id;
+nuevo   2: v_instructor_id NUMBER := 102;
+Instructor, Tom Wojick, teaches too much                                                                                                              
+
+Procedimiento PL/SQL terminado correctamente.
+
