@@ -9,8 +9,8 @@
 
 ## PL/SQL by example
 
-- [] Capítulo 15 - Collections
-- [] Capítulo 19 - Procedures
+- [x] Capítulo 15 - Collections
+- [x] Capítulo 19 - Procedures
 - [] Capítulo 20 - Functions
 - [] Capítulo 21 - Packages
 
