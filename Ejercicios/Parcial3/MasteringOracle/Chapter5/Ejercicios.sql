@@ -27,6 +27,7 @@ rem the following query, which identifies the salesperson responsible for
 rem the most orders (Mishra y Beaulieu, 2002, 70)
 
 
+update employee set salary=5001 where emp_id= 7934; 
 
 SELECT sales_emp_id, COUNT(*)
 FROM cust_order
@@ -39,17 +40,17 @@ GROUP BY sales_emp_id);
 rem Ejemplo miltiple-row subqueries
 SELECT fname, lname
 FROM employee
-WHERE dept_id = 3 AND salary >= ALL
+WHERE dept_id = 30 AND salary >= ALL
 	(SELECT salary
 	FROM employee
-	WHERE dept_id = 3);
+	WHERE dept_id = 30);
 
 SELECT fname, lname
 FROM employee
-WHERE dept_id = 3 AND NOT salary < ANY
+WHERE dept_id = 30 AND NOT salary < ANY
 	(SELECT salary
 	FROM employee
-	WHERE dept_id = 3);
+	WHERE dept_id = 30);
 
 rem también se puede utilizar con ANY
 

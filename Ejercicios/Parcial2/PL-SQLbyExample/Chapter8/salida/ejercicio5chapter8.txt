@@ -1,0 +1,13 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+Introduzca un valor para sv_instructor_id: 319
+antiguo   2: v_instructor_id NUMBER := &sv_instructor_id;
+nuevo   2: v_instructor_id NUMBER := 319;
+An error has occurred                                                                                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+

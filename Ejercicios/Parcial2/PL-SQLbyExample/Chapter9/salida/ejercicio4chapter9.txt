@@ -1,0 +1,23 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+Introduzca un valor para sv_your_name: Oscar Mendoza
+antiguo   8: v_your_name := '&sv_your_name';
+nuevo   8: v_your_name := 'Oscar Mendoza';
+DECLARE
+*
+ERROR en línea 1:
+ORA-06502: PL/SQL: error : buffer de cadenas de caracteres demasiado pequeño numérico o de valor 
+ORA-06512: en línea 2 
+
+
+DECLARE
+*
+ERROR en línea 1:
+ORA-20002: Course 25, section 89 has more than 10 students 
+ORA-06512: en línea 11 
+
+
