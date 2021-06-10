@@ -42,10 +42,7 @@ Tabla (ROSENZWEIG y RAKHIMOV, 2009, 445).
 MODE | DESCRIPTION | USAGE
 -----|-------------|-----------
 IN |  Passes a value into the program. Constants, literals, expressions. Cannot be changed within the program’s default mode. | Read-only value
-OUT | Passes a value back from the program
-Cannot assign default values
-Must be a variable
-A value is assigned only if the program is successful | Write-only value
+OUT | Passes a value back from the program. Cannot assign default values. Must be a variable. A value is assigned only if the program is successful | Write-only value
 IN OUT |  Passes values in and also sends values back | Has to be a variable
 
 
