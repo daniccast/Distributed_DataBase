@@ -1,4 +1,4 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter15\salida\ejercicio3chapter15.txt
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter15\salida\ejercicio4chapter15.txt
 /*
 rem **********************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
@@ -20,24 +20,28 @@ alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
 SET SERVEROUTPUT ON;
 
 
--- Modify script ch15_1a.sql, used in Exercise 15.1.1. Instead of using an associative array, use a nested table. (ROSENZWEIG y RAKHIMOV, 2009, 331).
+-- Ejemplo, uso de varray(ROSENZWEIG y RAKHIMOV, 2009, 336).
 
 -- ch15_2a.sql, version 1.0
-
 DECLARE
-	CURSOR course_cur IS
-		SELECT description
-			FROM course;
-	TYPE course_type IS TABLE OF course.description%TYPE;
-	course_tab course_type := course_type();
+	CURSOR name_cur IS
+		SELECT last_name
+			FROM student
+			WHERE rownum <= 10;
+	TYPE last_name_type IS VARRAY(10) OF student.last_name%TYPE;
+	last_name_varray last_name_type := last_name_type();
 	v_counter INTEGER := 0;
 BEGIN
-	FOR course_rec IN course_cur LOOP
+	FOR name_rec IN name_cur LOOP
 		v_counter := v_counter + 1;
-		course_tab.EXTEND;
-		course_tab(v_counter) := course_rec.description;
+		last_name_varray.EXTEND;
+		last_name_varray(v_counter) := name_rec.last_name;
+		DBMS_OUTPUT.PUT_LINE ('last_name('||v_counter||'): '|| last_name_varray(v_counter));
 	END LOOP;
+	DBMS_OUTPUT.PUT_LINE ('varray.LIMIT = '||varray.LIMIT);
 END;
+
+
 
 
 

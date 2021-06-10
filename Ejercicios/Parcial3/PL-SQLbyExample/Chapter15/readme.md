@@ -1,100 +1,124 @@
-Resumen cápitulo ocho.
-Información recuperada de ROSENZWEIG,B &  RAKHIMOV,E (2009)."Chapter 8. Error Handling and Built-in Exceptions".Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson. 
+Resumen cápitulo quince.
+Información recuperada de ROSENZWEIG,B &  RAKHIMOV,E (2009)."Chapter 15. Collections".Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson. 
 
-# Error Handling and Built-in Exceptions
+# Collections
 
-La sección de manejo de errores permite a los programadores especificar que acciones se deben tomar cuando un excepción específica ocurra. 
+Una colección es un grupo de elementos del mismo tipo de datos. Cada elemento está identificado por un subíndice único que representa su posición en la colección.
 
-PL/SQL tiene dos tipos de excepciones: **built-in y user-defined**.
+## PL/SQLTables
 
-## Handling Errors
+Una tabla PL / SQL es similar a una tabla de base de datos de una columna. Las filas de una tabla PL / SQL no se almacenan en ningún orden predefinido, sin embargo, cuando se recuperan en una variable, a cada fila se le asigna un subíndice consecutivo a partir de 1.
 
-Pra manejar los erores en tiempo de ejecución, o *runtime errors*, debemos agregar un manejador de expeciones. Este tiene la siguiente estructura:
+
+###  ASSOCIATIVE ARRAYS
+
+
+Sintaxis:
 
 ```
-EXCEPTION
-	WHEN EXCEPTION_NAME THEN
-		ERROR-PROCESSING STATEMENTS;
+TYPE type_name IS TABLE OF element_type [NOT NULL]
+	INDEX BY element_type;
+
+table_name TYPE_NAME;
 ```
 
-Esta sección se coloca después de la sección de bloque de código. 
-
-Ejemplo (ROSENZWEIG y RAKHIMOV, 2009, 166):
-```
-DECLARE
-	v_num1 INTEGER := &sv_num1;
-	v_num2 INTEGER := &sv_num2;
-	v_result NUMBER;
-BEGIN
-	v_result := v_num1 / v_num2;
-	DBMS_OUTPUT.PUT_LINE ('v_result: '||v_result);
-EXCEPTION
-	WHEN ZERO_DIVIDE THEN
-		DBMS_OUTPUT.PUT_LINE ('A number cannot be divided by zero.');
-END;
-```
-
-Con esto logramas tener una salida más limpia e informativa.
-
-## Built-in Exceptions
-
-Es importante recalcar que después de que la sección de manejo de errores termina, el bloque lo hace, no regresará a la sección de ejecución.
-
-
-Tabla de algunas excepciones predefinidas.
-
-Excepción      |  Descripción
----------------|--------------------------
-NO\_DATA\_FOUND| Esta excepción se genera cuando algún select que usemoss en alguna función devulva 0 filas. Claramente su usamos una función de grupo como SUM O COUNT no se levanta esta excepción, pues estás devolverían 0;
-TOO\_MANY\_ROWS| Esta excepción se genera cuando algún select  devuelva más de una fila, para funciones que solo necesiten una. 
-ZERO_DIVIDE    | Esta excepción se genera cuando en una división el divisor es 0;
-LOGIN_DENIED   |  Esta excepción se genera cuando un usuario trata de ingresar a Oracle con un usuario o contraseña inválidos.
-PROGRAM_ERROR  | Esta excepción se genera cuando un programa PL/SQL tiene un problema interno.
-VALUE_ERROR    |Esta excepción se genera cuando se produce un error de conversión o de discrepancia de tamaño. 
-DUP\_VALUE\_ON\_INDEX | Esta excepción se genera cuando un programa trata de almacenar un valor duplicado en una columna que solo tiene valores únicos.
-
-
-Ejemplo de uso de más de una excepción (ROSENZWEIG y RAKHIMOV, 2009, 171):
-
+Ejemplo (ROSENZWEIG y RAKHIMOV, 2009, 317):
 ```
 DECLARE
-	v_student_id NUMBER := &sv_student_id;
-	v_enrolled VARCHAR2(3) := 'NO';
-BEGIN
-	DBMS_OUTPUT.PUT_LINE ('Check if the student is enrolled');
-	SELECT 'YES'
-		INTO v_enrolled
-		FROM enrollment
-		WHERE student_id = v_student_id;
-	DBMS_OUTPUT.PUT_LINE ('The student is enrolled into one course');
-	
-EXCEPTION
-	WHEN NO_DATA_FOUND THEN
-		DBMS_OUTPUT.PUT_LINE ('The student is not enrolled');
-	WHEN TOO_MANY_ROWS THEN
-		DBMS_OUTPUT.PUT_LINE('The student is enrolled in too many courses');
-END;
+	TYPE last_name_type IS TABLE OF student.last_name%TYPE
+	INDEX BY BINARY_INTEGER;
+last_name_tab last_name_type;
 ```
 
-**No siempre podremos saber que excepción será generada, para eso se usa OTHERS.**
+### NESTED TABLES
 
-Ejemplo de uso de más de una excepción (ROSENZWEIG y RAKHIMOV, 2009, 173):
+Sintaxis:
 
+```
+TYPE type_name IS TABLE OF element_type [NOT NULL];
+table_name TYPE_NAME;
+```
+
+Estas deben ser inicializdas antes de que sus elementos puedan ser referenciados.
+Deben ser **inicializadas** con un constructor.
+
+Ejemplo (ROSENZWEIG y RAKHIMOV, 2009, 321):
 ```
 DECLARE
-	v_instructor_id NUMBER := &sv_instructor_id;
-	v_instructor_name VARCHAR2(50);
+	CURSOR name_cur IS
+		SELECT last_name
+		FROM student
+		WHERE rownum <= 10;
+	TYPE last_name_type IS TABLE OF student.last_name%TYPE;
+	last_name_tab last_name_type := last_name_type();
+	v_counter INTEGER := 0;
 BEGIN
-	SELECT first_name||' '||last_name
-		INTO v_instructor_name
-		FROM instructor
-		WHERE instructor_id = v_instructor_id;
-	DBMS_OUTPUT.PUT_LINE ('Instructor name is '||v_instructor_name);
-EXCEPTION
-	WHEN OTHERS THEN
-		DBMS_OUTPUT.PUT_LINE ('An error has occurred');
+	FOR name_rec IN name_cur LOOP
+		v_counter := v_counter + 1;
+		last_name_tab.EXTEND;
+		last_name_tab(v_counter) := name_rec.last_name;
+		DBMS_OUTPUT.PUT_LINE ('last_name('||v_counter||'): '||
+		last_name_tab(v_counter));
+	END LOOP;
 END;
+
 ```
+Usaar := significa que está vacía pero no es NULL.
+EXTEND sirvve para incrementar el tamaño de la colección.
+
+
+### COLLECTION METHODS
+
+Sintaxis
+```
+collection_name.method_name
+```
+
+
+* **EXISTS**. Devuelve TRUE si un elemento específico existe en la colección. Spuede usar para evitar las excepciones SUBSCRIPT\_OUTSIDE_LIMIT.
+* **COUNT**. Devuelve el número total de elementos en la colección.
+* **EXTEND**. Incrementa el tamaño de la colección.
+* **DELETE**. Borra todos los elementos, un rango de elementos o un solo elemento. 
+* **FIRS and LAST**. Devuelve subíndices del primer y último elemento de una colección.
+* **PRIOR and NEXT**. Devuelve subíndices que preceden y suceden a un subíndice de colección específico.
+* **TRIM**. Elimina uno o un número específico de elementos del final de una colección.
+
+
+
+
+## Varrays
+
+Similar a las tablas PL/SQL. Tiene un tamaño máximo.
+
+Sintaxis
+```
+TYPE type_name IS {VARRAY | VARYING ARRAY} (size_limit) OF
+	element_type [NOT NULL];
+varray_name TYPE_NAME;
+```
+Tienen que ser **inicializados**.
+Podemos usar los métodos en los varrays. Y se agrega LIMIT. Pero, nos se puede usar 
+
+
+## Multilevel Collections
+
+A partir de Oracle 9i, PL / SQL le permite crear colecciones cuyo tipo de elemento se basa en un tipo de colección. Estas colecciones se denominan colecciones multinivel.
+
+Practicámente es un varray de varrays.
+
+Sintaxis:
+```
+varray_name(subscript of the outer varray)(subscript of the inner
+varray)
+
+```
+
+
+
+
+
+
+
 
 
 
