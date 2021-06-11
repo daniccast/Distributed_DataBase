@@ -59,7 +59,7 @@ END;
 /
 
 /*
-como podemios ver el script nos muestra los estudiante con un Id menor que 110 asi como su nombre y los cursos en los que esta ioncrito, 
+como podemos ver el script nos muestra los estudiante con un Id menor que 110 asi como su nombre y los cursos en los que esta ioncrito, 
 esto gracias dos cursores, ahora bien si quisieramos usar estos mismos dos cursores sin, pero con ciclos sin anidar, parta mostrar el monto
 que recuda cada instructor, nos quedaria de la siguiente manera 
 */

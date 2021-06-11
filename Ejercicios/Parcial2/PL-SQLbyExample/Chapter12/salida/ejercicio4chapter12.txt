@@ -1,0 +1,96 @@
+SQL> /*
+SQL> rem **********************************************************
+SQL> rem * Distributed DataBase, ESCOM. Ciclo 2021-2		  *
+SQL> rem * Elaborado por:					  *
+SQL> rem * Cortï¿½s Castilllo Daniela y Mendoza Cuellar Josï¿½ Oscar  *
+SQL> rem * Realizado el 2 de mayo  de 2021			  *
+SQL> rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).			  *
+SQL> rem *Oracleï¿½ PL/SQLï¿½by Example,Boston,MA,USA:Perarson.      *
+SQL> rem **********************************************************
+SQL> */
+SQL> 
+SQL> set colsep '|='
+SQL> set describe linenum on
+SQL> SET PAGESIZE 99;
+SQL> SET LINESIZE 150
+SQL> alter session set NLS_DATE_FORMAT = 'DD-MON-YYYY';
+
+Sesión modificada.
+
+SQL> alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
+
+Sesión modificada.
+
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> /*
+SQL> En este script se actualizaron las calificaciones del curso 135 a 90, haciendo uso de los cursores
+SQL> */
+SQL> 
+SQL> -- ch12_3a.sql (ROSENZWEIG &  RAKHIMOV, 2009, 259 )
+SQL> DECLARE
+  2  CURSOR c_grade(
+  3  	 i_student_id IN enrollment.student_id%TYPE,
+  4  	 i_section_id IN enrollment.section_id%TYPE)
+  5  	 IS
+  6  	 SELECT final_grade
+  7  	 FROM enrollment
+  8  	 WHERE student_id = i_student_id
+  9  	 AND section_id = i_section_id
+ 10  	 FOR UPDATE;
+ 11  	 CURSOR c_enrollment IS
+ 12  	     SELECT e.student_id, e.section_id
+ 13  	     FROM enrollment e, section s
+ 14  	     WHERE s.course_no = 135
+ 15  	     AND e.section_id = s.section_id;
+ 16  BEGIN
+ 17  	 FOR r_enroll IN c_enrollment
+ 18  	 LOOP
+ 19  	     FOR r_grade IN c_grade(r_enroll.student_id,
+ 20  	     r_enroll.section_id)
+ 21  	     LOOP
+ 22  		 UPDATE enrollment
+ 23  		 SET final_grade = 90
+ 24  		 WHERE student_id = r_enroll.student_id
+ 25  		 AND section_id = r_enroll.section_id;
+ 26  	     END LOOP;
+ 27  	 END LOOP;
+ 28  END;
+ 29  .
+SQL> /
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> 
+SQL> SELECT student_id, course_no,final_grade
+  2  FROM enrollment, section
+  3  WHERE final_grade =90
+  4  AND course_no=135
+  5  ORDER BY final_grade;
+
+STUDENT_ID|= COURSE_NO|=FINAL_GRADE                                                                                                                   
+----------|=----------|=-----------                                                                                                                   
+       129|=       135|=         90                                                                                                                   
+       129|=       135|=         90                                                                                                                   
+       129|=       135|=         90                                                                                                                   
+       129|=       135|=         90                                                                                                                   
+       135|=       135|=         90                                                                                                                   
+       135|=       135|=         90                                                                                                                   
+       135|=       135|=         90                                                                                                                   
+       135|=       135|=         90                                                                                                                   
+       176|=       135|=         90                                                                                                                   
+       176|=       135|=         90                                                                                                                   
+       176|=       135|=         90                                                                                                                   
+       176|=       135|=         90                                                                                                                   
+       233|=       135|=         90                                                                                                                   
+       233|=       135|=         90                                                                                                                   
+       233|=       135|=         90                                                                                                                   
+       233|=       135|=         90                                                                                                                   
+
+16 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> spool OFF;

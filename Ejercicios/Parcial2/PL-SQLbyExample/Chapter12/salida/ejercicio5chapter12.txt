@@ -1,0 +1,172 @@
+SQL> /*
+SQL> rem **********************************************************
+SQL> rem * Distributed DataBase, ESCOM. Ciclo 2021-2		  *
+SQL> rem * Elaborado por:					  *
+SQL> rem * Cortï¿½s Castilllo Daniela y Mendoza Cuellar Josï¿½ Oscar  *
+SQL> rem * Realizado el 2 de mayo  de 2021			  *
+SQL> rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).			  *
+SQL> rem *Oracleï¿½ PL/SQLï¿½by Example,Boston,MA,USA:Perarson.      *
+SQL> rem **********************************************************
+SQL> */
+SQL> 
+SQL> set colsep '|='
+SQL> set describe linenum on
+SQL> SET PAGESIZE 99;
+SQL> SET LINESIZE 150
+SQL> alter session set NLS_DATE_FORMAT = 'DD-MON-YYYY';
+
+Sesión modificada.
+
+SQL> alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
+
+Sesión modificada.
+
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> --Ejercicio Propio
+SQL> 
+SQL> /*
+SQL> Si queremos modificar las calificaciones de 2 cursos completos a la vez deberiamos hacer los siguiente
+SQL> */
+SQL> 
+SQL> DECLARE
+  2  CURSOR c_grade(
+  3  	 i_student_id IN enrollment.student_id%TYPE,
+  4  	 i_section_id IN enrollment.section_id%TYPE)
+  5  	 IS
+  6  	 SELECT final_grade
+  7  	 FROM enrollment
+  8  	 WHERE student_id = i_student_id
+  9  	 AND section_id = i_section_id
+ 10  	 FOR UPDATE;
+ 11  	 CURSOR c_enrollment IS
+ 12  	     SELECT e.student_id, e.section_id
+ 13  	     FROM enrollment e, section s
+ 14  	     WHERE s.course_no = 135
+ 15  	     AND e.section_id = s.section_id;
+ 16  	 CURSOR h_enrollment IS
+ 17  	     SELECT j.student_id, j.section_id
+ 18  	     FROM enrollment j, section k
+ 19  	     WHERE k.course_no = 140
+ 20  	     AND j.section_id = k.section_id;
+ 21  
+ 22  BEGIN
+ 23  	 FOR r_enroll IN c_enrollment
+ 24  	 LOOP
+ 25  	     FOR r_grade IN c_grade(r_enroll.student_id,
+ 26  	     r_enroll.section_id)
+ 27  	     LOOP
+ 28  		 UPDATE enrollment
+ 29  		 SET final_grade = 90
+ 30  		 WHERE student_id = r_enroll.student_id
+ 31  		 AND section_id = r_enroll.section_id;
+ 32  	     END LOOP;
+ 33  	 END LOOP;
+ 34  
+ 35  	 FOR r_enroll IN h_enrollment
+ 36  	 LOOP
+ 37  	     FOR r_grade IN c_grade(r_enroll.student_id,
+ 38  	     r_enroll.section_id)
+ 39  	     LOOP
+ 40  		 UPDATE enrollment
+ 41  		 SET final_grade = 100
+ 42  		 WHERE student_id = r_enroll.student_id
+ 43  		 AND section_id = r_enroll.section_id;
+ 44  	     END LOOP;
+ 45  	 END LOOP;
+ 46  
+ 47  END;
+ 48  .
+SQL> /
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> 
+SQL> SELECT student_id, course_no,final_grade
+  2  FROM enrollment, section
+  3  WHERE final_grade =90
+  4  AND course_no=135
+  5  ORDER BY final_grade;
+
+STUDENT_ID|= COURSE_NO|=FINAL_GRADE                                                                                                                   
+----------|=----------|=-----------                                                                                                                   
+       129|=       135|=         90                                                                                                                   
+       129|=       135|=         90                                                                                                                   
+       129|=       135|=         90                                                                                                                   
+       129|=       135|=         90                                                                                                                   
+       135|=       135|=         90                                                                                                                   
+       135|=       135|=         90                                                                                                                   
+       135|=       135|=         90                                                                                                                   
+       135|=       135|=         90                                                                                                                   
+       176|=       135|=         90                                                                                                                   
+       176|=       135|=         90                                                                                                                   
+       176|=       135|=         90                                                                                                                   
+       176|=       135|=         90                                                                                                                   
+       233|=       135|=         90                                                                                                                   
+       233|=       135|=         90                                                                                                                   
+       233|=       135|=         90                                                                                                                   
+       233|=       135|=         90                                                                                                                   
+
+16 filas seleccionadas.
+
+SQL> 
+SQL> SELECT student_id, course_no,final_grade
+  2  FROM enrollment, section
+  3  WHERE final_grade =100
+  4  AND course_no=140
+  5  ORDER BY final_grade;
+
+STUDENT_ID|= COURSE_NO|=FINAL_GRADE                                                                                                                   
+----------|=----------|=-----------                                                                                                                   
+       124|=       140|=        100                                                                                                                   
+       124|=       140|=        100                                                                                                                   
+       124|=       140|=        100                                                                                                                   
+       147|=       140|=        100                                                                                                                   
+       147|=       140|=        100                                                                                                                   
+       147|=       140|=        100                                                                                                                   
+       179|=       140|=        100                                                                                                                   
+       179|=       140|=        100                                                                                                                   
+       179|=       140|=        100                                                                                                                   
+       180|=       140|=        100                                                                                                                   
+       180|=       140|=        100                                                                                                                   
+       180|=       140|=        100                                                                                                                   
+       181|=       140|=        100                                                                                                                   
+       181|=       140|=        100                                                                                                                   
+       181|=       140|=        100                                                                                                                   
+       182|=       140|=        100                                                                                                                   
+       182|=       140|=        100                                                                                                                   
+       182|=       140|=        100                                                                                                                   
+       184|=       140|=        100                                                                                                                   
+       184|=       140|=        100                                                                                                                   
+       184|=       140|=        100                                                                                                                   
+       185|=       140|=        100                                                                                                                   
+       185|=       140|=        100                                                                                                                   
+       185|=       140|=        100                                                                                                                   
+       188|=       140|=        100                                                                                                                   
+       188|=       140|=        100                                                                                                                   
+       188|=       140|=        100                                                                                                                   
+       189|=       140|=        100                                                                                                                   
+       189|=       140|=        100                                                                                                                   
+       189|=       140|=        100                                                                                                                   
+       190|=       140|=        100                                                                                                                   
+       190|=       140|=        100                                                                                                                   
+       190|=       140|=        100                                                                                                                   
+       191|=       140|=        100                                                                                                                   
+       191|=       140|=        100                                                                                                                   
+       191|=       140|=        100                                                                                                                   
+       192|=       140|=        100                                                                                                                   
+       192|=       140|=        100                                                                                                                   
+       192|=       140|=        100                                                                                                                   
+       194|=       140|=        100                                                                                                                   
+       194|=       140|=        100                                                                                                                   
+       194|=       140|=        100                                                                                                                   
+       264|=       140|=        100                                                                                                                   
+       264|=       140|=        100                                                                                                                   
+       264|=       140|=        100                                                                                                                   
+
+45 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> spool OFF;
