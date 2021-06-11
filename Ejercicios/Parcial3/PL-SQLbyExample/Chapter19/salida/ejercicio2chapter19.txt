@@ -1,0 +1,74 @@
+SQL> 
+SQL> CREATE OR REPLACE PROCEDURE find_sname
+  2  	(i_student_id IN NUMBER,
+  3  	o_first_name OUT VARCHAR2,
+  4  	o_last_name OUT VARCHAR2
+  5  	)
+  6  AS
+  7  BEGIN
+  8  	SELECT first_name, last_name
+  9  		INTO o_first_name, o_last_name
+ 10  		FROM student
+ 11  		WHERE student_id = i_student_id;
+ 12  EXCEPTION
+ 13  	WHEN OTHERS
+ 14  	THEN
+ 15  	DBMS_OUTPUT.PUT_LINE('Error in finding student_id: '||i_student_id);
+ 16  END find_sname;
+ 17  
+ 18  /
+
+Procedimiento creado.
+
+SQL> DECLARE
+  2  	v_local_first_name student.first_name%TYPE;
+  3  	v_local_last_name student.last_name%TYPE;
+  4  BEGIN
+  5  	find_sname
+  6  		(145, v_local_first_name, v_local_last_name);
+  7  	DBMS_OUTPUT.PUT_LINE
+  8  	('Student 145 is: '||v_local_first_name||
+  9  	' '|| v_local_last_name||'.'
+ 10  	);
+ 11  END;
+ 12  /
+Student 145 is: Paul Lefkowitz.                                                                                                                       
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> DECLARE
+  2  	v_local_first_name student.first_name%TYPE;
+  3  	v_local_last_name student.last_name%TYPE;
+  4  BEGIN
+  5  	find_sname
+  6  		(205, v_local_first_name, v_local_last_name);
+  7  	DBMS_OUTPUT.PUT_LINE
+  8  	('Student 145 is: '||v_local_first_name||
+  9  	' '|| v_local_last_name||'.'
+ 10  	);
+ 11  END;
+ 12  /
+Student 145 is: Alfred Hutheesing.                                                                                                                    
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> 
+SQL> DECLARE
+  2  	v_local_first_name student.first_name%TYPE;
+  3  	v_local_last_name student.last_name%TYPE;
+  4  BEGIN
+  5  	find_sname
+  6  		(2005, v_local_first_name, v_local_last_name);
+  7  	DBMS_OUTPUT.PUT_LINE
+  8  	('Student 2005 is: '||v_local_first_name||
+  9  	' '|| v_local_last_name||'.'
+ 10  	);
+ 11  END;
+ 12  /
+Error in finding student_id: 2005                                                                                                                     
+Student 2005 is:  .                                                                                                                                   
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> 
+SQL> spool OFF;

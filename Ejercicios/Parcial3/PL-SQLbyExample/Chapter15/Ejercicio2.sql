@@ -1,14 +1,16 @@
-spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial2\PL-SQLbyExample\Chapter8\salida\ejercicio2chapter8.txt
+spool C:\Users\lolol_000\Documents\Distributed_DataBase\Ejercicios\Parcial3\PL-SQLbyExample\Chapter15\salida\ejercicio2chapter15.txt
+
 /*
 rem **********************************************************
 rem * Distributed DataBase, ESCOM. Ciclo 2021-2              * 
 rem * Elaborado por:                                         *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar José Oscar  *                 
-rem * Realizado el 4 de Abril  de 2021                       *
+rem * Realizado el 9 de Junio  de 2021                       *
 rem * ROSENZWEIG,B &  RAKHIMOV,E (2009).                     *
-rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.       *
+rem *Oracle® PL/SQL™by Example,Boston,MA,USA:Perarson.      *
 rem **********************************************************
 */
+
 
 set colsep '|='
 set describe linenum on
@@ -19,146 +21,42 @@ alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
 SET SERVEROUTPUT ON;
 
 
-
-
-
--- Create the following PL/SQL script. (ROSENZWEIG y RAKHIMOV, 2009, 174).
-
--- ch08_2a.sql, version 1.0
-SET SERVEROUTPUT ON
-DECLARE
-	v_exists         NUMBER(1);
-	v_total_students NUMBER(1);
-	v_zip            CHAR(5):= '&sv_zip';
-BEGIN
-	SELECT count(*)
-		INTO v_exists
-		FROM zipcode
-		WHERE zip = v_zip;
-		
-	IF v_exists != 0 THEN
-		SELECT COUNT(*)
-		INTO v_total_students
-		FROM student
-		WHERE zip = v_zip;
-	DBMS_OUTPUT.PUT_LINE('There are '||v_total_students||' students');
-	ELSE
-		DBMS_OUTPUT.PUT_LINE (v_zip||' is not a valid zip');
-	END IF;
-EXCEPTION
-	WHEN VALUE_ERROR OR INVALID_NUMBER THEN
-		DBMS_OUTPUT.PUT_LINE ('An error has occurred');
-END;
-.
-/
-/
-/
---Probar con valores 07024 00914 12345
-
---Insertar este estudiante
-INSERT INTO student (student_id, salutation, first_name,
-	last_name, zip, registration_date, created_by, created_date,
-	modified_by, modified_date)
-VALUES (STUDENT_ID_SEQ.NEXTVAL, 'Mr.', 'John', 'Smith', '07024',
-SYSDATE, 'STUDENT', SYSDATE, 'STUDENT', SYSDATE);
-
-COMMIT;
-
-
-/
-
---¿Por qué hay error?
-
-/*
-Porque en las declaraciones la variable total students es de tipo NUMBER con longitud de 1. Al
-agregar un estudiante más ya no puede ser almacenada en esa variable.
-*/
-
-SET SERVEROUTPUT ON
-DECLARE
-	v_exists         NUMBER(1);
-	v_total_students NUMBER(1);
-	v_zip            CHAR(5):= '&sv_zip';
-BEGIN
-	SELECT count(*)
-		INTO v_exists
-		FROM zipcode
-		WHERE zip = v_zip;
-		
-	IF v_exists != 0 THEN
-		SELECT COUNT(*)
-		INTO v_total_students
-		FROM student
-		WHERE zip = v_zip;
-	DBMS_OUTPUT.PUT_LINE('There are '||v_total_students||' students');
-	ELSE
-		DBMS_OUTPUT.PUT_LINE (v_zip||' is not a valid zip');
-	END IF;
-EXCEPTION
-	WHEN VALUE_ERROR OR INVALID_NUMBER THEN
-		DBMS_OUTPUT.PUT_LINE ('An error has occurred');
-END;
-.
-/
-
-SET SERVEROUTPUT ON
-DECLARE
-	v_exists         NUMBER(1);
-	v_total_students NUMBER(2);
-	v_zip            CHAR(5):= '&sv_zip';
-BEGIN
-	SELECT count(*)
-		INTO v_exists
-		FROM zipcode
-		WHERE zip = v_zip;
-		
-	IF v_exists != 0 THEN
-		SELECT COUNT(*)
-		INTO v_total_students
-		FROM student
-		WHERE zip = v_zip;
-	DBMS_OUTPUT.PUT_LINE('There are '||v_total_students||' students');
-	ELSE
-		DBMS_OUTPUT.PUT_LINE (v_zip||' is not a valid zip');
-	END IF;
-EXCEPTION
-	WHEN VALUE_ERROR OR INVALID_NUMBER THEN
-		DBMS_OUTPUT.PUT_LINE ('An error has occurred');
-END;
-.
-/
-
-
------------------------------------------------------
--- How would you change the script to display a student’s first name and last name instead of displaying the total number of students for any given value of a zip?
-
+-- Ejemplo. (ROSENZWEIG y RAKHIMOV, 2009, 325).
 
 DECLARE
-	v_exists       NUMBER(1);
-	v_student_name VARCHAR2(30);
-	v_zip          CHAR(5):= '&sv_zip';
+	TYPE index_by_type IS TABLE OF NUMBER
+		INDEX BY BINARY_INTEGER;
+	index_by_table index_by_type;
+	TYPE nested_type IS TABLE OF NUMBER;
+	nested_table nested_type := nested_type(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 BEGIN
-	SELECT count(*)
-		INTO v_exists
-		FROM zipcode
-		WHERE zip = v_zip;
-	IF v_exists != 0 THEN
-		SELECT first_name||' '||last_name
-			INTO v_student_name
-			FROM student
-			WHERE zip = v_zip
-			AND rownum = 1;
-	DBMS_OUTPUT.PUT_LINE ('Student name is '||v_student_name);
-	ELSE
-		DBMS_OUTPUT.PUT_LINE (v_zip||' is not a valid zip');
+
+	FOR i IN 1..10 LOOP
+		index_by_table(i) := i;
+	END LOOP;
+	IF index_by_table.EXISTS(3) THEN
+		DBMS_OUTPUT.PUT_LINE ('index_by_table(3) = '||index_by_table(3));
 	END IF;
-EXCEPTION
-	WHEN VALUE_ERROR OR INVALID_NUMBER THEN
-		DBMS_OUTPUT.PUT_LINE ('An error has occurred');
-	WHEN NO_DATA_FOUND THEN
-		DBMS_OUTPUT.PUT_LINE('There are no students for this value of zip code');
+	-- delete 10th element from a collection
+	nested_table.DELETE(10);
+	-- delete elements 1 through 3 from a collection
+	nested_table.DELETE(1,3);
+	index_by_table.DELETE(10);
+	DBMS_OUTPUT.PUT_LINE ('nested_table.COUNT = '||nested_table.COUNT);
+	DBMS_OUTPUT.PUT_LINE ('index_by_table.COUNT = '|| index_by_table.COUNT);
+	DBMS_OUTPUT.PUT_LINE ('nested_table.FIRST = '||nested_table.FIRST);
+	DBMS_OUTPUT.PUT_LINE ('nested_table.LAST = '||nested_table.LAST);
+	DBMS_OUTPUT.PUT_LINE ('index_by_table.FIRST = '|| index_by_table.FIRST);
+	DBMS_OUTPUT.PUT_LINE ('index_by_table.LAST ='||index_by_table.LAST);
+	DBMS_OUTPUT.PUT_LINE ('nested_table.PRIOR(2) = '||nested_table. PRIOR(2));
+	DBMS_OUTPUT.PUT_LINE ('nested_table.NEXT(2) = '||nested_table.NEXT(2));
+	DBMS_OUTPUT.PUT_LINE ('index_by_table.PRIOR(2) = '||index_by_table.PRIOR(2));
+	DBMS_OUTPUT.PUT_LINE ('index_by_table.NEXT(2) = '||index_by_table.NEXT(2));
+	-- Trim last two elements
+	nested_table.TRIM(2);
+	-- Trim last element
+	nested_table.TRIM;
+	DBMS_OUTPUT.PUT_LINE('nested_table.LAST = '||nested_table.LAST);
 END;
-.
-/
 
 spool OFF;

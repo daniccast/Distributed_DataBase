@@ -1,0 +1,158 @@
+SQL> DECLARE
+  2  	CURSOR name_cur IS
+  3  		SELECT last_name
+  4  		FROM student
+  5  		WHERE rownum <= 10;
+  6  	TYPE last_name_type IS TABLE OF student.last_name%TYPE
+  7  	INDEX BY BINARY_INTEGER;
+  8  	last_name_tab last_name_type;
+  9  	v_counter INTEGER := 0;
+ 10  BEGIN
+ 11  	FOR name_rec IN name_cur LOOP
+ 12  		v_counter := v_counter + 1;
+ 13  		last_name_tab(v_counter) := name_rec.last_name;
+ 14  		DBMS_OUTPUT.PUT_LINE ('last_name('||v_counter||'): '||
+ 15  		last_name_tab(v_counter));
+ 16  	END LOOP;
+ 17  END;
+ 18  .
+SQL> /
+last_name(1): Galik                                                                                                                                   
+last_name(2): Kiraly                                                                                                                                  
+last_name(3): Rosenberg                                                                                                                               
+last_name(4): Sentell                                                                                                                                 
+last_name(5): Hagel                                                                                                                                   
+last_name(6): Leopta                                                                                                                                  
+last_name(7): Mastandora                                                                                                                              
+last_name(8): Smith                                                                                                                                   
+last_name(9): Cheevens                                                                                                                                
+last_name(10): Lin                                                                                                                                    
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> -- Nested table
+SQL> 
+SQL> DECLARE
+  2  	CURSOR name_cur IS
+  3  		SELECT last_name
+  4  		FROM student
+  5  		WHERE rownum <= 10;
+  6  	TYPE last_name_type IS TABLE OF student.last_name%TYPE;
+  7  	last_name_tab last_name_type := last_name_type();
+  8  	v_counter INTEGER := 0;
+  9  BEGIN
+ 10  	FOR name_rec IN name_cur LOOP
+ 11  		v_counter := v_counter + 1;
+ 12  		last_name_tab.EXTEND;
+ 13  		last_name_tab(v_counter) := name_rec.last_name;
+ 14  		DBMS_OUTPUT.PUT_LINE ('last_name('||v_counter||'): '||
+ 15  		last_name_tab(v_counter));
+ 16  	END LOOP;
+ 17  END;
+ 18  .
+SQL> /
+last_name(1): Galik                                                                                                                                   
+last_name(2): Kiraly                                                                                                                                  
+last_name(3): Rosenberg                                                                                                                               
+last_name(4): Sentell                                                                                                                                 
+last_name(5): Hagel                                                                                                                                   
+last_name(6): Leopta                                                                                                                                  
+last_name(7): Mastandora                                                                                                                              
+last_name(8): Smith                                                                                                                                   
+last_name(9): Cheevens                                                                                                                                
+last_name(10): Lin                                                                                                                                    
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> -- ch15_1c.sql, version 3.0 (ROSENZWEIG y RAKHIMOV, 2009, 327). MOdificado
+SQL> 
+SQL> DECLARE
+  2  	CURSOR course_cur IS
+  3  		SELECT description
+  4  		FROM course;
+  5  	TYPE course_type IS TABLE OF course.description%TYPE
+  6  	INDEX BY BINARY_INTEGER;
+  7  	course_tab course_type;
+  8  	v_counter INTEGER := 0;
+  9  BEGIN
+ 10  	FOR course_rec IN course_cur LOOP
+ 11  		v_counter := v_counter + 1;
+ 12  		course_tab(v_counter):= course_rec.description;
+ 13  	END LOOP;
+ 14  	FOR i IN 1..v_counter LOOP
+ 15  		DBMS_OUTPUT.PUT_LINE('course('||i||'): '||course_tab(i));
+ 16  	END LOOP;
+ 17  	DBMS_OUTPUT.PUT_LINE('course('||course_tab.FIRST||'): '|| course_tab(course_tab.FIRST));
+ 18  	DBMS_OUTPUT.PUT_LINE('course('||course_tab.LAST||'): '|| course_tab(course_tab.LAST));
+ 19  
+ 20  	DBMS_OUTPUT.PUT_LINE ('Total number of elements: '|| course_tab.COUNT);
+ 21  
+ 22  END;
+ 23  .
+SQL> /
+course(1): Test Course                                                                                                                                
+course(2): DP Overview                                                                                                                                
+course(3): Intro to Computers                                                                                                                         
+course(4): Intro to Programming                                                                                                                       
+course(5): Structured Programming Techniques                                                                                                          
+course(6): Hands-On Windows                                                                                                                           
+course(7): Intro to Java Programming                                                                                                                  
+course(8): Intermediate Java Programming                                                                                                              
+course(9): Advanced Java Programming                                                                                                                  
+course(10): JDeveloper                                                                                                                                
+course(11): Intro to Unix                                                                                                                             
+course(12): Basics of Unix Admin                                                                                                                      
+course(13): Advanced Unix Admin                                                                                                                       
+course(14): Unix Tips and Techniques                                                                                                                  
+course(15): Structured Analysis                                                                                                                       
+course(16): Project Management                                                                                                                        
+course(17): Database Design                                                                                                                           
+course(18): Internet Protocols                                                                                                                        
+course(19): Java for C/C++ Programmers                                                                                                                
+course(20): GUI Programming                                                                                                                           
+course(21): Intro to SQL                                                                                                                              
+course(22): Oracle Tools                                                                                                                              
+course(23): PL/SQL Programming                                                                                                                        
+course(24): Intro to Internet                                                                                                                         
+course(25): Intro to the Basic Language                                                                                                               
+course(26): Operating Systems                                                                                                                         
+course(27): Network Administration                                                                                                                    
+course(28): JDeveloper Lab                                                                                                                            
+course(29): Database System Principles                                                                                                                
+course(30): JDeveloper Techniques                                                                                                                     
+course(31): DB Programming in Java                                                                                                                    
+course(1): Test Course                                                                                                                                
+course(31): DB Programming in Java                                                                                                                    
+Total number of elements: 31                                                                                                                          
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> --­Que pasa si consultamos el ndice 0?
+SQL> 
+SQL> DECLARE
+  2  	TYPE course_type IS TABLE OF INTEGER
+  3  	INDEX BY BINARY_INTEGER;
+  4  	course_tab course_type;
+  5  	v_counter INTEGER := 0;
+  6  BEGIN
+  7  	course_tab(0):= 4;
+  8  	course_tab(-1):= 5;
+  9  	DBMS_OUTPUT.PUT_LINE('course(0): '|| course_tab(0));
+ 10  	DBMS_OUTPUT.PUT_LINE('course(-1): '|| course_tab(-1));
+ 11  	DBMS_OUTPUT.PUT_LINE('course('||course_tab.FIRST||'): '|| course_tab(course_tab.FIRST));
+ 12  	DBMS_OUTPUT.PUT_LINE('course('||course_tab.LAST||'): '|| course_tab(course_tab.LAST));
+ 13  	DBMS_OUTPUT.PUT_LINE ('Total number of elements: '|| course_tab.COUNT);
+ 14  END;
+ 15  .
+SQL> /
+course(0): 4                                                                                                                                          
+course(-1): 5                                                                                                                                         
+course(-1): 5                                                                                                                                         
+course(0): 4                                                                                                                                          
+Total number of elements: 2                                                                                                                           
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> -- SI SE PUEDE INICIAR EN 0 incluso en negativos
+SQL> 
+SQL> spool OFF;

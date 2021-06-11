@@ -1,0 +1,72 @@
+SQL> 
+SQL> DECLARE
+  2  	CURSOR name_cur IS
+  3  		SELECT last_name
+  4  			FROM student
+  5  			WHERE rownum <= 12;
+  6  	TYPE last_name_type IS VARRAY(12) OF student.last_name%TYPE;
+  7  	last_name_varray last_name_type := last_name_type();
+  8  	v_counter INTEGER := 0;
+  9  BEGIN
+ 10  	FOR name_rec IN name_cur LOOP
+ 11  		v_counter := v_counter + 1;
+ 12  		last_name_varray.EXTEND;
+ 13  		last_name_varray(v_counter) := name_rec.last_name;
+ 14  		DBMS_OUTPUT.PUT_LINE ('last_name('||v_counter||'): '|| last_name_varray(v_counter));
+ 15  	END LOOP;
+ 16  	DBMS_OUTPUT.PUT_LINE ('varray.LIMIT = '|| last_name_varray.LIMIT);
+ 17  	DBMS_OUTPUT.PUT_LINE ('varray.FIRST = '|| last_name_varray.FIRST);
+ 18  END;
+ 19  .
+SQL> /
+last_name(1): Galik                                                                                                                                   
+last_name(2): Kiraly                                                                                                                                  
+last_name(3): Rosenberg                                                                                                                               
+last_name(4): Sentell                                                                                                                                 
+last_name(5): Hagel                                                                                                                                   
+last_name(6): Leopta                                                                                                                                  
+last_name(7): Mastandora                                                                                                                              
+last_name(8): Smith                                                                                                                                   
+last_name(9): Cheevens                                                                                                                                
+last_name(10): Lin                                                                                                                                    
+last_name(11): Tucker                                                                                                                                 
+last_name(12): Mithane                                                                                                                                
+varray.LIMIT = 12                                                                                                                                     
+varray.FIRST = 1                                                                                                                                      
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> -- ¨Podemos usar desde posici¢n 0?
+SQL> 
+SQL> DECLARE
+  2  	CURSOR name_cur IS
+  3  		SELECT last_name
+  4  			FROM student
+  5  			WHERE rownum <= 12;
+  6  	TYPE last_name_type IS VARRAY(13) OF student.last_name%TYPE;
+  7  	last_name_varray last_name_type := last_name_type();
+  8  	v_counter INTEGER := 0;
+  9  BEGIN
+ 10  	last_name_varray.EXTEND;
+ 11  		last_name_varray(0) := 'CORTES';
+ 12  
+ 13  	FOR name_rec IN name_cur LOOP
+ 14  		v_counter := v_counter + 1;
+ 15  		last_name_varray.EXTEND;
+ 16  		last_name_varray(v_counter) := name_rec.last_name;
+ 17  		DBMS_OUTPUT.PUT_LINE ('last_name('||v_counter||'): '|| last_name_varray(v_counter));
+ 18  	END LOOP;
+ 19  	DBMS_OUTPUT.PUT_LINE ('varray.LIMIT = '|| last_name_varray.LIMIT);
+ 20  	DBMS_OUTPUT.PUT_LINE ('varray.FIRST = '|| last_name_varray.FIRST);
+ 21  END;
+ 22  .
+SQL> /
+DECLARE
+*
+ERROR en línea 1:
+ORA-06532: Subíndice fuera del límite 
+ORA-06512: en línea 11 
+
+
+SQL> --NOPE
+SQL> spool OFF;

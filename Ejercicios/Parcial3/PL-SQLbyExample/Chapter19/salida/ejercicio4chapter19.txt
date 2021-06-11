@@ -1,0 +1,42 @@
+SQL> -- Write a procedure that takes in a zip code, city, and state and inserts the values into the zip code
+SQL> --table. It should check to see if the zip code is already in the database. If it is, an exception should
+SQL> --be raised, and an error message should be displayed. Write an anonymous block that uses the
+SQL> --procedure and inserts your zip code.
+SQL> --(ROSENZWEIG y RAKHIMOV, 2009, 447).
+SQL> 
+SQL> CREATE OR REPLACE PROCEDURE zipcode_insert
+  2  	(i_zip IN VARCHAR2,
+  3  	 i_city IN VARCHAR2
+  4  	)
+  5  AS
+  6  BEGIN
+  7  	insert into ZIPCODE(zip,city, created_by, created_date, modified_by, modified_date)
+  8  	values(i_zip,i_city, 'Daniela',SYSDATE,'Daniela',SYSDATE);
+  9  EXCEPTION
+ 10  	WHEN OTHERS
+ 11  	THEN
+ 12  	DBMS_OUTPUT.PUT_LINE('Ya est  registrado ');
+ 13  END zipcode_insert;
+ 14  /
+
+Procedimiento creado.
+
+SQL> BEGIN
+  2  	zipcode_insert
+  3  		('50070','Ecatepec de Morelos');
+  4  	zipcode_insert
+  5  		('50071','Ecatepec de Morelos 2');
+  6  END;
+  7  /
+Ya est  registrado                                                                                                                                    
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> select zip, city from zipcode where zip='50071' or zip='50070' ;
+
+ZIP  |=CITY                                                                                                                                           
+-----|=-------------------------                                                                                                                      
+50070|=Ecatepec de Morelos                                                                                                                            
+50071|=Ecatepec de Morelos 2                                                                                                                          
+
+SQL> spool OFF;
