@@ -1,0 +1,75 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+
+                                                                                                                                                     
+The Student 102 Fred Crocitto                                                                                                                         
+is enrolled in the following courses:                                                                                                                 
+25 Intro to Programming                                                                                                                               
+25 Intro to Programming                                                                                                                               
+
+                                                                                                                                                     
+The Student 103 J. Landry                                                                                                                             
+is enrolled in the following courses:                                                                                                                 
+20 Intro to Computers                                                                                                                                 
+
+                                                                                                                                                     
+The Student 104 Laetia Enison                                                                                                                         
+is enrolled in the following courses:                                                                                                                 
+20 Intro to Computers                                                                                                                                 
+
+                                                                                                                                                     
+The Student 105 Angel Moskowitz                                                                                                                       
+is enrolled in the following courses:                                                                                                                 
+122 Intermediate Java Programming                                                                                                                     
+
+                                                                                                                                                     
+The Student 106 Judith Olvsade                                                                                                                        
+is enrolled in the following courses:                                                                                                                 
+230 Intro to Internet                                                                                                                                 
+240 Intro to the Basic Language                                                                                                                       
+
+                                                                                                                                                     
+The Student 107 Catherine Mierzwa                                                                                                                     
+is enrolled in the following courses:                                                                                                                 
+25 Intro to Programming                                                                                                                               
+
+                                                                                                                                                     
+The Student 108 Judy Sethi                                                                                                                            
+is enrolled in the following courses:                                                                                                                 
+25 Intro to Programming                                                                                                                               
+
+                                                                                                                                                     
+The Student 109 Larry Walter                                                                                                                          
+is enrolled in the following courses:                                                                                                                 
+230 Intro to Internet                                                                                                                                 
+240 Intro to the Basic Language                                                                                                                       
+
+Procedimiento PL/SQL terminado correctamente.
+
+Amount generated by instructor Fernand Hanks is                                                                                                       
+$42,958                                                                                                                                               
+Amount generated by instructor Tom Wojick is                                                                                                          
+$23,462                                                                                                                                               
+Amount generated by instructor Nina Schorin is                                                                                                        
+$40,890                                                                                                                                               
+Amount generated by instructor Gary Pertez is                                                                                                         
+$28,345                                                                                                                                               
+Amount generated by instructor Anita Morris is                                                                                                        
+$17,690                                                                                                                                               
+Amount generated by instructor Todd Smythe is                                                                                                         
+$19,958                                                                                                                                               
+Amount generated by instructor Marilyn Frantzen is                                                                                                    
+$30,426                                                                                                                                               
+Amount generated by instructor Charles Lowry is                                                                                                       
+$32,844                                                                                                                                               
+Amount generated by instructor Rick Chow is                                                                                                           
+$0                                                                                                                                                    
+Amount generated by instructor Irene Willig is                                                                                                        
+$0                                                                                                                                                    
+
+Procedimiento PL/SQL terminado correctamente.
+
