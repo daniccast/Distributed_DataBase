@@ -1,4 +1,4 @@
-spool C:\Users\ozkr_\OneDrive\Documentos\Github\Distributed_DataBase\Ejercicios\Parcial2\PL-SQLbyExample\Chapter13\salida\ejercicio4chapter13
+spool C:\Users\ozkr_\OneDrive\Documentos\Github\Distributed_DataBase\Ejercicios\Parcial2\PL-SQLbyExample\Chapter13\salida\ejercicio4chapter13.txt
 
 /*
 rem **********************************************************
@@ -19,6 +19,13 @@ alter session set NLS_DATE_FORMAT = 'DD-MON-YYYY';
 alter session set NLS_DATE_LANGUAGE = 'ENGLISH';
 SET SERVEROUTPUT ON;
 
+/*
+
+*/
+
+
+.
+/
 
 
 spool OFF;
