@@ -5,9 +5,9 @@ rem * Distributed DataBase, ESCOM. Ciclo 2021-2         *
 rem * Elaborado por:                                    *
 rem * Cortés Castilllo Daniela y Mendoza Cuellar Oscar  *
 rem * Realizado el 1 de Abril de 2021                   *
-rem * Rischert,A (2004)."Chapter 9. Complex Joins". 	*
-rem *Ramagnano,L, Oracle® SQL™by Example(446-477). 	*
-rem *Pearson.  					        *
+rem * Rischert,A (2004)."Chapter 9. Complex Joins". 	  *
+rem *Ramagnano,L, Oracle® SQL™by Example(446-477). 	  *
+rem *Pearson.  					  *
 rem *****************************************************
 
 rem Establecer formato para las tablas
@@ -131,7 +131,7 @@ AND e.section_id = g.section_id(+);
 
 
 rem ----------------------------- EJERCICIO D. LAB 9.2.1--------------------------------------------------------------
-rem Write a query showing the course number, course description, prerequisite, and description of the prerequisite. Include courses without any prerequisites. Note this requires a self-join and an outer join.
+rem Write a query showing the course number, course description, prerequisite, and description of the prerequisite. Include courses without any prerequisites. Note this requires a self-join and an outer join. (Rischert, 2004, 462)
 
 COL sno format 999;
 COL course_descr format A16;
