@@ -1,0 +1,20 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+
+CUST_NAME                     |=|CUST_SALES|=|REGION_NAME         |=|PERCENT_OF_REGION                                                                
+------------------------------|=|----------|=|--------------------|=|-----------------                                                                
+Flowtech Inc.                 |=|   1878275|=|New England         |=|               29                                                                
+Spartan Industries            |=|   1788836|=|Mid-Atlantic        |=|               28                                                                
+Madden Industries             |=|   1929774|=|Southeast US        |=|               28                                                                
+Evans Supply Corp.            |=|   1944281|=|Southwest US        |=|               28                                                                
+Malden Labs                   |=|   1413722|=|Southwest US        |=|               21                                                                
+Worcester Technologies        |=|   2232703|=|Northwest US        |=|               33                                                                
+Alpha Technologies            |=|   1808949|=|Central US          |=|               29                                                                
+Phillips Labs                 |=|   1322747|=|Central US          |=|               21                                                                
+
+8 filas seleccionadas.
+

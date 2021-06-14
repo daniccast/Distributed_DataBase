@@ -1,0 +1,13 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+
+   DEPT_ID|=|NAME                |=|       TOT                                                                                                        
+----------|=|--------------------|=|----------                                                                                                        
+        10|=|ACCOUNTING          |=|         3                                                                                                        
+        20|=|RESEARCH            |=|         5                                                                                                        
+        30|=|SALES               |=|         6                                                                                                        
+

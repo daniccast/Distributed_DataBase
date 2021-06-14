@@ -1,0 +1,13 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+
+  CUST_NBR|=|COUNT(ORDER_NBR)                                                                                                                         
+----------|=|----------------                                                                                                                         
+         1|=|               4                                                                                                                         
+         8|=|               2                                                                                                                         
+         4|=|               4                                                                                                                         
+
