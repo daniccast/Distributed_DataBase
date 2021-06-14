@@ -1,0 +1,45 @@
+
+Sesión modificada.
+
+
+Sesión modificada.
+
+
+Employee            |=|Manager                                                                                                                        
+--------------------|=|--------------------                                                                                                           
+FORD                |=|JONES                                                                                                                          
+SCOTT               |=|JONES                                                                                                                          
+TURNER              |=|BLAKE                                                                                                                          
+ALLEN               |=|BLAKE                                                                                                                          
+WARD                |=|BLAKE                                                                                                                          
+JAMES               |=|BLAKE                                                                                                                          
+MARTIN              |=|BLAKE                                                                                                                          
+MILLER              |=|CLARK                                                                                                                          
+ADAMS               |=|SCOTT                                                                                                                          
+BLAKE               |=|KING                                                                                                                           
+JONES               |=|KING                                                                                                                           
+CLARK               |=|KING                                                                                                                           
+SMITH               |=|FORD                                                                                                                           
+
+13 filas seleccionadas.
+
+
+Employee            |=|Manager                                                                                                                        
+--------------------|=|--------------------                                                                                                           
+SCOTT               |=|JONES                                                                                                                          
+FORD                |=|JONES                                                                                                                          
+ALLEN               |=|BLAKE                                                                                                                          
+WARD                |=|BLAKE                                                                                                                          
+MARTIN              |=|BLAKE                                                                                                                          
+TURNER              |=|BLAKE                                                                                                                          
+JAMES               |=|BLAKE                                                                                                                          
+MILLER              |=|CLARK                                                                                                                          
+ADAMS               |=|SCOTT                                                                                                                          
+JONES               |=|KING                                                                                                                           
+BLAKE               |=|KING                                                                                                                           
+CLARK               |=|KING                                                                                                                           
+SMITH               |=|FORD                                                                                                                           
+KING                |=|                                                                                                                               
+
+14 filas seleccionadas.
+
