@@ -1,0 +1,405 @@
+SQL> 
+SQL> SET COLSEP '|=|'
+SQL> 
+SQL> @@C:\Users\ozkr_\Desktop\loader\script\DESPLIEGA_ATRIB.SQL
+
+      SNUM ║ SNAME                          ║ MAJOR                     ║ ST ║        AGE                                                     
+---------- ║ ------------------------------ ║ ------------------------- ║ -- ║ ----------                                                     
+  51135593 ║ Maria White                    ║ English                   ║ SR ║         21                                                     
+  60839453 ║ Charles Harris                 ║ Architecture              ║ SR ║         22                                                     
+  99354543 ║ Susan Martin                   ║ Law                       ║ JR ║         20                                                     
+ 112348546 ║ Joseph Thompson                ║ Computer Science          ║ SO ║         19                                                     
+ 115987938 ║ Christopher Garcia             ║ Computer Science          ║ JR ║         20                                                     
+ 132977562 ║ Angela Martinez                ║ History                   ║ SR ║         20                                                     
+ 269734834 ║ Thomas Robinson                ║ Psychology                ║ SO ║         18                                                     
+ 280158572 ║ Margaret Clark                 ║ Animal Science            ║ FR ║         18                                                     
+ 301221823 ║ Juan Rodriguez                 ║ Psychology                ║ JR ║         20                                                     
+ 318548912 ║ Dorthy Lewis                   ║ Finance                   ║ FR ║         18                                                     
+ 320874981 ║ Daniel Lee                     ║ Electrical Engineering    ║ FR ║         17                                                     
+ 322654189 ║ Lisa Walker                    ║ Computer Science          ║ SO ║         17                                                     
+ 348121549 ║ Paul Hall                      ║ Computer Science          ║ JR ║         18                                                     
+ 351565322 ║ Nancy Allen                    ║ Accounting                ║ JR ║         19                                                     
+ 451519864 ║ Mark Young                     ║ Finance                   ║ FR ║         18                                                     
+ 455798411 ║ Luis Hernandez                 ║ Electrical Engineering    ║ FR ║         17                                                     
+ 462156489 ║ Donald King                    ║ Mechanical Engineering    ║ SO ║         19                                                     
+ 550156548 ║ George Wright                  ║ Education                 ║ SR ║         21                                                     
+ 552455318 ║ Ana Lopez                      ║ Computer Engineering      ║ SR ║         19                                                     
+ 556784565 ║ Kenneth Hill                   ║ Civil Engineering         ║ SR ║         21                                                     
+ 567354612 ║ Karen Scott                    ║ Computer Engineering      ║ FR ║         18                                                     
+ 573284895 ║ Steven Green                   ║ Kinesiology               ║ SO ║         19                                                     
+ 574489456 ║ Betty Adams                    ║ Economics                 ║ JR ║         20                                                     
+ 578875478 ║ Edward Baker                   ║ Veterinary Medicine       ║ SR ║         21                                                     
+
+24 filas seleccionadas.
+
+
+       FID ║ FNAME                          ║     DEPTID                                                                                          
+---------- ║ ------------------------------ ║ ----------                                                                                          
+ 142519864 ║ I. Teach                       ║         20                                                                                          
+ 242518965 ║ James Smith                    ║         68                                                                                          
+ 141582651 ║ Mary Johnson                   ║         20                                                                                          
+  11564812 ║ John Williams                  ║         68                                                                                          
+ 254099823 ║ Patricia Jones                 ║         68                                                                                          
+ 356187925 ║ Robert Brown                   ║         12                                                                                          
+ 489456522 ║ Linda Davis                    ║         20                                                                                          
+ 287321212 ║ Michael Miller                 ║         12                                                                                          
+ 248965255 ║ Barbara Wilson                 ║         12                                                                                          
+ 159542516 ║ William Moore                  ║         33                                                                                          
+  90873519 ║ Elizabeth Taylor               ║         11                                                                                          
+ 486512566 ║ David Anderson                 ║         20                                                                                          
+ 619023588 ║ Jennifer Thomas                ║         11                                                                                          
+ 489221823 ║ Richard Jackson                ║         33                                                                                          
+ 548977562 ║ Ulysses Teach                  ║         20                                                                                          
+
+15 filas seleccionadas.
+
+
+NAME                                     ║ MEETS_AT             ║ ROOM       ║        FID                                                       
+---------------------------------------- ║ -------------------- ║ ---------- ║ ----------                                                       
+Data Structures                          ║ MWF 10               ║ R128       ║  489456522                                                       
+Database Systems                         ║ MWF 12:30-1:45       ║ 1320 DCL   ║  142519864                                                       
+Operating System Design                  ║ TuTh 12-1:20         ║ 20 AVW     ║  489456522                                                       
+Psychology                               ║                      ║            ║  619023588                                                       
+Archaeology of the Incas                 ║ MWF 3-4:15           ║ R128       ║  248965255                                                       
+Aviation Accident Investigation          ║ TuTh 1-2:50          ║ Q3         ║   11564812                                                       
+Air Quality Engineering                  ║ TuTh 10:30-11:45     ║ R15        ║   11564812                                                       
+Introductory Latin                       ║ MWF 3-4:15           ║ R12        ║  248965255                                                       
+American Political Parties               ║ TuTh 2-3:15          ║ 20 AVW     ║  619023588                                                       
+Social Cognition                         ║ Tu 6:30-8:40         ║ R15        ║  159542516                                                       
+Perception                               ║ MTuWTh 3             ║ Q3         ║  489221823                                                       
+Multivariate Analysis                    ║ TuTh 2-3:15          ║ R15        ║   90873519                                                       
+Patent Law                               ║ F 1-2:50             ║ R128       ║   90873519                                                       
+Urban Economics                          ║ MWF 11               ║ 20 AVW     ║  489221823                                                       
+Organic Chemistry                        ║ TuTh 12:30-1:45      ║ R12        ║  489221823                                                       
+Marketing Research                       ║ MW 10-11:15          ║ 1320 DCL   ║  489221823                                                       
+Seminar in American Art                  ║ M 4                  ║ R15        ║  489221823                                                       
+Orbital Mechanics                        ║ MWF 8                ║ 1320 DCL   ║   11564812                                                       
+Dairy Herd Management                    ║ TuTh 12:30-1:45      ║ R128       ║  356187925                                                       
+Communication Networks                   ║ MW 9:30-10:45        ║ 20 AVW     ║  141582651                                                       
+Optical Electronics                      ║ TuTh 12:30-1:45      ║ R15        ║  254099823                                                       
+Artificial Intelligence                  ║                      ║ UP328      ║                                                                  
+Intoduction to Math                      ║ TuTh 8-9:30          ║ R128       ║  489221823                                                       
+
+23 filas seleccionadas.
+
+
+      SNUM ║ CNAME                                                                                                                                  
+---------- ║ ----------------------------------------                                                                                               
+  99354543 ║ Patent Law                                                                                                                             
+ 112348546 ║ Database Systems                                                                                                                       
+ 112348546 ║ Operating System Design                                                                                                                
+ 115987938 ║ Database Systems                                                                                                                       
+ 115987938 ║ Operating System Design                                                                                                                
+ 301221823 ║ American Political Parties                                                                                                             
+ 301221823 ║ Perception                                                                                                                             
+ 301221823 ║ Social Cognition                                                                                                                       
+ 322654189 ║ Database Systems                                                                                                                       
+ 322654189 ║ Operating System Design                                                                                                                
+ 348121549 ║ Database Systems                                                                                                                       
+ 455798411 ║ Operating System Design                                                                                                                
+ 455798411 ║ Optical Electronics                                                                                                                    
+ 455798411 ║ Organic Chemistry                                                                                                                      
+ 552455318 ║ Communication Networks                                                                                                                 
+ 552455318 ║ Database Systems                                                                                                                       
+ 552455318 ║ Operating System Design                                                                                                                
+ 556784565 ║ Air Quality Engineering                                                                                                                
+ 567354612 ║ Data Structures                                                                                                                        
+ 567354612 ║ Operating System Design                                                                                                                
+ 574489456 ║ Urban Economics                                                                                                                        
+
+21 filas seleccionadas.
+
+
+       EID ║ ENAME                          ║        AGE ║     SALARY                                                                           
+---------- ║ ------------------------------ ║ ---------- ║ ----------                                                                           
+ 142519864 ║ Susan Martin                   ║         39 ║      56990                                                                           
+ 242518965 ║ James Smith                    ║         68 ║      27099                                                                           
+ 141582651 ║ Mary Johnson                   ║         44 ║      94011                                                                           
+  11564812 ║ John Williams                  ║         35 ║      74098                                                                           
+ 254099823 ║ Patricia Jones                 ║         28 ║      42783                                                                           
+ 356187925 ║ Robert Brown                   ║         28 ║      35431                                                                           
+ 489456522 ║ Linda Davis                    ║         26 ║      25971                                                                           
+ 287321212 ║ Michael Miller                 ║         62 ║     131072                                                                           
+ 248965255 ║ Barbara Wilson                 ║         48 ║      95021                                                                           
+ 159542516 ║ Matt Nelson                    ║         33 ║      48990                                                                           
+  90873519 ║ Elizabeth Taylor               ║         27 ║      33055                                                                           
+ 486512566 ║ David Anderson                 ║         20 ║      25199                                                                           
+ 619023588 ║ Jennifer Thomas                ║         24 ║      34654                                                                           
+ 112348546 ║ Joseph Thompson                ║         26 ║      24998                                                                           
+ 115987938 ║ Christopher Garcia             ║         60 ║      24998                                                                           
+ 132977562 ║ Angela Martinez                ║         31 ║      24998                                                                           
+ 269734834 ║ Rick Carter                    ║         38 ║      24998                                                                           
+ 280158572 ║ Margaret Clark                 ║         40 ║      24998                                                                           
+ 301221823 ║ Juan Rodriguez                 ║         30 ║      32175                                                                           
+ 318548912 ║ Ann Mitchell                   ║         23 ║      32175                                                                           
+ 320874981 ║ Daniel Lee                     ║         23 ║      32175                                                                           
+ 322654189 ║ Lisa Walker                    ║         38 ║      32175                                                                           
+ 348121549 ║ Trey Phillips                  ║         69 ║      32175                                                                           
+ 351565322 ║ Nancy Allen                    ║         30 ║      39910                                                                           
+ 451519864 ║ Mark Young                     ║         34 ║      39910                                                                           
+ 455798411 ║ Luis Hernandez                 ║         44 ║      39910                                                                           
+ 550156548 ║ George Wright                  ║         42 ║      41008                                                                           
+ 552455318 ║ Ana Lopez                      ║         35 ║      41008                                                                           
+ 556784565 ║ Kenneth Hill                   ║         81 ║      41008                                                                           
+ 567354612 ║ Karen Scott                    ║         70 ║      39910                                                                           
+ 573284895 ║ Steven Green                   ║         29 ║      39910                                                                           
+ 574489456 ║ Betty Adams                    ║         39 ║      39910                                                                           
+  15645489 ║ Daniel Evans                   ║         25 ║      40312                                                                           
+  15487874 ║ Gene Edwards                   ║         51 ║      41008                                                                           
+  54879887 ║ Dorthy Lewis                   ║         33 ║      41008                                                                           
+  98784544 ║ Eric Collins                   ║         23 ║      41008                                                                           
+  74454898 ║ Scott Bell                     ║         23 ║      70100                                                                           
+ 156489494 ║ Gil Richardson                 ║         32 ║      70100                                                                           
+ 179887498 ║ Dorthy Howard                  ║         28 ║      40312                                                                           
+ 156465461 ║ Eric Cooper                    ║         26 ║      24998                                                                           
+ 128778823 ║ William Ward                   ║         33 ║      24998                                                                           
+ 178949844 ║ Chad Stewart                   ║         29 ║      24998                                                                           
+ 298489484 ║ Lisa Gray                      ║         31 ║      24998                                                                           
+ 274878974 ║ Harry Watson                   ║         30 ║      24998                                                                           
+ 267894232 ║ Paul Hall                      ║         25 ║      24998                                                                           
+ 254898318 ║ Gim Rogers                     ║         25 ║      32175                                                                           
+ 489221823 ║ Richard Jackson                ║         33 ║      32996                                                                           
+ 548977562 ║ Donald King                    ║         43 ║      92048                                                                           
+ 289562686 ║ Thomas Robinson                ║         34 ║      32175                                                                           
+ 291795563 ║ Haywood Kelly                  ║         36 ║      32175                                                                           
+ 578875478 ║ Edward Baker                   ║         50 ║     101071                                                                           
+  51135593 ║ Maria White                    ║         22 ║      24998                                                                           
+  60839453 ║ Charles Harris                 ║         24 ║      24998                                                                           
+ 334568786 ║ William Moore                  ║         32 ║      32175                                                                           
+ 355548984 ║ Tom Murphy                     ║         41 ║      32175                                                                           
+ 310454876 ║ Milo Brooks                    ║         22 ║      39910                                                                           
+ 390487451 ║ Mark Coleman                   ║         42 ║      39910                                                                           
+ 454565232 ║ Louis Jenkins                  ║         20 ║      39910                                                                           
+ 141582657 ║ Stanley Browne                 ║         23 ║      14093                                                                           
+
+59 filas seleccionadas.
+
+
+       DID ║ DNAME                ║     BUDGET ║  MANAGERID                                                                                     
+---------- ║ -------------------- ║ ---------- ║ ----------                                                                                     
+         1 ║ Hardware             ║ 1048572.12 ║  141582651                                                                                     
+         2 ║ Operations           ║    4099101 ║  287321212                                                                                     
+         3 ║ Legal                ║  222988.13 ║  248965255                                                                                     
+         4 ║ Marketing            ║  538099.54 ║  548977562                                                                                     
+         5 ║ Software             ║  400011.12 ║  141582651                                                                                     
+         6 ║ Production           ║   12099101 ║  578875478                                                                                     
+         7 ║ Shipping             ║          5 ║  489456522                                                                                     
+
+7 filas seleccionadas.
+
+
+ninguna fila seleccionada
+
+
+       PID ║ PNAME                                    ║ COLOR                                                                                     
+---------- ║ ---------------------------------------- ║ ---------------                                                                           
+         1 ║ Left Handed Bacon Stretcher Cover        ║ Red                                                                                       
+         2 ║ Smoke Shifter End                        ║ Black                                                                                     
+         3 ║ Acme Widget Washer                       ║ Red                                                                                       
+         4 ║ Acme Widget Washer                       ║ Silver                                                                                    
+         5 ║ I Brake for Crop Circles Sticker         ║ Translucent                                                                               
+         6 ║ Anti-Gravity Turbine Generator           ║ Cyan                                                                                      
+         7 ║ Anti-Gravity Turbine Generator           ║ Magenta                                                                                   
+         8 ║ Fire Hydrant Cap                         ║ Red                                                                                       
+         9 ║ 7 Segment Display                        ║ Green                                                                                     
+
+9 filas seleccionadas.
+
+
+       SID ║ SNAME                          ║ ADDRESS                                                                                             
+---------- ║ ------------------------------ ║ ----------------------------------------                                                            
+         1 ║ Acme Widget Suppliers          ║ "1 Grub St.                                                                                         
+         2 ║ Big Red Tool and Die           ║ "4 My Way                                                                                           
+         3 ║ Perfunctory Parts              ║ "99999 Short Pier                                                                                   
+         4 ║ Alien Aircaft Inc.             ║ "2 Groom Lake                                                                                       
+
+
+       SID ║        PID ║       COST                                                                                                              
+---------- ║ ---------- ║ ----------                                                                                                              
+         1 ║          1 ║       36.1                                                                                                              
+         1 ║          2 ║       42.3                                                                                                              
+         1 ║          3 ║       15.3                                                                                                              
+         1 ║          4 ║       20.5                                                                                                              
+         1 ║          5 ║       20.5                                                                                                              
+         1 ║          6 ║     124.23                                                                                                              
+         1 ║          7 ║     124.23                                                                                                              
+         1 ║          8 ║       11.7                                                                                                              
+         1 ║          9 ║       75.2                                                                                                              
+         2 ║          1 ║       16.5                                                                                                              
+         2 ║          7 ║        .55                                                                                                              
+         2 ║          8 ║       7.95                                                                                                              
+         3 ║          8 ║       12.5                                                                                                              
+         3 ║          9 ║          1                                                                                                              
+         4 ║          4 ║       57.3                                                                                                              
+         4 ║          5 ║       22.2                                                                                                              
+         4 ║          8 ║       48.6                                                                                                              
+
+17 filas seleccionadas.
+
+
+       AID ║ ANAME                          ║ CRUISINGRANGE                                                                                       
+---------- ║ ------------------------------ ║ -------------                                                                                       
+         1 ║ Boeing 747-400                 ║          8430                                                                                       
+         2 ║ Boeing 737-800                 ║          3383                                                                                       
+         3 ║ Airbus A340-300                ║          7120                                                                                       
+         4 ║ British Aerospace Jetstream 41 ║          1502                                                                                       
+         5 ║ Embraer ERJ-145                ║          1530                                                                                       
+         6 ║ SAAB 340                       ║          2128                                                                                       
+         7 ║ Piper Archer III               ║           520                                                                                       
+         8 ║ Tupolev 154                    ║          4103                                                                                       
+        16 ║ Schwitzer 2-33                 ║            30                                                                                       
+         9 ║ Lockheed L1011                 ║          6900                                                                                       
+        10 ║ Boeing 757-300                 ║          4010                                                                                       
+        11 ║ Boeing 777-300                 ║          6441                                                                                       
+        12 ║ Boeing 767-400ER               ║          6475                                                                                       
+        13 ║ Airbus A320                    ║          2605                                                                                       
+        14 ║ Airbus A319                    ║          1805                                                                                       
+        15 ║ Boeing 727                     ║          1504                                                                                       
+
+16 filas seleccionadas.
+
+
+       EID ║ ENAME                          ║     SALARY                                                                                          
+---------- ║ ------------------------------ ║ ----------                                                                                          
+ 242518965 ║ James Smith                    ║     120433                                                                                          
+ 141582651 ║ Mary Johnson                   ║     178345                                                                                          
+  11564812 ║ John Williams                  ║     153972                                                                                          
+ 567354612 ║ Lisa Walker                    ║     256481                                                                                          
+ 552455318 ║ Larry West                     ║     101745                                                                                          
+ 550156548 ║ Karen Scott                    ║     205187                                                                                          
+ 390487451 ║ Lawrence Sperry                ║     212156                                                                                          
+ 274878974 ║ Michael Miller                 ║      99890                                                                                          
+ 254099823 ║ Patricia Jones                 ║      24450                                                                                          
+ 356187925 ║ Robert Brown                   ║      44740                                                                                          
+ 355548984 ║ Angela Martinez                ║     212156                                                                                          
+ 310454876 ║ Joseph Thompson                ║     212156                                                                                          
+ 489456522 ║ Linda Davis                    ║      27984                                                                                          
+ 489221823 ║ Richard Jackson                ║      23980                                                                                          
+ 548977562 ║ William Ward                   ║      84476                                                                                          
+ 310454877 ║ Chad Stewart                   ║      33546                                                                                          
+ 142519864 ║ Betty Adams                    ║     227489                                                                                          
+ 269734834 ║ George Wright                  ║     289950                                                                                          
+ 287321212 ║ Michael Miller                 ║      48090                                                                                          
+ 552455348 ║ Dorthy Lewis                   ║     152013                                                                                          
+ 248965255 ║ Barbara Wilson                 ║      43723                                                                                          
+ 159542516 ║ William Moore                  ║      48250                                                                                          
+ 348121549 ║ Haywood Kelly                  ║      32899                                                                                          
+  90873519 ║ Elizabeth Taylor               ║      32021                                                                                          
+ 486512566 ║ David Anderson                 ║      43001                                                                                          
+ 619023588 ║ Jennifer Thomas                ║      54921                                                                                          
+  15645489 ║ Donald King                    ║      18050                                                                                          
+ 556784565 ║ Mark Young                     ║     205187                                                                                          
+ 573284895 ║ Eric Cooper                    ║     114323                                                                                          
+ 574489456 ║ William Jones                  ║     105743                                                                                          
+ 574489457 ║ Milo Brooks                    ║         20                                                                                          
+
+31 filas seleccionadas.
+
+
+      FLNO ║ ORIGIN               ║ DESTINATION          ║   DISTANCE ║ DEPARTS  ║ ARRIVES  ║      PRICE                                  
+---------- ║ -------------------- ║ -------------------- ║ ---------- ║ -------- ║ -------- ║ ----------                                  
+        99 ║ Los Angeles          ║ Washington D.C.      ║       2308 ║ 12/04/05 ║ 12/04/05 ║     235.98                                  
+        13 ║ Los Angeles          ║ Chicago              ║       1749 ║ 12/04/05 ║ 12/04/05 ║     220.98                                  
+       346 ║ Los Angeles          ║ Dallas               ║       1251 ║ 12/04/05 ║ 12/04/05 ║     225.43                                  
+       387 ║ Los Angeles          ║ Boston               ║       2606 ║ 12/04/05 ║ 12/04/05 ║     261.56                                  
+         7 ║ Los Angeles          ║ Sydney               ║       7487 ║ 12/04/05 ║ 14/04/05 ║    1278.56                                  
+         2 ║ Los Angeles          ║ Tokyo                ║       5478 ║ 12/04/05 ║ 13/04/05 ║     780.99                                  
+        33 ║ Los Angeles          ║ Honolulu             ║       2551 ║ 12/04/05 ║ 12/04/05 ║     375.23                                  
+        34 ║ Los Angeles          ║ Honolulu             ║       2551 ║ 12/04/05 ║ 12/04/05 ║     425.98                                  
+        76 ║ Chicago              ║ Los Angeles          ║       1749 ║ 12/04/05 ║ 12/04/05 ║     220.98                                  
+        68 ║ Chicago              ║ New York             ║        802 ║ 12/04/05 ║ 12/04/05 ║     202.45                                  
+      7789 ║ Madison              ║ Detroit              ║        319 ║ 12/04/05 ║ 12/04/05 ║     120.33                                  
+       701 ║ Detroit              ║ New York             ║        470 ║ 12/04/05 ║ 12/04/05 ║     180.56                                  
+       702 ║ Madison              ║ New York             ║        789 ║ 12/04/05 ║ 12/04/05 ║     202.34                                  
+      4884 ║ Madison              ║ Chicago              ║         84 ║ 12/04/05 ║ 12/04/05 ║     112.45                                  
+      2223 ║ Madison              ║ Pittsburgh           ║        517 ║ 12/04/05 ║ 12/04/05 ║     189.98                                  
+      5694 ║ Madison              ║ Minneapolis          ║        247 ║ 12/04/05 ║ 12/04/05 ║     120.11                                  
+       304 ║ Minneapolis          ║ New York             ║        991 ║ 12/04/05 ║ 12/04/05 ║     101.56                                  
+       149 ║ Pittsburgh           ║ New York             ║        303 ║ 12/04/05 ║ 12/04/05 ║      116.5                                  
+
+18 filas seleccionadas.
+
+
+       EID ║        AID                                                                                                                             
+---------- ║ ----------                                                                                                                             
+  11564812 ║          2                                                                                                                             
+  11564812 ║         10                                                                                                                             
+  90873519 ║          6                                                                                                                             
+ 141582651 ║          2                                                                                                                             
+ 141582651 ║         10                                                                                                                             
+ 141582651 ║         12                                                                                                                             
+ 142519864 ║          1                                                                                                                             
+ 142519864 ║          2                                                                                                                             
+ 142519864 ║          3                                                                                                                             
+ 142519864 ║          7                                                                                                                             
+ 142519864 ║         10                                                                                                                             
+ 142519864 ║         11                                                                                                                             
+ 142519864 ║         12                                                                                                                             
+ 142519864 ║         13                                                                                                                             
+ 159542516 ║          5                                                                                                                             
+ 159542516 ║          7                                                                                                                             
+ 242518965 ║          2                                                                                                                             
+ 242518965 ║         10                                                                                                                             
+ 269734834 ║          1                                                                                                                             
+ 269734834 ║          2                                                                                                                             
+ 269734834 ║          3                                                                                                                             
+ 269734834 ║          4                                                                                                                             
+ 269734834 ║          5                                                                                                                             
+ 269734834 ║          6                                                                                                                             
+ 269734834 ║          7                                                                                                                             
+ 269734834 ║          8                                                                                                                             
+ 269734834 ║          9                                                                                                                             
+ 269734834 ║         10                                                                                                                             
+ 269734834 ║         11                                                                                                                             
+ 269734834 ║         12                                                                                                                             
+ 269734834 ║         13                                                                                                                             
+ 269734834 ║         14                                                                                                                             
+ 269734834 ║         15                                                                                                                             
+ 274878974 ║         10                                                                                                                             
+ 274878974 ║         12                                                                                                                             
+ 310454876 ║          8                                                                                                                             
+ 310454876 ║          9                                                                                                                             
+ 355548984 ║          8                                                                                                                             
+ 355548984 ║          9                                                                                                                             
+ 356187925 ║          6                                                                                                                             
+ 390487451 ║          3                                                                                                                             
+ 390487451 ║         13                                                                                                                             
+ 390487451 ║         14                                                                                                                             
+ 548977562 ║          7                                                                                                                             
+ 550156548 ║          1                                                                                                                             
+ 550156548 ║         12                                                                                                                             
+ 552455318 ║          2                                                                                                                             
+ 552455318 ║          7                                                                                                                             
+ 552455318 ║         14                                                                                                                             
+ 556784565 ║          2                                                                                                                             
+ 556784565 ║          3                                                                                                                             
+ 556784565 ║          5                                                                                                                             
+ 567354612 ║          1                                                                                                                             
+ 567354612 ║          2                                                                                                                             
+ 567354612 ║          3                                                                                                                             
+ 567354612 ║          4                                                                                                                             
+ 567354612 ║          5                                                                                                                             
+ 567354612 ║          7                                                                                                                             
+ 567354612 ║          9                                                                                                                             
+ 567354612 ║         10                                                                                                                             
+ 567354612 ║         11                                                                                                                             
+ 567354612 ║         12                                                                                                                             
+ 567354612 ║         15                                                                                                                             
+ 573284895 ║          3                                                                                                                             
+ 573284895 ║          4                                                                                                                             
+ 573284895 ║          5                                                                                                                             
+ 574489456 ║          6                                                                                                                             
+ 574489456 ║          8                                                                                                                             
+ 574489457 ║          7                                                                                                                             
+
+69 filas seleccionadas.
+
+
+       SID ║ SNAME                          ║     RATING ║        AGE                                                                           
+---------- ║ ------------------------------ ║ ---------- ║ ----------                                                                           
+        18 ║ jones                          ║          3 ║         30                                                                           
+        41 ║ jonah                          ║          6 ║         56                                                                           
+        22 ║ ahab                           ║          7 ║         44                                                                           
+        63 ║ moby                           ║            ║         15                                                                           
+
+SQL> spool off

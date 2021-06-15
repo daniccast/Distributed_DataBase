@@ -1,0 +1,87 @@
+SQL> 
+SQL> 
+SQL> @C:\Users\ozkr_\Desktop\loader\script\CIFRAS.SQL
+
+'TUPLASDEENTIDADSTUDENT:'    ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad STUDENT:   ║         24                                                                                                           
+
+
+'TUPLASDEENTIDADFACULTY:'    ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad FACULTY:   ║         15                                                                                                           
+
+
+'TUPLASDEENTIDADCLASS:'      ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad CLASS:     ║         23                                                                                                           
+
+
+'TUPLASDEENTIDADENROLLED:'   ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad ENROLLED:  ║         21                                                                                                           
+
+
+'TUPLASDEENTIDADEMP:'        ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad EMP:       ║         59                                                                                                           
+
+
+'TUPLASDEENTIDADDEPT:'       ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad DEPT:      ║          7                                                                                                           
+
+
+'TUPLASDEENTIDADWORKS:'     ║   COUNT(*)                                                                                                            
+--------------------------- ║ ----------                                                                                                            
+Tuplas de entidad WORKS:    ║          0                                                                                                            
+
+
+'TUPLASDEENTIDADPARTS:'      ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad PARTS:     ║          9                                                                                                           
+
+
+'TUPLASDEENTIDADSUPPLIERS:'  ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad SUPPLIERS: ║          4                                                                                                           
+
+
+'TUPLASDEENTIDADCATALOG:'    ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad CATALOG:   ║         17                                                                                                           
+
+
+'TUPLASDEENTIDADAIRCRAFT:'   ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad AIRCRAFT:  ║         16                                                                                                           
+
+
+'TUPLASDEENTIDADEMPLOYEES:'  ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad EMPLOYEES: ║         31                                                                                                           
+
+
+'TUPLASDEENTIDADFLIGHTS:'    ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad FLIGHTS:   ║         18                                                                                                           
+
+
+'TUPLASDEENTIDADCERTIFIED:'  ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad CERTIFIED: ║         69                                                                                                           
+
+
+'TUPLASDEENTIDADSAILORS:'    ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad SAILORS:   ║          4                                                                                                           
+
+
+'TUPLASDEENTIDADSAILORS:'    ║   COUNT(*)                                                                                                           
+---------------------------- ║ ----------                                                                                                           
+Tuplas de entidad SAILORS:   ║          4                                                                                                           
+
+SQL> 
+SQL> REM  DESPLIEGA TUPLAS
+SQL> 
+SQL> spool off;

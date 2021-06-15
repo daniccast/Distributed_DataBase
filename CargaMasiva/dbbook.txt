@@ -1,0 +1,136 @@
+SQL> @@C:\Users\ozkr_\Desktop\loader\script\dbbook.sql
+
+Tabla borrada.
+
+drop table faculty cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table class cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table enrolled cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table emp cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table works cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table dept cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table flights cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table aircraft cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table certified cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table employees cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table suppliers cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table parts cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table catalog cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+drop table sailors cascade constraints
+           *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+
+Tabla creada.
+
+g                                  
+
+SQL> spool off

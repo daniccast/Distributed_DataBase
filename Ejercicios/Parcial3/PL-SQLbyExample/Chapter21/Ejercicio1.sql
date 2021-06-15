@@ -111,5 +111,20 @@ END;
 -- Probar para 145
 
 
+DECLARE
+	v_first_name student.first_name%TYPE;
+	v_last_name student.last_name%TYPE;
+BEGIN
+	IF manage_students.id_is_good(120) THEN
+		manage_students.find_sname(120, v_first_name, v_last_name);
+		DBMS_OUTPUT.PUT_LINE('Student No. '||120||' is ' ||v_last_name||', '||v_first_name);
+	ELSE
+		DBMS_OUTPUT.PUT_LINE('Student ID: '||120||' is not in the database.');
+	END IF;
+END;
+.
+/
+
+
 
 spool OFF;
